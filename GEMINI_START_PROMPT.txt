@@ -1,0 +1,23 @@
+Use this repository as the full source of truth for the task.
+
+Start by reading these files in this order:
+1. `00_START_HERE.txt`
+2. `01_BRIEF/02_FULL_CONTINUOUS_BRIEF.docx`
+3. `README.md`
+
+Then inspect the actual codebase inside:
+`02_CODE_BASE_PRE_COLOR/`
+
+Important rules:
+- The real base code is `02_CODE_BASE_PRE_COLOR/`
+- Do not start from the later blue/white experiment
+- Preserve the strongest black/orange version as the base
+- Apply the brief and source context carefully without flattening the site's conversion architecture
+- Do not expose Tomer's backend / dashboard / control logic to customers
+- Keep Hebrew RTL, first-person Tomer voice, premium hierarchy, and strong pricing/value communication
+
+What I need back from you:
+- The exact files you would change
+- The revised files or a precise diff
+- Any rewritten copy in-place
+- A clear note of what you restored vs what you revised
