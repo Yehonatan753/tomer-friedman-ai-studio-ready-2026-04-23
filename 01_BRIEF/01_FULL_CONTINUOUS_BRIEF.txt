@@ -1,0 +1,231 @@
+GOOGLE AI STUDIO - FULL CONTINUOUS BRIEF
+
+BASE VERSION TO USE
+Use the attached code folder named:
+02_CODE_BASE_PRE_COLOR
+
+This is the backup version from before the later color-direction changes.
+Do not start from the newer blue/white experiment.
+This older base is the closest preserved version to the strong black/orange site that was approved.
+
+PRIMARY GOAL
+Recover the strongest version of Tomer Friedman's premium site from this backup base.
+Then apply the later strategic corrections carefully, without ruining what already worked.
+This is not a redesign from zero.
+This is not generic SaaS cleanup.
+This is a fidelity-driven recovery and upgrade pass.
+
+TOP PRIORITY ORDER IF ANYTHING CONFLICTS
+1. The user instructions in this brief.
+2. The OPUS recovery logic and section strategy.
+3. The included backup codebase and its visual hierarchy.
+4. The later blue/white experiment only where it helps readability or gives useful assets.
+
+USER INSTRUCTIONS THAT ARE NON-NEGOTIABLE
+- Keep the site very close to the stronger black/orange version that already worked.
+- The later task was mainly to shorten and tighten, not to rewrite strong sections.
+- The header and hero direction from the stronger version were already correct and should not have been casually rewritten.
+- The scroll animation and the section under the hero were strong and should be preserved.
+- Restore or preserve the following because they were explicitly liked:
+  - value stack
+  - market value framing
+  - urgency and scarcity
+  - insurance section
+  - workshops / lectures
+  - newsletter
+  - final CTA around the strong closing line the user explicitly liked
+  - lower contact / footer block
+- Do not expose Tomer's internal backend / control / dashboard logic to customers.
+- The app section must sell the customer-facing value only.
+- Testimonials must not mismatch image-to-person logic.
+- Do not reuse the same image logic across unrelated sections.
+- Tomer should speak in first person.
+- Hebrew must feel natural and not robotic.
+- Preserve RTL correctly.
+
+BLUNT DIAGNOSIS OF THE WEAKER PASS
+The later blue/white assembly improved neatness but reduced persuasion, hierarchy, premium drama, and pricing sophistication.
+It flattened the offer logic and removed sections that were already working.
+The correct move is not to sanitize the site. The correct move is to restore the strongest conversion architecture, keep the strongest emotional sections, and only then improve clarity or palette where it genuinely helps.
+
+FINAL PAGE FLOW TO AIM FOR
+1. Header / Hero
+2. Process / principles section under hero
+3. VSL
+4. App showcase
+5. Pathfinder
+6. Tracks / offers with value-stack depth
+7. Commitment / trust block
+8. Insurance section
+9. Testimonials
+10. Workshops / lectures
+11. FAQ
+12. Newsletter
+13. Final CTA
+14. Footer / contact
+
+WHY THIS FLOW MATTERS
+Authority first. Then explanation. Then product proof. Then offers. Then trust and objection handling. Then additional authority breadth. Then final capture and contact.
+The process/principles block under the hero and the commitment block between offers and insurance are structural connective tissue and should not be treated as decorative extras.
+Without them the page feels cleaner but thinner and less persuasive.
+
+SECTION DECISIONS
+PRESERVE CLOSE TO THE STRONG VERSION
+- Header structure and overall hero composition
+- Hero portrait dominance and motion feel
+- The section under the hero / process / principles rhythm
+- Pathfinder dark dramatic island
+- Workshops / lectures presence
+- Newsletter concept
+- Final CTA concept
+- Footer / contact depth
+
+RESTORE IF MISSING OR WEAKENED
+- Value stack
+- Market value logic
+- Capacity-based urgency / scarcity
+- Insurance block
+- Commitment / trust block
+- Workshops / lectures block
+- Newsletter and final CTA in stronger form
+
+REVISE CAREFULLY, DO NOT REINVENT
+- App section
+- Testimonials image logic
+- Contrast / readability in pricing-heavy areas
+- Any palette translation toward blue/white, only where it helps and does not kill drama
+
+OFFERS / PRICING COMMUNICATION STRATEGY
+The offer section must communicate five layers, not just price cards.
+
+Layer 1 - Why this offer exists in the ladder
+- TF Tracker = independent entry product, not a fake teaser
+- BodyMetRiX Lite = self-diagnosis starting point
+- Online process = remote flagship
+- Full personal guidance = highest-intensity premium tier
+- Measurement card = maintenance / continuation product
+- Pro product = for professionals, not for the regular buyer of personal guidance
+
+Layer 2 - Value stack
+For flagship offers, restore quantified value-stack communication:
+- questionnaire and diagnostic review
+- full strategy session
+- adaptive nutrition plan
+- workout plan
+- daily WhatsApp support
+- monthly measurements
+- full TF Tracker usage
+- total market value
+- actual Tomer price
+
+Layer 3 - Market comparison
+Use premium framing, not spammy hype.
+Explain what similar premium support usually costs and why Tomer's offer is positioned strongly.
+
+Layer 4 - Urgency / scarcity
+Use operational scarcity only.
+No fake countdowns.
+Examples:
+- limited number of new clients per month
+- limited number of active personal slots at one time
+- waiting period once slots are full
+
+Layer 5 - What happens after
+Use a small continuation panel that shows renewal / next step logic without dumping ugly internal details.
+
+Critical rule:
+Do not flatten this section into sterile pricing cards.
+This section must sell value intelligently.
+
+APP SECTION CORRECTION PLAN
+What went wrong before:
+- it became visually unclear
+- it mixed customer-facing value with backend/operator logic
+- the phone and screenshots were not framed properly
+
+What it should communicate:
+TF Tracker is a real, low-friction digital product that gives structure from day one and makes execution easier.
+
+Required hierarchy:
+- Main visual = phone frame with a real customer-facing app screen
+- Supporting visual 1 = AI / chat / assistant customer screen
+- Supporting visual 2 = progress / tracking / measurement screen
+- Never mention dashboard, backend, admin control, Tomer-side monitoring, or operator tools
+
+What the app copy should sell:
+- clarity from day one
+- easy daily execution
+- one place for food, tracking, measurements, and progress
+- smooth continuation into deeper support later if the customer chooses it
+
+TESTIMONIALS RULES
+- Keep the structure if it works
+- Fix image-to-testimonial mismatches
+- A female-client quote cannot sit next to a Tomer portrait
+- If a correct client image does not exist, use a photo-less card instead of a misleading pairing
+- Do not reuse the same image logic across multiple sections
+
+IMAGE ASSIGNMENT RULES
+- Hero = strongest Tomer portrait from the approved version
+- Process section = mostly icon / stage logic, not another competing portrait
+- VSL = suitcase / lifestyle / movement image or video thumbnail logic
+- App section = only real customer-facing product screens
+- Commitment block = waist / measurement image
+- Insurance = separate Tomer image, not the same hero portrait if avoidable
+- Testimonials = client-sensible imagery or photo-less cards where needed
+- Workshops = event / authority imagery
+- Newsletter = no heavy image needed
+- Final CTA = typography-led, not another image block
+
+TYPOGRAPHY / READABILITY / COLOR RULES
+- Do not replace the premium heading feel with generic SaaS typography
+- Improve readability where contrast is weak
+- Pricing numerals and dense info rows must be stronger and more legible
+- Body text on mobile should not be too small or too faint
+- Blue/white can support business color direction only where it genuinely helps
+- Dark dramatic treatment should remain where it creates authority and premium feel
+- The page must not become washed out
+
+COPY RULES
+- Tomer speaks in first person
+- Hebrew should feel natural, direct, and premium
+- No robotic phrasing
+- No fake proof, fake testimonials, fake urgency, or fake claims
+- Keep persuasion high, but credible
+- Preserve the emotional strength of the older version
+
+FILES TO INSPECT FIRST IN THE CODE FOLDER
+- src/pages/Index.tsx
+- src/components/Header.tsx
+- src/components/Hero.tsx
+- src/components/Process.tsx or the section immediately under the hero
+- src/components/VSL.tsx
+- src/components/AppShowcase.tsx
+- src/components/Pathfinder.tsx
+- src/components/Tracks.tsx
+- src/components/Commitment.tsx or equivalent trust block
+- src/components/InsuranceBanner.tsx
+- src/components/Testimonials.tsx
+- src/components/Seminars.tsx / Courses.tsx
+- src/components/Newsletter.tsx
+- src/components/CtaSection.tsx
+- src/components/Footer.tsx
+- src/data.ts
+- src/index.css
+
+WHAT GEMINI SHOULD RETURN
+- The exact files to modify
+- The revised files or a precise diff
+- Copy rewrites in-place, not abstract suggestions only
+- A clear note of what was restored vs revised
+- Any color translation must remain subordinate to fidelity and conversion strength
+
+REFERENCE FILES INCLUDED HERE
+- 03_REFERENCE_IMAGES contains the visual anchors
+- 04_SOURCE_CONTEXT_TXT contains clean txt versions of the OPUS and feedback docs
+- 05_USER_FILES contains pricing and user asset files
+- 06_ORIGINAL_PSD_FILES contains the PSD source files copied into one accessible place
+
+FINAL RULE
+If something looks cleaner but weaker than the approved black/orange version, it is probably the wrong move.
+Preserve what was already right. Tighten only where needed.
