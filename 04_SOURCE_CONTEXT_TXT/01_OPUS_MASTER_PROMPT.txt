@@ -1,0 +1,435 @@
+# Opus 4.7 Master Prompt - Tomer Friedman Site Recovery + Rewrite Plan
+
+You are **Opus 4.7**.
+
+You are not the implementation agent here.  
+Your job is to do the **thinking, planning, content architecture, section strategy, copy direction, and exact writing** for the next site pass.
+
+**Codex will do the backend / assembly / code integration after you.**
+
+That means:
+
+- You should think like the **lead strategist + copy chief + site architect**.
+- You should **not** waste output on generic frontend code.
+- You should produce a **high-signal implementation blueprint** that can be assembled directly into the existing React codebase.
+- You should assume the site is in Hebrew RTL and that Tomer speaks in **first person**.
+
+---
+
+## Project
+
+Active repo:
+
+`C:\Users\User\Downloads\תומר פרידמן\01_PROJECTS\your-site-creator`
+
+Reference backup snapshot:
+
+`C:\Users\User\Downloads\תומר פרידמן\01_PROJECTS\your-site-creator-snapshot-end-019d8d8f-2026-04-17`
+
+Current live preview of the assembled blue/white version:
+
+`http://127.0.0.1:4195/`
+
+Previous snapshot preview for comparison:
+
+`http://127.0.0.1:4201/`
+
+---
+
+## Your Role In This Workflow
+
+You are responsible for:
+
+- Strategic recovery of the sections that were removed or weakened.
+- Rebuilding the right **conversion hierarchy**.
+- Restoring the **sales sophistication** that existed in the stronger previous version.
+- Rewriting robotic or flat copy into strong, natural, high-conviction Hebrew.
+- Making sure the site still fits the newer **blue / white business color direction** without flattening the premium feel.
+
+You are **not** responsible for:
+
+- backend implementation
+- code assembly
+- git
+- tests
+- build fixes
+- routing
+- storage
+- lead capture plumbing
+
+Codex will do all of that after receiving your plan.
+
+---
+
+## Read First
+
+Read these local files before answering:
+
+1. `archive/client-update-2026-04-22/README.md`
+2. `archive/client-update-2026-04-22/OPUS_4_7_VISUAL_AND_DECISION_CONTEXT_2026-04-22.md`
+3. `archive/client-update-2026-04-22/USER_FEEDBACK_2026-04-22_AFTER_ASSEMBLY.md`
+4. `archive/client-update-2026-04-22/claude-copy-notes.md`
+5. `src/data.ts`
+6. `src/pages/Index.tsx`
+7. `src/components/Header.tsx`
+8. `src/components/Hero.tsx`
+9. `src/components/VSL.tsx`
+10. `src/components/Tracks.tsx`
+11. `src/components/AppShowcase.tsx`
+12. `src/components/Testimonials.tsx`
+13. `src/components/InsuranceBanner.tsx`
+14. `src/components/Courses.tsx`
+15. `src/components/Newsletter.tsx`
+16. `src/components/Footer.tsx`
+17. `src/components/CtaSection.tsx`
+18. `src/components/Pathfinder.tsx`
+19. `src/pages/Checkout.tsx`
+20. `src/pages/ThankYou.tsx`
+21. `src/index.css`
+
+Also inspect:
+
+- `public/client-update-2026-04-22/`
+
+And compare against the backup snapshot where needed.
+
+---
+
+## Non-Negotiable User Feedback
+
+The previous assembly pass removed or weakened too many things that were explicitly liked.  
+Those removals should be treated as mistakes unless there is a very strong reason otherwise.
+
+### Things the user explicitly wants restored / preserved
+
+1. **Header + hero image direction from the stronger previous version**
+   - The header was already good.
+   - Tomer’s hero image there was the best one.
+   - There was no need to replace it.
+   - The scroll animation in that hero area was excellent and should be preserved.
+
+2. **The section under the hero / scroll animation**
+   - The layout and feeling were great.
+   - It should be adapted to the new palette where needed, not redesigned away.
+
+3. **Value stack / market value / urgency / scarcity**
+   - This was strong, high-level sales material.
+   - It should be restored.
+   - It should remain sophisticated and premium, not cheesy.
+   - This includes per-offer value framing and market-value logic.
+
+4. **Insurance section**
+   - The insurance section was excellent.
+   - It was removed without being requested.
+   - It must come back.
+
+5. **Workshops / lectures**
+   - They were strong.
+   - They were removed without being requested.
+   - They must come back.
+
+6. **Newsletter**
+   - It was good.
+   - Only small improvements are acceptable.
+   - Do not rewrite it into something generic.
+
+7. **End CTA**
+   - The CTA around:
+     - "אם הגעת עד לפה אז כנראה הבנת"
+   - This was very good and should return.
+
+8. **Final contact / links / lower footer area**
+   - It was good already.
+   - It should not have been removed.
+   - Restore it.
+
+---
+
+## Additional Critical Feedback From The Current Pass
+
+### Visual / readability
+
+- Fonts and colors currently hurt readability in several areas.
+- Some pricing areas are harder to read than they should be.
+- Contrast must improve.
+- The site should feel premium and deliberate, not washed out.
+
+### Offers / pricing logic
+
+- The pricing content is not meant to be flattened into simplistic customer-facing blocks.
+- It is part of a **sales enablement and operator logic layer**.
+- The site should communicate value clearly and sell properly, not reduce everything into sterile plan cards.
+- Restore **value stack**, **market value**, and **urgency / scarcity** structure where they originally worked.
+
+### App section
+
+- The current app section is unclear and badly framed.
+- The phone and the real app imagery are good, but they are not being showcased correctly.
+- The copy is bad and needs rewriting.
+- Any “control”, “dashboard”, internal operator tooling, or Tomer-only backend should **not** be exposed to customers.
+- The app section should sell:
+  - clarity
+  - daily structure
+  - tracking
+  - adherence
+  - ease of execution
+  - smooth progression into deeper support if needed
+
+### Testimonials
+
+- Structure is fine overall.
+- But image-to-testimonial matching is currently wrong in at least one case.
+- A female-client testimonial should not sit next to a Tomer photo.
+- No duplicate images across sections.
+- Each section should get its own distinct image logic.
+
+### Copy quality
+
+- The copy repeatedly feels robotic / templated.
+- You must rewrite it into natural, strong Hebrew.
+- It should sound like Tomer speaking in first person, not like agency boilerplate.
+
+---
+
+## Visual Direction Constraints
+
+Do **not** reduce the site into bland white-card SaaS UI.
+
+The right answer is:
+
+- premium
+- Hebrew RTL
+- high-conversion
+- emotionally charged but credible
+- visually clear
+- blue / white brand-aligned
+- still dramatic where needed
+
+This means:
+
+- keep depth
+- keep hierarchy
+- keep motion where it is already strong
+- keep conviction
+- keep editorial boldness
+- do not sterilize the page
+
+Blue / white is the theme direction.  
+But the stronger dark/orange dramatic structure from the prior version still contains many of the right conversion ideas and section treatments.
+
+So the mission is **not** “make it light”.  
+The mission is:
+
+> preserve the strongest conversion architecture and strongest sections, while translating the site into a readable premium blue/white direction where appropriate.
+
+---
+
+## Screenshots The User Explicitly Referenced As Positive
+
+Treat these screenshot cues as high-priority references:
+
+1. Hero / header / portrait / scroll animation structure
+2. The “מחוייבות שלי אליך” section
+3. The offer section with value stack / market value / pricing depth / urgency-scarcity
+4. Insurance section
+5. Workshops / lectures section
+6. Newsletter section
+7. Final CTA:
+   - “אם הגעת עד לפה אז כנראה הבנת”
+8. The final contact / footer / links block
+
+If the current site deviates from these without a strong reason, recommend restoring them.
+
+---
+
+## What I Need From You
+
+I need a **single response** that Codex can use as the implementation blueprint.
+
+Your response must include the following sections, in this exact order:
+
+### 1. Executive Diagnosis
+
+Give a blunt diagnosis of:
+
+- what the current version got wrong
+- what should be restored
+- what should stay from the newer blue/white direction
+- what should be rewritten entirely
+
+Keep this sharp and practical.
+
+### 2. Preserve / Restore / Revise Matrix
+
+Create a table with these columns:
+
+- Section
+- Current status
+- Decision: Preserve / Restore / Revise / Remove
+- Why
+
+Include at least:
+
+- Header
+- Hero
+- Scroll animation section below hero
+- VSL
+- Pathfinder
+- Tracks / offers
+- App section
+- Testimonials
+- Insurance
+- Workshops / lectures
+- Newsletter
+- Final CTA
+- Footer / contact block
+
+### 3. Recommended Final Page Flow
+
+Give the exact preferred homepage order.
+
+If a section should move, say where and why.
+
+### 4. Section-by-Section Strategic Direction
+
+For each main section, provide:
+
+- its job in the funnel
+- what emotion it should create
+- what should be shown visually
+- what should be hidden
+- what the CTA goal is
+- what must be restored from the stronger older version
+
+### 5. Exact Copy Drafts In Hebrew
+
+This is the most important part.
+
+Write the actual recommended Hebrew copy for:
+
+- Header CTA labels if needed
+- Hero eyebrow
+- Hero headline
+- Hero body copy
+- Hero proof points
+- Scroll animation section under hero
+- Offer section headline
+- Offer section framing line
+- Value stack framing
+- Market value framing
+- Urgency / scarcity lines
+- App section headline
+- App section body copy
+- App section bullets
+- Testimonials section heading / intro
+- Insurance section heading / subcopy / trust framing
+- Workshops section headline / support copy / CTA framing
+- Newsletter headline / subcopy / button copy
+- Final CTA headline / support copy / button copy
+- Footer/contact microcopy if needed
+
+Requirements for this copy:
+
+- first person where Tomer should speak
+- natural Hebrew
+- no robotic phrasing
+- no generic startup clichés
+- no fake claims
+- no corny manipulative hype
+- urgency and scarcity should feel premium and credible, not spammy
+
+### 6. Offers / Pricing Communication Strategy
+
+This is not just copy.  
+Explain how the offer section should communicate:
+
+- product ladder
+- entry vs flagship logic
+- value stack
+- market comparison / implied market value
+- why each offer exists
+- urgency / scarcity
+
+Important:
+
+- Do not flatten the whole thing into boring pricing cards.
+- Do not expose internal-only operator logic that should stay behind the scenes.
+- Explain how to sell the offers in a way that is premium and strategically smart.
+
+### 7. App Section Correction Plan
+
+Give a dedicated plan for the app section:
+
+- what exactly is wrong now
+- what message it should communicate instead
+- what imagery hierarchy should be
+- what should appear in the phone
+- what supporting screenshots should do
+- what absolutely should **not** be mentioned because it is backend / Tomer-only
+
+Then provide the exact Hebrew copy for the corrected app section.
+
+### 8. Image Assignment Plan
+
+Create a simple mapping:
+
+- Section
+- Recommended image
+- Why this image belongs there
+- Which image must not be reused elsewhere
+
+This is critical because the user explicitly asked for no duplicate image logic across sections.
+
+### 9. Font / Readability / Color Guidance
+
+Do not write CSS.  
+But tell Codex exactly what to preserve and what to fix regarding:
+
+- font feel
+- readability
+- contrast
+- blue/white usage
+- where darker treatment should stay
+- where light treatment is correct
+
+### 10. Codex Assembly Instructions
+
+End with a concise implementation handoff for Codex:
+
+- which sections should be rebuilt first
+- which existing components likely need restoration vs revision
+- where copy can be swapped directly
+- where layout should be preserved from the older version
+
+Make this practical and file-aware.
+
+---
+
+## Hard Rules
+
+- Do not recommend broad deletion unless absolutely necessary.
+- Default to **restoring strong removed sections** rather than simplifying them away.
+- Do not weaken the site into “clean but less persuasive”.
+- Do not remove value stack, urgency, scarcity, workshops, insurance, newsletter, final CTA, or lower contact/footer unless you can prove they actively hurt conversion.
+- Do not expose Tomer’s internal/backend controls to customers.
+- Do not use generic English marketing phrasing translated into Hebrew.
+- Do not invent fake testimonials, fake proof, fake names, or fake before/after stories.
+- Do not break RTL assumptions.
+
+---
+
+## Final Quality Bar
+
+Your output should feel like it came from:
+
+- a top-level conversion strategist
+- a strong Hebrew copy chief
+- someone who understands premium personal brand sites
+- someone who knows the difference between simplification and sabotage
+
+If a section was previously strong and was removed by mistake, say so directly.
+
+Be opinionated.  
+Be concrete.  
+Be useful for assembly.  
+Do not be vague.

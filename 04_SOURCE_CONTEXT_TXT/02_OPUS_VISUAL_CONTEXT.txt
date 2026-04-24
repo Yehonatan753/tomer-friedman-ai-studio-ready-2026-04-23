@@ -1,0 +1,424 @@
+# Opus 4.7 Visual + Decision Context Pack
+
+Use this file **together with**:
+
+- `archive/client-update-2026-04-22/OPUS_4_7_MASTER_PROMPT_2026-04-22.md`
+- `archive/client-update-2026-04-22/README.md`
+- `archive/client-update-2026-04-22/USER_FEEDBACK_2026-04-22_AFTER_ASSEMBLY.md`
+- `archive/client-update-2026-04-22/claude-copy-notes.md`
+
+This companion file exists to connect the user's visual references and exact preferences to the planning / copy / structure work.
+
+---
+
+## Compare Against These Two Running Versions
+
+- Current assembled blue/white version:
+  - `http://127.0.0.1:4195/`
+
+- Stronger previous snapshot that preserved more of the original premium conversion structure:
+  - `http://127.0.0.1:4201/`
+
+Your job is **not** to blindly choose one version.
+
+Your job is to define the correct **hybrid recovery direction**:
+
+- preserve the strongest conversion architecture from the stronger previous version
+- preserve the business-color direction and newer assets from the newer version
+- remove the mistakes introduced by oversimplification
+
+---
+
+## Critical Strategic Truth
+
+The last pass made a classic mistake:
+
+- it improved neatness
+- but reduced persuasion
+- reduced hierarchy
+- removed strong sections
+- flattened pricing communication
+- weakened the feeling of depth and conviction
+
+This is not acceptable.
+
+The next pass should **restore sophistication**, not just clean things up.
+
+---
+
+## What Must Be Preserved Or Restored
+
+These are not optional suggestions. These are user-validated strengths.
+
+### 1. Header + Hero Image + Scroll Motion
+
+The user explicitly said:
+
+- the header in the stronger version was already excellent
+- the Tomer image there was the best one
+- there was no reason to replace it
+- the scroll animation in that area was excellent
+
+Meaning:
+
+- do not redesign the header from scratch
+- do not switch the hero portrait unless there is a very strong reason
+- keep the premium animated feel
+- if palette changes are needed, adapt the colors only
+
+### 2. Section Under The Hero / Scroll Animation
+
+The user explicitly said:
+
+- this section was great
+- it should mostly be color-adapted, not conceptually replaced
+
+Meaning:
+
+- preserve its role and emotional effect
+- preserve its sense of authority and progression
+- only refine legibility / palette / clarity where needed
+
+### 3. Offer Section With Value Stack / Market Value / Urgency / Scarcity
+
+This is one of the highest-priority restores.
+
+The user explicitly wants back:
+
+- value stack
+- market value framing
+- urgency
+- scarcity
+- per-section pricing by value
+- stronger premium selling structure
+
+Meaning:
+
+- do not flatten the offers into minimal neat product cards
+- do not reduce the section to sterile pricing tiles
+- restore the layered selling logic
+- keep it premium and high-level, not spammy
+
+### 4. Insurance Section
+
+This section was explicitly liked and should come back.
+
+It should:
+
+- feel trustworthy
+- feel useful
+- feel like a real advantage
+- connect to lead capture properly
+
+### 5. Workshops / Lectures Section
+
+This section was explicitly liked and should come back.
+
+It should:
+
+- remain premium
+- stay connected to Tomer’s authority and public presence
+- not be cut just because it is not top-of-funnel
+
+### 6. Newsletter Section
+
+The user said:
+
+- it was good
+- only small changes are acceptable
+
+Meaning:
+
+- do not reinvent it
+- do not replace its entire tone
+- keep what worked
+
+### 7. Final CTA
+
+The user explicitly liked the CTA concept around:
+
+- `אם הגעת עד לפה אז כנראה הבנת`
+
+This should be restored.
+
+### 8. Lower Contact / Footer Area
+
+The user explicitly said:
+
+- it was already good
+- it should not have been removed
+
+Restore it.
+
+---
+
+## Screenshot Reference Map
+
+The user attached screenshots in the current chat.  
+Treat them as **visual proof of preference**, not random inspiration.
+
+When these screenshots are attached to your run, interpret them using the mapping below.
+
+### Screenshot 01 - Header + Hero Reference
+
+What it proves:
+
+- the stronger previous header was already correct
+- the stronger previous hero portrait was correct
+- the dramatic split-layout was working
+- the scroll animation and premium motion should stay
+
+What to preserve:
+
+- layout hierarchy
+- header behavior
+- hero portrait dominance
+- the feeling of depth and movement
+
+What may change:
+
+- readability
+- palette translation if needed
+- microcopy if needed
+
+What should not happen:
+
+- replacing the image just to make it “lighter”
+- flattening the hero into generic white SaaS blocks
+
+### Screenshot 02 - “מחוייבות / תהליך / עקרונות” Style Reference
+
+What it proves:
+
+- the section under the hero had strong rhythm and authority
+- the timeline / staged explanation format was working
+- the visual tone felt premium and intentional
+
+What to preserve:
+
+- authority
+- stage-based logic
+- premium progression feel
+
+What may change:
+
+- improve readability
+- adapt colors
+- tighten copy
+
+### Screenshot 03 - “המחוייבות שלי אליך” Reference
+
+What it proves:
+
+- this trust-building section worked
+- the measurement photo belongs well in this part of the site
+- the emotional tone was right
+
+What to preserve:
+
+- trust structure
+- Tomer speaking directly
+- image-led emotional proof
+
+Important image rule:
+
+- this measurement image should not be casually duplicated in unrelated sections
+
+### Screenshot 04 - Offers / Value Stack / Market Value / Urgency Reference
+
+What it proves:
+
+- the sophisticated pricing / value communication was a major strength
+- the value stack and market-value framing were working
+- urgency / scarcity were present at the right level
+
+What to preserve:
+
+- layered offer presentation
+- price anchoring
+- value stack logic
+- premium urgency / scarcity
+- distinction between entry / flagship / deeper offers
+
+What should not happen:
+
+- collapsing this into shallow “clean” cards
+- removing the market value logic
+- removing urgency / scarcity
+
+### Screenshot 05 - Insurance Section Reference
+
+What it proves:
+
+- the insurance section was strong and conversion-relevant
+- the split layout with Tomer image worked
+- the credibility framing should remain
+
+What to preserve:
+
+- trust
+- clarity
+- seriousness
+- lead capture utility
+
+### Screenshot 06 - Workshops / Lectures Reference
+
+What it proves:
+
+- Tomer’s lectures / workshops section added authority and breadth
+- this content should not be removed
+- the section already had good structure
+
+What to preserve:
+
+- category positioning
+- authority framing
+- CTA logic
+
+### Screenshot 07 - Newsletter Reference
+
+What it proves:
+
+- the newsletter was already good
+- it only needs small improvements
+
+What to preserve:
+
+- the simple structure
+- the strong email icon / headline / fields
+- the premium dark treatment if still appropriate
+
+### Screenshot 08 - Final CTA Reference
+
+What it proves:
+
+- the final CTA concept worked very well
+- the line `אם הגעת עד לפה אז כנראה שהבנת` had strong closing energy
+
+What to preserve:
+
+- emotional close
+- strong final push
+- simple form logic
+
+### Screenshot 09 - Final CTA Duplicate Emphasis
+
+The last screenshot repeats the same CTA reference, which should be interpreted as:
+
+- the user is strongly emphasizing this section
+- do not downgrade it
+- do not replace it with a generic weak closer
+
+---
+
+## Specific Current Problems To Solve
+
+### Fonts / readability / color use
+
+- some sections are hard to read
+- fonts + palette pairing currently feel weaker than they should
+- contrast needs improvement
+- blue/white should not mean “washed out” or “soft everywhere”
+
+### App section
+
+The user’s current judgment is very negative.
+
+What the user likes:
+
+- the phone
+- the real product screenshots
+- the raw ingredients
+
+What the user dislikes:
+
+- the way they are arranged now
+- the copy
+- the clarity of the section
+- the exposure of internal/control concepts
+
+Meaning:
+
+- keep real product imagery
+- rebuild the hierarchy
+- clarify the customer-facing benefit
+- remove internal/backend framing
+
+### Testimonials
+
+Main problem:
+
+- image / testimonial mismatch
+
+Required fix:
+
+- match each testimonial to a sensible visual
+- avoid using Tomer’s portrait as if it were client proof
+- avoid duplicate image logic across sections
+
+---
+
+## Non-Negotiable Content Logic
+
+### Tomer must speak in first person
+
+The site should sound like:
+
+- Tomer speaking directly
+- not an agency
+- not a robotic system
+- not abstract wellness language
+
+### Do not expose internal operator/backend material
+
+This especially applies to:
+
+- app control language
+- internal dashboards
+- backend processes
+- anything that belongs to Tomer/operator eyes only
+
+### The pricing structure should remain strategically smart
+
+Meaning:
+
+- show enough to sell properly
+- preserve the premium framing
+- preserve value stack and market value logic
+- do not dump internal-only details without judgment
+
+---
+
+## Desired End State
+
+The final site should feel like:
+
+- the strongest older version recovered intelligently
+- with the right new assets
+- with the right blue/white business-color direction
+- with better readability
+- with stronger copy quality
+- with restored premium persuasion
+
+This is **not** a redesign from zero.
+
+This is:
+
+> restore the strongest version, fix the mistakes, adapt the palette, and sharpen the conversion path.
+
+---
+
+## What Codex Will Use From You
+
+Codex needs from you:
+
+- exact decisions about what to restore vs revise
+- exact Hebrew copy
+- exact section order
+- exact image logic
+- clear explanation of where the stronger older structure should be reused
+
+So do not stay abstract.
+
+Be decisive and file-aware.
+

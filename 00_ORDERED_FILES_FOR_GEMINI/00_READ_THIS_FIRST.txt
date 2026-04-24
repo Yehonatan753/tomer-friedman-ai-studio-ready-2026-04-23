@@ -8,6 +8,7 @@ The real base app is still:
 
 But if navigation fails, use these ordered files as the source of truth:
 01_STRICT_EXECUTION_PROMPT.txt
+01A_AI_STUDIO_FEATURE_REQUIREMENTS.txt
 02_FULL_CONTINUOUS_BRIEF.txt
 03_SOURCE_CONTEXT_OPUS_AND_FEEDBACK.txt
 04_REFERENCE_IMAGES_INDEX.txt

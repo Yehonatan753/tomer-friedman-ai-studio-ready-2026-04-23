@@ -1,0 +1,40 @@
+# User Feedback - 2026-04-22 After Assembly
+
+This file captures Yehonatan's explicit feedback after the Claude/Gemini assembly pass.
+Treat these points as active constraints for the next revision pass.
+
+## Visual / Readability
+
+- There is a problem with the fonts and color choices: some sections are not readable enough.
+- Contrast needs improvement, especially around pricing and dense information blocks.
+- The site copy and visual rhythm currently feel robotic and repetitive across multiple sections.
+
+## Offers / Pricing / Sales Structure
+
+- The pricing material is backend-facing sales enablement content for Tomer and the operator, not something that should be exposed naively or flattened.
+- Restore the `value stack` that previously existed.
+- Restore the `per-section pricing by value` presentation that previously existed.
+- These removals were not requested and should be undone.
+- Restore urgency and scarcity elements.
+
+## App Section
+
+- The app section is currently unclear, messy, and poorly explained.
+- The phone + real app images are good, but they are not being shown clearly enough.
+- The current copy is bad and should be fixed quickly.
+- The "control"/backend aspect is only for Tomer and should not be explained to customers directly.
+- The section should communicate the customer-facing value of the app, not internal operator tooling.
+
+## Testimonials
+
+- Testimonials structure is generally good.
+- Fix the mismatch where a photo of Tomer appears next to a testimonial that is written as if from a female client.
+- Avoid duplicate image usage across sections.
+- Each section should have its own distinct image.
+
+## Process / Next Step
+
+- User will send screenshots of sections they liked and did not want removed.
+- Before that, provide a live link to the most up-to-date previous site version available so comparison is possible.
+- Do not start a broad redesign before the user gives the next detailed correction pass.
+

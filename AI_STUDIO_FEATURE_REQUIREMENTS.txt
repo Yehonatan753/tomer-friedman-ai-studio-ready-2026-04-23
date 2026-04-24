@@ -1,0 +1,34 @@
+AI Studio feature requirements requested by the user.
+
+When working in Google AI Studio, enable or implement these capabilities as part of the task:
+
+1. Add database and auth
+- Add a real persistence/auth layer if AI Studio offers that option.
+- Use it for leads, newsletter signups, questionnaire/app intent data, and future customer-account flows.
+- Do not expose Tomer's internal admin/backend controls to public visitors.
+- If database/auth cannot be implemented directly in the current environment, return the exact schema, auth flow, and files needed.
+
+2. Add a Gemini chatbot
+- Add a customer-facing Gemini assistant only if it supports the conversion journey.
+- It should help visitors understand which product fits them, answer FAQs, and route them to the right CTA.
+- It must not claim medical certainty, diagnose conditions, invent pricing, or expose internal business logic.
+- It should speak Hebrew RTL in Tomer's brand voice.
+
+3. Enable high thinking
+- Use the highest available reasoning / thinking mode before planning and implementing.
+- Do not answer from the brief alone.
+- Inspect the ordered files and code first.
+
+4. Analyze images
+- Treat `03_REFERENCE_IMAGES/` as binding visual references.
+- Analyze the screenshots and assets before changing layout.
+- Preserve the approved black/orange visual direction unless a specific instruction says otherwise.
+
+5. Add Gemini intelligence
+- Add Gemini-powered behavior only where it adds real value.
+- Good uses: product-fit assistant, FAQ assistant, lead qualification, questionnaire support, explanation of offers.
+- Bad uses: exposing backend/admin logic, replacing Tomer's direct first-person copy, making unsupported health claims.
+
+Priority rule:
+These feature requirements do not override the main recovery task.
+The main task is still to work from `02_CODE_BASE_PRE_COLOR/`, preserve the stronger black/orange version, restore the strong sections, and produce exact file changes.

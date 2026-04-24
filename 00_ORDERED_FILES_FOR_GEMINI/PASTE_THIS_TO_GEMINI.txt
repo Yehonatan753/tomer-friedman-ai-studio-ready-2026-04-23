@@ -8,11 +8,20 @@ Open the folder:
 Read the files there in numerical order.
 Start with:
 00_ORDERED_FILES_FOR_GEMINI/01_STRICT_EXECUTION_PROMPT.txt
+Then read:
+00_ORDERED_FILES_FOR_GEMINI/01A_AI_STUDIO_FEATURE_REQUIREMENTS.txt
 
 The real base code is still:
 02_CODE_BASE_PRE_COLOR/
 
-But if you struggle to navigate the repo, use the ordered TXT files as the source of truth because they contain the important code and instructions in sequence.
+You must also handle the AI Studio feature requests:
+- Add database and auth
+- Add a Gemini chatbot
+- Enable high thinking
+- Analyze images
+- Add Gemini intelligence
+
+If you struggle to navigate the repo, use the ordered TXT files as the source of truth because they contain the important code and instructions in sequence.
 
 Your first response must be the Compliance Audit requested in 01_STRICT_EXECUTION_PROMPT.txt.
 Do not give a vague plan.

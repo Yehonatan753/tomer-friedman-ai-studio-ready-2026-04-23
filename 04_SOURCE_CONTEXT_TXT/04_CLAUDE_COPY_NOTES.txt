@@ -1,0 +1,68 @@
+# Copy Notes — 2026-04-22 Pass
+
+## Files Changed
+
+- `src/data.ts` only. No layout/styling components touched.
+
+---
+
+## Changes Made
+
+### Hero
+
+| Field | Before | After | Reason |
+|---|---|---|---|
+| `eyebrow` | "דיוק מקצועי. התמדה אמיתית. תוצאות שאפשר להחזיק." | "תזונה, מדידות ואימונים. הכול ממקום אחד, 22 שנה." | The old eyebrow repeated "התמדה" and "להחזיק" from the headline — pre-empting the promise instead of positioning Tomer. New line describes the actual service scope and anchors the 22-year credential. |
+| `secondaryCta` | "אני רוצה להבין מה נכון לי" | "לכל המוצרים והמחירים" | The old label phrased like a Pathfinder quiz prompt, but the destination link is `#tracks` (the products grid). New label matches what the user actually sees when they click. |
+| `proofPoints[1]` | "ליווי אישי שלי" | "קליניקה ואונליין" | "ליווי אישי שלי" is a feature description, not a proof point. "קליניקה ואונליין" establishes both work modalities concretely — relevant to buyers evaluating remote vs. in-person options. |
+
+### TF Tracker Offer — Audience Label
+
+| Field | Before | After | Reason |
+|---|---|---|---|
+| `OFFERS.entry[0].audience` | "למי שרוצה בסיס עצמאי, ברור ונוח לפני שנכנסים לליווי עמוק יותר." | "למי שרוצה להתחיל לעבוד מסודר באופן עצמאי. עם אפשרות להמשיך לליווי אישי מלא כשמוכנים." | "לפני שנכנסים לליווי" positions TF Tracker as a pre-step, not a real product. New phrasing affirms it as a standalone entry point and frames the upsell as optional. |
+
+### AppSubscription
+
+| Field | Before | After | Reason |
+|---|---|---|---|
+| `entryCard.subtitle` | "מנוי הכניסה הדיגיטלי שלי: ..." | "מנוי הכניסה שלי: ..." | "הדיגיטלי" creates gender-agreement mismatch with "מנוי" in Hebrew. Removed. |
+| `entryCard.checklist[2]` | "מוצר הכניסה שלי לפני מעבר לליווי רחב יותר." | "נקודת ההתחלה לעבודה מסודרת, עם מעבר פשוט לתהליך אישי כשרוצים." | Same problem as audience label — "לפני מעבר" subordinates TF Tracker to the upsell. |
+
+### AppShowcase
+
+| Field | Before | After | Reason |
+|---|---|---|---|
+| `appShowcase.subtitle` | "האפליקציה לא מחליפה ליווי טוב. היא נותנת לי ולך דרך לעבוד מסודר בין פגישה לפגישה..." | "TF Tracker הוא מוצר כניסה עצמאי. אוכל, אימונים, מדידות ומעקב רציף — הכול ממקום אחד. מי שרוצה מסגרת עמוקה יותר יכול להתקדם לתהליך אישי בלי לשנות מערכת בדרך." | Opening with "לא מחליפה ליווי טוב" framed TF Tracker as the lesser option. New subtitle leads with what it is, then positions the upsell as an option — not a correction. |
+
+### FAQ
+
+| Field | Before | After | Reason |
+|---|---|---|---|
+| Q1 answer | "...לתהליך אונליין או לליווי הפרימיום." | "...לתהליך האונליין או לליווי האישי המלא." | "ליווי הפרימיום" was inconsistent with the official offer title "ליווי אישי מלא". Fixed to match `OFFERS.flagship[1].title`. |
+
+---
+
+## Issues Left Intentionally Untouched
+
+### InsuranceBanner — hardcoded in component
+
+The headline "אולי מגיע לך הרבה כסף!" reads as clickbait and could conflict with the "no fake urgency" rule. However, this is hardcoded in `InsuranceBanner.tsx`, not in `data.ts`, and the brief says not to edit layout/styling components unless absolutely required. **Flag for a separate component pass.**
+
+The CTA "בדוק זכאותך" links to `#pathfinder`. This is a valid destination since the Pathfinder quiz collects contact info and passes answers to Tomer, enabling a real eligibility check. No change needed.
+
+### Pathfinder — fully hardcoded in component
+
+All Pathfinder questions, recommendation logic, and result copy live in `Pathfinder.tsx`. The current intro already says clearly: "המטרה היא לכוון אותך למוצר או למסלול שבאמת נכון לשלב שאתה נמצא בו." This is honest and clear. No data.ts changes possible here.
+
+### Testimonials — already appropriately scoped
+
+All 4 testimonials are anonymous, first-person, and carry honest result tags ("התמדה ושינוי הרגלים", "סדר באכילה ובמעקב"). None overclaim. The `approved: false` flag on 3 of them correctly triggers the "ההמלצה מוצגת בעילום שם" disclaimer in the component. No changes made.
+
+### Offers data — no changes
+
+Pricing, includes lists, and renewal terms are accurate per the April 19, 2026 pricing document. No copy changes were made to offers themselves, only to the audience framing of TF Tracker.
+
+### cartBonuses — not changed
+
+These appear to serve a different display context (possibly checkout/cart summary). They overlap with `entryCard.checklist` but are likely shown in a different flow. Left as-is to avoid breaking downstream usage without understanding the full context.

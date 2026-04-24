@@ -16,15 +16,34 @@ Do not flatten the website into generic SaaS cards.
 
 Your task is to recover and improve the stronger pre-color-change black/orange version, using the instructions and references in this repository.
 
+GOOGLE AI STUDIO FEATURE REQUIREMENTS
+The user also explicitly requested the AI Studio capabilities shown in the project setup:
+- Add database and auth
+- Add a Gemini chatbot
+- Enable high thinking
+- Analyze images
+- Add Gemini intelligence
+
+Before planning, read:
+`AI_STUDIO_FEATURE_REQUIREMENTS.txt`
+
+These requirements must be handled, but they do not override the main website recovery task.
+Use database/auth for useful persistence such as leads, newsletter, questionnaire intent, and future customer-account flows.
+Use Gemini chatbot/intelligence only where it helps customers choose the right offer, ask FAQs, or move through the conversion journey.
+Do not expose Tomer's backend, admin dashboard, control panel, internal monitoring, or operator logic.
+Use high thinking / deep reasoning if the AI Studio environment exposes that setting.
+Analyze the images in `03_REFERENCE_IMAGES/` before changing layout.
+
 READING ORDER
 Read these files in this order before making any recommendation:
 1. `GEMINI_STRICT_EXECUTION_PROMPT.txt`
-2. `00_START_HERE.txt`
-3. `01_BRIEF/01_FULL_CONTINUOUS_BRIEF.txt`
-4. `README.md`
-5. `04_SOURCE_CONTEXT_TXT/01_OPUS_MASTER_PROMPT.txt`
-6. `04_SOURCE_CONTEXT_TXT/02_OPUS_VISUAL_CONTEXT.txt`
-7. `04_SOURCE_CONTEXT_TXT/03_USER_FEEDBACK.txt`
+2. `AI_STUDIO_FEATURE_REQUIREMENTS.txt`
+3. `00_START_HERE.txt`
+4. `01_BRIEF/01_FULL_CONTINUOUS_BRIEF.txt`
+5. `README.md`
+6. `04_SOURCE_CONTEXT_TXT/01_OPUS_MASTER_PROMPT.txt`
+7. `04_SOURCE_CONTEXT_TXT/02_OPUS_VISUAL_CONTEXT.txt`
+8. `04_SOURCE_CONTEXT_TXT/03_USER_FEEDBACK.txt`
 
 Then inspect the real code in:
 `02_CODE_BASE_PRE_COLOR/`
@@ -175,6 +194,16 @@ Expected checks:
 - build
 - preview
 - inspect home page
+
+6. AI Studio Feature Handling
+Explain exactly how you handled:
+- database/auth
+- Gemini chatbot
+- high thinking
+- image analysis
+- Gemini intelligence
+
+If any feature cannot be implemented directly, give the exact missing prerequisite and the exact implementation plan.
 
 QUALITY BAR
 If a change makes the site cleaner but weaker than the approved black/orange version, it is the wrong change.
