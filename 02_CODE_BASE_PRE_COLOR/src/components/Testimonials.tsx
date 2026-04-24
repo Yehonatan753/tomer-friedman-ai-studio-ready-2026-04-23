@@ -8,16 +8,22 @@ const testimonials = [
     name: 'ש. ט.',
     context: 'תהליך אונליין',
     text: 'הפעם הראשונה שהרגשתי שהתפריט נבנה סביב החיים שלי ולא סביב דף מוכן מראש. היה ברור מה עושים גם במסעדה, גם בחופש וגם בשבוע עמוס.',
+    image: '/tomer-measure-reference.jpeg',
+    imageLabel: 'רגע מדידה מהקליניקה',
   },
   {
     name: 'ד. ס.',
     context: 'ליווי אישי',
     text: 'המדידות שינו לי את כל ההבנה. לא הסתכלנו רק על משקל, אלא על הרכב גוף, היקפים והתגובה של הגוף לאורך זמן.',
+    image: '/tomer-measure-waist-highres.png',
+    imageLabel: 'מדידה כחלק מתהליך',
   },
   {
     name: 'ר. ג.',
     context: 'ספורטאי חובב',
     text: 'הדיוק סביב אימונים, זמני ארוחות וכמויות הוריד המון רעש. לא הייתי צריך לנחש אם אני אוכל מספיק או יותר מדי.',
+    image: '/tomer-measure.png',
+    imageLabel: 'מעקב גוף והיקפים',
   },
   {
     name: 'א. מ.',
@@ -66,18 +72,29 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ delay: (idx % 3) * 0.08, duration: 0.6, ease }}
-              className="rounded-[2rem] border border-energy/20 bg-[#f8fbff] p-8 shadow-[0_20px_65px_rgba(15,42,68,0.07)] transition-colors hover:border-energy/40"
+              className="overflow-hidden rounded-[2rem] border border-energy/20 bg-[#f8fbff] shadow-[0_20px_65px_rgba(15,42,68,0.07)] transition-colors hover:border-energy/40"
             >
-              <Quote size={32} className="mb-6 rotate-180 text-energy/30" />
-              <div className="mb-6 flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} fill="currentColor" className="text-energy" />
-                ))}
-              </div>
-              <p className="mb-8 text-lg font-medium leading-relaxed text-foreground/80">"{testimonial.text}"</p>
-              <div className="border-t border-[#dceaf5] pt-6">
-                <p className="text-lg font-black text-foreground">{testimonial.name}</p>
-                <p className="text-sm font-bold text-energy">{testimonial.context}</p>
+              {'image' in testimonial && testimonial.image && (
+                <div className="relative h-48 overflow-hidden">
+                  <img src={testimonial.image} alt={testimonial.imageLabel} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2a44]/45 to-transparent" />
+                  <div className="absolute bottom-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-foreground">
+                    {testimonial.imageLabel}
+                  </div>
+                </div>
+              )}
+              <div className="p-8">
+                <Quote size={32} className="mb-6 rotate-180 text-energy/30" />
+                <div className="mb-6 flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={16} fill="currentColor" className="text-energy" />
+                  ))}
+                </div>
+                <p className="mb-8 text-lg font-medium leading-relaxed text-foreground/80">"{testimonial.text}"</p>
+                <div className="border-t border-[#dceaf5] pt-6">
+                  <p className="text-lg font-black text-foreground">{testimonial.name}</p>
+                  <p className="text-sm font-bold text-energy">{testimonial.context}</p>
+                </div>
               </div>
             </motion.article>
           ))}

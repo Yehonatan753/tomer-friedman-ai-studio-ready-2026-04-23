@@ -91,7 +91,7 @@ export default function Header() {
           </nav>
 
           <a
-            href="#tracks"
+            href="#contact"
             className="hidden rounded-full bg-energy px-5 py-2 text-sm font-black text-white shadow-[0_12px_32px_rgba(28,141,255,0.28)] transition-colors hover:bg-[#0f6fc9] md:block"
           >
             צור קשר

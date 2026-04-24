@@ -6,8 +6,8 @@ const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const features = [
   {
     icon: Utensils,
-    title: 'שאלון קצר וכניסה מסודרת',
-    text: 'מתחילים בלי בלגן. המערכת בונה לך מבנה בסיסי כבר מהיום הראשון.',
+    title: 'שאלון התאמה חכם יותר',
+    text: 'לא רק מטרה ומשקל. האפליקציה בודקת ניסיון, תקציב, מדידות, שגרת אימון ורמת מעטפת שנכונה לך.',
   },
   {
     icon: Dumbbell,
@@ -57,7 +57,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.2 }}
             className="mb-8 text-lg leading-relaxed text-text-muted"
           >
-            TF Tracker הוא מוצר הכניסה הדיגיטלי שלי. בפנים יש מערכת אחת שאוגדת אוכל, אימונים, מדידות ומעקב, בלי לקפוץ בין 4 אפליקציות, בלי למלא אקסלים, ובלי לנחש מה קורה מיום ליום. זה מוצר עצמאי שעומד לבד, ומי שרוצה להעמיק אחר כך לתהליך אישי, ההיסטוריה ממשיכה איתו ולא מתחילה מחדש.
+            TF Tracker הוא מוצר הכניסה הדיגיטלי שלי. בפנים יש מערכת אחת שאוגדת אוכל, אימונים, מדידות ומעקב, עם מצב כהה ומצב בהיר לפי מה שנוח לך. זה מוצר עצמאי שעומד לבד, ומי שרוצה להעמיק אחר כך לתהליך אישי, ההיסטוריה ממשיכה איתו ולא מתחילה מחדש.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -71,7 +71,7 @@ export default function AppShowcase() {
               <ArrowLeft size={20} />
             </a>
             <a href="#pathfinder" className="flex items-center justify-center gap-2 rounded-full border border-energy/20 bg-white px-8 py-4 font-bold text-foreground shadow-sm transition-colors hover:bg-[#eef7ff]">
-              <span>להבין אם זה מתאים לי</span>
+              <span>ענה על שאלון התאמה</span>
               <HelpCircle size={20} className="text-energy" />
             </a>
           </motion.div>
@@ -152,9 +152,10 @@ export default function AppShowcase() {
                       <div className="mb-1 text-xs font-black uppercase tracking-wider text-energy">TF Tracker</div>
                       <div className="text-2xl font-black text-white">שלום, דניאל</div>
                     </div>
-                    <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-energy/40 bg-white">
-                      <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-9 w-9 object-contain" />
-                    </div>
+                    <a href="#pathfinder" className="flex items-center gap-2 overflow-hidden rounded-2xl border border-energy/40 bg-white/10 px-2 py-1 text-[10px] font-black text-white transition-colors hover:border-energy">
+                      <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-8 w-8 rounded-xl bg-white object-contain" />
+                      שאלון התאמה
+                    </a>
                   </div>
                 </div>
 

@@ -1,0 +1,63 @@
+TOMER SITE + TF TRACKER SYNC UPDATE - 2026-04-25
+
+Source of truth:
+- Website repo code under 02_CODE_BASE_PRE_COLOR is the current marketing source of truth.
+- App repo synced from: https://github.com/Yehonatan753/t-omer-s-tracker.git
+- App local path used for implementation: C:\Users\User\Downloads\t-omer-s-tracker-github
+
+Locked client decisions:
+1. The site remains premium white/blue, not black/orange.
+2. The real logo from the PSD export is the canonical logo. Use /tomer-logo.png on the website and src/assets/tomer-logo.png in the app.
+3. Do not use visual "TF" initials where the real logo can be used.
+4. The website product ladder is the source of truth for app offers and prices.
+5. Social links must stay available. Do not remove Instagram, Facebook, YouTube, LinkedIn, or WhatsApp links.
+6. Testimonials must not pair a client quote with a misleading Tomer-only portrait. Use measurement/process images only where context is clear.
+7. The app should support light and dark mode. Default visual direction is blue/white.
+8. App customer-facing copy must not mention admin/control/dashboard/backend monitoring.
+
+Website updates implemented:
+- Replaced tomer-logo.png with the clean PSD-derived logo export.
+- AppShowcase now positions the top-left phone chip as a questionnaire CTA instead of a decorative/admin-style badge.
+- AppShowcase copy mentions TF Tracker as a standalone product with a natural upgrade path and light/dark mode.
+- Pathfinder questionnaire expanded with more specific questions around measurement confidence, budget, and app behavior.
+- Tracks now has a selection cart per product and WhatsApp handoff for selected products.
+- Footer restored/expanded with social links including WhatsApp and LinkedIn.
+- Testimonials now use measurement/process visuals where appropriate instead of misleading mismatched portraits.
+
+App updates implemented:
+- Real Tomer logo added to app assets and public folder.
+- Theme system added in src/lib/theme.ts with persistent light/dark mode.
+- CSS variables and Tailwind colors aligned to blue/white source of truth.
+- Settings screen now controls theme mode and displays the real logo.
+- Dashboard avatar uses the real logo and the upsell cards use website prices:
+  - תהליך אונליין: ₪4,500 / 3 חודשים
+  - ליווי אישי מלא: ₪9,000 / 3 חודשים
+- Subscription screen rebuilt as a six-product selection cart:
+  - TF Tracker: ₪49.90 monthly / ₪39.90 monthly annual
+  - BodyMetRiX Lite: ₪297 report / ₪790 for 3 reports
+  - תהליך אונליין: ₪4,500 / 3 months / ₪8,400 / 6 months
+  - ליווי אישי מלא: ₪9,000 / 3 months / ₪16,500 / 6 months
+  - כרטיסיית מדידות: ₪800 / ₪1,400 / ₪1,900
+  - BodyMetRiX Pro: ₪2,970 annual / ₪297 monthly
+- Onboarding questionnaire expanded to match the smarter website Pathfinder logic.
+- Contact page restored official social links.
+
+Verification performed:
+- Website: npm run build, npm run test, npm run lint.
+- App: npm run build, npm run test, npm run lint.
+- Browser QA with Playwright:
+  - Website logo loaded.
+  - Website questionnaire CTA visible.
+  - Website all six products available across product tabs.
+  - Website social links present.
+  - App dashboard logo rendered.
+  - App dashboard shows source-of-truth flagship offers.
+  - App subscription cart rendered and flagship tab works.
+  - App settings theme option rendered.
+
+QA screenshots:
+- C:\Users\User\Downloads\tomer-qa-shots\site-home.png
+- C:\Users\User\Downloads\tomer-qa-shots\site-products.png
+- C:\Users\User\Downloads\tomer-qa-shots\app-dashboard-light.png
+- C:\Users\User\Downloads\tomer-qa-shots\app-subscription.png
+- C:\Users\User\Downloads\tomer-qa-shots\app-settings.png

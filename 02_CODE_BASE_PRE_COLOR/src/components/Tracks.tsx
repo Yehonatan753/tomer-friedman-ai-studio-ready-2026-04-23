@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Activity, ArrowLeft, BriefcaseBusiness, CheckCircle2, Laptop, Ruler, Smartphone, Sparkles, UserRound } from 'lucide-react';
+import { Activity, ArrowLeft, BriefcaseBusiness, CheckCircle2, Laptop, MessageCircle, Ruler, ShoppingCart, Smartphone, Sparkles, Trash2, UserRound } from 'lucide-react';
 
 type TrackTab = 'entry' | 'flagship' | 'professional';
 
@@ -225,7 +225,7 @@ function whatsappLink(product: string) {
   return `https://wa.me/972546699574?text=${text}`;
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, inCart, onToggleCart }: { product: Product; inCart: boolean; onToggleCart: () => void }) {
   const Icon = product.icon;
 
   return (
@@ -336,24 +336,48 @@ function ProductCard({ product }: { product: Product }) {
         )}
       </div>
 
-      <a
-        href={whatsappLink(product.title)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`mt-6 flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-center font-black transition-colors ${
-          product.featured ? 'bg-energy text-white hover:bg-[#0f6fc9]' : 'border border-energy/20 bg-white text-foreground hover:bg-[#eef7ff]'
-        }`}
-      >
-        קבל התאמה למסלול
-        <ArrowLeft size={18} />
-      </a>
+      <div className="mt-6 grid gap-3 md:grid-cols-2">
+        <button
+          type="button"
+          onClick={onToggleCart}
+          className={`flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-center font-black transition-colors ${
+            inCart ? 'border border-energy/30 bg-[#eef7ff] text-energy' : 'bg-energy text-white hover:bg-[#0f6fc9]'
+          }`}
+        >
+          <ShoppingCart size={18} />
+          {inCart ? 'הסר מהסל' : 'הוסף לסל בחירה'}
+        </button>
+        <a
+          href={whatsappLink(product.title)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-2xl border border-energy/20 bg-white px-6 py-4 text-center font-black text-foreground transition-colors hover:bg-[#eef7ff]"
+        >
+          שאל על המוצר
+          <ArrowLeft size={18} />
+        </a>
+      </div>
     </motion.article>
   );
 }
 
 export default function Tracks() {
   const [activeTab, setActiveTab] = useState<TrackTab>('flagship');
+  const [cart, setCart] = useState<string[]>([]);
   const activeProducts = products.filter((product) => product.tab === activeTab);
+  const cartProducts = products.filter((product) => cart.includes(product.id));
+
+  function toggleCart(productId: string) {
+    setCart((current) => current.includes(productId) ? current.filter((id) => id !== productId) : [...current, productId]);
+  }
+
+  function cartWhatsappLink() {
+    const summary = cartProducts.length
+      ? cartProducts.map((product) => `• ${product.title}: ${product.prices.map((price) => `${price.label} ${price.price}`).join(' / ')}`).join('\n')
+      : 'עוד לא בחרתי מוצר, אשמח שתעזור לי לבחור.';
+    const text = encodeURIComponent(`שלום תומר, בניתי סל בחירה באתר ורוצה לבדוק התאמה:\n${summary}`);
+    return `https://wa.me/972546699574?text=${text}`;
+  }
 
   return (
     <section id="tracks" className="relative overflow-hidden bg-gradient-to-b from-white via-[#f7fbff] to-white px-6 pb-32 pt-16 md:px-16 lg:px-24">
@@ -406,11 +430,49 @@ export default function Tracks() {
             className="grid grid-cols-1 gap-8 lg:grid-cols-2"
           >
             {activeProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                inCart={cart.includes(product.id)}
+                onToggleCart={() => toggleCart(product.id)}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <AnimatePresence>
+        {cart.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            className="fixed inset-x-4 bottom-6 z-50 mx-auto max-w-4xl rounded-[2rem] border border-energy/20 bg-white/95 p-4 shadow-[0_24px_80px_rgba(15,42,68,0.18)] backdrop-blur-xl"
+          >
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="text-right">
+                <div className="flex items-center justify-end gap-2 font-black text-foreground">
+                  <span>{cart.length} מוצרים בסל הבחירה</span>
+                  <ShoppingCart size={18} className="text-energy" />
+                </div>
+                <p className="mt-1 text-sm text-text-muted">
+                  {cartProducts.map((product) => product.title).join(' · ')}
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <button onClick={() => setCart([])} className="flex items-center gap-2 rounded-full border border-[#dceaf5] px-5 py-3 text-sm font-black text-text-muted">
+                  <Trash2 size={16} />
+                  נקה
+                </button>
+                <a href={cartWhatsappLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full bg-energy px-6 py-3 text-sm font-black text-white">
+                  <MessageCircle size={16} />
+                  שלח לתומר
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

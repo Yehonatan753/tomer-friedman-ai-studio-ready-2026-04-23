@@ -58,6 +58,39 @@ const QUESTIONS = [
       { id: 'consult', label: 'פגישת ייעוץ ודיוק', desc: 'לעשות סדר חד פעמי בבלאגן' },
       { id: 'unsure', label: 'לא בטוח', desc: 'אשמח להמלצה מקצועית' },
     ]
+  },
+  {
+    id: 'q6',
+    title: 'כמה חשובה לך מדידה אמיתית של הרכב גוף?',
+    hint: 'לא רק משקל, אלא היקפים, אחוזי שומן ומגמות',
+    options: [
+      { id: 'measurement-high', label: 'קריטי לי לראות נתונים אמיתיים', desc: 'אני רוצה להבין מה קורה בגוף, לא לנחש' },
+      { id: 'measurement-medium', label: 'חשוב, אבל לא חייב בכל שלב', desc: 'מספיק לי מעקב תקופתי מסודר' },
+      { id: 'measurement-low', label: 'כרגע אני צריך סדר באוכל', desc: 'מדידות פחות דחופות לי עכשיו' },
+      { id: 'measurement-unsure', label: 'לא יודע מה נכון למדוד', desc: 'צריך הכוונה בסיסית' },
+    ]
+  },
+  {
+    id: 'q7',
+    title: 'איזה טווח השקעה מרגיש לך נכון להתחלה?',
+    hint: 'כדי לא להמליץ לך על מוצר שלא מתאים למציאות שלך',
+    options: [
+      { id: 'budget-entry', label: 'מוצר דיגיטלי זול וגמיש', desc: 'להתחיל קטן בלי התחייבות' },
+      { id: 'budget-diagnostic', label: 'כמה מאות שקלים לאבחון', desc: 'דוח / מדידה / בדיקת כיוון' },
+      { id: 'budget-flagship', label: 'תהליך מלא של כמה אלפי שקלים', desc: 'אם זה שווה את הערך והמסגרת' },
+      { id: 'budget-unsure', label: 'קודם להבין ערך', desc: 'לא החלטתי עדיין' },
+    ]
+  },
+  {
+    id: 'q8',
+    title: 'מה יגרום לך להשתמש במערכת באמת?',
+    hint: 'הפער הוא בדרך כלל לא ידע, אלא יישום',
+    options: [
+      { id: 'execution-fast', label: 'רישום אוכל מהיר', desc: 'ברקוד, צילום ובלי למלא אקסלים' },
+      { id: 'execution-accountability', label: 'אחריותיות ומעקב', desc: 'שמישהו יחזיק איתי את הרצף' },
+      { id: 'execution-progress', label: 'גרפים והתקדמות', desc: 'לראות אם הנתונים באמת זזים' },
+      { id: 'execution-coaching', label: 'חיבור לתהליך אישי', desc: 'שיהיה ברור מה השלב הבא אם נתקעים' },
+    ]
   }
 ];
 
@@ -67,12 +100,30 @@ function calculateResult(answers: Record<string, string>) {
   if (answers.q5 === 'independent') score -= 2;
   if (answers.q3 === 'none') score += 1;
   if (answers.q4 === 'yoyo') score += 1;
+  if (answers.q6 === 'measurement-high') score += 1;
+  if (answers.q8 === 'execution-accountability' || answers.q8 === 'execution-coaching') score += 1;
+  if (answers.q7 === 'budget-entry' || answers.q7 === 'budget-diagnostic') score -= 2;
+  if (answers.q7 === 'budget-flagship') score += 2;
 
+  if (answers.q7 === 'budget-entry') return {
+    badge: 'ההמלצה שלי: TF Tracker',
+    title: 'הצעד הנכון הוא להתחיל קטן, מסודר וזול.',
+    body: 'לפי התשובות שלך, אין סיבה לקפוץ מיד לתהליך מלא. קודם בונים רצף יומי עם אוכל, אימונים, מדידות ומעקב במקום אחד.',
+    points: ['₪49.90 חודשי או ₪39.90 במסלול שנתי', 'שאלון כניסה ומעקב יומי', 'אפשר להתקדם אחר כך בלי לאבד נתונים'],
+    cta: 'בחר את TF Tracker בסל הבחירה ושלח לי את ההתאמה.'
+  };
+  if (answers.q7 === 'budget-diagnostic' || answers.q6 === 'measurement-unsure') return {
+    badge: 'ההמלצה שלי: BodyMetRiX Lite',
+    title: 'לפני שמתחייבים, כדאי להבין מאיפה מתחילים.',
+    body: 'הפער כרגע הוא לא בהכרח ליווי מלא, אלא אבחון ברור. דוח מדידה עצמי יכול לתת לך כיוון בלי להעמיס החלטה גדולה.',
+    points: ['דוח בודד ב־₪297', '3 דוחות ב־₪790 למעקב', 'מדידות והמלצה להמשך בשפה פשוטה'],
+    cta: 'בחר BodyMetRiX Lite בסל הבחירה ונבדוק אם זה מספיק או שצריך מסלול עמוק יותר.'
+  };
   if (score >= 2) return {
-    badge: 'ההמלצה שלי: מסלול פרונטלי',
+    badge: 'ההמלצה שלי: ליווי אישי מלא',
     title: 'אתה צריך מסגרת חזקה וליווי אישי קרוב.',
     body: 'לפי התשובות שלך, ניסית בעבר להתמודד לבד וזה לא החזיק מעמד.',
-    points: ['מעקב צמוד בקליניקה', 'התאמה אישית מדויקת', 'מסגרת מחייבת', 'גישה לאפליקציית המעקב'],
+    points: ['עבודה צמודה בקליניקה / אונליין לפי התאמה', 'מדידות והרכב גוף מלאים', 'זמינות יומיומית וגישה לאפליקציה'],
     cta: 'בוא נבדוק בשיחת ייעוץ קצרה אם אנחנו מתאימים לעבוד יחד.'
   };
   if (score >= -1) return {
@@ -154,7 +205,7 @@ export default function Pathfinder() {
                   <Target size={32} className="text-energy" />
                 </div>
                 <div className="space-y-4 mb-10 text-right max-w-sm mx-auto">
-                  {['5 שאלות קצרות, פחות מדקה', 'תוצאה מותאמת אישית בסוף', 'בלי מכירה, בלי ספאם'].map((text, i) => (
+                  {[`${QUESTIONS.length} שאלות קצרות ומדויקות`, 'תוצאה מותאמת אישית בסוף', 'בלי מכירה, בלי ספאם'].map((text, i) => (
                     <div key={i} className="flex items-center gap-3 text-text-muted">
                       <div className="w-2 h-2 rounded-full bg-energy"></div>
                       <span>{text}</span>

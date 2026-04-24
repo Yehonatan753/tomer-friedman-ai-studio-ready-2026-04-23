@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, Facebook, Instagram, Mail, Phone, Youtube } from 'lucide-react';
+import { Clock, Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone, Youtube } from 'lucide-react';
 import { SITE_DATA } from '../data';
 import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
@@ -156,6 +156,12 @@ export default function Footer() {
             </a>
             <a href={SITE_DATA.profile.socials.youtube} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-energy/20 text-foreground transition-all hover:bg-energy hover:text-white">
               <Youtube size={18} />
+            </a>
+            <a href={SITE_DATA.profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-energy/20 text-foreground transition-all hover:bg-energy hover:text-white">
+              <Linkedin size={18} />
+            </a>
+            <a href={SITE_DATA.profile.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-energy/20 text-foreground transition-all hover:bg-energy hover:text-white">
+              <MessageCircle size={18} />
             </a>
           </div>
 
