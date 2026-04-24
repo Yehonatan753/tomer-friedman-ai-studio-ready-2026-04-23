@@ -1,9 +1,10 @@
 Use this repository as the full source of truth for the task.
 
 Start by reading these files in this order:
-1. `00_START_HERE.txt`
-2. `01_BRIEF/02_FULL_CONTINUOUS_BRIEF.docx`
-3. `README.md`
+1. `GEMINI_STRICT_EXECUTION_PROMPT.txt`
+2. `00_START_HERE.txt`
+3. `01_BRIEF/01_FULL_CONTINUOUS_BRIEF.txt`
+4. `README.md`
 
 Then inspect the actual codebase inside:
 `02_CODE_BASE_PRE_COLOR/`
