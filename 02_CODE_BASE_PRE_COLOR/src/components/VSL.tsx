@@ -3,7 +3,7 @@ import { Play } from 'lucide-react';
 
 export default function VSL() {
   return (
-    <section className="relative py-20 px-6 md:px-16 lg:px-24 bg-bg overflow-hidden z-20">
+    <section className="relative z-20 overflow-hidden bg-white px-6 py-20 md:px-16 lg:px-24">
       <div className="max-w-5xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -13,16 +13,16 @@ export default function VSL() {
           className="relative"
         >
           {/* Glowing border effect */}
-          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-blue-700 opacity-30 blur-xl"></div>
+          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-b from-energy to-[#5fb8ff] opacity-20 blur-xl md:rounded-[2rem]"></div>
 
-          <div className="relative rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-surface overflow-hidden aspect-video shadow-2xl flex items-center justify-center group cursor-pointer">
+          <div className="group relative flex aspect-video cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-energy/10 bg-white shadow-[0_24px_75px_rgba(15,42,68,0.12)] md:rounded-[2rem]">
             {/* Fallback / Placeholder Image */}
             <img
               src="/tomer-suitcase-photo.jpeg"
               alt="Tomer Fridman VSL"
-              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
+              className="absolute inset-0 h-full w-full object-cover opacity-80 transition-opacity duration-700 group-hover:opacity-95"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f2a44]/70 via-[#0f2a44]/10 to-transparent"></div>
 
             {/* Play Button */}
             <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(28,141,255,0.5)]">

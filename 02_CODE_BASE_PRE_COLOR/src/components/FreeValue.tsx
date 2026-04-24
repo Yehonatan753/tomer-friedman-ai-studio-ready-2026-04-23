@@ -59,7 +59,7 @@ export default function FreeValue() {
               <motion.button 
                 variants={itemVariants} 
                 onClick={() => {
-                  window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - אפליקציית החינמית' } }));
+                  window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - האפליקציה הדיגיטלית' } }));
                 }}
                 className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
               >
@@ -82,7 +82,8 @@ export default function FreeValue() {
                 <div className="w-16 h-16 bg-energy text-foreground rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                   <Smartphone size={32} />
                 </div>
-                <h3 className="text-3xl font-heading font-black text-foreground mb-2">TF. TRACKER</h3>
+                <img src="/tomer-logo.png" alt="תומר פרידמן" className="mx-auto mb-4 h-16 w-16 object-contain" />
+                <h3 className="text-3xl font-heading font-black text-foreground mb-2">TF Tracker</h3>
                 <p className="text-energy font-bold tracking-widest uppercase text-sm mb-6">אפליקציית מעקב אישית</p>
               </div>
             </div>
@@ -92,4 +93,3 @@ export default function FreeValue() {
     </section>
   );
 }
-

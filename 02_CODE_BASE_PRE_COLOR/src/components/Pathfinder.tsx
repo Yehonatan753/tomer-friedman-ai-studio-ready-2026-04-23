@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, ChevronLeft, CheckCircle2, ChevronRight } from 'lucide-react';
+import { openWhatsApp, submitLead } from '../lib/leads';
 
 const QUESTIONS = [
   {
@@ -106,8 +107,17 @@ export default function Pathfinder() {
     }
   };
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    await submitLead({
+      source: 'pathfinder',
+      name: leadData.name,
+      phone: leadData.phone,
+      email: leadData.email,
+      product: 'pathfinder-result',
+      metadata: { answers },
+    });
+    openWhatsApp(`שלום תומר, קוראים לי ${leadData.name}. מילאתי את האבחון באתר ואשמח להבין מה המסלול הנכון בשבילי. טלפון: ${leadData.phone}`);
     setCurrentStep(QUESTIONS.length + 1);
     setTimeout(() => setCurrentStep(QUESTIONS.length + 2), 2000);
   };
@@ -115,7 +125,7 @@ export default function Pathfinder() {
   const result = currentStep === QUESTIONS.length + 2 ? calculateResult(answers) : null;
 
   return (
-    <section id="pathfinder" className="py-24 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden">
+    <section id="pathfinder" className="relative overflow-hidden bg-gradient-to-b from-[#f7fbff] to-white px-6 py-24 md:px-16 lg:px-24">
       <div className="max-w-3xl mx-auto relative z-10">
         {currentStep < QUESTIONS.length + 2 && (
           <div className="text-center mb-12">
@@ -128,7 +138,7 @@ export default function Pathfinder() {
           </div>
         )}
 
-        <div className="glass-panel-dark rounded-3xl border border-foreground/5 p-8 md:p-12 min-h-[450px] flex flex-col justify-center relative overflow-hidden shadow-2xl">
+        <div className="glass-panel-dark relative flex min-h-[450px] flex-col justify-center overflow-hidden rounded-3xl border border-energy/10 p-8 shadow-[0_24px_80px_rgba(15,42,68,0.10)] md:p-12">
           {currentStep >= 0 && currentStep < QUESTIONS.length && (
             <div className="absolute top-0 left-0 w-full h-1 bg-foreground/5">
               <motion.div className="h-full bg-energy" initial={{ width: 0 }} animate={{ width: `${((currentStep + 1) / QUESTIONS.length) * 100}%` }} transition={{ duration: 0.3 }} />
@@ -149,7 +159,7 @@ export default function Pathfinder() {
                     </div>
                   ))}
                 </div>
-                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-flex items-center gap-2 text-lg">
+                <button onClick={handleStart} className="btn-magnetic inline-flex items-center gap-2 rounded-full bg-energy px-10 py-4 text-lg font-bold text-white shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                   <span>בוא נתחיל</span>
                   <ChevronLeft size={20} />
                 </button>
@@ -216,7 +226,7 @@ export default function Pathfinder() {
                     <label className="text-sm font-medium text-text-muted">אימייל</label>
                     <input required type="email" value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
                   </div>
-                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] mt-4">
+                  <button type="submit" className="btn-magnetic mt-4 w-full rounded-xl bg-energy px-8 py-4 font-bold text-white shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                     קבל את התוצאות שלי
                   </button>
                 </form>
@@ -262,7 +272,7 @@ export default function Pathfinder() {
                 <div className="text-center bg-bg border border-foreground/5 rounded-3xl p-8">
                   <div className="text-xl font-bold text-foreground mb-3">הצעד הבא שלך</div>
                   <p className="text-text-muted mb-8 max-w-lg mx-auto">{result.cta}</p>
-                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
+                  <a href="#tracks" className="btn-magnetic mb-4 inline-block w-full rounded-full bg-energy px-10 py-4 text-lg font-bold text-white shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] sm:w-auto">
                     לקבוע שיחת ייעוץ איתי
                   </a>
                 </div>
@@ -274,4 +284,3 @@ export default function Pathfinder() {
     </section>
   );
 }
-

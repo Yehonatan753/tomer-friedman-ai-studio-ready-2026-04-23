@@ -21,8 +21,20 @@ But if navigation fails, use these ordered files as the source of truth:
 15_SUPPORT_COMPONENTS_AND_UTILS.txt
 16_FULL_CODEBASE_TEXT_DUMP.txt
 
-Important correction:
+Important final-state correction:
 The black/orange version is the structural/conversion reference, not the final palette requirement.
-The target is a premium blue/white translation that preserves the strong old flow, value stack, urgency, insurance, workshops, newsletter, CTA, footer, and motion while reducing duplication.
+The target is now implemented as a premium white/blue translation with the OPUS flow:
+Hero -> Process -> VSL -> AppShowcase -> Pathfinder -> Tracks -> Commitment -> Insurance -> Testimonials -> Seminars -> FAQ -> Newsletter -> CtaSection -> Footer.
+
+The current code already includes:
+- all 6 products in Tracks with corrected prices
+- value stack, market comparison, operational scarcity, renewal/upsell panel
+- light DownloadPopup without pricing-board image or fake email promise
+- lead capture helpers and API
+- secure Gemini agent API through server-side GEMINI_API_KEY
+- floating Hebrew RTL GeminiAgentPopup
+- tomer-logo.png replacing visual TF marks
+
+Use http://localhost:5173/?skip_popup=true for QA if the scroll popup blocks inspection.
 
 Your response must start with the correction/audit required in 00B_FOLLOWUP_CORRECTION_PROMPT.txt and then satisfy 01_STRICT_EXECUTION_PROMPT.txt.

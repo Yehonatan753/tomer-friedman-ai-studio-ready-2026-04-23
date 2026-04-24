@@ -1,517 +1,416 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Smartphone, Users, PhoneCall, CheckCircle2, Lock } from 'lucide-react';
-import { SITE_DATA } from '../data';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Activity, ArrowLeft, BriefcaseBusiness, CheckCircle2, Laptop, Ruler, Smartphone, Sparkles, UserRound } from 'lucide-react';
 
-type TabId = 'online' | 'frontal' | 'phone';
+type TrackTab = 'entry' | 'flagship' | 'professional';
 
-export default function Tracks() {
-    const [activeTab, setActiveTab] = useState<TabId>('online');
+type PriceOption = {
+  label: string;
+  price: string;
+  note?: string;
+  highlight?: boolean;
+};
 
-    // Inject animated border style tag just in case index.css doesn't load it early enough
-    // (Prompt suggested doing this, though we also add it to index.css)
-    useEffect(() => {
-        const style = document.createElement('style');
-        style.innerHTML = `
-          @property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-          @keyframes rotateBorder { to { --angle: 360deg; } }
-        `;
-        document.head.appendChild(style);
-        return () => {
-            document.head.removeChild(style);
-        };
-    }, []);
+type ValueStackItem = {
+  label: string;
+  marketPrice: string;
+};
 
-    const tabs = [
-        { id: 'online', label: 'אונליין', icon: Smartphone },
-        { id: 'frontal', label: 'פרונטלי', icon: Users },
-        { id: 'phone', label: 'ייעוץ טלפוני', icon: PhoneCall },
-    ];
+type Product = {
+  id: string;
+  tab: TrackTab;
+  title: string;
+  icon: typeof Smartphone;
+  eyebrow: string;
+  ladderNote: string;
+  description: string;
+  prices: PriceOption[];
+  includes: string[];
+  valueStack?: {
+    items: ValueStackItem[];
+    total: string;
+    here: string;
+  };
+  marketComparison?: string;
+  capacity?: string;
+  renewal?: string;
+  upsell?: string;
+  hiddenDetails?: string[];
+  featured?: boolean;
+};
 
-    const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const tabs: Array<{ id: TrackTab; label: string }> = [
+  { id: 'entry', label: 'כניסה ואבחון' },
+  { id: 'flagship', label: 'תהליכי ליווי' },
+  { id: 'professional', label: 'תחזוקה ומקצועי' },
+];
 
-    return (
-        <section id="tracks" className="pt-16 pb-32 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden">
-            {/* Urgency Banner */}
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease }}
-                className="flex items-center justify-center gap-2 text-sm text-text-muted mb-8"
-            >
-                <Lock size={14} className="text-energy" />
-                <span>תומר מקבל עד 8 מתאמנים חדשים בלבד בחודש — כדי לשמור על איכות הליווי.</span>
-            </motion.div>
+const products: Product[] = [
+  {
+    id: 'tf-tracker',
+    tab: 'entry',
+    icon: Smartphone,
+    title: 'TF Tracker',
+    eyebrow: 'מוצר הכניסה הדיגיטלי',
+    ladderNote: 'מוצר הכניסה העצמאי. לא פרומו לתהליך הגדול, כלי שעומד בפני עצמו.',
+    description: 'אוכל, אימונים, מדידות ומעקב במקום אחד. מתאים למי שרוצה להתחיל מסודר בלי להתחייב לליווי אישי.',
+    prices: [
+      { label: 'חודשי', price: '₪49.90', note: 'גמיש, ללא התחייבות' },
+      { label: 'שנתי', price: '₪39.90 / חודש', note: 'חיסכון של ₪120 בשנה', highlight: true },
+    ],
+    includes: [
+      'שאלון אישי קצר ובניית מסגרת התחלתית',
+      'בוט AI לשאלות יומיומיות בסיסיות',
+      'מדידות עצמאיות ומעקב התקדמות',
+      'שיטת המנות של תומר + ברקוד/צילום/מאגר ארוחות',
+      'תוכנית אימונים לבית, לחדר כושר או לפארק',
+    ],
+    renewal: 'מנוי חודשי או שנתי. אפשר לבטל בלי להיכנס לתהליך אישי.',
+    upsell: 'כשמוכנים לליווי אישי, הנתונים ממשיכים איתך לתהליך אונליין.',
+  },
+  {
+    id: 'bodymetrix-lite',
+    tab: 'entry',
+    icon: Activity,
+    title: 'BodyMetRiX Lite',
+    eyebrow: 'אבחון עצמי ממוקד',
+    ladderNote: 'לפני שמתחייבים לתהליך מלא, מבינים מאיפה מתחילים.',
+    description: 'דוח מדידה עצמי קצר וברור שמתרגם היקפים והרכב גוף להמלצה פרקטית להמשך.',
+    prices: [
+      { label: 'דוח בודד', price: '₪297' },
+      { label: '3 דוחות', price: '₪790', note: 'למעקב התקדמות', highlight: true },
+    ],
+    includes: [
+      'סרטון הדרכה קצר למדידות עצמיות',
+      'שאלון קצר ופרקטי',
+      'ניתוח מדידות והמלצה להמשך',
+      'שפה פשוטה, לא דוח מעבדה מבלבל',
+    ],
+    renewal: 'אפשר לרכוש דוחות נוספים לפי צורך.',
+    upsell: 'אם רואים שצריך מסגרת עמוקה יותר, ההמשך הטבעי הוא תהליך אונליין.',
+  },
+  {
+    id: 'online-process',
+    tab: 'flagship',
+    icon: Laptop,
+    title: 'תהליך אונליין',
+    eyebrow: 'מוצר הדגל מרחוק',
+    ladderNote: 'כל מה שצריך בתהליך רציני, בלי לדרוש הגעה פיזית.',
+    description: 'ליווי מקצועי מרחוק עם תפריט דינמי, מעקב, אפליקציה, מדידות ואופטימיזציה לפי מה שקורה בפועל.',
+    prices: [
+      { label: '3 חודשים', price: '₪4,500', note: '₪1,500 לחודש' },
+      { label: '6 חודשים', price: '₪8,400', note: '₪1,400 לחודש', highlight: true },
+    ],
+    includes: [
+      'שאלון אישי מורחב ובדיקות רלוונטיות',
+      'סקירת בדיקות והמלצות מקצועיות',
+      'מעקב שבועי במייל + מענה יומי עם בוט AI',
+      'פגישת מדידה קצרה אחת לחודש לפי צורך',
+      'תפריט דינמי ותוכנית אימונים לפי צורך',
+      'שימוש מלא ב־TF Tracker ודוח התקדמות חודשי',
+    ],
+    valueStack: {
+      items: [
+        { label: 'שאלון אישי מורחב ובדיקות', marketPrice: '₪600' },
+        { label: 'בניית תפריט דינמי ל־3 חודשים', marketPrice: '₪2,700' },
+        { label: 'תוכנית אימונים מותאמת', marketPrice: '₪1,200' },
+        { label: 'מעקב שבועי ומענה יומי', marketPrice: '₪1,500+' },
+        { label: 'פגישות מדידה חודשיות', marketPrice: '₪1,350' },
+        { label: 'שימוש מלא ב־TF Tracker', marketPrice: '₪149.70' },
+      ],
+      total: '~₪7,500+',
+      here: '₪4,500 ל־3 חודשים',
+    },
+    marketComparison:
+      'אצל רוב הקולגות שלי ליווי מרחוק במבנה דומה עולה ₪6,000-8,000 ל־3 חודשים, בלי אפליקציה ובלי רצף נתונים. כאן זה ₪4,500, עם שניהם.',
+    capacity: 'אני לוקח עד 8 משתתפים חדשים בחודש לתהליך הזה. הרישום לחודש הבא פתוח.',
+    renewal: 'לאחר 3 חודשים אפשר להאריך ל־3 חודשים נוספים ב־₪3,900. לאחר 6 חודשים אפשר לעבור לתחזוקה.',
+    upsell: 'אם צריך זמינות גבוהה יותר ועבודה צמודה, עוברים לליווי האישי המלא.',
+    hiddenDetails: ['לבוגרי 12 חודשים קיימת אפשרות תחזוקה חודשית לפי התאמה אישית. זה לא מוצג כהצעת כניסה כדי לא לבלבל את ההחלטה הראשונית.'],
+  },
+  {
+    id: 'personal-premium',
+    tab: 'flagship',
+    icon: UserRound,
+    title: 'ליווי אישי מלא',
+    eyebrow: 'הדרגה העליונה',
+    ladderNote: 'עבודה צמודה, זמינות יומיומית ואפס פינות חתוכות.',
+    description: 'תהליך עומק עם תומר: אפיון מלא, מדידות, תפריט דינמי, התאמות, זמינות יומיומית ופגישות מעקב מלאות.',
+    prices: [
+      { label: '3 חודשים', price: '₪9,000', note: '₪3,000 לחודש' },
+      { label: '6 חודשים', price: '₪16,500', note: '₪2,750 לחודש', highlight: true },
+    ],
+    includes: [
+      'פגישת אפיון מלאה ושאלון אישי מורחב',
+      'בדיקות, הרכב גוף, מסת גוף רזה, היקפים ופרופורציות',
+      'הגדרת מטרות מדעית ומספרית',
+      'תפריט דינמי אישי ותוכנית אימונים לפי צורך',
+      'זמינות יומיומית בוואטסאפ',
+      'פגישות מעקב ומדידות מלאות אחת לחודש',
+      'דוח התקדמות חודשי ושימוש מלא ב־TF Tracker',
+    ],
+    valueStack: {
+      items: [
+        { label: 'פגישת אפיון מלאה', marketPrice: '₪800' },
+        { label: 'מדידות הרכב גוף והיקפים', marketPrice: '₪1,350' },
+        { label: 'תפריט דינמי מותאם אישית', marketPrice: '₪2,700' },
+        { label: 'תוכנית אימונים מותאמת', marketPrice: '₪1,200' },
+        { label: 'ליווי וואטסאפ יומי', marketPrice: '₪1,500 / חודש' },
+        { label: 'פגישות מעקב חודשיות מלאות', marketPrice: '₪1,800+' },
+        { label: 'דוחות התקדמות ואפליקציה', marketPrice: '₪500+' },
+      ],
+      total: '~₪12,500+',
+      here: '₪9,000 ל־3 חודשים',
+    },
+    marketComparison:
+      'ליווי פרטי צמוד בשוק הפרימיום נע בין ₪12,000 ל־₪20,000 ל־3 חודשים. כאן המחיר הוא ₪9,000, עם הרבה יותר נקודות מגע מהממוצע.',
+    capacity: '12 מקומות אישיים פעילים במקביל. כשמקום מתפנה, נפתח מקום חדש.',
+    renewal: 'לאחר 3 חודשים ניתן להאריך ב־₪7,500. לאחר 6 חודשים ניתן להאריך ב־₪6,000.',
+    upsell: 'אין מדרגה גבוהה יותר באתר. אם צריך המשך, זה תחזוקה אישית לפי מצב אמיתי.',
+    hiddenDetails: ['לבוגרי פרימיום קיימת אפשרות תחזוקה חודשית ב־₪1,800 הכוללת פגישה חודשית, זמינות יומית והתאמות שוטפות.'],
+    featured: true,
+  },
+  {
+    id: 'measurement-card',
+    tab: 'professional',
+    icon: Ruler,
+    title: 'כרטיסיית מדידות',
+    eyebrow: 'תחזוקה למסיימי תהליך',
+    ladderNote: 'לא כניסה. תחזוקה של תוצאה שכבר הושגה.',
+    description: 'מדידות מקצועיות, דוחות השוואה והמלצות המשך כדי לשמור על תוצאה לאורך זמן.',
+    prices: [
+      { label: '4 מדידות', price: '₪800' },
+      { label: '8 מדידות', price: '₪1,400', highlight: true },
+      { label: '12 מדידות', price: '₪1,900' },
+    ],
+    includes: [
+      'מדידות הרכב גוף והיקפים',
+      'אחוז שומן, FFMI, LBM, היקפים ופרופורציות',
+      'גרפים והשוואה לאורך זמן',
+      'נורמות מותאמות גיל ומין',
+      'המלצות מקצועיות בשפה פשוטה',
+    ],
+    renewal: 'אפשר לרכוש כרטיסייה נוספת לפי צורך.',
+    upsell: 'אם המדידות מראות שהמסגרת התרופפה, חוזרים לתהליך אונליין.',
+    hiddenDetails: ['קיימת אפשרות תחזוקה שנתית סביב ₪150 לחודש למי שכבר עבר תהליך ומחזיק רצף.'],
+  },
+  {
+    id: 'bodymetrix-pro',
+    tab: 'professional',
+    icon: BriefcaseBusiness,
+    title: 'BodyMetRiX Pro',
+    eyebrow: 'מוצר מקצועי לתזונאים',
+    ladderNote: 'לא רלוונטי למי שמחפש ליווי אישי. זה מוצר B2B לאנשי מקצוע.',
+    description: 'מערכת מדידות והרכב גוף לתזונאים ואנשי מקצוע שרוצים דוחות, גרפים והמלצות ללקוחות.',
+    prices: [
+      { label: 'שנתי', price: '₪2,970', highlight: true },
+      { label: 'חודשי', price: '₪297' },
+    ],
+    includes: [
+      'מדידות והרכב גוף והיקפים',
+      'אחוזי שומן, FFMI, LBM והיקפים',
+      'פרופורציות ופוטנציאל שריר',
+      'דוחות וגרפים ללקוח ולאיש המקצוע',
+      'נורמות מותאמות גיל ומין',
+      'המלצות מקצועיות ושפה קלינית פשוטה',
+    ],
+    renewal: 'רישיון שנתי או חודשי, לפי אופי השימוש.',
+    upsell: 'ניתן להוסיף קורס הטמעה דיגיטלי, הדרכת מדידה אישית או שעות ייעוץ עסקי.',
+    hiddenDetails: ['מחירי נאמנות/שימור לא מוצגים באתר כברירת מחדל כדי לא לפגוע במכירה הראשונית.'],
+  },
+];
 
-            {/* Section Heading */}
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease }}
-                className="max-w-7xl mx-auto text-center mb-12 relative z-10"
-            >
-                <h2 className="text-5xl md:text-7xl font-heading font-black text-white tracking-tighter mb-6">
-                    מסלולי <span className="text-energy italic font-light">ליווי</span>
-                </h2>
-                <p className="text-xl text-text-muted max-w-2xl mx-auto">
-                    לא עוד דיאטה. מערכת שמותאמת ללוח הזמנים, להעדפות ולמטרות שלך.
-                </p>
-            </motion.div>
-
-            {/* Tab Switcher */}
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease }}
-                className="flex justify-center mb-16 relative z-10"
-            >
-                <div className="inline-flex p-1.5 rounded-full" style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    backdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.06)'
-                }}>
-                    {tabs.map((tab) => {
-                        const Icon = tab.icon;
-                        const isActive = activeTab === tab.id;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id as TabId)}
-                                className={`relative flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold transition-all duration-300 ${isActive ? 'text-white' : 'text-text-muted hover:text-white'
-                                    }`}
-                            >
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className="absolute inset-0 bg-energy rounded-full"
-                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                <span className="relative z-10 flex items-center gap-2">
-                                    <Icon size={18} />
-                                    {tab.label}
-                                </span>
-                            </button>
-                        );
-                    })}
-                </div>
-            </motion.div>
-
-            {/* Radial Glow Background behind cards */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
-                 style={{ background: 'radial-gradient(ellipse at center, rgba(28,141,255,0.06) 0%, transparent 70%)', zIndex: 0 }} />
-
-            {/* Tab Content */}
-            <div className="max-w-7xl mx-auto relative z-10">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={activeTab}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, ease }}
-                    >
-                        {activeTab === 'online' && (
-                            <div className="flex flex-col gap-8">
-                                {/* Entry Card */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.05, duration: 0.5 }}
-                                    className="bg-surface border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row gap-6 md:items-center justify-between"
-                                >
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-white mb-2">TF Tracker — מנוי לאפליקציה</h3>
-                                        <p className="text-text-muted">החודש הראשון חינם. אחר כך ₪39/חודש.</p>
-                                    </div>
-                                    <div className="flex-grow max-w-xl">
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            {[
-                                                "מעקב משקל ומדדים אישיים",
-                                                "מחשבון קלוריות ומאקרו מובנה",
-                                                "גישה לספריית מתכונים ומאמרים",
-                                                "מדריך וידאו קצר להתחלה נכונה",
-                                                "ביטול בכל רגע, ללא התחייבות"
-                                            ].map((item, i) => (
-                                                <div key={i} className="flex items-start gap-3">
-                                                    <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/80">{item}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col justify-center items-center shrink-0 w-full md:w-auto mt-4 md:mt-0">
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full md:w-auto px-8 py-3 rounded-full font-bold bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-colors text-center">
-                                            התחל חינם
-                                        </a>
-                                        <p className="text-[10px] text-text-muted mt-2 text-center">0 ₪ לחודש הראשון. ₪39/חודש אח״כ. ביטול בקליק.</p>
-                                    </div>
-                                </motion.div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {/* Online Card 1 */}
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.15, duration: 0.5 }}
-                                        className="bg-surface border border-white/5 rounded-[1.5rem] p-10 flex flex-col relative"
-                                    >
-                                        <h3 className="text-3xl font-bold text-white mb-2">המסלול הממוקד</h3>
-                                        <p className="text-text-muted mb-8">תזונה מותאמת אישית, ליווי שבועי, תוצאות מדידות</p>
-                                        
-                                        <div className="space-y-4 mb-8 flex-grow">
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">תפריט מותאם לאורח החיים שלך — כולל מסעדות, אירועים וחופשות <span className="opacity-50">(שווי שוק: ₪500)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">מדריך שרידות: איך לאכול בחוץ בלי להרוס התקדמות <span className="opacity-50">(שווי שוק: ₪350)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">מעקב שבועי אישי מול תומר — לא מתמחה <span className="opacity-50">(שווי שוק: ₪300/פגישה)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">גישה מלאה לאפליקציית TF Tracker <span className="opacity-50">(שווי שוק: ₪39/חודש)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">התאמות תפריט בזמן אמת דרך צ'אט ישיר <span className="opacity-50">(שווי שוק: ₪500)</span></span>
-                                            </div>
-                                        </div>
-
-                                        <div className="mb-6 pt-6 border-t border-white/5 text-center">
-                                            <div className="text-sm text-text-muted/60 line-through mb-1">שווי כולל ל-6 חודשים: ₪8,784</div>
-                                            <div className="text-xl font-bold text-white">המחיר שלך: ₪4,200</div>
-                                        </div>
-
-                                        <div className="space-y-4 mb-8">
-                                            <div className="flex justify-between items-center text-white/80 pb-3 border-b border-white/5">
-                                                <span>חודש</span>
-                                                <span className="font-bold">₪1,200</span>
-                                            </div>
-                                            <div className="flex justify-between items-center text-white/80 pb-3 border-b border-white/5">
-                                                <span>3 חודשים</span>
-                                                <span className="font-bold">₪2,580 (₪860/חודש)</span>
-                                            </div>
-                                            <div className="flex justify-between items-center text-white pb-3">
-                                                <span>6 חודשים <span className="text-xs text-energy bg-energy/10 px-2 py-0.5 rounded ml-2">הכי משתלם</span></span>
-                                                <span className="font-bold text-lg text-white">₪4,200 (₪700/חודש)</span>
-                                            </div>
-                                        </div>
-
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full text-center py-4 rounded-xl font-bold bg-transparent text-white border border-white/20 hover:bg-white/5 transition-colors">
-                                            התחל את התהליך
-                                        </a>
-                                        <p className="text-xs text-center mt-3 text-text-muted">השארת פרטים לתיאום תהליך</p>
-                                    </motion.div>
-
-                                    {/* Online Card 2 (POPULAR) */}
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.3, duration: 0.5 }}
-                                        className="animated-border-card-popular relative z-20"
-                                    >
-                                        <div className="bg-surface h-full rounded-[calc(1.5rem-2px)] p-10 flex flex-col relative overflow-hidden">
-                                            <div className="absolute top-0 right-1/2 translate-x-1/2 bg-gradient-to-r from-energy to-energy-light text-white text-xs font-bold px-6 py-1.5 rounded-b-lg tracking-widest uppercase">
-                                                הנבחר ביותר
-                                            </div>
-                                            <div className="absolute top-4 left-4 bg-energy/10 text-energy text-xs font-bold px-3 py-1 rounded-full border border-energy/20">
-                                                נשארו 3 מקומות החודש
-                                            </div>
-                                            <h3 className="text-3xl font-bold text-white mb-2 mt-6">המסלול המלא</h3>
-                                            <p className="text-text-muted mb-8">תזונה + אימונים אישיים. המעטפת השלמה למי שרוצה תוצאות ולא רוצה לנחש.</p>
-
-                                            <div className="space-y-4 mb-8 flex-grow">
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90 font-bold">כל מה שכלול במסלול הממוקד <span className="opacity-50 font-normal">(שווי שוק: ₪8,784)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">תכנית אימונים אישית: 20 דקות, 3 פעמים בשבוע <span className="opacity-50">(שווי שוק: ₪800)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">סרטוני הדרכה לכל תרגיל + משקלים מדויקים <span className="opacity-50">(שווי שוק: ₪1,500)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">עדכון תכנית אימונים כל חודש לפי התקדמות <span className="opacity-50">(שווי שוק: ₪400)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">מעקב ביצועים באפליקציה: סטים, חזרות, עומסים</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="mb-6 pt-6 border-t border-white/5 text-center">
-                                                <div className="text-sm text-text-muted/60 line-through mb-1">שווי כולל ל-6 חודשים: ₪11,484</div>
-                                                <div className="text-xl font-bold text-white">המחיר שלך: ₪6,480</div>
-                                            </div>
-
-                                            <div className="space-y-4 mb-8">
-                                                <div className="flex justify-between items-center text-white/80 pb-3 border-b border-white/5">
-                                                    <span>חודש</span>
-                                                    <span className="font-bold">₪1,620</span>
-                                                </div>
-                                                <div className="flex justify-between items-center text-white/80 pb-3 border-b border-white/5">
-                                                    <span>3 חודשים</span>
-                                                    <span className="font-bold">₪3,660 (₪1,220/חודש)</span>
-                                                </div>
-                                                <div className="flex justify-between items-center text-white pb-3">
-                                                    <span>6 חודשים <span className="text-xs text-energy bg-energy/10 px-2 py-0.5 rounded ml-2">הכי משתלם</span></span>
-                                                    <span className="font-bold text-lg text-energy">₪6,480 (₪1,080/חודש)</span>
-                                                </div>
-                                            </div>
-
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
-                                                מתחיל עכשיו
-                                            </a>
-                                            <p className="text-xs text-center mt-3 text-white/70">לנרשמים ל-6 חודשים: פגישת מיפוי ראשונית ללא עלות נוספת</p>
-                                        </div>
-                                    </motion.div>
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === 'frontal' && (
-                            <div className="space-y-8">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {/* Frontal Card 1 */}
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.15, duration: 0.5 }}
-                                        className="bg-surface border border-white/5 rounded-[1.5rem] p-10 flex flex-col relative"
-                                    >
-                                        <h3 className="text-3xl font-bold text-white mb-2">הליווי הפרונטלי</h3>
-                                        <p className="text-text-muted mb-8">תזונה מותאמת אישית עם מפגשים פנים מול פנים</p>
-                                        
-                                        <div className="space-y-4 mb-10 flex-grow">
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">תפריט מותאם לאורח החיים שלך — כולל מסעדות, אירועים וחופשות <span className="opacity-50">(שווי שוק: ₪500)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">מדריך שרידות: איך לאכול בחוץ בלי להרוס התקדמות <span className="opacity-50">(שווי שוק: ₪350)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">מדידות הרכב גוף כל פגישה <span className="opacity-50">(שווי שוק: ₪250/מדידה)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">פגישה ראשונה של 75 דקות לאפיון מלא <span className="opacity-50">(שווי שוק: ₪600)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">פגישות מעקב קצרות כל 2-3 שבועות <span className="opacity-50">(שווי שוק: ₪400/פגישה)</span></span>
-                                            </div>
-                                            <div className="flex items-start gap-4">
-                                                <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                <span className="text-sm text-white/90">גישה מלאה לאפליקציית TF Tracker <span className="opacity-50">(שווי שוק: ₪39/חודש)</span></span>
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-4 mb-8">
-                                            <div className="flex justify-between items-center text-white/80 pb-3 border-b border-white/5">
-                                                <span>4 מפגשים</span>
-                                                <span className="font-bold">₪4,200</span>
-                                            </div>
-                                            <div className="flex justify-between items-center text-white pb-3">
-                                                <span>8 מפגשים</span>
-                                                <span className="font-bold text-lg">₪6,240 (₪780/מפגש)</span>
-                                            </div>
-                                        </div>
-
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full text-center py-4 rounded-xl font-bold bg-transparent border border-white/20 text-white hover:bg-white/5 transition-colors">
-                                            קבע פגישת היכרות
-                                        </a>
-                                        <p className="text-xs text-center mt-3 text-text-muted">השארת פרטים לתיאום פגישה</p>
-                                    </motion.div>
-
-                                    {/* Frontal Card 2 (POPULAR) */}
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.3, duration: 0.5 }}
-                                        className="animated-border-card-popular relative z-20"
-                                    >
-                                        <div className="bg-surface h-full rounded-[calc(1.5rem-2px)] p-10 flex flex-col relative overflow-hidden">
-                                            <div className="absolute top-0 right-1/2 translate-x-1/2 bg-gradient-to-r from-energy to-energy-light text-white text-xs font-bold px-6 py-1.5 rounded-b-lg tracking-widest uppercase">
-                                                הנבחר ביותר
-                                            </div>
-                                            <div className="absolute top-4 left-4 bg-energy/10 text-energy text-xs font-bold px-3 py-1 rounded-full border border-energy/20">
-                                                נשארו 3 מקומות החודש
-                                            </div>
-                                            <h3 className="text-3xl font-bold text-white mb-2 mt-6">הליווי האינטנסיבי</h3>
-                                            <p className="text-text-muted mb-8">תזונה + אימונים פנים מול פנים. הליווי הצמוד ביותר שתומר מציע.</p>
-
-                                            <div className="space-y-4 mb-10 flex-grow">
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90 font-bold">כל מה שכלול בליווי הפרונטלי</span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">תכנית אימונים אישית: 20 דקות, 3 פעמים בשבוע <span className="opacity-50">(שווי שוק: ₪800)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">סרטוני הדרכה לכל תרגיל + משקלים מדויקים <span className="opacity-50">(שווי שוק: ₪1,500)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">עדכון תכנית אימונים כל חודש לפי התקדמות <span className="opacity-50">(שווי שוק: ₪400)</span></span>
-                                                </div>
-                                                <div className="flex items-start gap-4">
-                                                    <CheckCircle2 size={18} className="text-energy shrink-0 mt-0.5" />
-                                                    <span className="text-sm text-white/90">מעקב ביצועים באפליקציה: סטים, חזרות, עומסים</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="space-y-4 mb-8">
-                                                <div className="flex justify-between items-center text-white/80 pb-3 border-b border-white/5">
-                                                    <span>4 מפגשים</span>
-                                                    <span className="font-bold">₪5,580</span>
-                                                </div>
-                                                <div className="flex justify-between items-center text-white pb-3">
-                                                    <span>8 מפגשים</span>
-                                                    <span className="font-bold text-lg text-energy">₪8,580 (₪1,073/מפגש)</span>
-                                                </div>
-                                            </div>
-
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
-                                                מתחיל עכשיו
-                                            </a>
-                                            <p className="text-xs text-center mt-3 text-white/70">פגישה ראשונה ארוכה (75 דק׳) — אפיון מלא של מטרות, מגבלות והעדפות</p>
-                                        </div>
-                                    </motion.div>
-                                </div>
-                                
-                                {/* Info Note */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.4 }}
-                                    className="bg-blue-900/20 border border-blue-500/30 rounded-2xl p-6 flex items-start sm:items-center gap-4 text-blue-200/80"
-                                >
-                                    <div className="shrink-0 mt-1 sm:mt-0 text-blue-400">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-                                    </div>
-                                    <div className="flex-grow">
-                                        <p className="text-sm leading-relaxed">
-                                            <strong className="text-blue-300 font-bold">שימו לב:</strong> הפגישה הראשונה ארוכה מן הרגיל. שאר פגישות המעקב אורכות כ-5 דקות ומתקיימות בטווח של כ-3 שבועות אחת מהשנייה למעקב אידיאלי.
-                                        </p>
-                                    </div>
-                                </motion.div>
-
-                                {/* MFU Section */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5 }}
-                                    className="bg-surface border border-white/5 rounded-[2rem] p-10 lg:p-14 flex flex-col xl:flex-row gap-12 lg:gap-16 items-center"
-                                >
-                                    <div className="w-full xl:w-1/3 text-center xl:text-right">
-                                        <h4 className="text-3xl font-bold mb-4 text-white">מדידות מעקב (MFU)</h4>
-                                        <p className="text-text-muted text-lg leading-relaxed">לשמירה על תוצאות — מיועד רק למי שעבר תהליך פרונטלי מלא</p>
-                                    </div>
-                                    
-                                    <div className="w-full xl:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-6">
-                                        <div className="bg-bg border border-white/5 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden">
-                                            <div className="text-white/60 text-sm mb-2">4 מדידות</div>
-                                            <div className="text-2xl font-bold text-white mb-1">₪520</div>
-                                            <div className="text-xs text-text-muted">₪130/מדידה</div>
-                                        </div>
-                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(28,141,255,0.1)]">
-                                            <div className="absolute top-0 right-0 w-full h-1 bg-energy"></div>
-                                            <div className="text-energy text-sm mb-2 font-bold">8 מדידות</div>
-                                            <div className="text-2xl font-bold text-white mb-1">₪880</div>
-                                            <div className="text-xs text-energy/80">₪110/מדידה (חיסכון ₪160)</div>
-                                        </div>
-                                        <div className="bg-bg border border-energy/50 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden bg-energy/5">
-                                            <div className="absolute top-0 right-1/2 translate-x-1/2 bg-energy text-white text-[10px] font-bold px-3 py-0.5 rounded-b-md">הכי משתלם</div>
-                                            <div className="text-text-main text-sm mt-3 mb-1 font-bold">12 מדידות</div>
-                                            <div className="text-2xl font-bold text-white mb-1">₪1,140</div>
-                                            <div className="text-xs text-text-muted">₪95/מדידה</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="w-full border-t border-white/5 pt-6 mt-2 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                                            <span className="text-sm text-text-muted">מדידת הרכב גוף מקצועית <span className="opacity-50">(שווי שוק: ₪200-300/מדידה)</span></span>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                                            <span className="text-sm text-text-muted">ניתוח תוצאות + המלצות אישיות מתומר</span>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                                            <span className="text-sm text-text-muted">3-4 דקות פגישה ממוקדת — אפס בזבוז זמן</span>
-                                        </div>
-                                        <div className="flex items-start gap-3">
-                                            <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                                            <span className="text-sm text-text-muted">גישה מתמשכת לאפליקציית TF Tracker</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="w-full mt-4 flex flex-col items-center">
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="px-8 py-3 rounded-xl font-bold bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-colors">
-                                            שמור על התוצאות
-                                        </a>
-                                        <p className="text-xs mt-3 text-text-muted/60">מיועד לבוגרי תהליך פרונטלי בלבד</p>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        )}
-
-                        {activeTab === 'phone' && (
-                            <div className="max-w-2xl mx-auto">
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(28,141,255,0.05)]"
-                                >
-                                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-energy/5 to-transparent pointer-events-none"></div>
-                                    <PhoneCall className="w-16 h-16 text-energy mx-auto mb-8" strokeWidth={1.5} />
-                                    <h3 className="text-4xl font-heading font-black mb-6 text-white">{SITE_DATA.services.phone.title}</h3>
-                                    <p className="text-lg text-text-muted mb-12 leading-relaxed max-w-lg mx-auto">
-                                        {SITE_DATA.services.phone.description}
-                                    </p>
-
-                                    <div className="flex flex-col gap-4 max-w-md mx-auto relative z-10">
-                                        <div className="flex justify-between items-center w-full bg-surface border border-white/5 rounded-2xl p-6">
-                                            <span className="text-sm text-text-muted">{SITE_DATA.services.phone.basePrice.minutes} דקות ראשונות</span>
-                                            <span className="text-3xl font-black text-energy">₪{SITE_DATA.services.phone.basePrice.price}</span>
-                                        </div>
-                                        <div className="flex justify-between items-center w-full bg-surface border border-white/5 rounded-2xl p-6">
-                                            <span className="text-sm text-text-muted">כל דקה נוספת</span>
-                                            <span className="font-bold text-xl text-white">₪{SITE_DATA.services.phone.additionalMinutePrice}</span>
-                                        </div>
-
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#1c8dff] to-[#0f5fb3] text-white hover:shadow-[0_0_30px_rgba(28,141,255,0.4)] hover:scale-[1.02]">
-                                            תיאום שיחה
-                                        </a>
-                                        <p className="text-xs text-center mt-3 text-white/50">בלי התחייבות. שלם רק על הזמן שאתה צורך.</p>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        )}
-                    </motion.div>
-                </AnimatePresence>
-            </div>
-        </section>
-    );
+function whatsappLink(product: string) {
+  const text = encodeURIComponent(`שלום תומר, אשמח לשמוע עוד על ${product}`);
+  return `https://wa.me/972546699574?text=${text}`;
 }
 
+function ProductCard({ product }: { product: Product }) {
+  const Icon = product.icon;
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45 }}
+      className={`flex h-full flex-col rounded-[2rem] border bg-white p-7 shadow-[0_24px_70px_rgba(15,42,68,0.08)] md:p-9 ${
+        product.featured ? 'border-energy/40 ring-2 ring-energy/10' : 'border-energy/20'
+      }`}
+    >
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0f8ff] text-energy">
+          <Icon size={26} />
+        </div>
+        <div className="rounded-full border border-energy/20 bg-[#f6fbff] px-3 py-1 text-xs font-black text-energy">{product.eyebrow}</div>
+      </div>
+
+      <p className="mb-3 text-sm font-bold leading-relaxed text-energy">{product.ladderNote}</p>
+      <h3 className="mb-3 font-heading text-3xl font-black text-foreground">{product.title}</h3>
+      <p className="mb-6 leading-relaxed text-text-muted">{product.description}</p>
+
+      <div className="mb-7 grid gap-3">
+        {product.prices.map((price) => (
+          <div
+            key={`${product.id}-${price.label}`}
+            className={`flex items-center justify-between rounded-2xl border p-4 ${
+              price.highlight ? 'border-energy/40 bg-[#eef7ff]' : 'border-[#dceaf5] bg-white'
+            }`}
+          >
+            <div>
+              <div className="text-sm font-bold text-text-muted">{price.label}</div>
+              {price.note && <div className="mt-1 text-xs text-text-muted/80">{price.note}</div>}
+            </div>
+            <div className="text-left text-2xl font-black text-[#0f2a44]">{price.price}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mb-7 space-y-3">
+        {product.includes.map((item) => (
+          <div key={item} className="flex items-start gap-3">
+            <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-energy" />
+            <span className="text-sm leading-relaxed text-foreground/80">{item}</span>
+          </div>
+        ))}
+      </div>
+
+      {product.valueStack && (
+        <div className="mb-7 rounded-[1.5rem] border border-energy/20 bg-[#f6fbff] p-5">
+          <div className="mb-4 flex items-center gap-2 font-black text-foreground">
+            <Sparkles size={18} className="text-energy" />
+            שווי שוק משוער
+          </div>
+          <div className="space-y-2">
+            {product.valueStack.items.map((item) => (
+              <div key={item.label} className="flex items-center justify-between gap-4 border-b border-[#dceaf5] pb-2 text-sm last:border-0 last:pb-0">
+                <span className="text-text-muted">{item.label}</span>
+                <span className="font-black text-foreground">{item.marketPrice}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 flex items-center justify-between rounded-2xl bg-white px-4 py-3">
+            <span className="font-black text-text-muted">שווי כולל</span>
+            <span className="font-black text-foreground">{product.valueStack.total}</span>
+          </div>
+          <div className="mt-2 flex items-center justify-between rounded-2xl bg-energy px-4 py-3 text-white">
+            <span className="font-black">המחיר כאן</span>
+            <span className="font-black">{product.valueStack.here}</span>
+          </div>
+        </div>
+      )}
+
+      {product.marketComparison && (
+        <p className="mb-5 rounded-2xl border border-energy/20 bg-white px-4 py-3 text-sm font-bold leading-relaxed text-foreground">
+          {product.marketComparison}
+        </p>
+      )}
+
+      {product.capacity && (
+        <div className="mb-5 flex items-start gap-2 rounded-full border border-amber-300/60 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">
+          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+          {product.capacity}
+        </div>
+      )}
+
+      <div className="mt-auto rounded-[1.5rem] border border-[#dceaf5] bg-[#f8fbff] p-4">
+        <div className="mb-3 text-sm font-black text-foreground">מה קורה אחרי</div>
+        <div className="grid gap-3 md:grid-cols-2">
+          <div>
+            <div className="mb-1 text-xs font-black text-energy">בסיום התהליך</div>
+            <p className="text-sm leading-relaxed text-text-muted">{product.renewal}</p>
+          </div>
+          <div>
+            <div className="mb-1 text-xs font-black text-energy">שלב הבא אם צריך</div>
+            <p className="text-sm leading-relaxed text-text-muted">{product.upsell}</p>
+          </div>
+        </div>
+        {product.hiddenDetails && (
+          <details className="mt-4 rounded-2xl border border-[#dceaf5] bg-white p-3 text-sm text-text-muted">
+            <summary className="cursor-pointer font-black text-foreground">פרטים נוספים על המשך וחידוש</summary>
+            <ul className="mt-3 space-y-2">
+              {product.hiddenDetails.map((detail) => (
+                <li key={detail}>{detail}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </div>
+
+      <a
+        href={whatsappLink(product.title)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`mt-6 flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-center font-black transition-colors ${
+          product.featured ? 'bg-energy text-white hover:bg-[#0f6fc9]' : 'border border-energy/20 bg-white text-foreground hover:bg-[#eef7ff]'
+        }`}
+      >
+        קבל התאמה למסלול
+        <ArrowLeft size={18} />
+      </a>
+    </motion.article>
+  );
+}
+
+export default function Tracks() {
+  const [activeTab, setActiveTab] = useState<TrackTab>('flagship');
+  const activeProducts = products.filter((product) => product.tab === activeTab);
+
+  return (
+    <section id="tracks" className="relative overflow-hidden bg-gradient-to-b from-white via-[#f7fbff] to-white px-6 pb-32 pt-16 md:px-16 lg:px-24">
+      <div className="absolute left-1/2 top-24 h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-energy/10 blur-[120px]" />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+          className="mb-12 text-center"
+        >
+          <div className="mb-4 text-sm font-black uppercase tracking-widest text-energy">סולם המוצרים</div>
+          <h2 className="font-heading text-5xl font-black tracking-tighter text-foreground md:text-7xl">
+            לא רק מחיר. <span className="text-energy">ערך והמשך.</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-text-muted">
+            כל מוצר בסולם נועד לשלב אחר. מתחילים קטן אם זה נכון, נכנסים לתהליך מלא אם צריך, וממשיכים לתחזוקה רק כשהיא באמת משרתת את התוצאה.
+          </p>
+        </motion.div>
+
+        <div className="mb-12 flex justify-center">
+          <div className="inline-flex rounded-full border border-energy/20 bg-white p-1.5 shadow-[0_18px_55px_rgba(15,42,68,0.08)]">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative rounded-full px-5 py-3 text-sm font-black transition-colors md:px-8 ${
+                    isActive ? 'text-white' : 'text-text-muted hover:text-foreground'
+                  }`}
+                >
+                  {isActive && <motion.div layoutId="tracksActiveTab" className="absolute inset-0 rounded-full bg-energy" transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }} />}
+                  <span className="relative z-10">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -18 }}
+            transition={{ duration: 0.28 }}
+            className="grid grid-cols-1 gap-8 lg:grid-cols-2"
+          >
+            {activeProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}

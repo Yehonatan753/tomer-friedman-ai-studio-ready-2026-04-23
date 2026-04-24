@@ -1,15 +1,20 @@
-===== FILE: src/components/Header.tsx =====
-```tsx
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+# Top page components: header, hero, process, VSL, app showcase
+# Generated from current working code on 2026-04-24.
+# Source root: 02_CODE_BASE_PRE_COLOR/
+
+
+===== FILE: 02_CODE_BASE_PRE_COLOR/src/components/Header.tsx =====
+
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const links = [
   { name: 'ראשי', href: '#hero' },
-  { name: 'אודות', href: '#commitment' },
-  { name: 'מסלולים', href: '#tracks' },
-  { name: 'אפליקציה', href: '#app' },
   { name: 'תהליך', href: '#process' },
+  { name: 'אפליקציה', href: '#app' },
+  { name: 'מסלולים', href: '#tracks' },
+  { name: 'ביטוח', href: '#insurance' },
   { name: 'המלצות', href: '#testimonials' },
   { name: 'הרצאות', href: '#seminars' },
   { name: 'שאלות', href: '#faq' },
@@ -23,25 +28,22 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Determine active section
       let currentSection = 'hero';
-      const sections = links.map(link => link.href.substring(1));
 
-      for (const section of sections) {
+      for (const section of links.map((link) => link.href.slice(1))) {
         const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            currentSection = section;
-            break;
-          }
+        if (!element) continue;
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+          currentSection = section;
+          break;
         }
       }
+
       setActiveSection(currentSection);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -52,45 +54,42 @@ export default function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-6 left-0 right-0 z-40 mx-auto w-[95%] max-w-5xl rounded-full transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-5 z-40 mx-auto w-[95%] max-w-6xl rounded-full border px-5 transition-all duration-500 ${
           isScrolled
-            ? 'glass-panel py-3 px-6 shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10'
-            : 'bg-transparent py-4 px-6'
+            ? 'border-energy/20 bg-white/90 py-3 shadow-[0_18px_55px_rgba(15,42,68,0.12)] backdrop-blur-2xl'
+            : 'border-transparent bg-white/70 py-4 backdrop-blur-xl'
         }`}
       >
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a href="#hero" className="relative group flex items-center z-50">
-            <img src="/tomer-logo.png" alt="Tomer Fridman Logo" className="h-10 md:h-12 object-contain group-hover:scale-105 transition-transform" />
+        <div className="flex items-center justify-between gap-4">
+          <a href="#hero" className="relative z-50 flex items-center">
+            <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-11 object-contain md:h-12" />
           </a>
 
-          {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="focus:outline-none transition-colors text-white">
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+          <button
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="flex items-center rounded-full border border-energy/20 p-2 text-foreground md:hidden"
+            aria-label="פתח תפריט"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden items-center gap-1 md:flex">
             {links.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+              const isActive = activeSection === link.href.slice(1);
               return (
                 <a
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
-                    isActive
-                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(28,141,255,0.2)]'
-                      : 'text-text-muted hover:text-white hover:bg-white/5'
+                  className={`relative rounded-full px-3 py-2 text-sm font-bold transition-colors ${
+                    isActive ? 'text-foreground' : 'text-text-muted hover:bg-[#edf6ff] hover:text-foreground'
                   }`}
                 >
                   {link.name}
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(28,141,255,0.8)]"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      className="absolute inset-x-3 -bottom-1 h-0.5 rounded-full bg-energy"
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                     />
                   )}
                 </a>
@@ -98,66 +97,57 @@ export default function Header() {
             })}
           </nav>
 
-          {/* CTA Button (Desktop) */}
-          <div className="hidden md:block">
-            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(28,141,255,0.4)]">
-              צור קשר
-            </a>
-          </div>
+          <a
+            href="#tracks"
+            className="hidden rounded-full bg-energy px-5 py-2 text-sm font-black text-white shadow-[0_12px_32px_rgba(28,141,255,0.28)] transition-colors hover:bg-[#0f6fc9] md:block"
+          >
+            צור קשר
+          </a>
         </div>
       </motion.header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-30 bg-bg/95 backdrop-blur-xl pt-32 px-6 flex flex-col gap-6 md:hidden"
+            className="fixed inset-0 z-30 flex flex-col gap-5 bg-white/95 px-6 pt-32 backdrop-blur-xl md:hidden"
           >
-            {links.map((link, i) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-3xl font-heading font-bold border-b border-white/5 pb-4 transition-colors ${
-                    isActive ? 'text-energy' : 'text-white'
-                  }`}
-                >
-                  {link.name}
-                </motion.a>
-              );
-            })}
-            <motion.a
+            {links.map((link, index) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="border-b border-[#dceaf5] pb-4 text-3xl font-black text-foreground"
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            <a
               href="#tracks"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: links.length * 0.1 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
+              className="mt-4 rounded-2xl bg-energy py-4 text-center text-xl font-black text-white"
             >
-              צור קשר
-            </motion.a>
+              התאמת מסלול
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
     </>
   );
 }
-```
 
-===== FILE: src/components/Hero.tsx =====
-```tsx
+
+===== FILE: 02_CODE_BASE_PRE_COLOR/src/components/Hero.tsx =====
+
+import { MouseEvent } from 'react';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { ArrowLeft, PhoneCall, Users } from 'lucide-react';
 import { SITE_DATA } from '../data';
-import { MouseEvent } from 'react';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -171,151 +161,115 @@ export default function Hero() {
     mouseY.set(clientY - top);
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 2.0,
-      }
-    }
-  };
-
   const itemVariants = {
     hidden: { y: '100%' },
-    show: {
-      y: 0,
-      transition: { duration: 1.2, ease }
-    }
+    show: { y: 0, transition: { duration: 1.05, ease } },
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-[100dvh] w-full flex items-center pb-0 px-6 md:px-16 lg:px-24 overflow-hidden bg-bg group"
+      className="group relative flex min-h-[100dvh] w-full items-center overflow-hidden bg-gradient-to-br from-white via-[#f7fbff] to-[#e9f5ff] px-6 pb-0 pt-28 md:px-16 lg:px-24"
       onMouseMove={handleMouseMove}
     >
-      {/* Dynamic Glow based on mouse position */}
       <motion.div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-0"
+        className="pointer-events-none absolute -inset-px z-0 opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              600px circle at ${mouseX}px ${mouseY}px,
-              rgba(28, 141, 255, 0.16),
-              transparent 80%
+              660px circle at ${mouseX}px ${mouseY}px,
+              rgba(28, 141, 255, 0.18),
+              transparent 78%
             )
           `,
         }}
       />
 
-      {/* Dramatic Background Image */}
       <div className="absolute inset-0 z-0">
         <img
           src="/tomer-office-highres.png"
-          alt="Gym and Training Environment"
-          className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-20 scale-105"
-          referrerPolicy="no-referrer"
+          alt="תומר פרידמן בקליניקה"
+          className="absolute inset-0 h-full w-full scale-105 object-cover opacity-[0.08] mix-blend-multiply"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/90 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(28,141,255,0.16),transparent_34%),linear-gradient(90deg,rgba(255,255,255,0.98),rgba(255,255,255,0.84)_52%,rgba(232,244,255,0.68))]" />
       </div>
 
-
-
-      {/* Glow Blob */}
-      <div className="glow-blob top-1/4 -right-20 bg-energy opacity-50"></div>
-
-      {/* Tomer's Image Spot */}
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
+        initial={{ opacity: 0, x: -45 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, delay: 2.8, ease }}
-        className="absolute bottom-0 left-0 lg:left-10 w-[350px] lg:w-[500px] h-[600px] lg:h-[800px] hidden md:block z-10 pointer-events-none"
+        transition={{ duration: 1.1, delay: 1.8, ease }}
+        className="pointer-events-none absolute bottom-0 left-0 z-10 hidden h-[720px] w-[420px] lg:left-12 lg:block lg:w-[510px]"
       >
-        <div className="w-full h-full relative overflow-hidden flex items-end justify-center">
-             {/* Brand-color background behind the image */}
-             <div className="absolute inset-0 bg-energy/20"></div>
-             {/* The image itself without opacity reduction for better resolution */}
-             <div className="absolute inset-0 bg-[url('/tomer-blue-shirt.png')] bg-cover bg-top" style={{ maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)' }}></div>
-             
-             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(28,141,255,0.25)]">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center border border-energy/50 overflow-hidden bg-energy text-white font-heading font-black text-sm">
-                    TF
-                </div>
-                <div>
-                    <p className="text-white font-bold text-sm">{SITE_DATA.profile.name}</p>
-                    <p className="text-text-muted text-xs">{SITE_DATA.profile.title}</p>
-                </div>
-             </div>
+        <div className="relative flex h-full w-full items-end justify-center overflow-hidden rounded-t-[3rem]">
+          <div className="absolute inset-x-8 bottom-0 top-16 rounded-t-[3rem] bg-gradient-to-b from-energy/10 to-[#dff1ff]" />
+          <div
+            className="absolute inset-0 bg-[url('/tomer-blue-shirt.png')] bg-cover bg-top"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 76%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 76%, transparent 100%)',
+            }}
+          />
+
+          <div className="absolute bottom-12 flex items-center gap-4 rounded-3xl border border-energy/20 bg-white/90 px-5 py-4 shadow-[0_20px_55px_rgba(15,42,68,0.18)] backdrop-blur-md">
+            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-energy/20 bg-white">
+              <img src="/tomer-logo.png" alt="לוגו תומר פרידמן" className="h-10 w-10 object-contain" />
+            </div>
+            <div>
+              <p className="text-sm font-black text-foreground">{SITE_DATA.profile.name}</p>
+              <p className="text-xs text-text-muted">{SITE_DATA.profile.title}</p>
+            </div>
+          </div>
         </div>
       </motion.div>
 
-      {/* Content */}
       <motion.div
-        variants={containerVariants}
+        variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.14, delayChildren: 1.25 } } }}
         initial="hidden"
         animate="show"
-        className="relative z-10 max-w-6xl mx-auto w-full flex flex-col items-start gap-6 mt-20"
+        className="relative z-20 mx-auto flex w-full max-w-6xl flex-col items-start gap-6 lg:ml-[42%]"
       >
-
         <div className="overflow-hidden pb-2">
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 glass-panel-dark"
-          >
-            <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-energy opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-energy"></span>
-            </div>
-            <span className="text-xs font-bold tracking-widest text-text-muted uppercase">{SITE_DATA.hero.badge}</span>
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-3 rounded-full border border-energy/20 bg-white/80 px-5 py-2.5 shadow-sm backdrop-blur-xl">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-energy opacity-70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-energy" />
+            </span>
+            <span className="text-xs font-black tracking-widest text-foreground/70">{SITE_DATA.hero.badge}</span>
           </motion.div>
         </div>
 
         <div className="overflow-hidden pb-2">
-          <motion.p
-            variants={itemVariants}
-            className="text-xl md:text-2xl text-energy font-medium tracking-tight"
-          >
+          <motion.p variants={itemVariants} className="text-xl font-bold tracking-tight text-energy md:text-2xl">
             {SITE_DATA.hero.eyebrow}
           </motion.p>
         </div>
 
         <div className="overflow-hidden pb-4">
-          <motion.h1
-            variants={itemVariants}
-            className="text-6xl md:text-[7rem] font-heading font-black text-white leading-[1.1] tracking-tighter"
-          >
-            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-blue-300">האחרון</span><br/>
+          <motion.h1 variants={itemVariants} className="font-heading text-6xl font-black leading-[1.04] tracking-tighter text-foreground md:text-[7rem]">
+            השינוי <span className="text-glow-animate">האחרון</span>
+            <br />
             שתצטרך לעשות.
           </motion.h1>
         </div>
 
         <div className="overflow-hidden pb-2">
-          <motion.p
-            variants={itemVariants}
-            className="text-lg md:text-xl text-text-muted max-w-2xl leading-relaxed mt-4 border-r-2 border-energy pr-6"
-          >
-            אני לא מחלק תפריטים גנריים. אני בונה מערכת תזונה ואימונים שמותאמת בדיוק לחיים שלך — לא להפך. 22 שנות ניסיון קליני. בלי מתמחים. בלי תפריט פוטוקופי. רק אני, רק אתה, רק תוצאות.
+          <motion.p variants={itemVariants} className="mt-4 max-w-2xl border-r-2 border-energy pr-6 text-lg leading-relaxed text-text-muted md:text-xl">
+            אני לא מחלק תפריטים גנריים. אני בונה מערכת תזונה ואימונים שמותאמת בדיוק לחיים שלך, לא להפך. 22 שנות ניסיון קליני, בלי מתמחים ובלי תפריט פוטוקופי. רק אני, אתה, והנתונים שמראים מה באמת עובד.
           </motion.p>
         </div>
 
-        <div className="overflow-hidden pt-6 pb-4">
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
-          >
+        <div className="overflow-hidden pb-4 pt-6">
+          <motion.div variants={itemVariants} className="flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row">
             <a
               href="#pathfinder"
-              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(28,141,255,0.45)] flex items-center justify-center"
+              className="btn-magnetic group flex w-full items-center justify-center rounded-full bg-energy px-8 py-4 text-lg font-black text-white shadow-[0_12px_36px_rgba(28,141,255,0.32)] sm:w-auto"
             >
               <span>התאם לי תוכנית</span>
               <ArrowLeft size={20} className="mr-3 transition-transform group-hover:-translate-x-1" />
             </a>
             <a
               href="#tracks"
-              className="btn-magnetic w-full sm:w-auto group bg-white/5 backdrop-blur-md border border-white/15 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-colors flex items-center justify-center"
+              className="btn-magnetic group flex w-full items-center justify-center rounded-full border border-energy/20 bg-white/80 px-8 py-4 text-lg font-bold text-foreground shadow-sm backdrop-blur-md transition-colors hover:bg-[#eef7ff] sm:w-auto"
             >
               <PhoneCall size={20} className="ml-3 text-energy" />
               <span>תיאום שיחת ייעוץ</span>
@@ -323,39 +277,33 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
-          className="text-sm text-text-muted flex items-center gap-2 mt-6"
-        >
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.7 }} className="mt-6 flex items-center gap-2 text-sm text-text-muted">
           <Users size={16} className="text-energy" />
-          <span>מצטרף ליותר מ-500 מתאמנים שכבר עשו את השינוי</span>
+          <span>מצטרף ליותר מ־500 מתאמנים שכבר עשו את השינוי</span>
         </motion.p>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 3.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        animate={{ opacity: 0.7 }}
+        transition={{ delay: 2.2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-4"
       >
-        <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">
+        <div className="relative h-16 w-[1px] overflow-hidden bg-foreground/10">
           <motion.div
             animate={{ y: ['-100%', '100%'] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-full h-1/2 bg-energy"
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+            className="absolute left-0 top-0 h-1/2 w-full bg-energy"
           />
         </div>
       </motion.div>
     </section>
   );
 }
-```
 
-===== FILE: src/components/Process.tsx =====
-```tsx
+
+===== FILE: 02_CODE_BASE_PRE_COLOR/src/components/Process.tsx =====
+
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 
@@ -366,84 +314,56 @@ type Step = {
   note: string;
 };
 
-type ProcessStepProps = {
+function ProcessStep({
+  step,
+  idx,
+  total,
+  scrollYProgress,
+}: {
   step: Step;
   idx: number;
   total: number;
   scrollYProgress: MotionValue<number>;
-};
-
-function ProcessStep({ step, idx, total, scrollYProgress }: ProcessStepProps) {
+}) {
   const isEven = idx % 2 !== 0;
   const stepProgressStart = idx / Math.max(total, 1);
   const stepProgressEnd = stepProgressStart + 0.16;
 
-  const glowOpacity = useTransform(
-    scrollYProgress,
-    [stepProgressStart, stepProgressEnd],
-    [0.2, 1]
-  );
-
-  const borderColor = useTransform(
-    scrollYProgress,
-    [stepProgressStart, stepProgressEnd],
-    ["rgba(255,255,255,0.1)", "rgba(28,141,255,1)"]
-  );
-
-  const scale = useTransform(
-    scrollYProgress,
-    [stepProgressStart, stepProgressEnd],
-    [1, 1.1]
-  );
-
-  const nodeColor = useTransform(
-    scrollYProgress,
-    [stepProgressStart, stepProgressEnd],
-    ["#ffffff", "#1c8dff"]
-  );
+  const glowOpacity = useTransform(scrollYProgress, [stepProgressStart, stepProgressEnd], [0.2, 1]);
+  const borderColor = useTransform(scrollYProgress, [stepProgressStart, stepProgressEnd], ['rgba(28,141,255,0.14)', 'rgba(28,141,255,1)']);
+  const scale = useTransform(scrollYProgress, [stepProgressStart, stepProgressEnd], [1, 1.1]);
 
   return (
-    <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
+    <div className={`flex flex-col items-center gap-8 md:flex-row md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
       <motion.div
         initial={{ opacity: 0, x: isEven ? -40 : 40 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6 }}
-        className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
+        className="w-full flex-1 text-right md:w-1/2"
       >
-        <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(28,141,255,0.15)] group">
-          <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
-          <p className="text-text-muted mb-4">{step.desc}</p>
-          <p className="text-sm text-energy/80 italic">"{step.note}"</p>
+        <div className="rounded-[2rem] border border-energy/20 bg-white p-8 shadow-[0_24px_70px_rgba(15,42,68,0.08)] transition-all duration-300 hover:border-energy/40 hover:shadow-[0_24px_80px_rgba(28,141,255,0.14)]">
+          <h3 className="mb-3 font-heading text-2xl font-black text-foreground">{step.title}</h3>
+          <p className="mb-4 leading-relaxed text-text-muted">{step.desc}</p>
+          <p className="text-sm font-bold italic text-energy">"{step.note}"</p>
         </div>
       </motion.div>
 
-      <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
+      <div className="relative z-10 hidden h-16 w-16 shrink-0 items-center justify-center md:flex">
+        <motion.div className="absolute inset-0 rounded-full bg-energy/20 blur-md" style={{ opacity: glowOpacity }} />
         <motion.div
-          className="absolute inset-0 rounded-full bg-energy/20 blur-md"
-          style={{ opacity: glowOpacity }}
-        />
-        <motion.div
-          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
-          style={{
-            borderColor,
-            borderWidth: '2px',
-            borderStyle: 'solid',
-            scale
-          }}
-          whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(28,141,255,0.6)", borderColor: "rgba(28,141,255,1)" }}
+          className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-white text-xl font-black text-energy shadow-[0_16px_38px_rgba(15,42,68,0.12)]"
+          style={{ borderColor, borderWidth: '2px', borderStyle: 'solid', scale }}
         >
-          <motion.span style={{ color: nodeColor }}>
-            {step.num}
-          </motion.span>
+          {step.num}
         </motion.div>
       </div>
 
-      <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(28,141,255,0.3)]">
+      <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-energy bg-white text-xl font-black text-energy shadow-[0_12px_30px_rgba(28,141,255,0.18)] md:hidden">
         {step.num}
       </div>
 
-      <div className="hidden md:block flex-1 w-1/2"></div>
+      <div className="hidden w-1/2 flex-1 md:block" />
     </div>
   );
 }
@@ -452,64 +372,59 @@ export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"]
+    offset: ['start center', 'end center'],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
-  const steps = [
+  const steps: Step[] = [
     {
-      num: "1",
-      title: "אבחון",
-      desc: "מתחילים במדידות אמיתיות, לא בהערכה. הרכב גוף, היקפים, בדיקות אם יש. בלי זה, כל תפריט הוא ניחוש.",
-      note: "בשלב הזה אני רוצה להבין מה באמת קורה, לא מה נדמה שקורה."
+      num: '1',
+      title: 'אבחון',
+      desc: 'מתחילים במדידות אמיתיות, לא בהערכה. הרכב גוף, היקפים, בדיקות אם יש. בלי זה, כל תפריט הוא ניחוש.',
+      note: 'בשלב הזה אני רוצה להבין מה באמת קורה, לא מה נדמה שקורה.',
     },
     {
-      num: "2",
-      title: "בנייה",
-      desc: "אני בונה לך מסגרת — תזונה, אימונים ומדידות — שמתחברת לחיים שלך, לא לחיים של מישהו אחר שראיתי באפליקציה.",
-      note: "התכנית צריכה להתאים אליך. לא אתה אליה."
+      num: '2',
+      title: 'בנייה',
+      desc: 'אני בונה לך מסגרת: תזונה, אימונים ומדידות שמתחברת לחיים שלך, לא לחיים של מישהו אחר שראית באפליקציה.',
+      note: 'התוכנית צריכה להתאים אליך. לא אתה אליה.',
     },
     {
-      num: "3",
-      title: "ליווי",
-      desc: "מענה יומיומי. לא פעם בשבועיים כשאתה נזכר. גם כשנשבר, גם כשאתה בחופש, גם כשהשתנה משהו.",
-      note: "אני לא משאיר אותך לבד עם קובץ ותפריט."
+      num: '3',
+      title: 'ליווי',
+      desc: 'מענה יומיומי. לא פעם בשבועיים כשאתה נזכר. גם כשנשבר, גם כשאתה בחופש, וגם כשמשהו השתנה.',
+      note: 'אני לא משאיר אותך לבד עם קובץ ותפריט.',
     },
     {
-      num: "4",
-      title: "התמדה",
-      desc: "בסוף התהליך לא נשארים תלויים בי. בונים את הרצף שאפשר להחזיק גם אחרי שסיימנו לעבוד יחד.",
-      note: "המטרה היא לא רק תוצאה. המטרה היא תוצאה שאתה יודע לשמור."
-    }
+      num: '4',
+      title: 'התמדה',
+      desc: 'בסוף התהליך לא נשארים תלויים בי. בונים את הרצף שאפשר להחזיק גם אחרי שסיימנו לעבוד יחד.',
+      note: 'המטרה היא לא רק תוצאה. המטרה היא תוצאה שאתה יודע לשמור.',
+    },
   ];
 
   return (
-    <section id="process" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden">
-
-
-      <div className="max-w-5xl mx-auto relative z-10">
-        <div className="text-center mb-24">
-          <div className="text-energy font-bold tracking-widest uppercase text-sm mb-4">תהליך העבודה איתי</div>
-          <h2 className="text-4xl md:text-6xl font-heading font-black text-white">
-            מובנה, שקוף <span className="text-energy">וממוקד-תוצאות</span>
+    <section id="process" className="relative overflow-hidden bg-gradient-to-b from-[#f7fbff] to-white px-6 py-32 md:px-16 lg:px-24">
+      <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(#1c8dff 1px, transparent 1px), linear-gradient(90deg, #1c8dff 1px, transparent 1px)', backgroundSize: '46px 46px' }} />
+      <div className="relative z-10 mx-auto max-w-5xl">
+        <div className="mb-24 text-center">
+          <div className="mb-4 text-sm font-black uppercase tracking-widest text-energy">תהליך העבודה איתי</div>
+          <h2 className="font-heading text-4xl font-black text-foreground md:text-6xl">
+            4 שלבים. לא שיטה, <span className="text-energy">שיטתיות.</span>
           </h2>
-          <p className="text-text-muted mt-6 max-w-2xl mx-auto text-lg">
-            השותפות שלנו מתחילה באפיון אסטרטגי וממשיכה באופטימיזציה מתמדת. אני לא מספק פתרון 'זבנג וגמרנו', אלא אנחנו בונים יחד הרגלים לכל החיים.
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
+            השותפות שלנו מתחילה באבחון אסטרטגי וממשיכה באופטימיזציה מתמדת. אני לא מספק פתרון "זבנג וגמרנו", אלא בונה איתך הרגלים שאפשר להחזיק.
           </p>
         </div>
 
-        <div className="relative" ref={containerRef}>
-          {/* Background Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/5 -translate-x-1/2 hidden md:block"></div>
-
-          {/* Animated Fill Line */}
+        <div ref={containerRef} className="relative">
+          <div className="absolute bottom-0 left-1/2 top-0 hidden w-[2px] -translate-x-1/2 bg-energy/10 md:block" />
           <motion.div
-            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-blue-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(28,141,255,0.8)]"
+            className="absolute left-1/2 top-0 hidden w-[2px] origin-top -translate-x-1/2 bg-gradient-to-b from-energy to-[#5fb8ff] shadow-[0_0_15px_rgba(28,141,255,0.45)] md:block"
             style={{ height: lineHeight }}
-          ></motion.div>
-
-          <div className="flex flex-col gap-24 relative z-10">
+          />
+          <div className="relative z-10 flex flex-col gap-20 md:gap-24">
             {steps.map((step, idx) => (
               <ProcessStep key={step.num} step={step} idx={idx} total={steps.length} scrollYProgress={scrollYProgress} />
             ))}
@@ -519,16 +434,16 @@ export default function Process() {
     </section>
   );
 }
-```
 
-===== FILE: src/components/VSL.tsx =====
-```tsx
+
+===== FILE: 02_CODE_BASE_PRE_COLOR/src/components/VSL.tsx =====
+
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 
 export default function VSL() {
   return (
-    <section className="relative py-20 px-6 md:px-16 lg:px-24 bg-bg overflow-hidden z-20">
+    <section className="relative z-20 overflow-hidden bg-white px-6 py-20 md:px-16 lg:px-24">
       <div className="max-w-5xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -538,16 +453,16 @@ export default function VSL() {
           className="relative"
         >
           {/* Glowing border effect */}
-          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-blue-700 opacity-30 blur-xl"></div>
+          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-b from-energy to-[#5fb8ff] opacity-20 blur-xl md:rounded-[2rem]"></div>
 
-          <div className="relative rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-surface overflow-hidden aspect-video shadow-2xl flex items-center justify-center group cursor-pointer">
+          <div className="group relative flex aspect-video cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-energy/10 bg-white shadow-[0_24px_75px_rgba(15,42,68,0.12)] md:rounded-[2rem]">
             {/* Fallback / Placeholder Image */}
             <img
               src="/tomer-suitcase-photo.jpeg"
               alt="Tomer Fridman VSL"
-              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
+              className="absolute inset-0 h-full w-full object-cover opacity-80 transition-opacity duration-700 group-hover:opacity-95"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f2a44]/70 via-[#0f2a44]/10 to-transparent"></div>
 
             {/* Play Button */}
             <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(28,141,255,0.5)]">
@@ -567,5 +482,241 @@ export default function VSL() {
     </section>
   );
 }
-```
 
+
+===== FILE: 02_CODE_BASE_PRE_COLOR/src/components/AppShowcase.tsx =====
+
+import { motion } from 'framer-motion';
+import { ArrowLeft, CheckCircle2, Dumbbell, HelpCircle, LineChart, MessageCircle, Utensils } from 'lucide-react';
+
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+const features = [
+  {
+    icon: Utensils,
+    title: 'שאלון קצר וכניסה מסודרת',
+    text: 'מתחילים בלי בלגן. המערכת בונה לך מבנה בסיסי כבר מהיום הראשון.',
+  },
+  {
+    icon: Dumbbell,
+    title: 'אוכל, ברקוד וצילום מזון',
+    text: 'לרשום ארוחה זה שניות. גם כשאתה בחוץ, גם כשאתה ממהר.',
+  },
+  {
+    icon: LineChart,
+    title: 'מדידות, התקדמות ואימונים במקום אחד',
+    text: 'כל נתון נשמר, ההתקדמות נראית, וההמשך נבנה לפי מה שקורה בפועל.',
+  },
+  {
+    icon: MessageCircle,
+    title: 'המשך טבעי לתהליך אישי',
+    text: 'כשמוכנים, עוברים לליווי עמוק יותר בלי לאבד נתונים ובלי להתחיל מאפס.',
+  },
+];
+
+export default function AppShowcase() {
+  return (
+    <section id="app" className="relative overflow-hidden border-y border-energy/10 bg-gradient-to-br from-white via-[#f5fbff] to-[#eaf5ff] px-6 py-32 md:px-16 lg:px-24">
+      <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#1c8dff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mx-auto mb-20 max-w-3xl text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-4 inline-block rounded-full border border-energy/20 bg-white px-4 py-2 font-heading text-sm font-black tracking-widest text-energy"
+          >
+            TF Tracker
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mb-6 font-heading text-4xl font-black text-foreground md:text-5xl lg:text-6xl"
+          >
+            כך TF Tracker עובד <span className="text-energy">ביום-יום</span>.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mb-8 text-lg leading-relaxed text-text-muted"
+          >
+            TF Tracker הוא מוצר הכניסה הדיגיטלי שלי. בפנים יש מערכת אחת שאוגדת אוכל, אימונים, מדידות ומעקב, בלי לקפוץ בין 4 אפליקציות, בלי למלא אקסלים, ובלי לנחש מה קורה מיום ליום. זה מוצר עצמאי שעומד לבד, ומי שרוצה להעמיק אחר כך לתהליך אישי, ההיסטוריה ממשיכה איתו ולא מתחילה מחדש.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a href="#tracks" className="btn-magnetic flex items-center gap-2 rounded-full bg-energy px-8 py-4 font-black text-white shadow-[0_12px_34px_rgba(28,141,255,0.3)]">
+              <span>להתחיל עם TF Tracker</span>
+              <ArrowLeft size={20} />
+            </a>
+            <a href="#pathfinder" className="flex items-center justify-center gap-2 rounded-full border border-energy/20 bg-white px-8 py-4 font-bold text-foreground shadow-sm transition-colors hover:bg-[#eef7ff]">
+              <span>להבין אם זה מתאים לי</span>
+              <HelpCircle size={20} className="text-energy" />
+            </a>
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.12 } } }}
+          >
+            <div className="space-y-6">
+              {features.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <motion.div
+                    key={feature.title}
+                    variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } } }}
+                    className="group flex gap-5 rounded-[1.75rem] border border-energy/10 bg-white p-5 shadow-[0_18px_55px_rgba(15,42,68,0.07)]"
+                  >
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-energy/20 bg-[#f0f8ff] text-energy transition-colors group-hover:bg-energy group-hover:text-white">
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-2xl font-black text-foreground">{feature.title}</h3>
+                      <p className="leading-relaxed text-text-muted">{feature.text}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <motion.div className="mt-10 rounded-[1.75rem] border border-energy/20 bg-white p-6 shadow-[0_18px_55px_rgba(15,42,68,0.07)]">
+              <h4 className="mb-4 font-black text-foreground">מסלולי TF Tracker:</h4>
+              <ul className="space-y-3 text-sm text-text-muted">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-energy" />
+                  <span><strong className="text-foreground">₪49.90 / חודשי:</strong> גמיש, ללא התחייבות.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-energy" />
+                  <span><strong className="text-foreground">₪39.90 / לחודש במסלול שנתי:</strong> חיסכון של ₪120 לשנה.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-energy" />
+                  <span><strong className="text-foreground">המשך טבעי למסלול אישי:</strong> כשמוכנים, עוברים בלי לאבד נתונים.</span>
+                </li>
+              </ul>
+              <p className="mt-5 text-xs text-text-muted/80">
+                אלה מסכים אמיתיים מתוך המוצר. מה שאתה רואה כאן, זה מה שתראה ברגע שתיכנס.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, rotateY: -30 }}
+            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1, ease }}
+            className="relative flex justify-center lg:justify-end"
+          >
+            <div className="relative h-[600px] w-[300px] overflow-hidden rounded-[3rem] border-[8px] border-[#263544] bg-[#0a0a0a] shadow-[0_30px_70px_rgba(15,42,68,0.22),inset_0_0_0_2px_rgba(255,255,255,0.08)] md:h-[700px] md:w-[350px]">
+              <div className="absolute left-1/2 top-0 z-20 h-7 w-32 -translate-x-1/2 rounded-b-3xl bg-[#263544]" />
+              <div className="absolute inset-0 flex flex-col bg-[#0a0a0a] pt-8">
+                <div className="z-10 flex h-8 w-full items-center justify-between px-6 text-[11px] font-medium text-white">
+                  <span>9:41</span>
+                  <div className="flex items-center gap-1.5">
+                    <div className="h-3 w-3 rounded-full border border-white/80" />
+                    <div className="h-3 w-3 rounded-full bg-white/80" />
+                    <div className="h-2.5 w-4 rounded-sm bg-white/80" />
+                  </div>
+                </div>
+
+                <div className="mt-2 px-6 py-4">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div>
+                      <div className="mb-1 text-xs font-black uppercase tracking-wider text-energy">TF Tracker</div>
+                      <div className="text-2xl font-black text-white">שלום, דניאל</div>
+                    </div>
+                    <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-energy/40 bg-white">
+                      <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-9 w-9 object-contain" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="custom-scrollbar flex-1 space-y-6 overflow-y-auto px-6 pb-6">
+                  <div className="flex items-center justify-between rounded-3xl border border-white/10 bg-[#111] p-6">
+                    <div>
+                      <div className="mb-1 text-sm text-white/60">קלוריות נותרות</div>
+                      <div className="text-3xl font-black text-white">1,240</div>
+                      <div className="mt-1 text-xs text-energy">מתוך 2,500 קק"ל</div>
+                    </div>
+                    <div className="-rotate-45 flex h-20 w-20 items-center justify-center rounded-full border-4 border-[#222] border-r-energy border-t-energy">
+                      <div className="rotate-45 text-center text-lg font-black text-white">50%</div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-3xl border border-white/10 bg-[#111] p-5">
+                    <div className="mb-4 text-sm font-black text-white">יעדים יומיים</div>
+                    <div className="flex items-end justify-between">
+                      {[
+                        ['180g', 'חלבון', 'bg-energy', 'text-energy'],
+                        ['250g', 'פחמימה', 'bg-white', 'text-white'],
+                        ['70g', 'שומן', 'bg-white/40', 'text-white/60'],
+                      ].map(([value, label, bar, color]) => (
+                        <div key={label} className="text-center">
+                          <div className={`mb-1 text-xl font-black ${color}`}>{value}</div>
+                          <div className="mx-auto mb-1 h-1.5 w-12 overflow-hidden rounded-full bg-[#222]">
+                            <div className={`h-full w-3/4 rounded-full ${bar}`} />
+                          </div>
+                          <div className="text-[10px] text-white/40">{label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-3xl border border-energy/20 bg-gradient-to-br from-energy/20 to-transparent p-5">
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="text-sm font-black text-white">ארוחה הבאה</div>
+                      <div className="rounded-md bg-energy/10 px-2 py-1 text-xs text-energy">14:00</div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#222] text-white/50">
+                        <Utensils size={20} />
+                      </div>
+                      <div>
+                        <div className="text-sm font-black text-white">חזה עוף ואורז</div>
+                        <div className="text-xs text-white/60">450 קק"ל • 40g חלבון</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="z-10 flex h-20 items-center justify-around border-t border-white/10 bg-[#0a0a0a]/90 px-6 pb-4 pt-2 backdrop-blur-md">
+                  {[
+                    [Utensils, 'תזונה', true],
+                    [Dumbbell, 'אימון', false],
+                    [LineChart, 'מדדים', false],
+                    [MessageCircle, 'צ׳אט', false],
+                  ].map(([Icon, label, active]) => {
+                    const NavIcon = Icon as typeof Utensils;
+                    return (
+                      <div key={String(label)} className={`flex flex-col items-center gap-1 ${active ? 'text-energy' : 'text-white/40'}`}>
+                        <div className={`rounded-xl p-2 ${active ? 'bg-energy/10' : ''}`}>
+                          <NavIcon size={20} />
+                        </div>
+                        <div className="text-[10px] font-bold">{String(label)}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

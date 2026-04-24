@@ -1,6 +1,8 @@
 Use this repository:
 https://github.com/Yehonatan753/tomer-friedman-ai-studio-ready-2026-04-23
 
+Important: the repository now contains the implemented white/blue version. Do not rebuild from the failed black/orange or failed generic SaaS attempts. Review and improve the current implementation only.
+
 Do not browse randomly through the repo.
 Open the folder:
 00_ORDERED_FILES_FOR_GEMINI/
@@ -25,8 +27,14 @@ You must also handle the AI Studio feature requests:
 
 If you struggle to navigate the repo, use the ordered TXT files as the source of truth because they contain the important code and instructions in sequence.
 
-Correction:
-The black/orange site is the best conversion base, but the requested final direction is a premium blue/white translation with fewer duplicates. Do not keep it fully orange/black, and do not flatten it into bland white SaaS.
+Final correction:
+The black/orange site is the best conversion reference, but the final locked direction is premium white/blue. Keep the strong OPUS structure, all 6 products, value stack, operational scarcity, insurance, seminars, newsletter, final CTA, footer, and motion. Do not introduce dark site sections. Only the phone/device UI inside AppShowcase may stay dark.
+
+Current implementation includes secure server-side Gemini:
+- api/agent/chat.ts uses GEMINI_API_KEY server-side only
+- src/lib/agentClient.ts calls /api/agent/chat
+- GeminiAgentPopup is a Hebrew RTL product-fit / FAQ assistant
+- api/leads.ts and src/lib/leads.ts centralize lead capture
 
 Your first response must be the Failure Correction and Compliance Audit requested in 00B_FOLLOWUP_CORRECTION_PROMPT.txt and 01_STRICT_EXECUTION_PROMPT.txt.
 Do not give a vague plan.

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, CheckCircle2, GraduationCap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { CheckCircle2, GraduationCap, Send, X } from 'lucide-react';
+import { openWhatsApp, submitLead } from '../lib/leads';
 
 export default function CoursePopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
   const [courseName, setCourseName] = useState('');
 
   useEffect(() => {
@@ -13,113 +14,108 @@ export default function CoursePopup() {
       setCourseName(e.detail.courseName);
       setIsOpen(true);
       setHasSubmitted(false);
-      setFormData({ name: '', email: '' });
+      setFormData({ name: '', phone: '', email: '' });
     };
 
     window.addEventListener('open-course', handleOpenCourse as EventListener);
     return () => window.removeEventListener('open-course', handleOpenCourse as EventListener);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const text = encodeURIComponent('שלום תומר! קוראים לי ' + formData.name + ' ומעוניין/ת לשמוע על ' + courseName + ' (' + formData.email + ')');
-    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    await submitLead({
+      source: 'course-popup',
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      product: courseName,
+      message: 'בקשת פרטים על הרצאה/סדנה',
+    });
+    openWhatsApp(`שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${courseName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`);
     setHasSubmitted(true);
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 3000);
+    setTimeout(() => setIsOpen(false), 2600);
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-          <motion.div 
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" dir="rtl">
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-[#0f2a44]/30 backdrop-blur-sm"
           />
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-lg bg-bg border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-energy/20 bg-white shadow-[0_30px_90px_rgba(15,42,68,0.22)]"
           >
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-colors"
+              className="absolute right-4 top-4 z-10 rounded-full bg-white/80 p-2 text-text-muted transition-colors hover:bg-[#eef7ff] hover:text-foreground"
+              aria-label="סגור"
             >
               <X size={20} />
             </button>
 
-            <div className="h-32 bg-gradient-to-br from-energy to-blue-700 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 bg-black/20"></div>
-              <GraduationCap size={48} className="text-white relative z-10" />
+            <div className="relative flex h-32 items-center justify-center overflow-hidden bg-gradient-to-br from-[#f2f8ff] to-[#dff0ff]">
+              <GraduationCap size={48} className="relative z-10 text-energy" />
             </div>
 
             <div className="p-8">
               {!hasSubmitted ? (
                 <>
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-heading font-bold text-white mb-2">
-                      {courseName}
-                    </h3>
-                    <p className="text-text-muted text-sm">
-                      השאר שם ומייל ואני אשלח לך את כל הפרטים ישירות למייל.
+                  <div className="mb-6 text-center">
+                    <h3 className="mb-2 font-heading text-2xl font-black text-foreground">{courseName}</h3>
+                    <p className="text-sm leading-relaxed text-text-muted">
+                      השאר פרטים ותומר יחזור אליך בוואטסאפ עם כל המידע הרלוונטי להרצאה או לסדנה.
                     </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <input 
-                        required 
-                        type="text" 
-                        value={formData.name} 
-                        onChange={e => setFormData({...formData, name: e.target.value})} 
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
-                        placeholder="שם מלא" 
-                      />
-                    </div>
-                    <div>
-                      <input 
-                        required 
-                        type="email" 
-                        value={formData.email} 
-                        onChange={e => setFormData({...formData, email: e.target.value})} 
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
-                        placeholder="your@email.com" 
-                        dir="ltr" 
-                      />
-                    </div>
-                    
-                    <button 
-                      type="submit" 
-                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-2"
-                    >
-                      <Mail size={20} />
-                      <span>שלח לי למייל</span>
+                    <input
+                      required
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"
+                      placeholder="שם מלא"
+                    />
+                    <input
+                      required
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"
+                      placeholder="טלפון"
+                      dir="ltr"
+                    />
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"
+                      placeholder="your@email.com"
+                      dir="ltr"
+                    />
+
+                    <button type="submit" className="btn-magnetic flex w-full items-center justify-center gap-2 rounded-xl bg-energy px-8 py-4 font-black text-white shadow-[0_12px_34px_rgba(28,141,255,0.28)]">
+                      <Send size={20} />
+                      <span>שלח פרטים</span>
                     </button>
-                    <p className="text-xs text-text-muted/50 text-center mt-3">
-                      אני שונא ספאם בדיוק כמוך. הפרטים שלך בטוחים אצלי.
-                    </p>
                   </form>
                 </>
               ) : (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-8"
-                >
-                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 size={32} className="text-green-500" />
+                <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} className="py-8 text-center">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50">
+                    <CheckCircle2 size={32} className="text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">נשלח בהצלחה!</h3>
-                  <p className="text-text-muted">
-                    הפרטים בדרך למייל שלך. בדוק גם בתיקיית קידומי מכירות או ספאם.
-                  </p>
+                  <h3 className="mb-2 text-2xl font-black text-foreground">הפרטים נקלטו</h3>
+                  <p className="text-text-muted">נפתח לך וואטסאפ עם הודעה מוכנה לתומר.</p>
                 </motion.div>
               )}
             </div>
@@ -129,4 +125,3 @@ export default function CoursePopup() {
     </AnimatePresence>
   );
 }
-

@@ -24,7 +24,7 @@ export default function Courses() {
   };
 
   return (
-    <section id="courses" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative">
+    <section id="courses" className="relative bg-gradient-to-b from-white to-[#f5fbff] px-6 py-32 md:px-16 lg:px-24">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }} className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>

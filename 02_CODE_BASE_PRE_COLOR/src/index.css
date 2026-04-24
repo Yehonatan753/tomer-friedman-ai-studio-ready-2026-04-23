@@ -6,44 +6,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 2%;
-    --foreground: 0 0% 100%;
+    --background: 210 100% 99%;
+    --foreground: 211 64% 14%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 211 64% 14%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 211 64% 14%;
 
     --primary: 207 100% 47%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 206 75% 95%;
+    --secondary-foreground: 211 64% 14%;
 
-    --muted: 0 0% 10%;
-    --muted-foreground: 240 4% 66%;
+    --muted: 207 68% 95%;
+    --muted-foreground: 213 22% 43%;
 
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 207 88% 94%;
+    --accent-foreground: 211 64% 14%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    --border: 207 34% 86%;
+    --input: 207 34% 86%;
     --ring: 207 100% 47%;
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --bg: 0 0% 2%;
-    --surface: 0 0% 7%;
-    --surface-hover: 0 0% 10%;
+    --bg: 210 100% 99%;
+    --surface: 0 0% 100%;
+    --surface-hover: 207 68% 95%;
     --energy: 207 100% 47%;
     --energy-light: 203 100% 62%;
-    --text-main: 0 0% 100%;
-    --text-muted: 240 4% 66%;
+    --text-main: 211 64% 14%;
+    --text-muted: 213 22% 43%;
   }
 
   html {
@@ -57,7 +57,7 @@
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-family: 'Assistant', ui-sans-serif, system-ui, sans-serif;
-    cursor: none;
+    cursor: auto;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -70,13 +70,13 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(var(--bg));
+    background: hsl(var(--surface-hover));
   }
 
   ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, hsl(var(--energy)), hsl(211, 86%, 35%));
     border-radius: 10px;
-    border: 2px solid hsl(var(--bg));
+    border: 2px solid hsl(var(--surface-hover));
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -92,7 +92,7 @@
   height: 100vh;
   pointer-events: none;
   z-index: 50;
-  opacity: 0.03;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -124,7 +124,7 @@
   z-index: 50;
   transform: scale(0.8);
   transition: opacity 0.3s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 30px 60px rgba(15, 42, 68, 0.18);
 }
 
 .cursor-follower.visible {
@@ -133,19 +133,19 @@
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(28, 141, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(15, 42, 68, 0.08);
 }
 
 .glass-panel-dark {
-  background: rgba(18, 18, 26, 0.6);
+  background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(28, 141, 255, 0.14);
+  box-shadow: 0 22px 55px rgba(15, 42, 68, 0.10);
 }
 
 .glow-blob {
@@ -155,13 +155,13 @@
   background: hsl(var(--energy));
   filter: blur(120px);
   border-radius: 50%;
-  opacity: 0.15;
+  opacity: 0.12;
   pointer-events: none;
   z-index: 0;
 }
 
 .text-glow-animate {
-  background: linear-gradient(to right, #FFFFFF 20%, hsl(var(--energy)) 40%, hsl(var(--energy-light)) 60%, #FFFFFF 80%);
+  background: linear-gradient(to right, #0f2a44 20%, hsl(var(--energy)) 40%, hsl(var(--energy-light)) 60%, #0f2a44 80%);
   background-size: 200% auto;
   color: #000;
   background-clip: text;
@@ -172,7 +172,7 @@
 
 .phone-mockup {
   transform: perspective(1200px) rotateY(-15deg) rotateX(5deg) rotateZ(-2deg);
-  box-shadow: -30px 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(28, 141, 255, 0.15);
+  box-shadow: -30px 30px 60px rgba(15,42,68,0.18), 0 0 40px rgba(28, 141, 255, 0.12);
   transition: transform 0.5s ease;
 }
 

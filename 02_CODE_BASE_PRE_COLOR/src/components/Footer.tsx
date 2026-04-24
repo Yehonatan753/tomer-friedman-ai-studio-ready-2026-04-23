@@ -1,207 +1,161 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Clock, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Clock, Facebook, Instagram, Mail, Phone, Youtube } from 'lucide-react';
 import { SITE_DATA } from '../data';
+import { openWhatsApp, submitLead } from '../lib/leads';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function Footer() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      }
-    }
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleQuickSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get('name') || '');
+    const phone = String(fd.get('phone') || '');
+    await submitLead({ source: 'footer', name, phone, product: 'footer-whatsapp', message: 'טופס מהיר בפוטר' });
+    openWhatsApp(`שלום תומר, שמי ${name}. אשמח שתחזור אליי. טלפון: ${phone}`);
+    setSubmitted(true);
   };
 
-  const itemVariants = {
-    hidden: { y: '100%' },
-    show: {
-      y: 0,
-      transition: { duration: 1.2, ease }
-    }
+  const handleFullSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get('name') || '');
+    const phone = String(fd.get('phone') || '');
+    const email = String(fd.get('email') || '');
+    const subject = String(fd.get('subject') || '');
+    const message = String(fd.get('message') || '');
+    await submitLead({ source: 'footer', name, phone, email, product: subject || 'footer-contact', message });
+    openWhatsApp(`שלום תומר, שמי ${name}. אני רוצה לדבר איתך. ${subject ? `נושא: ${subject}. ` : ''}${message ? `הודעה: ${message}. ` : ''}טלפון: ${phone}. אימייל: ${email}`);
+    setSubmitted(true);
   };
 
   return (
-    <footer id="contact" className="bg-surface text-white rounded-t-[4rem] pt-32 pb-12 px-6 md:px-16 lg:px-24 relative overflow-hidden mt-[-2rem] z-20 border-t border-white/5">
-      {/* Background Noise */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
-           style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32">
-
-          <div className="col-span-1 lg:col-span-2 max-w-4xl mx-auto mb-20 w-full relative z-20">
+    <footer id="contact" className="relative z-20 overflow-hidden rounded-t-[4rem] border-t border-energy/10 bg-white px-6 pb-12 pt-28 text-foreground md:px-16 lg:px-24">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f5fbff] to-white" />
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mb-24 grid grid-cols-1 gap-16 lg:grid-cols-2">
+          <div className="col-span-1 w-full lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#0a0f1c] border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-[0_0_50px_rgba(28,141,255,0.15)] relative overflow-hidden"
+              className="mx-auto max-w-4xl overflow-hidden rounded-[3rem] border border-energy/20 bg-white p-6 shadow-[0_24px_80px_rgba(15,42,68,0.10)] md:p-10"
             >
-              {/* Subtle Glow Background */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-energy/10 blur-[80px] pointer-events-none"></div>
-
               <div className="relative z-10 flex flex-col items-center">
-                
-                <h3 className="text-xl md:text-3xl font-bold text-white mb-8 text-center leading-tight">
+                <h3 className="mb-8 text-center text-xl font-black leading-tight text-foreground md:text-3xl">
                   השאר פרטים ואחזור אליך בוואטסאפ עד 24 שעות
                 </h3>
-
-                <form 
-                  className="flex flex-col md:flex-row gap-4 w-full md:w-auto justify-center items-stretch md:items-center"
-                  onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.target as HTMLFormElement); const text = encodeURIComponent('שלום תומר! שמי: ' + (fd.get('name')||'') + ', טל: ' + (fd.get('phone')||'')); window.open('https://wa.me/972546699574?text=' + text, '_blank'); }}
-                >
-                  <input 
-                    type="text" 
-                    placeholder="שם מלא" 
-                    className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-energy transition-colors w-full md:w-auto flex-grow max-w-[280px] md:max-w-xs text-right" 
-                    required
-                  />
-                  <input 
-                    type="tel" 
-                    placeholder="טלפון" 
-                    dir="ltr"
-                    className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-energy transition-colors w-full md:w-auto flex-grow max-w-[280px] md:max-w-xs text-right" 
-                    required
-                  />
-                  <button 
-                    type="submit" 
-                    className="btn-magnetic bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-10 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-colors shadow-[0_10px_30px_-10px_rgba(139,92,246,0.6)] w-full md:w-auto whitespace-nowrap"
-                  >
-                    <span>בואו נתחיל</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                  </button>
-                </form>
+                {!submitted ? (
+                  <form className="flex w-full flex-col items-stretch justify-center gap-4 md:w-auto md:flex-row md:items-center" onSubmit={handleQuickSubmit}>
+                    <input name="name" type="text" placeholder="שם מלא" className="w-full max-w-xs flex-grow rounded-full border border-[#d2e2ef] bg-white px-6 py-4 text-right text-foreground outline-none transition-colors focus:border-energy md:w-auto" required />
+                    <input name="phone" type="tel" placeholder="טלפון" dir="ltr" className="w-full max-w-xs flex-grow rounded-full border border-[#d2e2ef] bg-white px-6 py-4 text-right text-foreground outline-none transition-colors focus:border-energy md:w-auto" required />
+                    <button type="submit" className="btn-magnetic flex w-full items-center justify-center gap-2 rounded-full bg-energy px-10 py-4 font-black text-white shadow-[0_14px_38px_rgba(28,141,255,0.28)] transition-colors hover:bg-[#0f6fc9] md:w-auto">
+                      בואו נתחיל
+                    </button>
+                  </form>
+                ) : (
+                  <div className="rounded-2xl border border-green-200 bg-green-50 px-6 py-4 font-black text-green-800">הפרטים נקלטו. נפתח וואטסאפ להמשך.</div>
+                )}
               </div>
             </motion.div>
           </div>
 
-          {/* Form Section */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.15 } } }}>
             <div className="overflow-hidden pb-4">
-              <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-heading font-bold mb-12 tracking-tighter">
-                מוכן לצאת <span className="text-energy italic font-light">לדרך?</span>
+              <motion.h2 variants={{ hidden: { y: '100%' }, show: { y: 0, transition: { duration: 1.0, ease } } }} className="mb-12 font-heading text-5xl font-black tracking-tighter text-foreground md:text-7xl">
+                מוכן לצאת <span className="text-energy">לדרך?</span>
               </motion.h2>
             </div>
 
-            <motion.form variants={itemVariants} className="flex flex-col gap-8" onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.target as HTMLFormElement); const name=(fd.get('name')||'') as string; const phone=(fd.get('phone')||'') as string; const subject=(fd.get('subject')||'') as string; const msg=(fd.get('message')||'') as string; const text=encodeURIComponent('שלום תומר, שמי '+name+' ואני רוצה/ת לדבר איתך. '+subject+(msg?' - '+msg:'')+'. טל: '+phone); window.open('https://wa.me/972546699574?text='+text,'_blank'); }}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative group">
-                  <input type="text" id="name" required className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " />
-                  <label htmlFor="name" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">שם מלא</label>
+            <form className="flex flex-col gap-8" onSubmit={handleFullSubmit}>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div className="relative">
+                  <input name="name" type="text" required className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-foreground outline-none transition-colors focus:border-energy" placeholder=" " />
+                  <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">שם מלא</label>
                 </div>
-                <div className="relative group">
-                  <input type="tel" id="phone" required className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " dir="ltr" />
-                  <label htmlFor="phone" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">טלפון</label>
+                <div className="relative">
+                  <input name="phone" type="tel" required className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-right text-foreground outline-none transition-colors focus:border-energy" placeholder=" " dir="ltr" />
+                  <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">טלפון</label>
                 </div>
               </div>
 
-              <div className="relative group">
-                <input type="email" id="email" required className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " dir="ltr" />
-                <label htmlFor="email" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">אימייל</label>
+              <div className="relative">
+                <input name="email" type="email" className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-right text-foreground outline-none transition-colors focus:border-energy" placeholder=" " dir="ltr" />
+                <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">אימייל</label>
               </div>
 
-              <div className="relative group">
-                <input type="text" id="subject" className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " />
-                <label htmlFor="subject" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">נושא הפנייה</label>
+              <div className="relative">
+                <input name="subject" type="text" className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-foreground outline-none transition-colors focus:border-energy" placeholder=" " />
+                <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">נושא הפנייה</label>
               </div>
 
-              <div className="relative group mt-4">
-                <textarea id="message" rows={4} className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer resize-none" placeholder=" "></textarea>
-                <label htmlFor="message" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">הודעה</label>
+              <div className="relative mt-4">
+                <textarea name="message" rows={4} className="peer w-full resize-none border-b border-[#cfe0ee] bg-transparent py-3 text-foreground outline-none transition-colors focus:border-energy" placeholder=" " />
+                <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">הודעה</label>
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-8 bg-energy text-white py-4 px-8 rounded-full font-bold text-lg w-full md:w-auto self-start hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
-                type="submit"
-              >
+              <button className="mt-8 w-full rounded-full bg-energy px-8 py-4 text-lg font-black text-white shadow-[0_14px_38px_rgba(28,141,255,0.28)] transition-colors hover:bg-[#0f6fc9] md:w-auto md:self-start" type="submit">
                 שלח הודעה
-              </motion.button>
-            </motion.form>
+              </button>
+            </form>
           </motion.div>
 
-          {/* Contact Details */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-center lg:pl-12"
-          >
-            <div className="glass-panel rounded-3xl p-10 flex flex-col gap-8">
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 text-energy border border-white/10">
-                  <Mail size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white/60 text-sm mb-1">אימייל</h4>
-                  <a href={`mailto:${SITE_DATA.profile.email}`} className="text-xl font-medium hover:text-energy transition-colors" dir="ltr">
-                    {SITE_DATA.profile.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 text-energy border border-white/10">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white/60 text-sm mb-1">ווטסאפ / טלפון</h4>
-                  <a href={`tel:${SITE_DATA.profile.phoneInternational}`} className="text-xl font-medium hover:text-energy transition-colors" dir="ltr">
-                    {SITE_DATA.profile.phone}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6">
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 text-energy border border-white/10">
-                  <Clock size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white/60 text-sm mb-1">שעות פעילות</h4>
-                  <p className="text-xl font-medium">
-                    {SITE_DATA.profile.hours}
-                  </p>
-                </div>
-              </div>
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="flex flex-col justify-center lg:pl-12">
+            <div className="rounded-3xl border border-energy/20 bg-[#f8fbff] p-10 shadow-[0_20px_60px_rgba(15,42,68,0.07)]">
+              {[
+                [Mail, 'אימייל', SITE_DATA.profile.email, `mailto:${SITE_DATA.profile.email}`],
+                [Phone, 'וואטסאפ / טלפון', SITE_DATA.profile.phone, `tel:${SITE_DATA.profile.phoneInternational}`],
+                [Clock, 'שעות פעילות', SITE_DATA.profile.hours, ''],
+              ].map(([Icon, label, value, href]) => {
+                const ItemIcon = Icon as typeof Mail;
+                return (
+                  <div key={String(label)} className="mb-8 flex items-start gap-6 last:mb-0">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-energy/20 bg-white text-energy">
+                      <ItemIcon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="mb-1 text-sm text-text-muted">{String(label)}</h4>
+                      {href ? (
+                        <a href={String(href)} className="text-xl font-bold text-foreground transition-colors hover:text-energy" dir="ltr">
+                          {String(value)}
+                        </a>
+                      ) : (
+                        <p className="text-xl font-bold text-foreground">{String(value)}</p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
-
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="w-16 h-16 rounded-full bg-energy flex items-center justify-center font-heading font-black text-2xl text-white">
-            TF
-          </div>
+        <div className="mb-8 grid grid-cols-1 gap-4 rounded-[2rem] border border-energy/10 bg-[#f8fbff] p-5 text-center text-sm font-bold text-foreground md:grid-cols-4">
+          <div>תזונאי קליני וספורט</div>
+          <div>22 שנות ניסיון קליני</div>
+          <div>קליניקה ואונליין</div>
+          <div>קבלות מוכרות לביטוח לפי זכאות</div>
+        </div>
+
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-[#dceaf5] pt-8 md:flex-row">
+          <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-16 w-16 object-contain" />
 
           <div className="flex items-center gap-4">
-            <a href={SITE_DATA.profile.socials.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-bg transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+            <a href={SITE_DATA.profile.socials.instagram} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-energy/20 text-foreground transition-all hover:bg-energy hover:text-white">
               <Instagram size={18} />
             </a>
-            <a href={SITE_DATA.profile.socials.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-bg transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+            <a href={SITE_DATA.profile.socials.facebook} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-energy/20 text-foreground transition-all hover:bg-energy hover:text-white">
               <Facebook size={18} />
             </a>
-            <a href={SITE_DATA.profile.socials.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-bg transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+            <a href={SITE_DATA.profile.socials.youtube} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-energy/20 text-foreground transition-all hover:bg-energy hover:text-white">
               <Youtube size={18} />
-            </a>
-            <a href={SITE_DATA.profile.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all hover:shadow-[0_0_15px_rgba(37,211,102,0.5)]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>
-            </a>
-            <a href={SITE_DATA.profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#0077b5] hover:border-[#0077b5] hover:text-white transition-all hover:shadow-[0_0_15px_rgba(0,119,181,0.5)]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
             </a>
           </div>
 
-          <div className="text-white/40 text-sm">
+          <div className="text-sm text-text-muted">
             © {new Date().getFullYear()} {SITE_DATA.profile.name}. כל הזכויות שמורות.
           </div>
         </div>
@@ -209,4 +163,3 @@ export default function Footer() {
     </footer>
   );
 }
-

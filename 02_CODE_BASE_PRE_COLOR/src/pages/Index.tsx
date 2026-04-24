@@ -18,6 +18,7 @@ import CoursePopup from '../components/CoursePopup';
 import CtaSection from '../components/CtaSection';
 import Footer from '../components/Footer';
 import CursorFollower from '../components/CursorFollower';
+import GeminiAgentPopup from '../components/GeminiAgentPopup';
 
 export default function Index() {
   const [loading, setLoading] = useState(true);
@@ -37,9 +38,10 @@ export default function Index() {
     }, 50);
 
     const handleScroll = () => {
-      if (window.scrollY > 800 && !hasScrolledPopupRef.current) {
+      const skipPopup = new URLSearchParams(window.location.search).get('skip_popup') === 'true';
+      if (!skipPopup && window.scrollY > 800 && !hasScrolledPopupRef.current) {
         hasScrolledPopupRef.current = true;
-        window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - האפליקציה בחינם' } }));
+        window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - התאמת מסלול ראשונית' } }));
       }
     };
 
@@ -59,10 +61,10 @@ export default function Index() {
             key="loader"
             exit={{ y: '-100%' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="fixed inset-0 z-[100] bg-bg flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-gradient-to-br from-white via-[#f4f9ff] to-[#e8f4ff] flex flex-col items-center justify-center"
           >
-            <div className="w-32 h-32 mb-6 rounded-full bg-energy flex items-center justify-center font-heading font-black text-5xl text-foreground">
-              TF
+            <div className="w-32 h-32 mb-6 rounded-[2rem] bg-white border border-energy/20 shadow-[0_24px_70px_rgba(28,141,255,0.18)] flex items-center justify-center overflow-hidden">
+              <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-24 w-24 object-contain" />
             </div>
             <div className="w-48 h-1 bg-foreground/10 rounded-full overflow-hidden">
               <motion.div
@@ -77,10 +79,11 @@ export default function Index() {
         )}
       </AnimatePresence>
 
-      <div className="relative w-full min-h-screen">
+      <div className="relative w-full min-h-screen" dir="rtl">
         <CursorFollower />
         <DownloadPopup />
         <CoursePopup />
+        <GeminiAgentPopup />
         <div className="noise-overlay"></div>
         <Header />
         <main>
@@ -94,8 +97,8 @@ export default function Index() {
           <InsuranceBanner />
           <Testimonials />
           <Seminars />
-          <Newsletter />
           <FAQ />
+          <Newsletter />
           <CtaSection />
         </main>
         <Footer />
