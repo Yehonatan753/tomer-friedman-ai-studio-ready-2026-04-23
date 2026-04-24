@@ -1,0 +1,22 @@
+READ THESE ORDERED FILES IN NUMERICAL ORDER.
+
+This folder exists because Gemini was not reliably following the repository structure.
+Everything important is now flattened into numbered TXT files.
+
+The real base app is still:
+02_CODE_BASE_PRE_COLOR/
+
+But if navigation fails, use these ordered files as the source of truth:
+01_STRICT_EXECUTION_PROMPT.txt
+02_FULL_CONTINUOUS_BRIEF.txt
+03_SOURCE_CONTEXT_OPUS_AND_FEEDBACK.txt
+04_REFERENCE_IMAGES_INDEX.txt
+10_APP_STRUCTURE_AND_CONFIG.txt
+11_MAIN_PAGE_AND_DATA.txt
+12_TOP_OF_PAGE_COMPONENTS.txt
+13_CORE_SALES_COMPONENTS.txt
+14_LOWER_PAGE_COMPONENTS.txt
+15_SUPPORT_COMPONENTS_AND_UTILS.txt
+16_FULL_CODEBASE_TEXT_DUMP.txt
+
+Your response must start with the Compliance Audit required in 01_STRICT_EXECUTION_PROMPT.txt.

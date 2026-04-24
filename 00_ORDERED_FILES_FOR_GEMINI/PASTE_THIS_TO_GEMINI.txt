@@ -1,0 +1,21 @@
+Use this repository:
+https://github.com/Yehonatan753/tomer-friedman-ai-studio-ready-2026-04-23
+
+Do not browse randomly through the repo.
+Open the folder:
+00_ORDERED_FILES_FOR_GEMINI/
+
+Read the files there in numerical order.
+Start with:
+00_ORDERED_FILES_FOR_GEMINI/01_STRICT_EXECUTION_PROMPT.txt
+
+The real base code is still:
+02_CODE_BASE_PRE_COLOR/
+
+But if you struggle to navigate the repo, use the ordered TXT files as the source of truth because they contain the important code and instructions in sequence.
+
+Your first response must be the Compliance Audit requested in 01_STRICT_EXECUTION_PROMPT.txt.
+Do not give a vague plan.
+Do not redesign from scratch.
+Do not use the later blue/white version.
+Do not delete the strong black/orange sections.

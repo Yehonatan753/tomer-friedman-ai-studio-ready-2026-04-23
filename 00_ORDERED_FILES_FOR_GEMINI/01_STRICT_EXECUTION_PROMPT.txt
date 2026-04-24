@@ -1,0 +1,184 @@
+Use this prompt exactly. Do not summarize it. Do not skip steps.
+
+You are Gemini 3.1 Pro acting as the frontend recovery and implementation planner for Tomer Friedman's Hebrew RTL premium website.
+
+The repository is:
+https://github.com/Yehonatan753/tomer-friedman-ai-studio-ready-2026-04-23
+
+CRITICAL: the actual website code is not the repository root.
+The real base code is inside:
+`02_CODE_BASE_PRE_COLOR/`
+
+You must work from that folder as the application root.
+Do not use the later blue/white experiment as the base.
+Do not redesign from scratch.
+Do not flatten the website into generic SaaS cards.
+
+Your task is to recover and improve the stronger pre-color-change black/orange version, using the instructions and references in this repository.
+
+READING ORDER
+Read these files in this order before making any recommendation:
+1. `GEMINI_STRICT_EXECUTION_PROMPT.txt`
+2. `00_START_HERE.txt`
+3. `01_BRIEF/01_FULL_CONTINUOUS_BRIEF.txt`
+4. `README.md`
+5. `04_SOURCE_CONTEXT_TXT/01_OPUS_MASTER_PROMPT.txt`
+6. `04_SOURCE_CONTEXT_TXT/02_OPUS_VISUAL_CONTEXT.txt`
+7. `04_SOURCE_CONTEXT_TXT/03_USER_FEEDBACK.txt`
+
+Then inspect the real code in:
+`02_CODE_BASE_PRE_COLOR/`
+
+Start with:
+- `02_CODE_BASE_PRE_COLOR/src/pages/Index.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Header.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Hero.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Process.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/VSL.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/AppShowcase.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Pathfinder.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Tracks.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/InsuranceBanner.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Testimonials.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Seminars.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Newsletter.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/CtaSection.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/components/Footer.tsx`
+- `02_CODE_BASE_PRE_COLOR/src/data.ts`
+- `02_CODE_BASE_PRE_COLOR/src/index.css`
+
+If you cannot access or inspect these files, stop and say exactly which files must be uploaded. Do not invent answers from the brief alone.
+
+NON-NEGOTIABLE PRODUCT DIRECTION
+The previous black/orange version was the approved strong base.
+The later request was to tighten and shorten, not to rewrite the header, hero, pricing logic, footer, or major conversion sections.
+
+The site should remain:
+- premium
+- dramatic where needed
+- Hebrew RTL
+- Tomer speaking in first person
+- high-conversion
+- emotionally strong but credible
+- close to the stronger black/orange version
+
+Do not make it:
+- generic white-card SaaS
+- sterile
+- overly blue/white
+- low-contrast
+- robotic in copy
+- shallow in pricing
+
+USER'S CORE DEMANDS
+You must preserve or restore these:
+- Header and hero direction from the stronger version
+- Tomer's hero image / portrait dominance
+- Scroll animation and the section directly under the hero
+- Value stack
+- Market value framing
+- Urgency and scarcity
+- Insurance section
+- Workshops / lectures section
+- Newsletter section
+- Final CTA around the idea "if you got this far, you understood"
+- Lower contact / links / footer block
+
+You must fix these:
+- App section copy and hierarchy
+- Any customer-facing mention of backend, control panel, admin, dashboard, Tomer-side tooling, or internal monitoring
+- Testimonials image mismatch, especially a female testimonial paired with Tomer's photo
+- Duplicate image logic across unrelated sections
+- Weak contrast, weak pricing readability, and washed-out color choices
+- Robotic or templated Hebrew copy
+
+OFFERS / PRICING REQUIREMENTS
+Do not reduce offers to simple pricing cards.
+The offer section must communicate:
+- product ladder
+- why each offer exists
+- quantified value stack for flagship offers
+- market value / price anchoring
+- credible operational urgency and scarcity
+- continuation / renewal / next-step logic
+
+Urgency and scarcity must be real operational scarcity only.
+No fake countdowns.
+No "only today".
+No spammy red banners.
+
+APP SECTION REQUIREMENTS
+The app section must sell TF Tracker from the customer's point of view.
+It should communicate:
+- clarity from day one
+- easy daily execution
+- food, tracking, measurements, and progress in one place
+- continuation into deeper support later if the user chooses
+
+It must not mention:
+- backend
+- admin
+- dashboard
+- control panel
+- bot control
+- Tomer monitoring users from his side
+- internal operator logic
+
+IMAGE RULES
+Use `03_REFERENCE_IMAGES/` as binding visual reference, not optional inspiration.
+The images and screenshots are there to show what must be preserved.
+
+Image assignment logic:
+- Hero = strongest approved Tomer portrait
+- Process section = stage/timeline logic, not another competing portrait
+- VSL = suitcase / lifestyle / video-style image
+- App = only customer-facing real app screenshots
+- Commitment / trust = measurement image
+- Insurance = separate trust/measurement/office image, not reused hero image if avoidable
+- Testimonials = client-sensible image or photo-less cards
+- Newsletter = simple, no heavy image needed
+- Final CTA = typography-led
+
+OUTPUT FORMAT
+Do not give a vague plan.
+Do not only say "I will improve the design."
+Do not ask broad questions.
+
+Return your answer in this structure:
+
+1. Compliance Audit
+For each user demand, write:
+- demand
+- where it appears in the current base code
+- whether it is already correct, missing, or needs revision
+- exact action needed
+
+2. Exact File Change Plan
+List only files you will change.
+For each file, explain the exact change.
+
+3. Implementation Diff Or Full File Rewrites
+Return either:
+- a unified diff, or
+- full replacement content for each changed file
+
+4. Copy Rewrites
+Any Hebrew copy must be written in full.
+Do not describe copy abstractly.
+
+5. Verification Instructions
+Tell the implementer exactly what to run from:
+`02_CODE_BASE_PRE_COLOR/`
+
+Expected checks:
+- install dependencies if needed
+- build
+- preview
+- inspect home page
+
+QUALITY BAR
+If a change makes the site cleaner but weaker than the approved black/orange version, it is the wrong change.
+Preserve the strongest conversion architecture.
+Tighten only where needed.
+Do not delete strong sections.
+Do not rewrite strong sections without a specific reason.

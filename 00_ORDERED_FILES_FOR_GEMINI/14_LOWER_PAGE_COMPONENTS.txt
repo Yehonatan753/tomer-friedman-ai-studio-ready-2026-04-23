@@ -1,0 +1,1032 @@
+===== FILE: src/components/About.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+import { ShieldCheck } from 'lucide-react';
+
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+export default function About() {
+  return (
+    <section id="about" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative border-y border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          {/* Image Side */}
+          <div className="w-full lg:w-1/2 relative">
+            <div className="absolute inset-0 bg-energy/20 blur-3xl rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease }}
+              className="relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5]"
+            >
+              <img
+                src="/tomer-chair.png"
+                alt="תומר פרידמן - תזונאי קליני וספורט יושב"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
+
+              {/* Floating Insurance Badge */}
+              <div className="absolute bottom-8 right-8 bg-surface/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center gap-4 animate-pulse">
+                <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-500 shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="font-bold text-sm text-white">החזרים מחברות הביטוח</p>
+                  <p className="text-xs text-text-muted">כפוף לפוליסה האישית</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Text Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease }}
+            className="w-full lg:w-1/2"
+          >
+            <span className="inline-block font-heading text-sm font-bold tracking-widest text-energy uppercase mb-4">הסיפור מאחורי השיטה</span>
+            <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl mb-8 text-white">
+              נעים מאוד, <span className="text-energy">תומר פרידמן</span>
+            </h2>
+
+            <div className="space-y-6 text-lg text-text-muted mb-10 leading-relaxed">
+              <p>
+                אני תזונאי קליני וספורט, ואני מלווה מאות מתאמנים, ספורטאים ואנשים שפשוט רוצים להיראות ולהרגיש הכי טוב שאפשר.
+                לא תמצאו אצלי פתרונות קסם. אין לי תפריט הדפסה שתלוי על המקרר.
+              </p>
+              <p>
+                <strong className="text-white font-medium">הגישה שלי שונה.</strong> אני מאמין בדיוק מדעי, בהתאמה אישית מלאה ובבניית הרגלים לטווח ארוך.
+                דיאטות מהירות נכשלות כי הן דורשות ממך להילחם בעצמך כל יום מחדש. המערכת שאנחנו בונים ביחד מנצחת את משחק המשמעת העצמית.
+              </p>
+              <p>
+                בתור עצמאי שעובד לבד, <span className="text-white border-b border-energy pb-0.5">אתם לא עוברים דרך מערך מתמחים.</span> אני זה שמנתח את הנתונים, אני זה שעונה בטלפון, ואני זה שבודק כל מדד וכל שקילה.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-8">
+              <div className="flex flex-col">
+                <span className="font-heading font-black text-4xl text-white">500+</span>
+                <span className="text-sm text-text-muted uppercase tracking-wider">לקוחות מרוצים</span>
+              </div>
+              <div className="w-px h-12 bg-white/10"></div>
+              <div className="flex flex-col">
+                <span className="font-heading font-black text-4xl text-white">B.Sc</span>
+                <span className="text-sm text-text-muted uppercase tracking-wider">מדעי התזונה</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+```
+
+
+===== FILE: src/components/Courses.tsx =====
+```tsx
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Download } from 'lucide-react';
+import { SITE_DATA } from '../data';
+
+export default function Courses() {
+  const [hoveredCourse, setHoveredCourse] = useState<number | null>(null);
+
+  const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+  };
+
+  const itemVariants = {
+    hidden: { y: '100%' },
+    show: { y: 0, transition: { duration: 1.2, ease } }
+  };
+
+  const handleCourseClick = (e: React.MouseEvent, courseTitle: string) => {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('open-course', { detail: { courseName: courseTitle } }));
+  };
+
+  return (
+    <section id="courses" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }} className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <div className="overflow-hidden pb-4">
+              <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-heading font-bold text-foreground tracking-tighter mb-4">
+                קורסים <span className="text-energy italic font-light">והרצאות</span>
+              </motion.h2>
+            </div>
+            <div className="overflow-hidden pb-2">
+              <motion.p variants={itemVariants} className="text-xl text-text-muted max-w-lg">
+                ידע מבוסס מחקר, מונגש בצורה פרקטית וברורה.
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="flex flex-col relative">
+          {SITE_DATA.courses.map((course, idx) => (
+            <motion.a
+              href="#"
+              onClick={(e) => handleCourseClick(e, course.title)}
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              onMouseEnter={() => setHoveredCourse(idx)}
+              onMouseLeave={() => setHoveredCourse(null)}
+              className="group flex flex-col sm:flex-row sm:items-center justify-between py-10 border-b border-foreground/10 hover:border-energy/30 transition-colors cursor-pointer relative z-10"
+            >
+              <div className="flex flex-col gap-2 mb-4 sm:mb-0 transition-transform duration-500 ease-out group-hover:-translate-x-4">
+                <span className="text-sm font-medium text-energy tracking-wider uppercase">
+                  {course.type}
+                </span>
+                <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground group-hover:text-energy transition-colors duration-300">
+                  {course.title}
+                </h3>
+                {course.freeValue && (
+                  <span className="flex items-center gap-2 mt-2 text-sm text-text-muted">
+                    <Download size={14} className="text-energy" />
+                    <span>{course.freeValue}</span>
+                  </span>
+                )}
+              </div>
+
+              <div className="w-12 h-12 rounded-full border border-foreground/10 flex items-center justify-center group-hover:bg-energy group-hover:border-energy group-hover:text-foreground transition-all duration-300 transform group-hover:-translate-x-2">
+                <ArrowLeft size={20} className="transition-transform group-hover:-translate-x-1" />
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+```
+
+
+===== FILE: src/components/Seminars.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+
+export default function Seminars() {
+  return (
+    <section id="seminars" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative border-y border-foreground/5">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="bg-surface border border-energy/20 rounded-[2rem] p-10 md:p-16 relative overflow-hidden text-center shadow-[0_0_50px_rgba(255,77,0,0.05)]"
+        >
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-energy/20 text-energy text-xs font-bold mb-6 tracking-widest uppercase border border-energy/30">בקרוב</span>
+            <h3 className="font-heading font-black text-3xl md:text-5xl mb-6 text-foreground">
+              סדנאות פרונטליות - <span className="text-transparent bg-clip-text bg-gradient-to-r from-energy to-orange-400">סדרת 2026</span>
+            </h3>
+            <p className="text-text-muted text-lg mb-10 leading-relaxed">
+              בקרוב נפתח את ההרשמה לסדרה ייחודית של הרצאות וסדנאות עומק בנושאי תזונת ספורט, תוספים, וגמישות תזונתית ברחבי הארץ.
+              מספר המקומות מוגבל. הירשמו לרשימת ההמתנה כדי לקבל עדכון ראשונים והטבת הרשמה.
+            </p>
+
+            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="האימייל שלך"
+                required
+                className="flex-grow bg-bg border border-foreground/20 rounded-full px-6 py-4 text-foreground focus:border-energy focus:ring-1 focus:ring-energy transition-all outline-none"
+              />
+              <button type="submit" className="btn-magnetic bg-energy text-foreground py-4 px-8 rounded-full font-bold whitespace-nowrap shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                הצטרף לרשימה
+              </button>
+            </form>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+```
+
+
+===== FILE: src/components/Newsletter.tsx =====
+```tsx
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Send, CheckCircle, User } from 'lucide-react';
+
+export default function Newsletter() {
+  const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent('שלום תומר! קוראים לי ' + name + ' ורוצה להירשם לרשימת התפוצה. מייל: ' + email);
+    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    setSubmitted(true);
+  };
+
+  return (
+    <section className="py-20 px-6 md:px-16 lg:px-24 bg-surface border-y border-white/5">
+      <div className="max-w-2xl mx-auto text-center">
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        >
+          <Mail className="w-10 h-10 text-energy mx-auto mb-6" />
+        </motion.div>
+        
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-heading font-bold text-white mb-4"
+        >
+          הישאר בלופ
+        </motion.h2>
+        
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-text-muted mb-8"
+        >
+          טיפים שבועיים קצרים על תזונה, אימונים ופסיכולוגיה של שינוי — ישירות למייל. בלי ספאם, בלי בולשיט.
+        </motion.p>
+        
+        <AnimatePresence mode="wait">
+          {!submitted ? (
+            <motion.form 
+              key="form"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+              onSubmit={handleSubmit}
+            >
+              <input 
+                type="text" 
+                placeholder="שם מלא" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="flex-grow bg-white/5 border border-white/10 rounded-full px-6 py-3 text-white text-right focus:outline-none focus:border-energy transition-colors" 
+                required
+              />
+              <input 
+                type="email" 
+                placeholder="your@email.com" 
+                dir="ltr" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-grow bg-white/5 border border-white/10 rounded-full px-6 py-3 text-white focus:outline-none focus:border-energy transition-colors" 
+                required
+              />
+              <button type="submit" className="btn-magnetic bg-energy text-white px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-energy-light transition-colors">
+                <span>אני בפנים</span>
+                <Send size={16} />
+              </button>
+            </motion.form>
+          ) : (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              className="flex flex-col items-center gap-4 py-4"
+            >
+              <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-green-400" />
+              </div>
+              <p className="text-xl font-bold text-white">נרשמת בהצלחה! 🎉</p>
+              <p className="text-text-muted">נשלח לך עדכונים ישירות למייל.</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {!submitted && (
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="text-xs text-text-muted/50 mt-4"
+          >
+            ניתן לבטל בכל רגע. 0 ספאם.
+          </motion.p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+```
+
+
+===== FILE: src/components/FAQ.tsx =====
+```tsx
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
+import { SITE_DATA } from '../data';
+
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } }
+  };
+
+  return (
+    <section id="faq" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
+        >
+          <div className="overflow-hidden pb-4">
+            <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-heading font-bold text-foreground tracking-tighter mb-4">
+              שאלות <span className="text-energy italic font-light">נפוצות</span>
+            </motion.h2>
+          </div>
+          <div className="overflow-hidden pb-2">
+            <motion.p variants={itemVariants} className="text-xl text-text-muted">
+              כל מה שרציתם לדעת על התהליך.
+            </motion.p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="space-y-4"
+        >
+          {SITE_DATA.faq.map((item, idx) => (
+            <motion.div key={idx} variants={itemVariants} className="glass-panel-dark rounded-2xl border border-foreground/5 overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                className="w-full flex items-center justify-between p-6 text-right focus:outline-none"
+              >
+                <span className="text-lg md:text-xl font-bold text-foreground">{item.question}</span>
+                <ChevronDown size={24} className={`text-energy transition-transform duration-300 ${openIndex === idx ? 'rotate-180' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {openIndex === idx && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  >
+                    <div className="p-6 pt-0 text-text-muted leading-relaxed border-t border-foreground/5 mt-2">
+                      {item.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+```
+
+
+===== FILE: src/components/CtaSection.tsx =====
+```tsx
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CheckCircle } from 'lucide-react';
+
+export default function CtaSection() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+    const name = ((fd.get('name') || fd.get('fullName') || '') as string).trim();
+    const phone = ((fd.get('phone') || '') as string).trim();
+    const text = encodeURIComponent('שלום תומר! קוראים לי ' + name + ' ורוצה להתחיל. טלפון: ' + phone);
+    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    setSubmitted(true);
+  };
+
+  return (
+    <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden border-t border-white/5">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,77,0,0.1)_0,rgba(0,0,0,0)_50%)]"></div>
+
+      <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
+        
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="text-center mb-12"
+        >
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-2 leading-tight">
+                אם הגעת לפה
+            </h2>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-energy mb-4 leading-tight">
+                כנראה שהבנת
+            </h2>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-snug">
+                שהגיע הזמן לקחת שליטה על הגוף שלך
+            </h2>
+            
+            <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto">
+                הדרך לתוצאות מתחילה בהחלטה אחת. אני כאן כדי לתת לך את כל האסטרטגיה והכלים שאתה צריך. מוכן להצטרף להצלחה?
+            </p>
+        </motion.div>
+
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="w-full relative"
+        >
+            <div className="absolute -inset-1 bg-gradient-to-r from-energy/50 to-orange-400/50 rounded-full blur-md opacity-70"></div>
+            
+            <div className="relative bg-[#110c18] border border-white/10 rounded-full py-6 px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_40px_rgba(255,77,0,0.15)]">
+                
+                <AnimatePresence mode="wait">
+                  {!submitted ? (
+                    <motion.div key="form-content" className="flex flex-col md:flex-row items-center justify-between gap-6 w-full" exit={{ opacity: 0, scale: 0.95 }}>
+                      <p className="text-sm md:text-base text-text-muted/80 text-center md:text-right w-full md:w-auto hidden lg:block">
+                          זה הזמן לעשות את הצעד הראשון. השאר פרטים ואחזור אליך בהקדם.
+                      </p>
+
+                      <form 
+                        className="flex flex-col md:flex-row gap-4 w-full lg:w-3/5 items-center justify-end"
+                        onSubmit={handleSubmit}
+                      >
+                        <input 
+                          type="text" 
+                          placeholder="שם מלא" 
+                          className="bg-white/5 border border-white/10 rounded-full px-6 py-3 text-white focus:outline-none focus:border-energy transition-colors w-full md:w-1/3 text-right text-sm" 
+                          required
+                        />
+                        <input 
+                          type="tel" 
+                          placeholder="טלפון" 
+                          dir="ltr"
+                          className="bg-white/5 border border-white/10 rounded-full px-6 py-3 text-white focus:outline-none focus:border-energy transition-colors w-full md:w-1/3 text-right text-sm" 
+                          required
+                        />
+                        <button 
+                          type="submit" 
+                          className="btn-magnetic bg-energy hover:bg-[#CC3E00] text-white px-8 py-3 rounded-full font-bold transition-colors shadow-[0_0_20px_rgba(255,77,0,0.4)] whitespace-nowrap text-sm"
+                        >
+                          שליחה
+                        </button>
+                      </form>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                      className="flex items-center justify-center gap-4 w-full py-2"
+                    >
+                      <CheckCircle className="w-8 h-8 text-green-400" />
+                      <p className="text-xl font-bold text-white">תודה! נחזור אליך בהקדם 🙌</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+            </div>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}
+
+```
+
+
+===== FILE: src/components/Footer.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+import { Mail, Phone, Clock, Instagram, Facebook, Youtube } from 'lucide-react';
+import { SITE_DATA } from '../data';
+
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+export default function Footer() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: '100%' },
+    show: {
+      y: 0,
+      transition: { duration: 1.2, ease }
+    }
+  };
+
+  return (
+    <footer id="contact" className="bg-surface text-white rounded-t-[4rem] pt-32 pb-12 px-6 md:px-16 lg:px-24 relative overflow-hidden mt-[-2rem] z-20 border-t border-white/5">
+      {/* Background Noise */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
+           style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32">
+
+          <div className="col-span-1 lg:col-span-2 max-w-4xl mx-auto mb-20 w-full relative z-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#0a0f1c] border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-[0_0_50px_rgba(255,77,0,0.15)] relative overflow-hidden"
+            >
+              {/* Subtle Glow Background */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-energy/10 blur-[80px] pointer-events-none"></div>
+
+              <div className="relative z-10 flex flex-col items-center">
+                
+                <h3 className="text-xl md:text-3xl font-bold text-white mb-8 text-center leading-tight">
+                  השאר פרטים ואחזור אליך בוואטסאפ עד 24 שעות
+                </h3>
+
+                <form 
+                  className="flex flex-col md:flex-row gap-4 w-full md:w-auto justify-center items-stretch md:items-center"
+                  onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.target as HTMLFormElement); const text = encodeURIComponent('שלום תומר! שמי: ' + (fd.get('name')||'') + ', טל: ' + (fd.get('phone')||'')); window.open('https://wa.me/972546699574?text=' + text, '_blank'); }}
+                >
+                  <input 
+                    type="text" 
+                    placeholder="שם מלא" 
+                    className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-energy transition-colors w-full md:w-auto flex-grow max-w-[280px] md:max-w-xs text-right" 
+                    required
+                  />
+                  <input 
+                    type="tel" 
+                    placeholder="טלפון" 
+                    dir="ltr"
+                    className="bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-energy transition-colors w-full md:w-auto flex-grow max-w-[280px] md:max-w-xs text-right" 
+                    required
+                  />
+                  <button 
+                    type="submit" 
+                    className="btn-magnetic bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-10 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-colors shadow-[0_10px_30px_-10px_rgba(139,92,246,0.6)] w-full md:w-auto whitespace-nowrap"
+                  >
+                    <span>בואו נתחיל</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Form Section */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <div className="overflow-hidden pb-4">
+              <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-heading font-bold mb-12 tracking-tighter">
+                מוכן לצאת <span className="text-energy italic font-light">לדרך?</span>
+              </motion.h2>
+            </div>
+
+            <motion.form variants={itemVariants} className="flex flex-col gap-8" onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.target as HTMLFormElement); const name=(fd.get('name')||'') as string; const phone=(fd.get('phone')||'') as string; const subject=(fd.get('subject')||'') as string; const msg=(fd.get('message')||'') as string; const text=encodeURIComponent('שלום תומר, שמי '+name+' ואני רוצה/ת לדבר איתך. '+subject+(msg?' - '+msg:'')+'. טל: '+phone); window.open('https://wa.me/972546699574?text='+text,'_blank'); }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="relative group">
+                  <input type="text" id="name" required className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " />
+                  <label htmlFor="name" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">שם מלא</label>
+                </div>
+                <div className="relative group">
+                  <input type="tel" id="phone" required className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " dir="ltr" />
+                  <label htmlFor="phone" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">טלפון</label>
+                </div>
+              </div>
+
+              <div className="relative group">
+                <input type="email" id="email" required className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " dir="ltr" />
+                <label htmlFor="email" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">אימייל</label>
+              </div>
+
+              <div className="relative group">
+                <input type="text" id="subject" className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer" placeholder=" " />
+                <label htmlFor="subject" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">נושא הפנייה</label>
+              </div>
+
+              <div className="relative group mt-4">
+                <textarea id="message" rows={4} className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-energy transition-colors peer resize-none" placeholder=" "></textarea>
+                <label htmlFor="message" className="absolute right-0 top-3 text-white/50 transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">הודעה</label>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-8 bg-energy text-white py-4 px-8 rounded-full font-bold text-lg w-full md:w-auto self-start hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]"
+                type="submit"
+              >
+                שלח הודעה
+              </motion.button>
+            </motion.form>
+          </motion.div>
+
+          {/* Contact Details */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col justify-center lg:pl-12"
+          >
+            <div className="glass-panel rounded-3xl p-10 flex flex-col gap-8">
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 text-energy border border-white/10">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white/60 text-sm mb-1">אימייל</h4>
+                  <a href={`mailto:${SITE_DATA.profile.email}`} className="text-xl font-medium hover:text-energy transition-colors" dir="ltr">
+                    {SITE_DATA.profile.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 text-energy border border-white/10">
+                  <Phone size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white/60 text-sm mb-1">ווטסאפ / טלפון</h4>
+                  <a href={`tel:${SITE_DATA.profile.phoneInternational}`} className="text-xl font-medium hover:text-energy transition-colors" dir="ltr">
+                    {SITE_DATA.profile.phone}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 text-energy border border-white/10">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white/60 text-sm mb-1">שעות פעילות</h4>
+                  <p className="text-xl font-medium">
+                    {SITE_DATA.profile.hours}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-energy flex items-center justify-center font-heading font-black text-2xl text-white">
+            TF
+          </div>
+
+          <div className="flex items-center gap-4">
+            <a href={SITE_DATA.profile.socials.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-bg transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+              <Instagram size={18} />
+            </a>
+            <a href={SITE_DATA.profile.socials.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-bg transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+              <Facebook size={18} />
+            </a>
+            <a href={SITE_DATA.profile.socials.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-bg transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+              <Youtube size={18} />
+            </a>
+            <a href={SITE_DATA.profile.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all hover:shadow-[0_0_15px_rgba(37,211,102,0.5)]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>
+            </a>
+            <a href={SITE_DATA.profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#0077b5] hover:border-[#0077b5] hover:text-white transition-all hover:shadow-[0_0_15px_rgba(0,119,181,0.5)]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+            </a>
+          </div>
+
+          <div className="text-white/40 text-sm">
+            © {new Date().getFullYear()} {SITE_DATA.profile.name}. כל הזכויות שמורות.
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+```
+
+
+===== FILE: src/components/CoursePopup.tsx =====
+```tsx
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Mail, CheckCircle2, GraduationCap } from 'lucide-react';
+
+export default function CoursePopup() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [courseName, setCourseName] = useState('');
+
+  useEffect(() => {
+    const handleOpenCourse = (e: CustomEvent) => {
+      setCourseName(e.detail.courseName);
+      setIsOpen(true);
+      setHasSubmitted(false);
+      setFormData({ name: '', email: '' });
+    };
+
+    window.addEventListener('open-course', handleOpenCourse as EventListener);
+    return () => window.removeEventListener('open-course', handleOpenCourse as EventListener);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent('שלום תומר! קוראים לי ' + formData.name + ' ומעוניין/ת לשמוע על ' + courseName + ' (' + formData.email + ')');
+    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    setHasSubmitted(true);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="relative w-full max-w-lg bg-bg border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+          >
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="h-32 bg-gradient-to-br from-energy to-orange-600 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/20"></div>
+              <GraduationCap size={48} className="text-white relative z-10" />
+            </div>
+
+            <div className="p-8">
+              {!hasSubmitted ? (
+                <>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-heading font-bold text-white mb-2">
+                      {courseName}
+                    </h3>
+                    <p className="text-text-muted text-sm">
+                      השאר שם ומייל ואני אשלח לך את כל הפרטים ישירות למייל.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <input 
+                        required 
+                        type="text" 
+                        value={formData.name} 
+                        onChange={e => setFormData({...formData, name: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
+                        placeholder="שם מלא" 
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        required 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={e => setFormData({...formData, email: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
+                        placeholder="your@email.com" 
+                        dir="ltr" 
+                      />
+                    </div>
+                    
+                    <button 
+                      type="submit" 
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-2"
+                    >
+                      <Mail size={20} />
+                      <span>שלח לי למייל</span>
+                    </button>
+                    <p className="text-xs text-text-muted/50 text-center mt-3">
+                      אני שונא ספאם בדיוק כמוך. הפרטים שלך בטוחים אצלי.
+                    </p>
+                  </form>
+                </>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 size={32} className="text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">נשלח בהצלחה!</h3>
+                  <p className="text-text-muted">
+                    הפרטים בדרך למייל שלך. בדוק גם בתיקיית קידומי מכירות או ספאם.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+```
+
+
+===== FILE: src/components/DownloadPopup.tsx =====
+```tsx
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Download, FileText, CheckCircle2 } from 'lucide-react';
+
+export default function DownloadPopup() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [resourceName, setResourceName] = useState('');
+
+  useEffect(() => {
+    const handleOpenDownload = (e: CustomEvent) => {
+      setResourceName(e.detail.resourceName);
+      setIsOpen(true);
+      setHasSubmitted(false);
+    };
+
+    window.addEventListener('open-download', handleOpenDownload as EventListener);
+    return () => window.removeEventListener('open-download', handleOpenDownload as EventListener);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent('שלום תומר! קוראים לי ' + formData.name + ' ורציתי לקבל את החומר על ' + resourceName + ' (' + formData.email + ')');
+    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    setHasSubmitted(true);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="relative w-full max-w-lg bg-bg border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+          >
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="h-32 bg-gradient-to-br from-energy to-orange-600 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('/image7.jpg')] mix-blend-overlay opacity-30 bg-cover bg-center"></div>
+              <FileText size={48} className="text-white relative z-10" />
+            </div>
+
+            <div className="p-8">
+              {!hasSubmitted ? (
+                <>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-heading font-bold text-white mb-2">
+                      קבלת גישה ל: {resourceName}
+                    </h3>
+                    <p className="text-text-muted text-sm">
+                      השאר פרטים והקובץ יישלח אליך למייל באופן מיידי.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <input 
+                        required 
+                        type="text" 
+                        value={formData.name} 
+                        onChange={e => setFormData({...formData, name: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors" 
+                        placeholder="שם פרטי" 
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        required 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={e => setFormData({...formData, email: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
+                        placeholder="your@email.com" 
+                        dir="ltr" 
+                      />
+                    </div>
+                    
+                    <button 
+                      type="submit" 
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-2"
+                    >
+                      <Download size={20} />
+                      <span>שלח לי את הקובץ</span>
+                    </button>
+                    <p className="text-xs text-text-muted/50 text-center mt-3">
+                      אני שונא ספאם בדיוק כמוך. הפרטים שלך בטוחים אצלי.
+                    </p>
+                  </form>
+                </>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 size={32} className="text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">נשלח בהצלחה!</h3>
+                  <p className="text-text-muted">
+                    הקובץ בדרך למייל שלך. בדוק גם בתיקיית קידומי מכירות או ספאם.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+```

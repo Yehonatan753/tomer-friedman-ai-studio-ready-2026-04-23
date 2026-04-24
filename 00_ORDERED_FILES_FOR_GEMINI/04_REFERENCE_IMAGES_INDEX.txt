@@ -1,0 +1,14 @@
+REFERENCE IMAGES ORDER
+
+Treat these as binding visual references, not optional inspiration.
+
+01. 03_REFERENCE_IMAGES/backup-home-fold-2026-04-17.png
+02. 03_REFERENCE_IMAGES/backup-home-full-2026-04-17.png
+03. 03_REFERENCE_IMAGES/tomer-blue-shirt.png
+04. 03_REFERENCE_IMAGES/tomer-measure-reference.jpeg
+05. 03_REFERENCE_IMAGES/tomer-measure-waist-highres.png
+06. 03_REFERENCE_IMAGES/tomer-measure.png
+07. 03_REFERENCE_IMAGES/tomer-office-highres.png
+08. 03_REFERENCE_IMAGES/tomer-pricing-board.jpeg
+09. 03_REFERENCE_IMAGES/tomer-suit-desk.png
+10. 03_REFERENCE_IMAGES/tomer-suitcase-photo.jpeg
