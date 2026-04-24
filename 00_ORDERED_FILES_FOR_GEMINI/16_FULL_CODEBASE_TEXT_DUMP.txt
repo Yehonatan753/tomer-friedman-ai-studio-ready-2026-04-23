@@ -1,34 +1,79 @@
-FULL TEXT DUMP OF CODEBASE
-Use this only if the grouped files above are not enough.
+===== FILE: README.md =====
+```md
+# Welcome to your Lovable project
 
+## Project info
 
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-===== FILE: components.json =====
-```json
-{
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "default",
-  "rsc": false,
-  "tsx": true,
-  "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/index.css",
-    "baseColor": "slate",
-    "cssVariables": true,
-    "prefix": ""
-  },
-  "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
-  }
-}
+## How can I edit this code?
 
+There are several ways of editing your application.
+
+**Use Lovable**
+
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+
+Changes made via Lovable will be committed automatically to this repo.
+
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
 ```
 
+**Edit a file directly in GitHub**
 
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```
 
 ===== FILE: eslint.config.js =====
 ```js
@@ -58,10 +103,7 @@ export default tseslint.config(
     },
   },
 );
-
 ```
-
-
 
 ===== FILE: index.html =====
 ```html
@@ -91,10 +133,7 @@ export default tseslint.config(
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
 ```
-
-
 
 ===== FILE: package.json =====
 ```json
@@ -189,37 +228,7 @@ export default tseslint.config(
     "vitest": "^3.2.4"
   }
 }
-
 ```
-
-
-
-===== FILE: playwright-fixture.ts =====
-```ts
-// Re-export the base fixture from the package
-// Override or extend test/expect here if needed
-export { test, expect } from "lovable-agent-playwright-config/fixture";
-
-```
-
-
-
-===== FILE: playwright.config.ts =====
-```ts
-import { createLovableConfig } from "lovable-agent-playwright-config/config";
-
-export default createLovableConfig({
-  // Add your custom playwright configuration overrides here
-  // Example:
-  // timeout: 60000,
-  // use: {
-  //   baseURL: 'http://localhost:3000',
-  // },
-});
-
-```
-
-
 
 ===== FILE: postcss.config.js =====
 ```js
@@ -229,90 +238,7 @@ export default {
     autoprefixer: {},
   },
 };
-
 ```
-
-
-
-===== FILE: README.md =====
-```md
-# Welcome to your Lovable project
-
-## Project info
-
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
-
-```
-
-
 
 ===== FILE: src/App.css =====
 ```css
@@ -358,10 +284,7 @@ Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/c
 .read-the-docs {
   color: #888;
 }
-
 ```
-
-
 
 ===== FILE: src/App.tsx =====
 ```tsx
@@ -392,10 +315,7 @@ const App = () => (
 );
 
 export default App;
-
 ```
-
-
 
 ===== FILE: src/components/About.tsx =====
 ```tsx
@@ -483,15 +403,12 @@ export default function About() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/AppShowcase.tsx =====
 ```tsx
 import { motion } from 'framer-motion';
-import { Utensils, Dumbbell, LineChart, MessageCircle, CheckCircle2, Apple, Smartphone } from 'lucide-react';
+import { Utensils, Dumbbell, LineChart, MessageCircle, CheckCircle2, ArrowLeft, HelpCircle } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -518,7 +435,7 @@ export default function AppShowcase() {
   return (
     <section id="app" className="py-32 px-6 md:px-16 lg:px-24 bg-surface relative overflow-hidden border-y border-white/5">
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#FF4D00 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#1c8dff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
       <div className="glow-blob top-1/2 right-0 bg-energy/30 translate-x-1/3 -translate-y-1/2"></div>
 
 
@@ -540,7 +457,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6"
           >
-            שליטה מלאה <span className="text-energy">בכף היד</span> שלך
+            כך TF Tracker עובד <span className="text-energy">ביום-יום</span>.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -549,7 +466,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.2 }}
             className="text-lg text-text-muted mb-8"
           >
-            התפריט, תכנית האימונים והמעקב - הכל באפליקציה אחת מקיפה. נוצרה במיוחד לתלמידים שלי. משתמשים חינמיים מקבלים גישה למחשבונים, מעקב משקל בסיסי וספריית מאמרים.
+            TF Tracker הוא מוצר הכניסה הדיגיטלי שלי. בפנים יש מערכת אחת שאוגדת אוכל, אימונים, מדידות ומעקב — בלי לקפוץ בין 4 אפליקציות, בלי למלא אקסלים, ובלי לנחש מה קורה מיום ליום. זה מוצר עצמאי שעומד לבד, ומי שרוצה להעמיק אחר כך לתהליך אישי — ההיסטוריה ממשיכה איתו, לא מתחילה מחדש.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -558,13 +475,13 @@ export default function AppShowcase() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#" className="btn-magnetic bg-energy text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center gap-2">
-              <span>הורד חינם (iOS)</span>
-              <Apple size={20} />
+            <a href="#" className="btn-magnetic bg-energy text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center gap-2">
+              <span>להתחיל עם TF Tracker</span>
+              <ArrowLeft size={20} />
             </a>
             <a href="#" className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/5 transition-colors font-medium text-white flex items-center justify-center gap-2">
-              <span>הורד חינם (Android)</span>
-              <Smartphone size={20} />
+              <span>להבין אם זה מתאים לי</span>
+              <HelpCircle size={20} />
             </a>
           </motion.div>
         </div>
@@ -584,8 +501,8 @@ export default function AppShowcase() {
                   <Utensils size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">תפריט תזונה דינמי</h3>
-                  <p className="text-text-muted leading-relaxed">גישה נוחה לתפריט היומי, תחליפי מזון אפשריים בכל ארוחה ומתכונים בלחיצת כפתור (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">שאלון קצר וכניסה מסודרת</h3>
+                  <p className="text-text-muted leading-relaxed">מתחילים בלי בלגן. המערכת בונה לך מבנה בסיסי כבר מהיום הראשון.</p>
                 </div>
               </motion.div>
 
@@ -594,8 +511,8 @@ export default function AppShowcase() {
                   <Dumbbell size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">תכנית אימונים חכמה</h3>
-                  <p className="text-text-muted leading-relaxed">מעקב אחר משקלים במכון, סרטוני הדרכה מדויקים לכל תרגיל ורישום התקדמות מלא (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">אוכל, ברקוד וצילום מזון</h3>
+                  <p className="text-text-muted leading-relaxed">לרשום ארוחה זה שניות. גם כשאתה בחוץ, גם כשאתה ממהר.</p>
                 </div>
               </motion.div>
 
@@ -604,8 +521,8 @@ export default function AppShowcase() {
                   <LineChart size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">מעקב מדדים</h3>
-                  <p className="text-text-muted leading-relaxed">גרפים ברורים המציגים את הירידה במשקל, אחוזי השומן, היקפים (חינם למשתמשים בסיסיים).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">מדידות, התקדמות ואימונים במקום אחד</h3>
+                  <p className="text-text-muted leading-relaxed">כל נתון נשמר, ההתקדמות נראית, וההמשך נבנה לפי מה שקורה בפועל.</p>
                 </div>
               </motion.div>
 
@@ -614,29 +531,32 @@ export default function AppShowcase() {
                   <MessageCircle size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">קשר ישיר</h3>
-                  <p className="text-text-muted leading-relaxed">צ'אט מובנה לשאלות, התייעצויות ועדכונים שוטפים בזמן אמת איתי (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">המשך טבעי לתהליך אישי</h3>
+                  <p className="text-text-muted leading-relaxed">כשתהיה מוכן לליווי עמוק יותר, עוברים בלי לאבד נתונים ובלי להתחיל מאפס.</p>
                 </div>
               </motion.div>
             </div>
 
             {/* Subscription Info */}
             <motion.div variants={itemVariants} className="mt-12 p-6 rounded-2xl bg-energy/5 border border-energy/20">
-              <h4 className="font-bold text-white mb-4">מסלולי מנוי לאפליקציה:</h4>
+              <h4 className="font-bold text-white mb-4">מסלולי TF Tracker:</h4>
               <ul className="space-y-3 text-sm text-text-muted">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">לקוחות ליווי (אונליין/פרונטלי):</strong> גישה מלאה לכל החיים (Lifetime Access).</span>
+                  <span><strong className="text-white">₪49.90 / חודשי:</strong> גמיש, ללא התחייבות.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">אחרי שיחת ייעוץ:</strong> 3 חודשים ראשונים בחינם למסלול הפרימיום.</span>
+                  <span><strong className="text-white">₪39.90 / לחודש במסלול שנתי:</strong> חיסכון של ₪120 לשנה.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">משתמשים חדשים:</strong> חודש ראשון בחינם, לאחר מכן מנוי חודשי מתחדש.</span>
+                  <span><strong className="text-white">המשך טבעי למסלול אישי:</strong> כשמוכנים, עוברים בלי לאבד נתונים.</span>
                 </li>
               </ul>
+              <p className="mt-5 text-xs text-text-muted/70">
+                אלה מסכים אמיתיים מתוך המוצר. מה שאתה רואה כאן — זה מה שתראה ברגע שתיכנס.
+              </p>
             </motion.div>
           </motion.div>
 
@@ -669,9 +589,9 @@ export default function AppShowcase() {
                   <div className="flex justify-between items-center mb-4">
                     <div>
                       <div className="text-energy text-xs font-bold mb-1 tracking-wider uppercase">TF Tracker</div>
-                      <div className="text-2xl font-bold text-white">שלום, תומר</div>
+                      <div className="text-2xl font-bold text-white">שלום, דניאל</div>
                     </div>
-                    <div className="w-10 h-10 rounded-full border border-energy/50 flex items-center justify-center text-energy font-bold overflow-hidden shadow-[0_0_10px_rgba(255,77,0,0.3)] bg-energy/10 text-sm">
+                    <div className="w-10 h-10 rounded-full border border-energy/50 flex items-center justify-center text-energy font-bold overflow-hidden shadow-[0_0_10px_rgba(28,141,255,0.3)] bg-energy/10 text-sm">
                       TF
                     </div>
                   </div>
@@ -790,10 +710,54 @@ export default function AppShowcase() {
     </section>
   );
 }
-
 ```
 
+===== FILE: src/components/Commitment.tsx =====
+```tsx
+import { motion } from 'framer-motion';
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+export default function Commitment() {
+  return (
+    <section id="commitment" className="py-28 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#1c8dff 1px, transparent 1px)', backgroundSize: '34px 34px' }} />
+      <div className="absolute top-1/2 right-0 w-[520px] h-[520px] rounded-full bg-energy/10 blur-[140px] translate-x-1/3 -translate-y-1/2" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease }}
+        className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center rounded-[2.5rem] border border-white/10 bg-surface/80 backdrop-blur-xl p-8 md:p-12 shadow-[0_30px_90px_rgba(0,0,0,0.35)]"
+      >
+        <div className="relative min-h-[320px] rounded-[2rem] overflow-hidden border border-white/10">
+          <img
+            src="/tomer-measure.png"
+            alt="תומר פרידמן במדידת הרכב גוף"
+            className="absolute inset-0 h-full w-full object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg/85 via-bg/15 to-transparent" />
+        </div>
+
+        <div className="text-right">
+          <div className="inline-flex items-center gap-2 rounded-full border border-energy/30 bg-energy/10 px-4 py-2 text-xs font-bold tracking-widest text-energy mb-6">
+            מה אני מתחייב אליך
+          </div>
+          <h2 className="text-4xl md:text-6xl font-heading font-black text-white leading-tight tracking-tight mb-6">
+            אני מתחייב עליך, לא על הסיסמה שלך.
+          </h2>
+          <p className="text-xl text-text-muted leading-relaxed mb-8">
+            אני לא מבטיח לך "תוצאות מובטחות" כי אני לא משחק. אני כן מתחייב לשלושה דברים: שלא אמכור לך מסלול שלא מתאים לך רק כי הוא יקר יותר. שלא אעלים ממך מידע שחשוב לשיקול הדעת שלך. ושאם בדרך נראה שמשהו לא עובד - נעצור, נתקן, ולא נמשיך על אוטומט.
+          </p>
+          <div className="text-2xl font-heading font-black text-white">תומר</div>
+          <div className="mt-2 text-sm font-bold tracking-widest text-energy">תזונאי קליני וספורט</div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+```
 
 ===== FILE: src/components/CoursePopup.tsx =====
 ```tsx
@@ -854,7 +818,7 @@ export default function CoursePopup() {
               <X size={20} />
             </button>
 
-            <div className="h-32 bg-gradient-to-br from-energy to-orange-600 relative overflow-hidden flex items-center justify-center">
+            <div className="h-32 bg-gradient-to-br from-energy to-blue-700 relative overflow-hidden flex items-center justify-center">
               <div className="absolute inset-0 bg-black/20"></div>
               <GraduationCap size={48} className="text-white relative z-10" />
             </div>
@@ -896,7 +860,7 @@ export default function CoursePopup() {
                     
                     <button 
                       type="submit" 
-                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-2"
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-2"
                     >
                       <Mail size={20} />
                       <span>שלח לי למייל</span>
@@ -928,10 +892,7 @@ export default function CoursePopup() {
     </AnimatePresence>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Courses.tsx =====
 ```tsx
@@ -1017,10 +978,7 @@ export default function Courses() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/CtaSection.tsx =====
 ```tsx
@@ -1044,7 +1002,7 @@ export default function CtaSection() {
 
   return (
     <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden border-t border-white/5">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,77,0,0.1)_0,rgba(0,0,0,0)_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(28,141,255,0.1)_0,rgba(0,0,0,0)_50%)]"></div>
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
         
@@ -1076,9 +1034,9 @@ export default function CtaSection() {
             transition={{ delay: 0.2 }}
             className="w-full relative"
         >
-            <div className="absolute -inset-1 bg-gradient-to-r from-energy/50 to-orange-400/50 rounded-full blur-md opacity-70"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-energy/50 to-blue-300/50 rounded-full blur-md opacity-70"></div>
             
-            <div className="relative bg-[#110c18] border border-white/10 rounded-full py-6 px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_40px_rgba(255,77,0,0.15)]">
+            <div className="relative bg-[#110c18] border border-white/10 rounded-full py-6 px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_40px_rgba(28,141,255,0.15)]">
                 
                 <AnimatePresence mode="wait">
                   {!submitted ? (
@@ -1106,7 +1064,7 @@ export default function CtaSection() {
                         />
                         <button 
                           type="submit" 
-                          className="btn-magnetic bg-energy hover:bg-[#CC3E00] text-white px-8 py-3 rounded-full font-bold transition-colors shadow-[0_0_20px_rgba(255,77,0,0.4)] whitespace-nowrap text-sm"
+                          className="btn-magnetic bg-energy hover:bg-[#0f5fb3] text-white px-8 py-3 rounded-full font-bold transition-colors shadow-[0_0_20px_rgba(28,141,255,0.4)] whitespace-nowrap text-sm"
                         >
                           שליחה
                         </button>
@@ -1133,14 +1091,11 @@ export default function CtaSection() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/CursorFollower.tsx =====
 ```tsx
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function CursorFollower() {
@@ -1198,17 +1153,14 @@ export default function CursorFollower() {
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
           scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'rgba(255, 77, 0, 0.4)' : 'rgba(255, 77, 0, 0.1)',
+          backgroundColor: isHovering ? 'rgba(28, 141, 255, 0.4)' : 'rgba(28, 141, 255, 0.1)',
         }}
         transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.5 }}
       />
     </>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/DownloadPopup.tsx =====
 ```tsx
@@ -1268,8 +1220,8 @@ export default function DownloadPopup() {
               <X size={20} />
             </button>
 
-            <div className="h-32 bg-gradient-to-br from-energy to-orange-600 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 bg-[url('/image7.jpg')] mix-blend-overlay opacity-30 bg-cover bg-center"></div>
+            <div className="h-32 bg-gradient-to-br from-energy to-blue-700 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('/tomer-pricing-board.jpeg')] mix-blend-overlay opacity-30 bg-cover bg-center"></div>
               <FileText size={48} className="text-white relative z-10" />
             </div>
 
@@ -1310,7 +1262,7 @@ export default function DownloadPopup() {
                     
                     <button 
                       type="submit" 
-                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-2"
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-2"
                     >
                       <Download size={20} />
                       <span>שלח לי את הקובץ</span>
@@ -1342,10 +1294,7 @@ export default function DownloadPopup() {
     </AnimatePresence>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/FAQ.tsx =====
 ```tsx
@@ -1429,10 +1378,7 @@ export default function FAQ() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Footer.tsx =====
 ```tsx
@@ -1475,7 +1421,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#0a0f1c] border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-[0_0_50px_rgba(255,77,0,0.15)] relative overflow-hidden"
+              className="bg-[#0a0f1c] border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-[0_0_50px_rgba(28,141,255,0.15)] relative overflow-hidden"
             >
               {/* Subtle Glow Background */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-energy/10 blur-[80px] pointer-events-none"></div>
@@ -1558,7 +1504,7 @@ export default function Footer() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-8 bg-energy text-white py-4 px-8 rounded-full font-bold text-lg w-full md:w-auto self-start hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]"
+                className="mt-8 bg-energy text-white py-4 px-8 rounded-full font-bold text-lg w-full md:w-auto self-start hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
                 type="submit"
               >
                 שלח הודעה
@@ -1647,10 +1593,7 @@ export default function Footer() {
     </footer>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/FreeValue.tsx =====
 ```tsx
@@ -1717,7 +1660,7 @@ export default function FreeValue() {
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - אפליקציית החינמית' } }));
                 }}
-                className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
+                className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
               >
                 <Smartphone size={20} />
                 <span>קבל גישה חינם עכשיו</span>
@@ -1748,10 +1691,7 @@ export default function FreeValue() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Header.tsx =====
 ```tsx
@@ -1759,21 +1699,21 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+const links = [
+  { name: 'ראשי', href: '#hero' },
+  { name: 'אודות', href: '#commitment' },
+  { name: 'מסלולים', href: '#tracks' },
+  { name: 'אפליקציה', href: '#app' },
+  { name: 'תהליך', href: '#process' },
+  { name: 'המלצות', href: '#testimonials' },
+  { name: 'הרצאות', href: '#seminars' },
+  { name: 'שאלות', href: '#faq' },
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-
-  const links = [
-    { name: 'ראשי', href: '#hero' },
-    { name: 'אודות', href: '#about' },
-    { name: 'מסלולים', href: '#tracks' },
-    { name: 'אפליקציה', href: '#app' },
-    { name: 'תהליך', href: '#process' },
-    { name: 'המלצות', href: '#testimonials' },
-    { name: 'הרצאות', href: '#courses' },
-    { name: 'שאלות', href: '#faq' },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1836,7 +1776,7 @@ export default function Header() {
                   href={link.href}
                   className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                     isActive
-                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(255,77,0,0.2)]'
+                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(28,141,255,0.2)]'
                       : 'text-text-muted hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -1844,7 +1784,7 @@ export default function Header() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(255,77,0,0.8)]"
+                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(28,141,255,0.8)]"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -1855,7 +1795,7 @@ export default function Header() {
 
           {/* CTA Button (Desktop) */}
           <div className="hidden md:block">
-            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(255,77,0,0.4)]">
+            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(28,141,255,0.4)]">
               צור קשר
             </a>
           </div>
@@ -1895,7 +1835,7 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: links.length * 0.1 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]"
+              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
             >
               צור קשר
             </motion.a>
@@ -1905,10 +1845,7 @@ export default function Header() {
     </>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Hero.tsx =====
 ```tsx
@@ -1961,7 +1898,7 @@ export default function Hero() {
           background: useMotionTemplate`
             radial-gradient(
               600px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 77, 0, 0.15),
+              rgba(28, 141, 255, 0.16),
               transparent 80%
             )
           `,
@@ -1971,7 +1908,7 @@ export default function Hero() {
       {/* Dramatic Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/image1.jpg"
+          src="/tomer-office-highres.png"
           alt="Gym and Training Environment"
           className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-20 scale-105"
           referrerPolicy="no-referrer"
@@ -1993,12 +1930,12 @@ export default function Hero() {
         className="absolute bottom-0 left-0 lg:left-10 w-[350px] lg:w-[500px] h-[600px] lg:h-[800px] hidden md:block z-10 pointer-events-none"
       >
         <div className="w-full h-full relative overflow-hidden flex items-end justify-center">
-             {/* Orange background behind the image */}
+             {/* Brand-color background behind the image */}
              <div className="absolute inset-0 bg-energy/20"></div>
              {/* The image itself without opacity reduction for better resolution */}
              <div className="absolute inset-0 bg-[url('/tomer-blue-shirt.png')] bg-cover bg-top" style={{ maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)' }}></div>
              
-             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(255,77,0,0.3)]">
+             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(28,141,255,0.25)]">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center border border-energy/50 overflow-hidden bg-energy text-white font-heading font-black text-sm">
                     TF
                 </div>
@@ -2045,7 +1982,7 @@ export default function Hero() {
             variants={itemVariants}
             className="text-6xl md:text-[7rem] font-heading font-black text-white leading-[1.1] tracking-tighter"
           >
-            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-orange-400">האחרון</span><br/>
+            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-blue-300">האחרון</span><br/>
             שתצטרך לעשות.
           </motion.h1>
         </div>
@@ -2066,7 +2003,7 @@ export default function Hero() {
           >
             <a
               href="#pathfinder"
-              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(255,77,0,0.6)] flex items-center justify-center"
+              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(28,141,255,0.45)] flex items-center justify-center"
             >
               <span>התאם לי תוכנית</span>
               <ArrowLeft size={20} className="mr-3 transition-transform group-hover:-translate-x-1" />
@@ -2110,10 +2047,7 @@ export default function Hero() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Ingredients.tsx =====
 ```tsx
@@ -2223,10 +2157,7 @@ export default function Ingredients() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/InsuranceBanner.tsx =====
 ```tsx
@@ -2353,10 +2284,7 @@ export default function InsuranceBanner() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/NavLink.tsx =====
 ```tsx
@@ -2388,10 +2316,7 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
 NavLink.displayName = "NavLink";
 
 export { NavLink };
-
 ```
-
-
 
 ===== FILE: src/components/Newsletter.tsx =====
 ```tsx
@@ -2508,10 +2433,7 @@ export default function Newsletter() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/PainPointGap.tsx =====
 ```tsx
@@ -2541,7 +2463,7 @@ export default function PainPointGap() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
           {/* Decorative VS divider */}
           <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="w-16 h-16 rounded-full bg-surface border-2 border-energy/30 flex items-center justify-center shadow-[0_0_30px_rgba(255,77,0,0.2)]">
+            <div className="w-16 h-16 rounded-full bg-surface border-2 border-energy/30 flex items-center justify-center shadow-[0_0_30px_rgba(28,141,255,0.2)]">
               <span className="text-energy font-black text-lg">VS</span>
             </div>
           </div>
@@ -2581,7 +2503,7 @@ export default function PainPointGap() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-energy/5 border border-energy/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_40px_rgba(255,77,0,0.05)] backdrop-blur-sm"
+            className="bg-energy/5 border border-energy/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_40px_rgba(28,141,255,0.05)] backdrop-blur-sm"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-energy/20 blur-3xl translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"></div>
             <h3 className="text-2xl font-bold text-energy mb-8 border-b border-energy/10 pb-4 relative z-10">
@@ -2595,7 +2517,7 @@ export default function PainPointGap() {
                 "תזונאי קליני אחד. 22 שנות ניסיון. בלי מתמחים, בלי צוות."
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-energy/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_10px_rgba(255,77,0,0.3)]">
+                  <div className="w-6 h-6 rounded-full bg-energy/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_10px_rgba(28,141,255,0.3)]">
                     <Check size={14} className="text-energy" strokeWidth={3} />
                   </div>
                   <span className="text-white font-medium leading-relaxed">{item}</span>
@@ -2618,10 +2540,7 @@ export default function PainPointGap() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Pathfinder.tsx =====
 ```tsx
@@ -2776,7 +2695,7 @@ export default function Pathfinder() {
                     </div>
                   ))}
                 </div>
-                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] inline-flex items-center gap-2 text-lg">
+                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-flex items-center gap-2 text-lg">
                   <span>בוא נתחיל</span>
                   <ChevronLeft size={20} />
                 </button>
@@ -2806,7 +2725,7 @@ export default function Pathfinder() {
                         onClick={() => handleAnswer(QUESTIONS[currentStep].id, option.id)}
                         className={`w-full flex items-center gap-4 p-5 rounded-2xl border transition-all duration-200 text-right
                           ${isSelected
-                            ? 'bg-energy/10 border-energy text-foreground shadow-[0_0_20px_rgba(255,77,0,0.15)]'
+                            ? 'bg-energy/10 border-energy text-foreground shadow-[0_0_20px_rgba(28,141,255,0.15)]'
                             : 'bg-foreground/5 border-foreground/10 text-text-muted hover:bg-foreground/10 hover:border-foreground/20 hover:text-foreground'
                           }`}
                       >
@@ -2843,7 +2762,7 @@ export default function Pathfinder() {
                     <label className="text-sm font-medium text-text-muted">אימייל</label>
                     <input required type="email" value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
                   </div>
-                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] mt-4">
+                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] mt-4">
                     קבל את התוצאות שלי
                   </button>
                 </form>
@@ -2889,7 +2808,7 @@ export default function Pathfinder() {
                 <div className="text-center bg-bg border border-foreground/5 rounded-3xl p-8">
                   <div className="text-xl font-bold text-foreground mb-3">הצעד הבא שלך</div>
                   <p className="text-text-muted mb-8 max-w-lg mx-auto">{result.cta}</p>
-                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
+                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
                     לקבוע שיחת ייעוץ איתי
                   </a>
                 </div>
@@ -2901,15 +2820,101 @@ export default function Pathfinder() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Process.tsx =====
 ```tsx
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+
+type Step = {
+  num: string;
+  title: string;
+  desc: string;
+  note: string;
+};
+
+type ProcessStepProps = {
+  step: Step;
+  idx: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+};
+
+function ProcessStep({ step, idx, total, scrollYProgress }: ProcessStepProps) {
+  const isEven = idx % 2 !== 0;
+  const stepProgressStart = idx / Math.max(total, 1);
+  const stepProgressEnd = stepProgressStart + 0.16;
+
+  const glowOpacity = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    [0.2, 1]
+  );
+
+  const borderColor = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    ["rgba(255,255,255,0.1)", "rgba(28,141,255,1)"]
+  );
+
+  const scale = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    [1, 1.1]
+  );
+
+  const nodeColor = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    ["#ffffff", "#1c8dff"]
+  );
+
+  return (
+    <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
+      >
+        <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(28,141,255,0.15)] group">
+          <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
+          <p className="text-text-muted mb-4">{step.desc}</p>
+          <p className="text-sm text-energy/80 italic">"{step.note}"</p>
+        </div>
+      </motion.div>
+
+      <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
+        <motion.div
+          className="absolute inset-0 rounded-full bg-energy/20 blur-md"
+          style={{ opacity: glowOpacity }}
+        />
+        <motion.div
+          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
+          style={{
+            borderColor,
+            borderWidth: '2px',
+            borderStyle: 'solid',
+            scale
+          }}
+          whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(28,141,255,0.6)", borderColor: "rgba(28,141,255,1)" }}
+        >
+          <motion.span style={{ color: nodeColor }}>
+            {step.num}
+          </motion.span>
+        </motion.div>
+      </div>
+
+      <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(28,141,255,0.3)]">
+        {step.num}
+      </div>
+
+      <div className="hidden md:block flex-1 w-1/2"></div>
+    </div>
+  );
+}
 
 export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -2923,21 +2928,27 @@ export default function Process() {
   const steps = [
     {
       num: "1",
-      title: "אפיון והגדרת מטרות",
-      desc: "פגישת היכרות מעמיקה להבנת אורח החיים שלך, היסטוריה רפואית, העדפות תזונתיות והגדרת יעדים ריאליים ומדויקים.",
-      note: "בשלב זה אני אוסף את כל המידע הדרוש כדי לתפור את החליפה המושלמת עבורך."
+      title: "אבחון",
+      desc: "מתחילים במדידות אמיתיות, לא בהערכה. הרכב גוף, היקפים, בדיקות אם יש. בלי זה, כל תפריט הוא ניחוש.",
+      note: "בשלב הזה אני רוצה להבין מה באמת קורה, לא מה נדמה שקורה."
     },
     {
       num: "2",
-      title: "התאמה מדעית",
-      desc: "בניית תפריט תזונה ותכנית אימונים מבוססי מחקר, המותאמים אישית לפיזיולוגיה שלך ולסדר היום שלך.",
-      note: "התאמה אישית היא המפתח להתמדה. התכנית צריכה להתאים לחיים שלך, לא להפך."
+      title: "בנייה",
+      desc: "אני בונה לך מסגרת — תזונה, אימונים ומדידות — שמתחברת לחיים שלך, לא לחיים של מישהו אחר שראיתי באפליקציה.",
+      note: "התכנית צריכה להתאים אליך. לא אתה אליה."
     },
     {
       num: "3",
-      title: "מעקב ואופטימיזציה",
-      desc: "ליווי צמוד, שקילות, מדידות ועדכוני תכנית שוטפים כדי להבטיח התקדמות מתמדת ושבירת תקיעויות.",
-      note: "הגוף משתנה ומסתגל, ולכן התכנית חייבת להיות דינמית ולהשתנות יחד איתו."
+      title: "ליווי",
+      desc: "מענה יומיומי. לא פעם בשבועיים כשאתה נזכר. גם כשנשבר, גם כשאתה בחופש, גם כשהשתנה משהו.",
+      note: "אני לא משאיר אותך לבד עם קובץ ותפריט."
+    },
+    {
+      num: "4",
+      title: "התמדה",
+      desc: "בסוף התהליך לא נשארים תלויים בי. בונים את הרצף שאפשר להחזיק גם אחרי שסיימנו לעבוד יחד.",
+      note: "המטרה היא לא רק תוצאה. המטרה היא תוצאה שאתה יודע לשמור."
     }
   ];
 
@@ -2962,98 +2973,21 @@ export default function Process() {
 
           {/* Animated Fill Line */}
           <motion.div
-            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-orange-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(255,77,0,0.8)]"
+            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-blue-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(28,141,255,0.8)]"
             style={{ height: lineHeight }}
           ></motion.div>
 
           <div className="flex flex-col gap-24 relative z-10">
-            {steps.map((step, idx) => {
-              const isEven = idx % 2 !== 0;
-              const stepProgressStart = idx * 0.33;
-              const stepProgressEnd = stepProgressStart + 0.1;
-
-              const glowOpacity = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                [0.2, 1]
-              );
-
-              const borderColor = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                ["rgba(255,255,255,0.1)", "rgba(255,77,0,1)"]
-              );
-
-              const scale = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                [1, 1.1]
-              );
-
-              return (
-                <div key={idx} className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
-
-                  {/* Content Box */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6 }}
-                    className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
-                  >
-                    <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,77,0,0.15)] group">
-                      <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
-                      <p className="text-text-muted mb-4">{step.desc}</p>
-                      <p className="text-sm text-energy/80 italic">"{step.note}"</p>
-                    </div>
-                  </motion.div>
-
-                  {/* Center Node */}
-                  <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-energy/20 blur-md"
-                      style={{ opacity: glowOpacity }}
-                    />
-                    <motion.div
-                      className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
-                      style={{
-                        borderColor: borderColor,
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                        scale: scale
-                      }}
-                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(255,77,0,0.6)", borderColor: "rgba(255,77,0,1)" }}
-                    >
-                      <motion.span
-                        style={{
-                          color: useTransform(scrollYProgress, [stepProgressStart, stepProgressEnd], ["#ffffff", "#FF4D00"])
-                        }}
-                      >
-                        {step.num}
-                      </motion.span>
-                    </motion.div>
-                  </div>
-
-                  {/* Mobile Node (Static) */}
-                  <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(255,77,0,0.3)]">
-                    {step.num}
-                  </div>
-
-                  {/* Empty Space for alignment */}
-                  <div className="hidden md:block flex-1 w-1/2"></div>
-                </div>
-              );
-            })}
+            {steps.map((step, idx) => (
+              <ProcessStep key={step.num} step={step} idx={idx} total={steps.length} scrollYProgress={scrollYProgress} />
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Seminars.tsx =====
 ```tsx
@@ -3068,12 +3002,12 @@ export default function Seminars() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-surface border border-energy/20 rounded-[2rem] p-10 md:p-16 relative overflow-hidden text-center shadow-[0_0_50px_rgba(255,77,0,0.05)]"
+          className="bg-surface border border-energy/20 rounded-[2rem] p-10 md:p-16 relative overflow-hidden text-center shadow-[0_0_50px_rgba(28,141,255,0.05)]"
         >
           <div className="relative z-10 max-w-2xl mx-auto">
             <span className="inline-block px-4 py-1.5 rounded-full bg-energy/20 text-energy text-xs font-bold mb-6 tracking-widest uppercase border border-energy/30">בקרוב</span>
             <h3 className="font-heading font-black text-3xl md:text-5xl mb-6 text-foreground">
-              סדנאות פרונטליות - <span className="text-transparent bg-clip-text bg-gradient-to-r from-energy to-orange-400">סדרת 2026</span>
+              סדנאות פרונטליות - <span className="text-transparent bg-clip-text bg-gradient-to-r from-energy to-blue-300">סדרת 2026</span>
             </h3>
             <p className="text-text-muted text-lg mb-10 leading-relaxed">
               בקרוב נפתח את ההרשמה לסדרה ייחודית של הרצאות וסדנאות עומק בנושאי תזונת ספורט, תוספים, וגמישות תזונתית ברחבי הארץ.
@@ -3087,7 +3021,7 @@ export default function Seminars() {
                 required
                 className="flex-grow bg-bg border border-foreground/20 rounded-full px-6 py-4 text-foreground focus:border-energy focus:ring-1 focus:ring-energy transition-all outline-none"
               />
-              <button type="submit" className="btn-magnetic bg-energy text-foreground py-4 px-8 rounded-full font-bold whitespace-nowrap shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+              <button type="submit" className="btn-magnetic bg-energy text-foreground py-4 px-8 rounded-full font-bold whitespace-nowrap shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                 הצטרף לרשימה
               </button>
             </form>
@@ -3097,10 +3031,7 @@ export default function Seminars() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Testimonials.tsx =====
 ```tsx
@@ -3152,7 +3083,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: (idx % 3) * 0.1, duration: 0.6, ease }}
-              className="break-inside-avoid bg-[#0a0a0a] border border-white/5 hover:border-energy/30 rounded-3xl p-8 flex flex-col relative transition-colors shadow-2xl hover:shadow-[0_15px_40px_rgba(255,77,0,0.1)] group"
+              className="break-inside-avoid bg-[#0a0a0a] border border-white/5 hover:border-energy/30 rounded-3xl p-8 flex flex-col relative transition-colors shadow-2xl hover:shadow-[0_15px_40px_rgba(28,141,255,0.1)] group"
             >
               <Quote size={32} className="text-energy/20 mb-6 rotate-180 group-hover:text-energy/50 transition-colors" />
               <div className="flex gap-1 mb-6">
@@ -3188,7 +3119,7 @@ export default function Testimonials() {
          >
             <div className="absolute top-0 right-0 w-96 h-96 bg-energy/10 rounded-full blur-[100px]"></div>
             
-            <div className="w-56 h-56 xl:w-72 xl:h-72 shrink-0 rounded-full border-[6px] border-[#111] overflow-hidden relative shadow-[0_0_50px_rgba(255,77,0,0.15)] glow-blob-container z-10">
+            <div className="w-56 h-56 xl:w-72 xl:h-72 shrink-0 rounded-full border-[6px] border-[#111] overflow-hidden relative shadow-[0_0_50px_rgba(28,141,255,0.15)] glow-blob-container z-10">
                 <div className="absolute inset-0 bg-[url('/tomer-measure.png')] bg-cover bg-top mix-blend-normal"></div>
             </div>
  
@@ -3207,10 +3138,7 @@ export default function Testimonials() {
     </section>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/Tracks.tsx =====
 ```tsx
@@ -3318,7 +3246,7 @@ export default function Tracks() {
 
             {/* Radial Glow Background behind cards */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
-                 style={{ background: 'radial-gradient(ellipse at center, rgba(255,77,0,0.06) 0%, transparent 70%)', zIndex: 0 }} />
+                 style={{ background: 'radial-gradient(ellipse at center, rgba(28,141,255,0.06) 0%, transparent 70%)', zIndex: 0 }} />
 
             {/* Tab Content */}
             <div className="max-w-7xl mx-auto relative z-10">
@@ -3487,7 +3415,7 @@ export default function Tracks() {
                                                 </div>
                                             </div>
 
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                                                 מתחיל עכשיו
                                             </a>
                                             <p className="text-xs text-center mt-3 text-white/70">לנרשמים ל-6 חודשים: פגישת מיפוי ראשונית ללא עלות נוספת</p>
@@ -3605,7 +3533,7 @@ export default function Tracks() {
                                                 </div>
                                             </div>
 
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                                                 מתחיל עכשיו
                                             </a>
                                             <p className="text-xs text-center mt-3 text-white/70">פגישה ראשונה ארוכה (75 דק׳) — אפיון מלא של מטרות, מגבלות והעדפות</p>
@@ -3648,7 +3576,7 @@ export default function Tracks() {
                                             <div className="text-2xl font-bold text-white mb-1">₪520</div>
                                             <div className="text-xs text-text-muted">₪130/מדידה</div>
                                         </div>
-                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(255,77,0,0.1)]">
+                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(28,141,255,0.1)]">
                                             <div className="absolute top-0 right-0 w-full h-1 bg-energy"></div>
                                             <div className="text-energy text-sm mb-2 font-bold">8 מדידות</div>
                                             <div className="text-2xl font-bold text-white mb-1">₪880</div>
@@ -3697,7 +3625,7 @@ export default function Tracks() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.5 }}
-                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,77,0,0.05)]"
+                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(28,141,255,0.05)]"
                                 >
                                     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-energy/5 to-transparent pointer-events-none"></div>
                                     <PhoneCall className="w-16 h-16 text-energy mx-auto mb-8" strokeWidth={1.5} />
@@ -3716,7 +3644,7 @@ export default function Tracks() {
                                             <span className="font-bold text-xl text-white">₪{SITE_DATA.services.phone.additionalMinutePrice}</span>
                                         </div>
 
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF4D00] to-[#CC3D00] text-white hover:shadow-[0_0_30px_rgba(255,77,0,0.4)] hover:scale-[1.02]">
+                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#1c8dff] to-[#0f5fb3] text-white hover:shadow-[0_0_30px_rgba(28,141,255,0.4)] hover:scale-[1.02]">
                                             תיאום שיחה
                                         </a>
                                         <p className="text-xs text-center mt-3 text-white/50">בלי התחייבות. שלם רק על הזמן שאתה צורך.</p>
@@ -3730,10 +3658,55 @@ export default function Tracks() {
         </section>
     );
 }
-
 ```
 
+===== FILE: src/components/VSL.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+import { Play } from 'lucide-react';
 
+export default function VSL() {
+  return (
+    <section className="relative py-20 px-6 md:px-16 lg:px-24 bg-bg overflow-hidden z-20">
+      <div className="max-w-5xl mx-auto relative">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative"
+        >
+          {/* Glowing border effect */}
+          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-blue-700 opacity-30 blur-xl"></div>
+
+          <div className="relative rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-surface overflow-hidden aspect-video shadow-2xl flex items-center justify-center group cursor-pointer">
+            {/* Fallback / Placeholder Image */}
+            <img
+              src="/tomer-suitcase-photo.jpeg"
+              alt="Tomer Fridman VSL"
+              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
+
+            {/* Play Button */}
+            <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(28,141,255,0.5)]">
+              <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-2" fill="currentColor" />
+            </div>
+
+            {/* VSL Text Overlay */}
+            <div className="absolute bottom-6 md:bottom-10 left-0 right-0 text-center z-10">
+              <p className="font-heading font-bold text-xl md:text-3xl text-white tracking-widest drop-shadow-md">
+                צפה כיצד השיטה עובדת
+              </p>
+              <p className="text-white/60 text-sm mt-2">4:32 דקות שעשויות לשנות את חייך</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+```
 
 ===== FILE: src/components/ui/accordion.tsx =====
 ```tsx
@@ -3789,10 +3762,7 @@ const AccordionContent = React.forwardRef<
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
-
 ```
-
-
 
 ===== FILE: src/components/ui/alert-dialog.tsx =====
 ```tsx
@@ -3900,10 +3870,7 @@ export {
   AlertDialogAction,
   AlertDialogCancel,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/alert.tsx =====
 ```tsx
@@ -3950,10 +3917,7 @@ const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttrib
 AlertDescription.displayName = "AlertDescription";
 
 export { Alert, AlertTitle, AlertDescription };
-
 ```
-
-
 
 ===== FILE: src/components/ui/aspect-ratio.tsx =====
 ```tsx
@@ -3962,10 +3926,7 @@ import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio";
 const AspectRatio = AspectRatioPrimitive.Root;
 
 export { AspectRatio };
-
 ```
-
-
 
 ===== FILE: src/components/ui/avatar.tsx =====
 ```tsx
@@ -4007,10 +3968,7 @@ const AvatarFallback = React.forwardRef<
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 export { Avatar, AvatarImage, AvatarFallback };
-
 ```
-
-
 
 ===== FILE: src/components/ui/badge.tsx =====
 ```tsx
@@ -4043,10 +4001,7 @@ function Badge({ className, variant, ...props }: BadgeProps) {
 }
 
 export { Badge, badgeVariants };
-
 ```
-
-
 
 ===== FILE: src/components/ui/breadcrumb.tsx =====
 ```tsx
@@ -4140,10 +4095,7 @@ export {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/button.tsx =====
 ```tsx
@@ -4194,10 +4146,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export { Button, buttonVariants };
-
 ```
-
-
 
 ===== FILE: src/components/ui/calendar.tsx =====
 ```tsx
@@ -4255,10 +4204,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 Calendar.displayName = "Calendar";
 
 export { Calendar };
-
 ```
-
-
 
 ===== FILE: src/components/ui/card.tsx =====
 ```tsx
@@ -4305,10 +4251,7 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 CardFooter.displayName = "CardFooter";
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
-
 ```
-
-
 
 ===== FILE: src/components/ui/carousel.tsx =====
 ```tsx
@@ -4536,10 +4479,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 CarouselNext.displayName = "CarouselNext";
 
 export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };
-
 ```
-
-
 
 ===== FILE: src/components/ui/chart.tsx =====
 ```tsx
@@ -4846,10 +4786,7 @@ function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key:
 }
 
 export { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle };
-
 ```
-
-
 
 ===== FILE: src/components/ui/checkbox.tsx =====
 ```tsx
@@ -4879,10 +4816,7 @@ const Checkbox = React.forwardRef<
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };
-
 ```
-
-
 
 ===== FILE: src/components/ui/collapsible.tsx =====
 ```tsx
@@ -4895,10 +4829,7 @@ const CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;
 const CollapsibleContent = CollapsiblePrimitive.CollapsibleContent;
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent };
-
 ```
-
-
 
 ===== FILE: src/components/ui/command.tsx =====
 ```tsx
@@ -4925,7 +4856,7 @@ const Command = React.forwardRef<
 ));
 Command.displayName = CommandPrimitive.displayName;
 
-interface CommandDialogProps extends DialogProps {}
+type CommandDialogProps = DialogProps;
 
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
   return (
@@ -5034,10 +4965,7 @@ export {
   CommandShortcut,
   CommandSeparator,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/context-menu.tsx =====
 ```tsx
@@ -5219,10 +5147,7 @@ export {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/dialog.tsx =====
 ```tsx
@@ -5321,10 +5246,7 @@ export {
   DialogTitle,
   DialogDescription,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/drawer.tsx =====
 ```tsx
@@ -5415,10 +5337,7 @@ export {
   DrawerTitle,
   DrawerDescription,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/dropdown-menu.tsx =====
 ```tsx
@@ -5601,10 +5520,7 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/form.tsx =====
 ```tsx
@@ -5737,10 +5653,7 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
 FormMessage.displayName = "FormMessage";
 
 export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField };
-
 ```
-
-
 
 ===== FILE: src/components/ui/hover-card.tsx =====
 ```tsx
@@ -5771,10 +5684,7 @@ const HoverCardContent = React.forwardRef<
 HoverCardContent.displayName = HoverCardPrimitive.Content.displayName;
 
 export { HoverCard, HoverCardTrigger, HoverCardContent };
-
 ```
-
-
 
 ===== FILE: src/components/ui/input-otp.tsx =====
 ```tsx
@@ -5839,10 +5749,7 @@ const InputOTPSeparator = React.forwardRef<React.ElementRef<"div">, React.Compon
 InputOTPSeparator.displayName = "InputOTPSeparator";
 
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };
-
 ```
-
-
 
 ===== FILE: src/components/ui/input.tsx =====
 ```tsx
@@ -5868,10 +5775,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
 Input.displayName = "Input";
 
 export { Input };
-
 ```
-
-
 
 ===== FILE: src/components/ui/label.tsx =====
 ```tsx
@@ -5892,10 +5796,7 @@ const Label = React.forwardRef<
 Label.displayName = LabelPrimitive.Root.displayName;
 
 export { Label };
-
 ```
-
-
 
 ===== FILE: src/components/ui/menubar.tsx =====
 ```tsx
@@ -6106,10 +6007,7 @@ export {
   MenubarSub,
   MenubarShortcut,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/navigation-menu.tsx =====
 ```tsx
@@ -6233,10 +6131,7 @@ export {
   NavigationMenuIndicator,
   NavigationMenuViewport,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/pagination.tsx =====
 ```tsx
@@ -6321,10 +6216,7 @@ export {
   PaginationNext,
   PaginationPrevious,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/popover.tsx =====
 ```tsx
@@ -6357,10 +6249,7 @@ const PopoverContent = React.forwardRef<
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
 export { Popover, PopoverTrigger, PopoverContent };
-
 ```
-
-
 
 ===== FILE: src/components/ui/progress.tsx =====
 ```tsx
@@ -6387,10 +6276,7 @@ const Progress = React.forwardRef<
 Progress.displayName = ProgressPrimitive.Root.displayName;
 
 export { Progress };
-
 ```
-
-
 
 ===== FILE: src/components/ui/radio-group.tsx =====
 ```tsx
@@ -6430,10 +6316,7 @@ const RadioGroupItem = React.forwardRef<
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
 
 export { RadioGroup, RadioGroupItem };
-
 ```
-
-
 
 ===== FILE: src/components/ui/resizable.tsx =====
 ```tsx
@@ -6474,10 +6357,7 @@ const ResizableHandle = ({
 );
 
 export { ResizablePanelGroup, ResizablePanel, ResizableHandle };
-
 ```
-
-
 
 ===== FILE: src/components/ui/scroll-area.tsx =====
 ```tsx
@@ -6519,10 +6399,7 @@ const ScrollBar = React.forwardRef<
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 
 export { ScrollArea, ScrollBar };
-
 ```
-
-
 
 ===== FILE: src/components/ui/select.tsx =====
 ```tsx
@@ -6669,10 +6546,7 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/separator.tsx =====
 ```tsx
@@ -6696,10 +6570,7 @@ const Separator = React.forwardRef<
 Separator.displayName = SeparatorPrimitive.Root.displayName;
 
 export { Separator };
-
 ```
-
-
 
 ===== FILE: src/components/ui/sheet.tsx =====
 ```tsx
@@ -6810,10 +6681,7 @@ export {
   SheetTitle,
   SheetTrigger,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/sidebar.tsx =====
 ```tsx
@@ -7454,10 +7322,7 @@ export {
   SidebarTrigger,
   useSidebar,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/skeleton.tsx =====
 ```tsx
@@ -7468,10 +7333,7 @@ function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
 }
 
 export { Skeleton };
-
 ```
-
-
 
 ===== FILE: src/components/ui/slider.tsx =====
 ```tsx
@@ -7498,10 +7360,7 @@ const Slider = React.forwardRef<
 Slider.displayName = SliderPrimitive.Root.displayName;
 
 export { Slider };
-
 ```
-
-
 
 ===== FILE: src/components/ui/sonner.tsx =====
 ```tsx
@@ -7532,10 +7391,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
 };
 
 export { Toaster, toast };
-
 ```
-
-
 
 ===== FILE: src/components/ui/switch.tsx =====
 ```tsx
@@ -7566,10 +7422,7 @@ const Switch = React.forwardRef<
 Switch.displayName = SwitchPrimitives.Root.displayName;
 
 export { Switch };
-
 ```
-
-
 
 ===== FILE: src/components/ui/table.tsx =====
 ```tsx
@@ -7645,10 +7498,7 @@ const TableCaption = React.forwardRef<HTMLTableCaptionElement, React.HTMLAttribu
 TableCaption.displayName = "TableCaption";
 
 export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };
-
 ```
-
-
 
 ===== FILE: src/components/ui/tabs.tsx =====
 ```tsx
@@ -7705,10 +7555,7 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
-
 ```
-
-
 
 ===== FILE: src/components/ui/textarea.tsx =====
 ```tsx
@@ -7716,7 +7563,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ className, ...props }, ref) => {
   return (
@@ -7733,10 +7580,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ classNa
 Textarea.displayName = "Textarea";
 
 export { Textarea };
-
 ```
-
-
 
 ===== FILE: src/components/ui/toast.tsx =====
 ```tsx
@@ -7851,10 +7695,7 @@ export {
   ToastClose,
   ToastAction,
 };
-
 ```
-
-
 
 ===== FILE: src/components/ui/toaster.tsx =====
 ```tsx
@@ -7882,10 +7723,7 @@ export function Toaster() {
     </ToastProvider>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/components/ui/toggle-group.tsx =====
 ```tsx
@@ -7938,10 +7776,7 @@ const ToggleGroupItem = React.forwardRef<
 ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName;
 
 export { ToggleGroup, ToggleGroupItem };
-
 ```
-
-
 
 ===== FILE: src/components/ui/toggle.tsx =====
 ```tsx
@@ -7982,10 +7817,7 @@ const Toggle = React.forwardRef<
 Toggle.displayName = TogglePrimitive.Root.displayName;
 
 export { Toggle, toggleVariants };
-
 ```
-
-
 
 ===== FILE: src/components/ui/tooltip.tsx =====
 ```tsx
@@ -8017,71 +7849,14 @@ const TooltipContent = React.forwardRef<
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
-
 ```
-
-
 
 ===== FILE: src/components/ui/use-toast.ts =====
 ```ts
 import { useToast, toast } from "@/hooks/use-toast";
 
 export { useToast, toast };
-
 ```
-
-
-
-===== FILE: src/components/VSL.tsx =====
-```tsx
-import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
-
-export default function VSL() {
-  return (
-    <section className="relative py-20 px-6 md:px-16 lg:px-24 bg-bg overflow-hidden z-20">
-      <div className="max-w-5xl mx-auto relative">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative"
-        >
-          {/* Glowing border effect */}
-          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-orange-600 opacity-30 blur-xl"></div>
-
-          <div className="relative rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-surface overflow-hidden aspect-video shadow-2xl flex items-center justify-center group cursor-pointer">
-            {/* Fallback / Placeholder Image */}
-            <img
-              src="/image4.jpg"
-              alt="Tomer Fridman VSL"
-              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
-
-            {/* Play Button */}
-            <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(255,77,0,0.5)]">
-              <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-2" fill="currentColor" />
-            </div>
-
-            {/* VSL Text Overlay */}
-            <div className="absolute bottom-6 md:bottom-10 left-0 right-0 text-center z-10">
-              <p className="font-heading font-bold text-xl md:text-3xl text-white tracking-widest drop-shadow-md">
-                צפה כיצד השיטה עובדת
-              </p>
-              <p className="text-white/60 text-sm mt-2">4:32 דקות שעשויות לשנות את חייך</p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-```
-
-
 
 ===== FILE: src/data.ts =====
 ```ts
@@ -8204,28 +7979,28 @@ export const SITE_DATA = {
       id: "course-sports-nutrition",
       title: "תזונת ספורט - בסיס העקרונות במאמץ פיזיולוגי",
       type: "Masterclass",
-      image: "/image9.jpg",
+      image: "/tomer-pricing-board.jpeg",
       freeValue: "הורד סיכום הרצאה חינם"
     },
     {
       id: "course-supplements",
       title: "תוספי תזונה אפקטיביים להיפרטרופיה ושיפור ביצועים",
       type: "Seminar",
-      image: "/image10.jpg",
+      image: "/tomer-measure-reference.jpeg",
       freeValue: "קבל רשימת תוספים מומלצת"
     },
     {
       id: "course-iifym",
       title: "גמישות תזונתית - IIFYM (If It Fits Your Macros)",
       type: "Workshop",
-      image: "/image11.jpg",
+      image: "/tomer-suitcase-photo.jpeg",
       freeValue: "מחשבון מאקרו חינמי"
     },
     {
       id: "course-myths",
       title: "מיתוסים בעולם התזונה במאבחן מבוסס ראיות",
       type: "Lecture",
-      image: "/image12.jpg",
+      image: "/tomer-office-highres.png",
       freeValue: "מדריך ניפוץ מיתוסים"
     }
   ],
@@ -8260,10 +8035,7 @@ export const SITE_DATA = {
     { question: "האם אפשר לשנות מסלול באמצע התהליך?", answer: "כן, ניתן לעבור ממסלול אונליין לפרונטלי או להפך, בהתאם לזמינות ולצרכים המשתנים שלך." }
   ]
 };
-
 ```
-
-
 
 ===== FILE: src/hooks/use-mobile.tsx =====
 ```tsx
@@ -8286,10 +8058,7 @@ export function useIsMobile() {
 
   return !!isMobile;
 }
-
 ```
-
-
 
 ===== FILE: src/hooks/use-toast.ts =====
 ```ts
@@ -8479,10 +8248,7 @@ function useToast() {
 }
 
 export { useToast, toast };
-
 ```
-
-
 
 ===== FILE: src/index.css =====
 ```css
@@ -8503,7 +8269,7 @@ export { useToast, toast };
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 18 100% 50%;
+    --primary: 207 100% 47%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 10%;
@@ -8520,7 +8286,7 @@ export { useToast, toast };
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 18 100% 50%;
+    --ring: 207 100% 47%;
 
     --radius: 0.5rem;
 
@@ -8528,8 +8294,8 @@ export { useToast, toast };
     --bg: 0 0% 2%;
     --surface: 0 0% 7%;
     --surface-hover: 0 0% 10%;
-    --energy: 18 100% 50%;
-    --energy-light: 18 100% 60%;
+    --energy: 207 100% 47%;
+    --energy-light: 203 100% 62%;
     --text-main: 0 0% 100%;
     --text-muted: 240 4% 66%;
   }
@@ -8562,7 +8328,7 @@ export { useToast, toast };
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(var(--energy)), hsl(18, 100%, 40%));
+    background: linear-gradient(180deg, hsl(var(--energy)), hsl(211, 86%, 35%));
     border-radius: 10px;
     border: 2px solid hsl(var(--bg));
   }
@@ -8649,7 +8415,7 @@ export { useToast, toast };
 }
 
 .text-glow-animate {
-  background: linear-gradient(to right, #FFFFFF 20%, hsl(18, 100%, 50%) 40%, hsl(18, 100%, 50%) 60%, #FFFFFF 80%);
+  background: linear-gradient(to right, #FFFFFF 20%, hsl(var(--energy)) 40%, hsl(var(--energy-light)) 60%, #FFFFFF 80%);
   background-size: 200% auto;
   color: #000;
   background-clip: text;
@@ -8660,7 +8426,7 @@ export { useToast, toast };
 
 .phone-mockup {
   transform: perspective(1200px) rotateY(-15deg) rotateX(5deg) rotateZ(-2deg);
-  box-shadow: -30px 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 77, 0, 0.15);
+  box-shadow: -30px 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(28, 141, 255, 0.15);
   transition: transform 0.5s ease;
 }
 
@@ -8683,27 +8449,24 @@ export { useToast, toast };
 }
 
 .animated-border-card {
-  background: conic-gradient(from var(--angle), transparent 60%, #FF4D00 80%, transparent 100%);
+  background: conic-gradient(from var(--angle), transparent 60%, #1c8dff 80%, transparent 100%);
   animation: rotateBorder 4s linear infinite;
   border-radius: 1.5rem;
   padding: 1px;
 }
 
 .animated-border-card-popular {
-  background: conic-gradient(from var(--angle), transparent 50%, #FF4D00 70%, transparent 90%);
+  background: conic-gradient(from var(--angle), transparent 50%, #1c8dff 70%, transparent 90%);
   animation: rotateBorder 4s linear infinite;
   border-radius: 1.5rem;
   padding: 2px;
-  box-shadow: 0 0 60px rgba(255,77,0,0.08), 0 0 120px rgba(255,77,0,0.04);
+  box-shadow: 0 0 60px rgba(28,141,255,0.10), 0 0 120px rgba(28,141,255,0.05);
 }
 
 @keyframes rotateBorder {
   to { --angle: 360deg; }
 }
-
 ```
-
-
 
 ===== FILE: src/lib/utils.ts =====
 ```ts
@@ -8713,10 +8476,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
 ```
-
-
 
 ===== FILE: src/main.tsx =====
 ```tsx
@@ -8725,10 +8485,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
-
 ```
-
-
 
 ===== FILE: src/pages/Index.tsx =====
 ```tsx
@@ -8737,16 +8494,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import VSL from '../components/VSL';
-import Ingredients from '../components/Ingredients';
 import Process from '../components/Process';
-import FreeValue from '../components/FreeValue';
 import Pathfinder from '../components/Pathfinder';
-import Courses from '../components/Courses';
 import Tracks from '../components/Tracks';
 import AppShowcase from '../components/AppShowcase';
 import Testimonials from '../components/Testimonials';
-import PainPointGap from '../components/PainPointGap';
-import About from '../components/About';
+import Commitment from '../components/Commitment';
 import Seminars from '../components/Seminars';
 import Newsletter from '../components/Newsletter';
 import FAQ from '../components/FAQ';
@@ -8823,18 +8576,14 @@ export default function Index() {
         <Header />
         <main>
           <Hero />
-          <VSL />
-          <Ingredients />
           <Process />
-          <FreeValue />
-          <Pathfinder />
-          <Courses />
-          <Testimonials />
-          <PainPointGap />
-          <Tracks />
-          <InsuranceBanner />
+          <VSL />
           <AppShowcase />
-          <About />
+          <Pathfinder />
+          <Tracks />
+          <Commitment />
+          <InsuranceBanner />
+          <Testimonials />
           <Seminars />
           <Newsletter />
           <FAQ />
@@ -8845,10 +8594,7 @@ export default function Index() {
     </>
   );
 }
-
 ```
-
-
 
 ===== FILE: src/pages/NotFound.tsx =====
 ```tsx
@@ -8876,10 +8622,7 @@ const NotFound = () => {
 };
 
 export default NotFound;
-
 ```
-
-
 
 ===== FILE: src/test/example.test.ts =====
 ```ts
@@ -8890,10 +8633,7 @@ describe("example", () => {
     expect(true).toBe(true);
   });
 });
-
 ```
-
-
 
 ===== FILE: src/test/setup.ts =====
 ```ts
@@ -8912,22 +8652,17 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
-
 ```
-
-
 
 ===== FILE: src/vite-env.d.ts =====
 ```ts
 /// <reference types="vite/client" />
-
 ```
-
-
 
 ===== FILE: tailwind.config.ts =====
 ```ts
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -9013,12 +8748,9 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
-
 ```
-
-
 
 ===== FILE: tsconfig.app.json =====
 ```json
@@ -9059,8 +8791,6 @@ export default {
 }
 ```
 
-
-
 ===== FILE: tsconfig.json =====
 ```json
 {
@@ -9089,8 +8819,6 @@ export default {
 }
 ```
 
-
-
 ===== FILE: tsconfig.node.json =====
 ```json
 {
@@ -9115,47 +8843,7 @@ export default {
   },
   "include": ["vite.config.ts"]
 }
-
 ```
-
-
-
-===== FILE: vercel.json =====
-```json
-{
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        }
-      ]
-    }
-  ]
-}
-```
-
-
 
 ===== FILE: vite.config.ts =====
 ```ts
@@ -9180,10 +8868,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
-
 ```
-
-
 
 ===== FILE: vitest.config.ts =====
 ```ts
@@ -9203,5 +8888,5 @@ export default defineConfig({
     alias: { "@": path.resolve(__dirname, "./src") },
   },
 });
-
 ```
+

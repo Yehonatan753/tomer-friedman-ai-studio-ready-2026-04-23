@@ -13,19 +13,19 @@ export default function VSL() {
           className="relative"
         >
           {/* Glowing border effect */}
-          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-orange-600 opacity-30 blur-xl"></div>
+          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-blue-700 opacity-30 blur-xl"></div>
 
           <div className="relative rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-surface overflow-hidden aspect-video shadow-2xl flex items-center justify-center group cursor-pointer">
             {/* Fallback / Placeholder Image */}
             <img
-              src="/image4.jpg"
+              src="/tomer-suitcase-photo.jpeg"
               alt="Tomer Fridman VSL"
               className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
 
             {/* Play Button */}
-            <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(255,77,0,0.5)]">
+            <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(28,141,255,0.5)]">
               <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-2" fill="currentColor" />
             </div>
 

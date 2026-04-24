@@ -54,8 +54,8 @@ export default function DownloadPopup() {
               <X size={20} />
             </button>
 
-            <div className="h-32 bg-gradient-to-br from-energy to-orange-600 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 bg-[url('/image7.jpg')] mix-blend-overlay opacity-30 bg-cover bg-center"></div>
+            <div className="h-32 bg-gradient-to-br from-energy to-blue-700 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('/tomer-pricing-board.jpeg')] mix-blend-overlay opacity-30 bg-cover bg-center"></div>
               <FileText size={48} className="text-white relative z-10" />
             </div>
 
@@ -96,7 +96,7 @@ export default function DownloadPopup() {
                     
                     <button 
                       type="submit" 
-                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-2"
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-2"
                     >
                       <Download size={20} />
                       <span>שלח לי את הקובץ</span>

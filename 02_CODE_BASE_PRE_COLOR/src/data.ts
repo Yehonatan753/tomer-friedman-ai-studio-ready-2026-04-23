@@ -117,28 +117,28 @@ export const SITE_DATA = {
       id: "course-sports-nutrition",
       title: "תזונת ספורט - בסיס העקרונות במאמץ פיזיולוגי",
       type: "Masterclass",
-      image: "/image9.jpg",
+      image: "/tomer-pricing-board.jpeg",
       freeValue: "הורד סיכום הרצאה חינם"
     },
     {
       id: "course-supplements",
       title: "תוספי תזונה אפקטיביים להיפרטרופיה ושיפור ביצועים",
       type: "Seminar",
-      image: "/image10.jpg",
+      image: "/tomer-measure-reference.jpeg",
       freeValue: "קבל רשימת תוספים מומלצת"
     },
     {
       id: "course-iifym",
       title: "גמישות תזונתית - IIFYM (If It Fits Your Macros)",
       type: "Workshop",
-      image: "/image11.jpg",
+      image: "/tomer-suitcase-photo.jpeg",
       freeValue: "מחשבון מאקרו חינמי"
     },
     {
       id: "course-myths",
       title: "מיתוסים בעולם התזונה במאבחן מבוסס ראיות",
       type: "Lecture",
-      image: "/image12.jpg",
+      image: "/tomer-office-highres.png",
       freeValue: "מדריך ניפוץ מיתוסים"
     }
   ],

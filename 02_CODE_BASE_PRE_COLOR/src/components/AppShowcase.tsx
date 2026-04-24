@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Utensils, Dumbbell, LineChart, MessageCircle, CheckCircle2, Apple, Smartphone } from 'lucide-react';
+import { Utensils, Dumbbell, LineChart, MessageCircle, CheckCircle2, ArrowLeft, HelpCircle } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -26,7 +26,7 @@ export default function AppShowcase() {
   return (
     <section id="app" className="py-32 px-6 md:px-16 lg:px-24 bg-surface relative overflow-hidden border-y border-white/5">
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#FF4D00 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#1c8dff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
       <div className="glow-blob top-1/2 right-0 bg-energy/30 translate-x-1/3 -translate-y-1/2"></div>
 
 
@@ -48,7 +48,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6"
           >
-            שליטה מלאה <span className="text-energy">בכף היד</span> שלך
+            כך TF Tracker עובד <span className="text-energy">ביום-יום</span>.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -57,7 +57,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.2 }}
             className="text-lg text-text-muted mb-8"
           >
-            התפריט, תכנית האימונים והמעקב - הכל באפליקציה אחת מקיפה. נוצרה במיוחד לתלמידים שלי. משתמשים חינמיים מקבלים גישה למחשבונים, מעקב משקל בסיסי וספריית מאמרים.
+            TF Tracker הוא מוצר הכניסה הדיגיטלי שלי. בפנים יש מערכת אחת שאוגדת אוכל, אימונים, מדידות ומעקב — בלי לקפוץ בין 4 אפליקציות, בלי למלא אקסלים, ובלי לנחש מה קורה מיום ליום. זה מוצר עצמאי שעומד לבד, ומי שרוצה להעמיק אחר כך לתהליך אישי — ההיסטוריה ממשיכה איתו, לא מתחילה מחדש.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -66,13 +66,13 @@ export default function AppShowcase() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#" className="btn-magnetic bg-energy text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center gap-2">
-              <span>הורד חינם (iOS)</span>
-              <Apple size={20} />
+            <a href="#" className="btn-magnetic bg-energy text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center gap-2">
+              <span>להתחיל עם TF Tracker</span>
+              <ArrowLeft size={20} />
             </a>
             <a href="#" className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/5 transition-colors font-medium text-white flex items-center justify-center gap-2">
-              <span>הורד חינם (Android)</span>
-              <Smartphone size={20} />
+              <span>להבין אם זה מתאים לי</span>
+              <HelpCircle size={20} />
             </a>
           </motion.div>
         </div>
@@ -92,8 +92,8 @@ export default function AppShowcase() {
                   <Utensils size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">תפריט תזונה דינמי</h3>
-                  <p className="text-text-muted leading-relaxed">גישה נוחה לתפריט היומי, תחליפי מזון אפשריים בכל ארוחה ומתכונים בלחיצת כפתור (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">שאלון קצר וכניסה מסודרת</h3>
+                  <p className="text-text-muted leading-relaxed">מתחילים בלי בלגן. המערכת בונה לך מבנה בסיסי כבר מהיום הראשון.</p>
                 </div>
               </motion.div>
 
@@ -102,8 +102,8 @@ export default function AppShowcase() {
                   <Dumbbell size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">תכנית אימונים חכמה</h3>
-                  <p className="text-text-muted leading-relaxed">מעקב אחר משקלים במכון, סרטוני הדרכה מדויקים לכל תרגיל ורישום התקדמות מלא (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">אוכל, ברקוד וצילום מזון</h3>
+                  <p className="text-text-muted leading-relaxed">לרשום ארוחה זה שניות. גם כשאתה בחוץ, גם כשאתה ממהר.</p>
                 </div>
               </motion.div>
 
@@ -112,8 +112,8 @@ export default function AppShowcase() {
                   <LineChart size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">מעקב מדדים</h3>
-                  <p className="text-text-muted leading-relaxed">גרפים ברורים המציגים את הירידה במשקל, אחוזי השומן, היקפים (חינם למשתמשים בסיסיים).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">מדידות, התקדמות ואימונים במקום אחד</h3>
+                  <p className="text-text-muted leading-relaxed">כל נתון נשמר, ההתקדמות נראית, וההמשך נבנה לפי מה שקורה בפועל.</p>
                 </div>
               </motion.div>
 
@@ -122,29 +122,32 @@ export default function AppShowcase() {
                   <MessageCircle size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">קשר ישיר</h3>
-                  <p className="text-text-muted leading-relaxed">צ'אט מובנה לשאלות, התייעצויות ועדכונים שוטפים בזמן אמת איתי (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">המשך טבעי לתהליך אישי</h3>
+                  <p className="text-text-muted leading-relaxed">כשתהיה מוכן לליווי עמוק יותר, עוברים בלי לאבד נתונים ובלי להתחיל מאפס.</p>
                 </div>
               </motion.div>
             </div>
 
             {/* Subscription Info */}
             <motion.div variants={itemVariants} className="mt-12 p-6 rounded-2xl bg-energy/5 border border-energy/20">
-              <h4 className="font-bold text-white mb-4">מסלולי מנוי לאפליקציה:</h4>
+              <h4 className="font-bold text-white mb-4">מסלולי TF Tracker:</h4>
               <ul className="space-y-3 text-sm text-text-muted">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">לקוחות ליווי (אונליין/פרונטלי):</strong> גישה מלאה לכל החיים (Lifetime Access).</span>
+                  <span><strong className="text-white">₪49.90 / חודשי:</strong> גמיש, ללא התחייבות.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">אחרי שיחת ייעוץ:</strong> 3 חודשים ראשונים בחינם למסלול הפרימיום.</span>
+                  <span><strong className="text-white">₪39.90 / לחודש במסלול שנתי:</strong> חיסכון של ₪120 לשנה.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">משתמשים חדשים:</strong> חודש ראשון בחינם, לאחר מכן מנוי חודשי מתחדש.</span>
+                  <span><strong className="text-white">המשך טבעי למסלול אישי:</strong> כשמוכנים, עוברים בלי לאבד נתונים.</span>
                 </li>
               </ul>
+              <p className="mt-5 text-xs text-text-muted/70">
+                אלה מסכים אמיתיים מתוך המוצר. מה שאתה רואה כאן — זה מה שתראה ברגע שתיכנס.
+              </p>
             </motion.div>
           </motion.div>
 
@@ -177,9 +180,9 @@ export default function AppShowcase() {
                   <div className="flex justify-between items-center mb-4">
                     <div>
                       <div className="text-energy text-xs font-bold mb-1 tracking-wider uppercase">TF Tracker</div>
-                      <div className="text-2xl font-bold text-white">שלום, תומר</div>
+                      <div className="text-2xl font-bold text-white">שלום, דניאל</div>
                     </div>
-                    <div className="w-10 h-10 rounded-full border border-energy/50 flex items-center justify-center text-energy font-bold overflow-hidden shadow-[0_0_10px_rgba(255,77,0,0.3)] bg-energy/10 text-sm">
+                    <div className="w-10 h-10 rounded-full border border-energy/50 flex items-center justify-center text-energy font-bold overflow-hidden shadow-[0_0_10px_rgba(28,141,255,0.3)] bg-energy/10 text-sm">
                       TF
                     </div>
                   </div>

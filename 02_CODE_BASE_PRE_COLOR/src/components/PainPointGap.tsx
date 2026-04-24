@@ -24,7 +24,7 @@ export default function PainPointGap() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
           {/* Decorative VS divider */}
           <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="w-16 h-16 rounded-full bg-surface border-2 border-energy/30 flex items-center justify-center shadow-[0_0_30px_rgba(255,77,0,0.2)]">
+            <div className="w-16 h-16 rounded-full bg-surface border-2 border-energy/30 flex items-center justify-center shadow-[0_0_30px_rgba(28,141,255,0.2)]">
               <span className="text-energy font-black text-lg">VS</span>
             </div>
           </div>
@@ -64,7 +64,7 @@ export default function PainPointGap() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-energy/5 border border-energy/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_40px_rgba(255,77,0,0.05)] backdrop-blur-sm"
+            className="bg-energy/5 border border-energy/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_40px_rgba(28,141,255,0.05)] backdrop-blur-sm"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-energy/20 blur-3xl translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"></div>
             <h3 className="text-2xl font-bold text-energy mb-8 border-b border-energy/10 pb-4 relative z-10">
@@ -78,7 +78,7 @@ export default function PainPointGap() {
                 "תזונאי קליני אחד. 22 שנות ניסיון. בלי מתמחים, בלי צוות."
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-energy/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_10px_rgba(255,77,0,0.3)]">
+                  <div className="w-6 h-6 rounded-full bg-energy/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_10px_rgba(28,141,255,0.3)]">
                     <Check size={14} className="text-energy" strokeWidth={3} />
                   </div>
                   <span className="text-white font-medium leading-relaxed">{item}</span>
@@ -101,3 +101,4 @@ export default function PainPointGap() {
     </section>
   );
 }
+

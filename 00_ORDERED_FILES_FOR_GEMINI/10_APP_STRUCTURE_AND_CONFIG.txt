@@ -91,13 +91,87 @@
     "vitest": "^3.2.4"
   }
 }
-
 ```
 
+===== FILE: index.html =====
+```html
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Set the document title to the name of your application -->
+    <title>תומר פרידמן | תזונאי קליני וספורט</title>
+    <meta name="description" content="תומר פרידמן - תזונאי קליני וספורט. תוכניות תזונה ואימונים מותאמות אישית לתוצאות שנשארות לתמיד." />
+    <meta name="author" content="Lovable" />
+
+    <!-- TODO: Update og:title to match your application name -->
+    <meta property="og:title" content="תומר פרידמן | תזונאי קליני וספורט" />
+    <meta property="og:description" content="תומר פרידמן - תזונאי קליני וספורט. תוכניות תזונה ואימונים מותאמות אישית לתוצאות שנשארות לתמיד." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/tomer-logo.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:image" content="/tomer-logo.png" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+```
+
+===== FILE: vite.config.ts =====
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+import { componentTagger } from "lovable-tagger";
+
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
+  server: {
+    host: "::",
+    port: 8080,
+    hmr: {
+      overlay: false,
+    },
+  },
+  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+}));
+```
+
+===== FILE: vitest.config.ts =====
+```ts
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./src/test/setup.ts"],
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
+  },
+  resolve: {
+    alias: { "@": path.resolve(__dirname, "./src") },
+  },
+});
+```
 
 ===== FILE: tailwind.config.ts =====
 ```ts
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -183,70 +257,142 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
-
 ```
 
+===== FILE: postcss.config.js =====
+```js
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+```
 
-===== FILE: vite.config.ts =====
-```ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-import { componentTagger } from "lovable-tagger";
+===== FILE: eslint.config.js =====
+```js
+import js from "@eslint/js";
+import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
+export default tseslint.config(
+  { ignores: ["dist"] },
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+);
+```
+
+===== FILE: tsconfig.json =====
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
     },
+    "skipLibCheck": true,
+    "strictNullChecks": false
   },
-}));
-
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
 ```
 
-
-===== FILE: index.html =====
-```html
-<!doctype html>
-<html lang="he" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>תומר פרידמן | תזונאי קליני וספורט</title>
-    <meta name="description" content="תומר פרידמן - תזונאי קליני וספורט. תוכניות תזונה ואימונים מותאמות אישית לתוצאות שנשארות לתמיד." />
-    <meta name="author" content="Lovable" />
-
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="תומר פרידמן | תזונאי קליני וספורט" />
-    <meta property="og:description" content="תומר פרידמן - תזונאי קליני וספורט. תוכניות תזונה ואימונים מותאמות אישית לתוצאות שנשארות לתמיד." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/tomer-logo.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="/tomer-logo.png" />
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-
+===== FILE: tsconfig.app.json =====
+```json
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "skipLibCheck": true,
+    "strict": false,
+    "target": "ES2020",
+    "types": [
+      "vitest/globals"
+    ],
+    "useDefineForClassFields": true
+  },
+  "include": [
+    "src"
+  ]
+}
 ```
 
+===== FILE: tsconfig.node.json =====
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+```
 
 ===== FILE: src/main.tsx =====
 ```tsx
@@ -255,9 +401,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
-
 ```
-
 
 ===== FILE: src/App.tsx =====
 ```tsx
@@ -288,9 +432,7 @@ const App = () => (
 );
 
 export default App;
-
 ```
-
 
 ===== FILE: src/index.css =====
 ```css
@@ -311,7 +453,7 @@ export default App;
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 18 100% 50%;
+    --primary: 207 100% 47%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 10%;
@@ -328,7 +470,7 @@ export default App;
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 18 100% 50%;
+    --ring: 207 100% 47%;
 
     --radius: 0.5rem;
 
@@ -336,8 +478,8 @@ export default App;
     --bg: 0 0% 2%;
     --surface: 0 0% 7%;
     --surface-hover: 0 0% 10%;
-    --energy: 18 100% 50%;
-    --energy-light: 18 100% 60%;
+    --energy: 207 100% 47%;
+    --energy-light: 203 100% 62%;
     --text-main: 0 0% 100%;
     --text-muted: 240 4% 66%;
   }
@@ -370,7 +512,7 @@ export default App;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(var(--energy)), hsl(18, 100%, 40%));
+    background: linear-gradient(180deg, hsl(var(--energy)), hsl(211, 86%, 35%));
     border-radius: 10px;
     border: 2px solid hsl(var(--bg));
   }
@@ -457,7 +599,7 @@ export default App;
 }
 
 .text-glow-animate {
-  background: linear-gradient(to right, #FFFFFF 20%, hsl(18, 100%, 50%) 40%, hsl(18, 100%, 50%) 60%, #FFFFFF 80%);
+  background: linear-gradient(to right, #FFFFFF 20%, hsl(var(--energy)) 40%, hsl(var(--energy-light)) 60%, #FFFFFF 80%);
   background-size: 200% auto;
   color: #000;
   background-clip: text;
@@ -468,7 +610,7 @@ export default App;
 
 .phone-mockup {
   transform: perspective(1200px) rotateY(-15deg) rotateX(5deg) rotateZ(-2deg);
-  box-shadow: -30px 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 77, 0, 0.15);
+  box-shadow: -30px 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(28, 141, 255, 0.15);
   transition: transform 0.5s ease;
 }
 
@@ -491,70 +633,22 @@ export default App;
 }
 
 .animated-border-card {
-  background: conic-gradient(from var(--angle), transparent 60%, #FF4D00 80%, transparent 100%);
+  background: conic-gradient(from var(--angle), transparent 60%, #1c8dff 80%, transparent 100%);
   animation: rotateBorder 4s linear infinite;
   border-radius: 1.5rem;
   padding: 1px;
 }
 
 .animated-border-card-popular {
-  background: conic-gradient(from var(--angle), transparent 50%, #FF4D00 70%, transparent 90%);
+  background: conic-gradient(from var(--angle), transparent 50%, #1c8dff 70%, transparent 90%);
   animation: rotateBorder 4s linear infinite;
   border-radius: 1.5rem;
   padding: 2px;
-  box-shadow: 0 0 60px rgba(255,77,0,0.08), 0 0 120px rgba(255,77,0,0.04);
+  box-shadow: 0 0 60px rgba(28,141,255,0.10), 0 0 120px rgba(28,141,255,0.05);
 }
 
 @keyframes rotateBorder {
   to { --angle: 360deg; }
 }
-
 ```
 
-
-===== FILE: src/App.css =====
-```css
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-```

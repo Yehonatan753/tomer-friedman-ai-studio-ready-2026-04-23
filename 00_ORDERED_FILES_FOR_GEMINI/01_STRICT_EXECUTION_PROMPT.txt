@@ -10,11 +10,12 @@ The real base code is inside:
 `02_CODE_BASE_PRE_COLOR/`
 
 You must work from that folder as the application root.
-Do not use the later blue/white experiment as the base.
+Do not use the failed later blue/white experiment as the base.
+Use the stronger black/orange version as the structural and conversion base, then translate the brand accent and visual system toward Tomer's requested blue/white business-color direction.
 Do not redesign from scratch.
 Do not flatten the website into generic SaaS cards.
 
-Your task is to recover and improve the stronger pre-color-change black/orange version, using the instructions and references in this repository.
+Your task is to recover and improve the stronger pre-color-change version, using it as the conversion architecture, while applying the OPUS/user requirement: blue/white brand direction, less duplication, tighter density, and no deletion of strong sales sections.
 
 GOOGLE AI STUDIO FEATURE REQUIREMENTS
 The user also explicitly requested the AI Studio capabilities shown in the project setup:
@@ -69,8 +70,8 @@ Start with:
 If you cannot access or inspect these files, stop and say exactly which files must be uploaded. Do not invent answers from the brief alone.
 
 NON-NEGOTIABLE PRODUCT DIRECTION
-The previous black/orange version was the approved strong base.
-The later request was to tighten and shorten, not to rewrite the header, hero, pricing logic, footer, or major conversion sections.
+The previous black/orange version was the approved strong base for structure, motion, hierarchy, and conversion logic.
+The later Tomer/OPUS request was not "throw it away"; it was to translate the palette toward blue/white, tighten and shorten, reduce duplicate content/images, and preserve the header, hero, pricing logic, footer, and major conversion sections.
 
 The site should remain:
 - premium
@@ -79,12 +80,13 @@ The site should remain:
 - Tomer speaking in first person
 - high-conversion
 - emotionally strong but credible
-- close to the stronger black/orange version
+- close to the stronger black/orange version in structure and emotional weight
+- visually translated toward a premium blue/white Tomer business-color system
 
 Do not make it:
 - generic white-card SaaS
 - sterile
-- overly blue/white
+- washed-out blue/white
 - low-contrast
 - robotic in copy
 - shallow in pricing
@@ -207,7 +209,9 @@ If any feature cannot be implemented directly, give the exact missing prerequisi
 
 QUALITY BAR
 If a change makes the site cleaner but weaker than the approved black/orange version, it is the wrong change.
+If a change keeps the site orange/black and ignores Tomer's blue/white request, it is also the wrong change.
 Preserve the strongest conversion architecture.
+Translate palette carefully; do not flatten the site into safe SaaS UI.
 Tighten only where needed.
 Do not delete strong sections.
 Do not rewrite strong sections without a specific reason.

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function CursorFollower() {
@@ -56,10 +56,11 @@ export default function CursorFollower() {
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
           scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'rgba(255, 77, 0, 0.4)' : 'rgba(255, 77, 0, 0.1)',
+          backgroundColor: isHovering ? 'rgba(28, 141, 255, 0.4)' : 'rgba(28, 141, 255, 0.1)',
         }}
         transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.5 }}
       />
     </>
   );
 }
+

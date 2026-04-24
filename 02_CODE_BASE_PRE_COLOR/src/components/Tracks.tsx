@@ -102,7 +102,7 @@ export default function Tracks() {
 
             {/* Radial Glow Background behind cards */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
-                 style={{ background: 'radial-gradient(ellipse at center, rgba(255,77,0,0.06) 0%, transparent 70%)', zIndex: 0 }} />
+                 style={{ background: 'radial-gradient(ellipse at center, rgba(28,141,255,0.06) 0%, transparent 70%)', zIndex: 0 }} />
 
             {/* Tab Content */}
             <div className="max-w-7xl mx-auto relative z-10">
@@ -271,7 +271,7 @@ export default function Tracks() {
                                                 </div>
                                             </div>
 
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                                                 מתחיל עכשיו
                                             </a>
                                             <p className="text-xs text-center mt-3 text-white/70">לנרשמים ל-6 חודשים: פגישת מיפוי ראשונית ללא עלות נוספת</p>
@@ -389,7 +389,7 @@ export default function Tracks() {
                                                 </div>
                                             </div>
 
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                                                 מתחיל עכשיו
                                             </a>
                                             <p className="text-xs text-center mt-3 text-white/70">פגישה ראשונה ארוכה (75 דק׳) — אפיון מלא של מטרות, מגבלות והעדפות</p>
@@ -432,7 +432,7 @@ export default function Tracks() {
                                             <div className="text-2xl font-bold text-white mb-1">₪520</div>
                                             <div className="text-xs text-text-muted">₪130/מדידה</div>
                                         </div>
-                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(255,77,0,0.1)]">
+                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(28,141,255,0.1)]">
                                             <div className="absolute top-0 right-0 w-full h-1 bg-energy"></div>
                                             <div className="text-energy text-sm mb-2 font-bold">8 מדידות</div>
                                             <div className="text-2xl font-bold text-white mb-1">₪880</div>
@@ -481,7 +481,7 @@ export default function Tracks() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.5 }}
-                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,77,0,0.05)]"
+                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(28,141,255,0.05)]"
                                 >
                                     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-energy/5 to-transparent pointer-events-none"></div>
                                     <PhoneCall className="w-16 h-16 text-energy mx-auto mb-8" strokeWidth={1.5} />
@@ -500,7 +500,7 @@ export default function Tracks() {
                                             <span className="font-bold text-xl text-white">₪{SITE_DATA.services.phone.additionalMinutePrice}</span>
                                         </div>
 
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF4D00] to-[#CC3D00] text-white hover:shadow-[0_0_30px_rgba(255,77,0,0.4)] hover:scale-[1.02]">
+                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#1c8dff] to-[#0f5fb3] text-white hover:shadow-[0_0_30px_rgba(28,141,255,0.4)] hover:scale-[1.02]">
                                             תיאום שיחה
                                         </a>
                                         <p className="text-xs text-center mt-3 text-white/50">בלי התחייבות. שלם רק על הזמן שאתה צורך.</p>
@@ -514,3 +514,4 @@ export default function Tracks() {
         </section>
     );
 }
+

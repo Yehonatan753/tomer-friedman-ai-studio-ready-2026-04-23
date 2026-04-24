@@ -1,7 +1,7 @@
 ===== FILE: src/components/AppShowcase.tsx =====
 ```tsx
 import { motion } from 'framer-motion';
-import { Utensils, Dumbbell, LineChart, MessageCircle, CheckCircle2, Apple, Smartphone } from 'lucide-react';
+import { Utensils, Dumbbell, LineChart, MessageCircle, CheckCircle2, ArrowLeft, HelpCircle } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -28,7 +28,7 @@ export default function AppShowcase() {
   return (
     <section id="app" className="py-32 px-6 md:px-16 lg:px-24 bg-surface relative overflow-hidden border-y border-white/5">
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#FF4D00 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#1c8dff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
       <div className="glow-blob top-1/2 right-0 bg-energy/30 translate-x-1/3 -translate-y-1/2"></div>
 
 
@@ -50,7 +50,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6"
           >
-            שליטה מלאה <span className="text-energy">בכף היד</span> שלך
+            כך TF Tracker עובד <span className="text-energy">ביום-יום</span>.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function AppShowcase() {
             transition={{ delay: 0.2 }}
             className="text-lg text-text-muted mb-8"
           >
-            התפריט, תכנית האימונים והמעקב - הכל באפליקציה אחת מקיפה. נוצרה במיוחד לתלמידים שלי. משתמשים חינמיים מקבלים גישה למחשבונים, מעקב משקל בסיסי וספריית מאמרים.
+            TF Tracker הוא מוצר הכניסה הדיגיטלי שלי. בפנים יש מערכת אחת שאוגדת אוכל, אימונים, מדידות ומעקב — בלי לקפוץ בין 4 אפליקציות, בלי למלא אקסלים, ובלי לנחש מה קורה מיום ליום. זה מוצר עצמאי שעומד לבד, ומי שרוצה להעמיק אחר כך לתהליך אישי — ההיסטוריה ממשיכה איתו, לא מתחילה מחדש.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -68,13 +68,13 @@ export default function AppShowcase() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#" className="btn-magnetic bg-energy text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center gap-2">
-              <span>הורד חינם (iOS)</span>
-              <Apple size={20} />
+            <a href="#" className="btn-magnetic bg-energy text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center gap-2">
+              <span>להתחיל עם TF Tracker</span>
+              <ArrowLeft size={20} />
             </a>
             <a href="#" className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/5 transition-colors font-medium text-white flex items-center justify-center gap-2">
-              <span>הורד חינם (Android)</span>
-              <Smartphone size={20} />
+              <span>להבין אם זה מתאים לי</span>
+              <HelpCircle size={20} />
             </a>
           </motion.div>
         </div>
@@ -94,8 +94,8 @@ export default function AppShowcase() {
                   <Utensils size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">תפריט תזונה דינמי</h3>
-                  <p className="text-text-muted leading-relaxed">גישה נוחה לתפריט היומי, תחליפי מזון אפשריים בכל ארוחה ומתכונים בלחיצת כפתור (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">שאלון קצר וכניסה מסודרת</h3>
+                  <p className="text-text-muted leading-relaxed">מתחילים בלי בלגן. המערכת בונה לך מבנה בסיסי כבר מהיום הראשון.</p>
                 </div>
               </motion.div>
 
@@ -104,8 +104,8 @@ export default function AppShowcase() {
                   <Dumbbell size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">תכנית אימונים חכמה</h3>
-                  <p className="text-text-muted leading-relaxed">מעקב אחר משקלים במכון, סרטוני הדרכה מדויקים לכל תרגיל ורישום התקדמות מלא (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">אוכל, ברקוד וצילום מזון</h3>
+                  <p className="text-text-muted leading-relaxed">לרשום ארוחה זה שניות. גם כשאתה בחוץ, גם כשאתה ממהר.</p>
                 </div>
               </motion.div>
 
@@ -114,8 +114,8 @@ export default function AppShowcase() {
                   <LineChart size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">מעקב מדדים</h3>
-                  <p className="text-text-muted leading-relaxed">גרפים ברורים המציגים את הירידה במשקל, אחוזי השומן, היקפים (חינם למשתמשים בסיסיים).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">מדידות, התקדמות ואימונים במקום אחד</h3>
+                  <p className="text-text-muted leading-relaxed">כל נתון נשמר, ההתקדמות נראית, וההמשך נבנה לפי מה שקורה בפועל.</p>
                 </div>
               </motion.div>
 
@@ -124,29 +124,32 @@ export default function AppShowcase() {
                   <MessageCircle size={24} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">קשר ישיר</h3>
-                  <p className="text-text-muted leading-relaxed">צ'אט מובנה לשאלות, התייעצויות ועדכונים שוטפים בזמן אמת איתי (פרימיום).</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">המשך טבעי לתהליך אישי</h3>
+                  <p className="text-text-muted leading-relaxed">כשתהיה מוכן לליווי עמוק יותר, עוברים בלי לאבד נתונים ובלי להתחיל מאפס.</p>
                 </div>
               </motion.div>
             </div>
 
             {/* Subscription Info */}
             <motion.div variants={itemVariants} className="mt-12 p-6 rounded-2xl bg-energy/5 border border-energy/20">
-              <h4 className="font-bold text-white mb-4">מסלולי מנוי לאפליקציה:</h4>
+              <h4 className="font-bold text-white mb-4">מסלולי TF Tracker:</h4>
               <ul className="space-y-3 text-sm text-text-muted">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">לקוחות ליווי (אונליין/פרונטלי):</strong> גישה מלאה לכל החיים (Lifetime Access).</span>
+                  <span><strong className="text-white">₪49.90 / חודשי:</strong> גמיש, ללא התחייבות.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">אחרי שיחת ייעוץ:</strong> 3 חודשים ראשונים בחינם למסלול הפרימיום.</span>
+                  <span><strong className="text-white">₪39.90 / לחודש במסלול שנתי:</strong> חיסכון של ₪120 לשנה.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="text-energy shrink-0 mt-0.5" />
-                  <span><strong className="text-white">משתמשים חדשים:</strong> חודש ראשון בחינם, לאחר מכן מנוי חודשי מתחדש.</span>
+                  <span><strong className="text-white">המשך טבעי למסלול אישי:</strong> כשמוכנים, עוברים בלי לאבד נתונים.</span>
                 </li>
               </ul>
+              <p className="mt-5 text-xs text-text-muted/70">
+                אלה מסכים אמיתיים מתוך המוצר. מה שאתה רואה כאן — זה מה שתראה ברגע שתיכנס.
+              </p>
             </motion.div>
           </motion.div>
 
@@ -179,9 +182,9 @@ export default function AppShowcase() {
                   <div className="flex justify-between items-center mb-4">
                     <div>
                       <div className="text-energy text-xs font-bold mb-1 tracking-wider uppercase">TF Tracker</div>
-                      <div className="text-2xl font-bold text-white">שלום, תומר</div>
+                      <div className="text-2xl font-bold text-white">שלום, דניאל</div>
                     </div>
-                    <div className="w-10 h-10 rounded-full border border-energy/50 flex items-center justify-center text-energy font-bold overflow-hidden shadow-[0_0_10px_rgba(255,77,0,0.3)] bg-energy/10 text-sm">
+                    <div className="w-10 h-10 rounded-full border border-energy/50 flex items-center justify-center text-energy font-bold overflow-hidden shadow-[0_0_10px_rgba(28,141,255,0.3)] bg-energy/10 text-sm">
                       TF
                     </div>
                   </div>
@@ -300,221 +303,287 @@ export default function AppShowcase() {
     </section>
   );
 }
-
 ```
 
-
-===== FILE: src/components/FreeValue.tsx =====
+===== FILE: src/components/Pathfinder.tsx =====
 ```tsx
-import { motion } from 'framer-motion';
-import { CheckCircle2, Smartphone } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Target, ChevronLeft, CheckCircle2, ChevronRight } from 'lucide-react';
 
-const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const QUESTIONS = [
+  {
+    id: 'q1',
+    title: 'מה המטרה העיקרית שלך?',
+    hint: 'בחר את המטרה שהכי חשובה לך כרגע',
+    options: [
+      { id: 'fat-loss', label: 'ירידה בשומן וחיטוב', desc: 'שינוי הרכב הגוף והצרת היקפים' },
+      { id: 'muscle', label: 'עלייה במסת שריר וכוח', desc: 'בניית שריר ושיפור ביצועים' },
+      { id: 'health', label: 'שיפור בריאות ואנרגיה', desc: 'איזון מדדים, חיוניות ותפקוד יומיומי' },
+      { id: 'habits', label: 'יציאה ממעגל הדיאטות', desc: 'בניית הרגלים לטווח ארוך בלי סבל' },
+    ]
+  },
+  {
+    id: 'q2',
+    title: 'מה האתגר הכי גדול שלך כרגע?',
+    hint: 'מה בדרך כלל גורם לך לעצור?',
+    options: [
+      { id: 'consistency', label: 'חוסר עקביות', desc: 'מתחיל חזק ואז מפסיק' },
+      { id: 'emotional', label: 'אכילה רגשית / חוסר שליטה', desc: 'בעיקר בשעות הערב או בסטרס' },
+      { id: 'confusion', label: 'בלבול מעודף מידע', desc: 'לא יודע למי להאמין ומה נכון' },
+      { id: 'time', label: 'חוסר זמן', desc: 'לו"ז צפוף שמקשה על התארגנות' },
+    ]
+  },
+  {
+    id: 'q3',
+    title: 'מה רמת הפעילות הגופנית שלך?',
+    hint: 'כמה אימונים בשבוע בממוצע?',
+    options: [
+      { id: 'none', label: 'לא מתאמן כרגע', desc: 'או פעילות קלה מאוד פה ושם' },
+      { id: 'low', label: '1-2 אימונים בשבוע', desc: 'משתדל לשמור על תנועה' },
+      { id: 'med', label: '3-4 אימונים בשבוע', desc: 'שגרת אימונים קבועה ויציבה' },
+      { id: 'high', label: 'מתאמן ברמה גבוהה', desc: '4+ אימונים עצימים בשבוע' },
+    ]
+  },
+  {
+    id: 'q4',
+    title: 'מה הניסיון הקודם שלך עם תזונה?',
+    hint: 'איך ניסית לפתור את זה בעבר?',
+    options: [
+      { id: 'never', label: 'אף פעם לא עשיתי תהליך מסודר', desc: 'זו פעם ראשונה שאני מחפש עזרה' },
+      { id: 'yoyo', label: 'ניסיתי דיאטות ועליתי בחזרה', desc: 'אפקט היו-יו המוכר' },
+      { id: 'know_stuck', label: 'יודע מה לעשות, לא מיישם', desc: 'הידע קיים, הביצוע חסר' },
+      { id: 'good_stuck', label: 'אוכל טוב אבל התוצאות תקועות', desc: 'מרגיש שעושה הכל נכון ואין שינוי' },
+    ]
+  },
+  {
+    id: 'q5',
+    title: 'איזו מסגרת ליווי תתאים לך עכשיו?',
+    hint: 'מה יעזור לך להצליח?',
+    options: [
+      { id: 'premium', label: 'ליווי אישי וצמוד', desc: 'מעקב שבועי, התאמות וזמינות מלאה' },
+      { id: 'independent', label: 'תוכנית מסודרת לעבודה עצמאית', desc: 'לקבל את הכלים ולרוץ לבד' },
+      { id: 'consult', label: 'פגישת ייעוץ ודיוק', desc: 'לעשות סדר חד פעמי בבלאגן' },
+      { id: 'unsure', label: 'לא בטוח', desc: 'אשמח להמלצה מקצועית' },
+    ]
+  }
+];
 
-export default function FreeValue() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+function calculateResult(answers: Record<string, string>) {
+  let score = 0;
+  if (answers.q5 === 'premium') score += 3;
+  if (answers.q5 === 'independent') score -= 2;
+  if (answers.q3 === 'none') score += 1;
+  if (answers.q4 === 'yoyo') score += 1;
+
+  if (score >= 2) return {
+    badge: 'ההמלצה שלי: מסלול פרונטלי',
+    title: 'אתה צריך מסגרת חזקה וליווי אישי קרוב.',
+    body: 'לפי התשובות שלך, ניסית בעבר להתמודד לבד וזה לא החזיק מעמד.',
+    points: ['מעקב צמוד בקליניקה', 'התאמה אישית מדויקת', 'מסגרת מחייבת', 'גישה לאפליקציית המעקב'],
+    cta: 'בוא נבדוק בשיחת ייעוץ קצרה אם אנחנו מתאימים לעבוד יחד.'
   };
-
-  const itemVariants = {
-    hidden: { y: '100%' },
-    show: { y: 0, transition: { duration: 1.2, ease } }
+  if (score >= -1) return {
+    badge: 'ההמלצה שלי: מסלול אונליין',
+    title: 'יש לך את הדרייב, אתה רק צריך את המערכת הנכונה.',
+    body: 'אתה יודע לעבוד עצמאית, אבל חסר לך הסדר והכוונה המקצועית.',
+    points: ['תוכנית מותאמת אישית', 'מעקב שבועי מרחוק', 'עצמאות בביצוע', 'גישה לאפליקציית המעקב'],
+    cta: 'כדי להתאים לך את מסלול האונליין המדויק, נדרשת שיחת אפיון קצרה.'
   };
-
-  return (
-    <section className="py-24 px-6 md:px-16 lg:px-24 bg-surface relative overflow-hidden border-y border-foreground/5">
-      <div className="glow-blob top-0 left-0 bg-energy opacity-10"></div>
-      <div className="glow-blob bottom-0 right-0 bg-energy-light opacity-10"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <div className="overflow-hidden pb-2">
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-energy/30 bg-energy/10 mb-6">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-energy opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-energy"></span>
-                </span>
-                <span className="text-xs font-bold tracking-widest text-energy uppercase">חינם לחלוטין</span>
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden pb-4">
-              <motion.h2 variants={itemVariants} className="text-4xl md:text-6xl font-heading font-black text-foreground mb-6 leading-tight">
-                קבל גישה חינמית <span className="text-energy">לאפליקציית המעקב שלי</span>
-              </motion.h2>
-            </div>
-
-            <div className="overflow-hidden pb-2">
-              <motion.p variants={itemVariants} className="text-lg text-text-muted mb-8 leading-relaxed">
-                לפני שאתה מתחייב לתהליך, קבל ממני את כל הכלים שאתה צריך כדי להתחיל.
-              </motion.p>
-            </div>
-
-            <ul className="space-y-4 mb-10">
-              {['מעקב אחר משקל ומדדים אישיים', 'מחשבון קלוריות ומאקרו מובנה', 'גישה למאגר מתכונים בריאים', 'מדריך וידאו קצר להתחלה נכונה'].map((item, i) => (
-                <div key={i} className="overflow-hidden pb-1">
-                  <motion.li variants={itemVariants} className="flex items-center gap-3 text-foreground">
-                    <CheckCircle2 size={20} className="text-energy shrink-0" />
-                    <span>{item}</span>
-                  </motion.li>
-                </div>
-              ))}
-            </ul>
-
-            <div className="overflow-hidden pb-2">
-              <motion.button 
-                variants={itemVariants} 
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - אפליקציית החינמית' } }));
-                }}
-                className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
-              >
-                <Smartphone size={20} />
-                <span>קבל גישה חינם עכשיו</span>
-              </motion.button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex justify-center lg:justify-end"
-          >
-            <div className="relative w-full max-w-md aspect-[3/4] glass-panel rounded-3xl border border-foreground/10 overflow-hidden shadow-2xl flex items-center justify-center group">
-              <div className="absolute inset-0 bg-gradient-to-br from-energy/20 to-bg opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-              <div className="relative z-10 text-center p-8">
-                <div className="w-16 h-16 bg-energy text-foreground rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <Smartphone size={32} />
-                </div>
-                <h3 className="text-3xl font-heading font-black text-foreground mb-2">TF. TRACKER</h3>
-                <p className="text-energy font-bold tracking-widest uppercase text-sm mb-6">אפליקציית מעקב אישית</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+  return {
+    badge: 'ההמלצה שלי: ייעוץ ממוקד',
+    title: 'המצב שלך טוב, אתה רק צריך דיוק.',
+    body: 'נראה שיש לך בסיס טוב ואתה יודע מה לעשות.',
+    points: ['מענה מדויק לשאלות ספציפיות', 'דיוק התפריט הקיים', 'כלים פרקטיים ליישום מיידי', 'בלי התחייבות לתהליך ארוך'],
+    cta: 'בוא נשב לשיחת ייעוץ ממוקדת ונדייק את מה שחסר לך.'
+  };
 }
 
-```
+export default function Pathfinder() {
+  const [currentStep, setCurrentStep] = useState(-1);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [leadData, setLeadData] = useState({ name: '', phone: '', email: '' });
 
+  const handleStart = () => setCurrentStep(0);
 
-===== FILE: src/components/Ingredients.tsx =====
-```tsx
-import { motion } from 'framer-motion';
-import { Dna, Dumbbell, CheckCircle2 } from 'lucide-react';
-
-const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
-
-export default function Ingredients() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      }
+  const handleAnswer = (questionId: string, optionId: string) => {
+    setAnswers(prev => ({ ...prev, [questionId]: optionId }));
+    if (currentStep < QUESTIONS.length - 1) {
+      setTimeout(() => setCurrentStep(prev => prev + 1), 350);
+    } else {
+      setTimeout(() => setCurrentStep(QUESTIONS.length), 350);
     }
   };
 
-  const itemVariants = {
-    hidden: { y: '100%' },
-    show: {
-      y: 0,
-      transition: { duration: 1.2, ease }
-    }
+  const handleLeadSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCurrentStep(QUESTIONS.length + 1);
+    setTimeout(() => setCurrentStep(QUESTIONS.length + 2), 2000);
   };
 
-  const data = [
-    {
-      id: "nutrition",
-      title: "תזונה שמתאימה לחיים שלך",
-      icon: "dna",
-      description: "לא עוד תפריט שגורם לך להרגיש רעב, מוגבל, או מנותק מהחיים. תפריט שבנוי סביב מה שאתה אוהב לאכול, מתי שנוח לך, ואיפה שאתה נמצא — גם במסעדה, גם בחופשה, גם באירוע.",
-      bullets: [
-        "מבוסס מחקר וידע עדכני, לא טרנדים מאינסטגרם",
-        "מותאם לגנטיקה, בריאות, העדפות, ולוח זמנים"
-      ]
-    },
-    {
-      id: "training",
-      title: "אימונים שלא גוזלים לך את היום",
-      icon: "barbell",
-      description: "שכח אימונים של שעה וחצי שמרגישים כמו עונש. 20 דקות, 3 פעמים בשבוע. זה מספיק. זו לא דעה — זו פיזיולוגיה. התוכנית מותאמת למה שהגוף שלך צריך, לא למה שהאינסטגרם אומר.",
-      bullets: [
-        "מותאם לפיזיולוגיה ולמגבלות שלך",
-        "תקופתיות מתקדמת (Periodization) — ככל שאתה מתקדם, התכנית מתקדמת"
-      ]
-    }
-  ];
+  const result = currentStep === QUESTIONS.length + 2 ? calculateResult(answers) : null;
 
   return (
-    <section id="ingredients" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="mb-20"
-        >
-          <div className="overflow-hidden pb-4">
-            <motion.h2
-              variants={itemVariants}
-              className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tighter"
-            >
-              למה זה עובד <span className="text-energy italic font-light">(כשכל השאר נכשל)</span>
-            </motion.h2>
+    <section id="pathfinder" className="py-24 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden">
+      <div className="max-w-3xl mx-auto relative z-10">
+        {currentStep < QUESTIONS.length + 2 && (
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-heading font-black text-foreground mb-4">
+              בוא נבין מה באמת <span className="text-energy">מעכב אותך</span>
+            </h2>
+            <p className="text-text-muted text-lg max-w-2xl mx-auto">
+              אבחון תזונתי קצר שיגיד לך בדיוק מה המצב, מה עוצר אותך, ומה הצעד הבא שמתאים לך.
+            </p>
           </div>
-        </motion.div>
+        )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {data.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 60 + (idx * 40) }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: idx * 0.2, ease }}
-              className={`glass-panel rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group ${idx === 1 ? 'md:mt-24' : ''}`}
-            >
-              <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-colors duration-700 ${idx === 0 ? 'bg-energy/5 group-hover:bg-energy/10' : 'bg-white/5 group-hover:bg-white/10'}`} />
+        <div className="glass-panel-dark rounded-3xl border border-foreground/5 p-8 md:p-12 min-h-[450px] flex flex-col justify-center relative overflow-hidden shadow-2xl">
+          {currentStep >= 0 && currentStep < QUESTIONS.length && (
+            <div className="absolute top-0 left-0 w-full h-1 bg-foreground/5">
+              <motion.div className="h-full bg-energy" initial={{ width: 0 }} animate={{ width: `${((currentStep + 1) / QUESTIONS.length) * 100}%` }} transition={{ duration: 0.3 }} />
+            </div>
+          )}
 
-              <div className="relative z-10 flex flex-col h-full">
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${idx === 0 ? 'bg-energy/10 text-energy' : 'bg-white/10 text-white'}`}>
-                  {item.icon === 'dna' ? <Dna size={32} strokeWidth={1.5} /> : <Dumbbell size={32} strokeWidth={1.5} />}
+          <AnimatePresence mode="wait">
+            {currentStep === -1 && (
+              <motion.div key="intro" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -50 }} className="text-center">
+                <div className="w-20 h-20 bg-energy/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-energy/20">
+                  <Target size={32} className="text-energy" />
+                </div>
+                <div className="space-y-4 mb-10 text-right max-w-sm mx-auto">
+                  {['5 שאלות קצרות, פחות מדקה', 'תוצאה מותאמת אישית בסוף', 'בלי מכירה, בלי ספאם'].map((text, i) => (
+                    <div key={i} className="flex items-center gap-3 text-text-muted">
+                      <div className="w-2 h-2 rounded-full bg-energy"></div>
+                      <span>{text}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-flex items-center gap-2 text-lg">
+                  <span>בוא נתחיל</span>
+                  <ChevronLeft size={20} />
+                </button>
+              </motion.div>
+            )}
+
+            {currentStep >= 0 && currentStep < QUESTIONS.length && (
+              <motion.div key={`question-${currentStep}`} initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-2xl mx-auto">
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-energy font-bold tracking-widest text-sm">שאלה {currentStep + 1} מתוך {QUESTIONS.length}</span>
+                  {currentStep > 0 && (
+                    <button onClick={() => setCurrentStep(prev => prev - 1)} className="text-text-muted hover:text-foreground flex items-center text-sm transition-colors">
+                      <ChevronRight size={16} className="ml-1" /> חזור
+                    </button>
+                  )}
                 </div>
 
-                <h3 className="text-3xl font-heading font-bold mb-6 text-white">{item.title}</h3>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-2">{QUESTIONS[currentStep].title}</h3>
+                {QUESTIONS[currentStep].hint && <p className="text-text-muted mb-8 text-sm">{QUESTIONS[currentStep].hint}</p>}
 
-                <p className="text-lg text-text-muted leading-relaxed font-medium mb-8">
-                  {item.description}
-                </p>
+                <div className="space-y-3">
+                  {QUESTIONS[currentStep].options.map((option) => {
+                    const isSelected = answers[QUESTIONS[currentStep].id] === option.id;
+                    return (
+                      <button
+                        key={option.id}
+                        onClick={() => handleAnswer(QUESTIONS[currentStep].id, option.id)}
+                        className={`w-full flex items-center gap-4 p-5 rounded-2xl border transition-all duration-200 text-right
+                          ${isSelected
+                            ? 'bg-energy/10 border-energy text-foreground shadow-[0_0_20px_rgba(28,141,255,0.15)]'
+                            : 'bg-foreground/5 border-foreground/10 text-text-muted hover:bg-foreground/10 hover:border-foreground/20 hover:text-foreground'
+                          }`}
+                      >
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'border-energy bg-energy' : 'border-foreground/20'}`}>
+                          {isSelected && <div className="w-1.5 h-1.5 bg-bg rounded-full"></div>}
+                        </div>
+                        <div>
+                          <span className="text-lg font-medium block">{option.label}</span>
+                          {option.desc && <span className="text-sm text-text-muted/80 block mt-0.5">{option.desc}</span>}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
 
-                <ul className="space-y-4 mt-auto">
-                  {item.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-3 text-white/80 bg-white/5 p-4 rounded-xl border border-white/5">
-                      <CheckCircle2 size={20} className={`${idx === 0 ? 'text-energy' : 'text-white'} shrink-0 mt-0.5`} />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          ))}
+            {currentStep === QUESTIONS.length && (
+              <motion.div key="lead" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl font-heading font-bold text-foreground mb-2">התוצאות שלך מוכנות</h3>
+                  <p className="text-text-muted">השאר פרטים ותקבל את האבחון האישי שלך</p>
+                </div>
+                <form onSubmit={handleLeadSubmit} className="space-y-5">
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-text-muted">שם מלא</label>
+                    <input required type="text" value={leadData.name} onChange={e => setLeadData({...leadData, name: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors" placeholder="השם שלך" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-text-muted">טלפון</label>
+                    <input required type="tel" value={leadData.phone} onChange={e => setLeadData({...leadData, phone: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="050-0000000" dir="ltr" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-text-muted">אימייל</label>
+                    <input required type="email" value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
+                  </div>
+                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] mt-4">
+                    קבל את התוצאות שלי
+                  </button>
+                </form>
+              </motion.div>
+            )}
+
+            {currentStep === QUESTIONS.length + 1 && (
+              <motion.div key="calculating" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-12">
+                <div className="relative w-20 h-20 mx-auto mb-6">
+                  <div className="absolute inset-0 border-4 border-foreground/10 rounded-full"></div>
+                  <div className="absolute inset-0 border-4 border-energy rounded-full border-t-transparent animate-spin"></div>
+                </div>
+                <h3 className="text-2xl font-heading font-bold text-foreground mb-2">מנתח את התשובות שלך...</h3>
+                <p className="text-text-muted">מתאים את האבחון המדויק עבורך</p>
+              </motion.div>
+            )}
+
+            {currentStep === QUESTIONS.length + 2 && result && (
+              <motion.div key="result" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full">
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl md:text-4xl font-heading font-black text-foreground mb-2">
+                    {leadData.name ? leadData.name.split(' ')[0] : 'היי'}, הנה מה שהאבחון מראה
+                  </h3>
+                </div>
+
+                <div className="border rounded-3xl p-8 mb-8 bg-bg relative overflow-hidden border-green-500/30">
+                  <div className="absolute top-0 right-0 w-full h-1 bg-green-500"></div>
+                  <div className="inline-block px-4 py-1.5 rounded-full text-sm font-bold tracking-widest mb-6 bg-green-500/10 text-green-500">
+                    {result.badge}
+                  </div>
+                  <h4 className="text-2xl font-bold text-foreground mb-4 leading-snug">{result.title}</h4>
+                  <p className="text-text-muted leading-relaxed mb-8">{result.body}</p>
+                  <ul className="space-y-4">
+                    {result.points.map((pt, i) => (
+                      <li key={i} className="flex items-start gap-3 text-foreground/90 pb-4 border-b border-foreground/5 last:border-0 last:pb-0">
+                        <CheckCircle2 size={20} className="shrink-0 mt-0.5 text-green-500" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="text-center bg-bg border border-foreground/5 rounded-3xl p-8">
+                  <div className="text-xl font-bold text-foreground mb-3">הצעד הבא שלך</div>
+                  <p className="text-text-muted mb-8 max-w-lg mx-auto">{result.cta}</p>
+                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
+                    לקבוע שיחת ייעוץ איתי
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
   );
 }
-
 ```
-
 
 ===== FILE: src/components/Tracks.tsx =====
 ```tsx
@@ -622,7 +691,7 @@ export default function Tracks() {
 
             {/* Radial Glow Background behind cards */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none"
-                 style={{ background: 'radial-gradient(ellipse at center, rgba(255,77,0,0.06) 0%, transparent 70%)', zIndex: 0 }} />
+                 style={{ background: 'radial-gradient(ellipse at center, rgba(28,141,255,0.06) 0%, transparent 70%)', zIndex: 0 }} />
 
             {/* Tab Content */}
             <div className="max-w-7xl mx-auto relative z-10">
@@ -791,7 +860,7 @@ export default function Tracks() {
                                                 </div>
                                             </div>
 
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                                                 מתחיל עכשיו
                                             </a>
                                             <p className="text-xs text-center mt-3 text-white/70">לנרשמים ל-6 חודשים: פגישת מיפוי ראשונית ללא עלות נוספת</p>
@@ -909,7 +978,7 @@ export default function Tracks() {
                                                 </div>
                                             </div>
 
-                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]">
+                                            <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="btn-magnetic w-full text-center py-4 rounded-xl font-bold bg-energy text-white hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                                                 מתחיל עכשיו
                                             </a>
                                             <p className="text-xs text-center mt-3 text-white/70">פגישה ראשונה ארוכה (75 דק׳) — אפיון מלא של מטרות, מגבלות והעדפות</p>
@@ -952,7 +1021,7 @@ export default function Tracks() {
                                             <div className="text-2xl font-bold text-white mb-1">₪520</div>
                                             <div className="text-xs text-text-muted">₪130/מדידה</div>
                                         </div>
-                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(255,77,0,0.1)]">
+                                        <div className="bg-bg border-2 border-energy/30 rounded-2xl p-6 lg:p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(28,141,255,0.1)]">
                                             <div className="absolute top-0 right-0 w-full h-1 bg-energy"></div>
                                             <div className="text-energy text-sm mb-2 font-bold">8 מדידות</div>
                                             <div className="text-2xl font-bold text-white mb-1">₪880</div>
@@ -1001,7 +1070,7 @@ export default function Tracks() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.5 }}
-                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,77,0,0.05)]"
+                                    className="bg-surface-hover border border-white/10 p-12 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-[0_0_50px_rgba(28,141,255,0.05)]"
                                 >
                                     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-energy/5 to-transparent pointer-events-none"></div>
                                     <PhoneCall className="w-16 h-16 text-energy mx-auto mb-8" strokeWidth={1.5} />
@@ -1020,7 +1089,7 @@ export default function Tracks() {
                                             <span className="font-bold text-xl text-white">₪{SITE_DATA.services.phone.additionalMinutePrice}</span>
                                         </div>
 
-                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF4D00] to-[#CC3D00] text-white hover:shadow-[0_0_30px_rgba(255,77,0,0.4)] hover:scale-[1.02]">
+                                        <a href="https://api.whatsapp.com/send?phone=972546699574&text=%D7%94%D7%99%D7%99%20%D7%AA%D7%95%D7%9E%D7%A8%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" className="w-full mt-4 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-[#1c8dff] to-[#0f5fb3] text-white hover:shadow-[0_0_30px_rgba(28,141,255,0.4)] hover:scale-[1.02]">
                                             תיאום שיחה
                                         </a>
                                         <p className="text-xs text-center mt-3 text-white/50">בלי התחייבות. שלם רק על הזמן שאתה צורך.</p>
@@ -1034,9 +1103,7 @@ export default function Tracks() {
         </section>
     );
 }
-
 ```
-
 
 ===== FILE: src/components/InsuranceBanner.tsx =====
 ```tsx
@@ -1163,9 +1230,7 @@ export default function InsuranceBanner() {
     </section>
   );
 }
-
 ```
-
 
 ===== FILE: src/components/Testimonials.tsx =====
 ```tsx
@@ -1217,7 +1282,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: (idx % 3) * 0.1, duration: 0.6, ease }}
-              className="break-inside-avoid bg-[#0a0a0a] border border-white/5 hover:border-energy/30 rounded-3xl p-8 flex flex-col relative transition-colors shadow-2xl hover:shadow-[0_15px_40px_rgba(255,77,0,0.1)] group"
+              className="break-inside-avoid bg-[#0a0a0a] border border-white/5 hover:border-energy/30 rounded-3xl p-8 flex flex-col relative transition-colors shadow-2xl hover:shadow-[0_15px_40px_rgba(28,141,255,0.1)] group"
             >
               <Quote size={32} className="text-energy/20 mb-6 rotate-180 group-hover:text-energy/50 transition-colors" />
               <div className="flex gap-1 mb-6">
@@ -1253,7 +1318,7 @@ export default function Testimonials() {
          >
             <div className="absolute top-0 right-0 w-96 h-96 bg-energy/10 rounded-full blur-[100px]"></div>
             
-            <div className="w-56 h-56 xl:w-72 xl:h-72 shrink-0 rounded-full border-[6px] border-[#111] overflow-hidden relative shadow-[0_0_50px_rgba(255,77,0,0.15)] glow-blob-container z-10">
+            <div className="w-56 h-56 xl:w-72 xl:h-72 shrink-0 rounded-full border-[6px] border-[#111] overflow-hidden relative shadow-[0_0_50px_rgba(28,141,255,0.15)] glow-blob-container z-10">
                 <div className="absolute inset-0 bg-[url('/tomer-measure.png')] bg-cover bg-top mix-blend-normal"></div>
             </div>
  
@@ -1272,5 +1337,5 @@ export default function Testimonials() {
     </section>
   );
 }
-
 ```
+

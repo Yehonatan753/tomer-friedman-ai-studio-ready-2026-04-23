@@ -7,6 +7,8 @@ Open the folder:
 
 Read the files there in numerical order.
 Start with:
+00_ORDERED_FILES_FOR_GEMINI/00B_FOLLOWUP_CORRECTION_PROMPT.txt
+Then read:
 00_ORDERED_FILES_FOR_GEMINI/01_STRICT_EXECUTION_PROMPT.txt
 Then read:
 00_ORDERED_FILES_FOR_GEMINI/01A_AI_STUDIO_FEATURE_REQUIREMENTS.txt
@@ -23,8 +25,11 @@ You must also handle the AI Studio feature requests:
 
 If you struggle to navigate the repo, use the ordered TXT files as the source of truth because they contain the important code and instructions in sequence.
 
-Your first response must be the Compliance Audit requested in 01_STRICT_EXECUTION_PROMPT.txt.
+Correction:
+The black/orange site is the best conversion base, but the requested final direction is a premium blue/white translation with fewer duplicates. Do not keep it fully orange/black, and do not flatten it into bland white SaaS.
+
+Your first response must be the Failure Correction and Compliance Audit requested in 00B_FOLLOWUP_CORRECTION_PROMPT.txt and 01_STRICT_EXECUTION_PROMPT.txt.
 Do not give a vague plan.
 Do not redesign from scratch.
-Do not use the later blue/white version.
-Do not delete the strong black/orange sections.
+Do not use the failed later blue/white version blindly.
+Do not delete the strong sections from the old version.

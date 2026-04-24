@@ -4,21 +4,21 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+const links = [
+  { name: 'ראשי', href: '#hero' },
+  { name: 'אודות', href: '#commitment' },
+  { name: 'מסלולים', href: '#tracks' },
+  { name: 'אפליקציה', href: '#app' },
+  { name: 'תהליך', href: '#process' },
+  { name: 'המלצות', href: '#testimonials' },
+  { name: 'הרצאות', href: '#seminars' },
+  { name: 'שאלות', href: '#faq' },
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-
-  const links = [
-    { name: 'ראשי', href: '#hero' },
-    { name: 'אודות', href: '#about' },
-    { name: 'מסלולים', href: '#tracks' },
-    { name: 'אפליקציה', href: '#app' },
-    { name: 'תהליך', href: '#process' },
-    { name: 'המלצות', href: '#testimonials' },
-    { name: 'הרצאות', href: '#courses' },
-    { name: 'שאלות', href: '#faq' },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,7 +81,7 @@ export default function Header() {
                   href={link.href}
                   className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                     isActive
-                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(255,77,0,0.2)]'
+                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(28,141,255,0.2)]'
                       : 'text-text-muted hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -89,7 +89,7 @@ export default function Header() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(255,77,0,0.8)]"
+                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(28,141,255,0.8)]"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -100,7 +100,7 @@ export default function Header() {
 
           {/* CTA Button (Desktop) */}
           <div className="hidden md:block">
-            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(255,77,0,0.4)]">
+            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(28,141,255,0.4)]">
               צור קשר
             </a>
           </div>
@@ -140,7 +140,7 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: links.length * 0.1 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]"
+              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
             >
               צור קשר
             </motion.a>
@@ -150,9 +150,7 @@ export default function Header() {
     </>
   );
 }
-
 ```
-
 
 ===== FILE: src/components/Hero.tsx =====
 ```tsx
@@ -205,7 +203,7 @@ export default function Hero() {
           background: useMotionTemplate`
             radial-gradient(
               600px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 77, 0, 0.15),
+              rgba(28, 141, 255, 0.16),
               transparent 80%
             )
           `,
@@ -215,7 +213,7 @@ export default function Hero() {
       {/* Dramatic Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/image1.jpg"
+          src="/tomer-office-highres.png"
           alt="Gym and Training Environment"
           className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-20 scale-105"
           referrerPolicy="no-referrer"
@@ -237,12 +235,12 @@ export default function Hero() {
         className="absolute bottom-0 left-0 lg:left-10 w-[350px] lg:w-[500px] h-[600px] lg:h-[800px] hidden md:block z-10 pointer-events-none"
       >
         <div className="w-full h-full relative overflow-hidden flex items-end justify-center">
-             {/* Orange background behind the image */}
+             {/* Brand-color background behind the image */}
              <div className="absolute inset-0 bg-energy/20"></div>
              {/* The image itself without opacity reduction for better resolution */}
              <div className="absolute inset-0 bg-[url('/tomer-blue-shirt.png')] bg-cover bg-top" style={{ maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)' }}></div>
              
-             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(255,77,0,0.3)]">
+             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(28,141,255,0.25)]">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center border border-energy/50 overflow-hidden bg-energy text-white font-heading font-black text-sm">
                     TF
                 </div>
@@ -289,7 +287,7 @@ export default function Hero() {
             variants={itemVariants}
             className="text-6xl md:text-[7rem] font-heading font-black text-white leading-[1.1] tracking-tighter"
           >
-            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-orange-400">האחרון</span><br/>
+            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-blue-300">האחרון</span><br/>
             שתצטרך לעשות.
           </motion.h1>
         </div>
@@ -310,7 +308,7 @@ export default function Hero() {
           >
             <a
               href="#pathfinder"
-              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(255,77,0,0.6)] flex items-center justify-center"
+              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(28,141,255,0.45)] flex items-center justify-center"
             >
               <span>התאם לי תוכנית</span>
               <ArrowLeft size={20} className="mr-3 transition-transform group-hover:-translate-x-1" />
@@ -354,14 +352,101 @@ export default function Hero() {
     </section>
   );
 }
-
 ```
-
 
 ===== FILE: src/components/Process.tsx =====
 ```tsx
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+
+type Step = {
+  num: string;
+  title: string;
+  desc: string;
+  note: string;
+};
+
+type ProcessStepProps = {
+  step: Step;
+  idx: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+};
+
+function ProcessStep({ step, idx, total, scrollYProgress }: ProcessStepProps) {
+  const isEven = idx % 2 !== 0;
+  const stepProgressStart = idx / Math.max(total, 1);
+  const stepProgressEnd = stepProgressStart + 0.16;
+
+  const glowOpacity = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    [0.2, 1]
+  );
+
+  const borderColor = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    ["rgba(255,255,255,0.1)", "rgba(28,141,255,1)"]
+  );
+
+  const scale = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    [1, 1.1]
+  );
+
+  const nodeColor = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    ["#ffffff", "#1c8dff"]
+  );
+
+  return (
+    <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
+      >
+        <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(28,141,255,0.15)] group">
+          <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
+          <p className="text-text-muted mb-4">{step.desc}</p>
+          <p className="text-sm text-energy/80 italic">"{step.note}"</p>
+        </div>
+      </motion.div>
+
+      <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
+        <motion.div
+          className="absolute inset-0 rounded-full bg-energy/20 blur-md"
+          style={{ opacity: glowOpacity }}
+        />
+        <motion.div
+          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
+          style={{
+            borderColor,
+            borderWidth: '2px',
+            borderStyle: 'solid',
+            scale
+          }}
+          whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(28,141,255,0.6)", borderColor: "rgba(28,141,255,1)" }}
+        >
+          <motion.span style={{ color: nodeColor }}>
+            {step.num}
+          </motion.span>
+        </motion.div>
+      </div>
+
+      <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(28,141,255,0.3)]">
+        {step.num}
+      </div>
+
+      <div className="hidden md:block flex-1 w-1/2"></div>
+    </div>
+  );
+}
 
 export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -375,21 +460,27 @@ export default function Process() {
   const steps = [
     {
       num: "1",
-      title: "אפיון והגדרת מטרות",
-      desc: "פגישת היכרות מעמיקה להבנת אורח החיים שלך, היסטוריה רפואית, העדפות תזונתיות והגדרת יעדים ריאליים ומדויקים.",
-      note: "בשלב זה אני אוסף את כל המידע הדרוש כדי לתפור את החליפה המושלמת עבורך."
+      title: "אבחון",
+      desc: "מתחילים במדידות אמיתיות, לא בהערכה. הרכב גוף, היקפים, בדיקות אם יש. בלי זה, כל תפריט הוא ניחוש.",
+      note: "בשלב הזה אני רוצה להבין מה באמת קורה, לא מה נדמה שקורה."
     },
     {
       num: "2",
-      title: "התאמה מדעית",
-      desc: "בניית תפריט תזונה ותכנית אימונים מבוססי מחקר, המותאמים אישית לפיזיולוגיה שלך ולסדר היום שלך.",
-      note: "התאמה אישית היא המפתח להתמדה. התכנית צריכה להתאים לחיים שלך, לא להפך."
+      title: "בנייה",
+      desc: "אני בונה לך מסגרת — תזונה, אימונים ומדידות — שמתחברת לחיים שלך, לא לחיים של מישהו אחר שראיתי באפליקציה.",
+      note: "התכנית צריכה להתאים אליך. לא אתה אליה."
     },
     {
       num: "3",
-      title: "מעקב ואופטימיזציה",
-      desc: "ליווי צמוד, שקילות, מדידות ועדכוני תכנית שוטפים כדי להבטיח התקדמות מתמדת ושבירת תקיעויות.",
-      note: "הגוף משתנה ומסתגל, ולכן התכנית חייבת להיות דינמית ולהשתנות יחד איתו."
+      title: "ליווי",
+      desc: "מענה יומיומי. לא פעם בשבועיים כשאתה נזכר. גם כשנשבר, גם כשאתה בחופש, גם כשהשתנה משהו.",
+      note: "אני לא משאיר אותך לבד עם קובץ ותפריט."
+    },
+    {
+      num: "4",
+      title: "התמדה",
+      desc: "בסוף התהליך לא נשארים תלויים בי. בונים את הרצף שאפשר להחזיק גם אחרי שסיימנו לעבוד יחד.",
+      note: "המטרה היא לא רק תוצאה. המטרה היא תוצאה שאתה יודע לשמור."
     }
   ];
 
@@ -414,97 +505,21 @@ export default function Process() {
 
           {/* Animated Fill Line */}
           <motion.div
-            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-orange-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(255,77,0,0.8)]"
+            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-blue-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(28,141,255,0.8)]"
             style={{ height: lineHeight }}
           ></motion.div>
 
           <div className="flex flex-col gap-24 relative z-10">
-            {steps.map((step, idx) => {
-              const isEven = idx % 2 !== 0;
-              const stepProgressStart = idx * 0.33;
-              const stepProgressEnd = stepProgressStart + 0.1;
-
-              const glowOpacity = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                [0.2, 1]
-              );
-
-              const borderColor = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                ["rgba(255,255,255,0.1)", "rgba(255,77,0,1)"]
-              );
-
-              const scale = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                [1, 1.1]
-              );
-
-              return (
-                <div key={idx} className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
-
-                  {/* Content Box */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6 }}
-                    className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
-                  >
-                    <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,77,0,0.15)] group">
-                      <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
-                      <p className="text-text-muted mb-4">{step.desc}</p>
-                      <p className="text-sm text-energy/80 italic">"{step.note}"</p>
-                    </div>
-                  </motion.div>
-
-                  {/* Center Node */}
-                  <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-energy/20 blur-md"
-                      style={{ opacity: glowOpacity }}
-                    />
-                    <motion.div
-                      className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
-                      style={{
-                        borderColor: borderColor,
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                        scale: scale
-                      }}
-                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(255,77,0,0.6)", borderColor: "rgba(255,77,0,1)" }}
-                    >
-                      <motion.span
-                        style={{
-                          color: useTransform(scrollYProgress, [stepProgressStart, stepProgressEnd], ["#ffffff", "#FF4D00"])
-                        }}
-                      >
-                        {step.num}
-                      </motion.span>
-                    </motion.div>
-                  </div>
-
-                  {/* Mobile Node (Static) */}
-                  <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(255,77,0,0.3)]">
-                    {step.num}
-                  </div>
-
-                  {/* Empty Space for alignment */}
-                  <div className="hidden md:block flex-1 w-1/2"></div>
-                </div>
-              );
-            })}
+            {steps.map((step, idx) => (
+              <ProcessStep key={step.num} step={step} idx={idx} total={steps.length} scrollYProgress={scrollYProgress} />
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 ```
-
 
 ===== FILE: src/components/VSL.tsx =====
 ```tsx
@@ -523,19 +538,19 @@ export default function VSL() {
           className="relative"
         >
           {/* Glowing border effect */}
-          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-orange-600 opacity-30 blur-xl"></div>
+          <div className="absolute -inset-1 rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-energy to-blue-700 opacity-30 blur-xl"></div>
 
           <div className="relative rounded-2xl md:rounded-[2rem] border-2 border-white/10 bg-surface overflow-hidden aspect-video shadow-2xl flex items-center justify-center group cursor-pointer">
             {/* Fallback / Placeholder Image */}
             <img
-              src="/image4.jpg"
+              src="/tomer-suitcase-photo.jpeg"
               alt="Tomer Fridman VSL"
               className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
 
             {/* Play Button */}
-            <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(255,77,0,0.5)]">
+            <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-energy/90 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-[0_0_40px_rgba(28,141,255,0.5)]">
               <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-2" fill="currentColor" />
             </div>
 
@@ -552,396 +567,5 @@ export default function VSL() {
     </section>
   );
 }
-
 ```
 
-
-===== FILE: src/components/PainPointGap.tsx =====
-```tsx
-import { motion } from 'framer-motion';
-import { Check, X } from 'lucide-react';
-
-export default function PainPointGap() {
-  return (
-    <section className="pt-32 pb-12 px-6 md:px-16 lg:px-24 relative overflow-hidden">
-      {/* Gradient background for differentiation */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bg via-surface/30 to-bg pointer-events-none"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-energy/5 rounded-full blur-[120px] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-6xl font-heading font-black text-white">
-            למה דיאטות לא עובדות <span className="text-energy italic font-light">(ומה כן)</span>
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
-          {/* Decorative VS divider */}
-          <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="w-16 h-16 rounded-full bg-surface border-2 border-energy/30 flex items-center justify-center shadow-[0_0_30px_rgba(255,77,0,0.2)]">
-              <span className="text-energy font-black text-lg">VS</span>
-            </div>
-          </div>
-
-          {/* The Old Way */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-red-500/5 border border-red-500/10 rounded-3xl p-8 md:p-12 relative overflow-hidden backdrop-blur-sm"
-          >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-            <h3 className="text-2xl font-bold text-red-400 mb-8 border-b border-red-500/10 pb-4">
-              הדרך הישנה
-            </h3>
-            <ul className="space-y-6">
-              {[
-                "תפריטים גנריים שלא לוקחים בחשבון את החיים האמיתיים שלך",
-                "אימונים של שעה+ שנגמרים אחרי שבועיים כי אין זמן או כוח",
-                "דיאטות קיצוניות שמסתיימות באותו משקל — פלוס עוד קילו",
-                "מאמנים שנותנים תפריט פוטוקופי זהה לכל לקוח"
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5">
-                    <X size={14} className="text-red-400/80" />
-                  </div>
-                  <span className="text-white/70 font-medium leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Tomer's Way */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-energy/5 border border-energy/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_40px_rgba(255,77,0,0.05)] backdrop-blur-sm"
-          >
-            <div className="absolute top-0 right-0 w-48 h-48 bg-energy/20 blur-3xl translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"></div>
-            <h3 className="text-2xl font-bold text-energy mb-8 border-b border-energy/10 pb-4 relative z-10">
-              הגישה של תומר
-            </h3>
-            <ul className="space-y-6 relative z-10">
-              {[
-                "תפריט שמתאים לאורח החיים שלך — מסעדות, אירועים, חופשות",
-                "אימונים של 20 דקות, 3 פעמים בשבוע. זה הכל.",
-                "תוצאות שנשארות כי הגישה מדעית, לא רגשית",
-                "תזונאי קליני אחד. 22 שנות ניסיון. בלי מתמחים, בלי צוות."
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-energy/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_10px_rgba(255,77,0,0.3)]">
-                    <Check size={14} className="text-energy" strokeWidth={3} />
-                  </div>
-                  <span className="text-white font-medium leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center text-text-muted mt-10 text-lg tracking-wide"
-        >
-          בחר את המסלול שמתאים לך.
-        </motion.p>
-      </div>
-    </section>
-  );
-}
-
-```
-
-
-===== FILE: src/components/Pathfinder.tsx =====
-```tsx
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Target, ChevronLeft, CheckCircle2, ChevronRight } from 'lucide-react';
-
-const QUESTIONS = [
-  {
-    id: 'q1',
-    title: 'מה המטרה העיקרית שלך?',
-    hint: 'בחר את המטרה שהכי חשובה לך כרגע',
-    options: [
-      { id: 'fat-loss', label: 'ירידה בשומן וחיטוב', desc: 'שינוי הרכב הגוף והצרת היקפים' },
-      { id: 'muscle', label: 'עלייה במסת שריר וכוח', desc: 'בניית שריר ושיפור ביצועים' },
-      { id: 'health', label: 'שיפור בריאות ואנרגיה', desc: 'איזון מדדים, חיוניות ותפקוד יומיומי' },
-      { id: 'habits', label: 'יציאה ממעגל הדיאטות', desc: 'בניית הרגלים לטווח ארוך בלי סבל' },
-    ]
-  },
-  {
-    id: 'q2',
-    title: 'מה האתגר הכי גדול שלך כרגע?',
-    hint: 'מה בדרך כלל גורם לך לעצור?',
-    options: [
-      { id: 'consistency', label: 'חוסר עקביות', desc: 'מתחיל חזק ואז מפסיק' },
-      { id: 'emotional', label: 'אכילה רגשית / חוסר שליטה', desc: 'בעיקר בשעות הערב או בסטרס' },
-      { id: 'confusion', label: 'בלבול מעודף מידע', desc: 'לא יודע למי להאמין ומה נכון' },
-      { id: 'time', label: 'חוסר זמן', desc: 'לו"ז צפוף שמקשה על התארגנות' },
-    ]
-  },
-  {
-    id: 'q3',
-    title: 'מה רמת הפעילות הגופנית שלך?',
-    hint: 'כמה אימונים בשבוע בממוצע?',
-    options: [
-      { id: 'none', label: 'לא מתאמן כרגע', desc: 'או פעילות קלה מאוד פה ושם' },
-      { id: 'low', label: '1-2 אימונים בשבוע', desc: 'משתדל לשמור על תנועה' },
-      { id: 'med', label: '3-4 אימונים בשבוע', desc: 'שגרת אימונים קבועה ויציבה' },
-      { id: 'high', label: 'מתאמן ברמה גבוהה', desc: '4+ אימונים עצימים בשבוע' },
-    ]
-  },
-  {
-    id: 'q4',
-    title: 'מה הניסיון הקודם שלך עם תזונה?',
-    hint: 'איך ניסית לפתור את זה בעבר?',
-    options: [
-      { id: 'never', label: 'אף פעם לא עשיתי תהליך מסודר', desc: 'זו פעם ראשונה שאני מחפש עזרה' },
-      { id: 'yoyo', label: 'ניסיתי דיאטות ועליתי בחזרה', desc: 'אפקט היו-יו המוכר' },
-      { id: 'know_stuck', label: 'יודע מה לעשות, לא מיישם', desc: 'הידע קיים, הביצוע חסר' },
-      { id: 'good_stuck', label: 'אוכל טוב אבל התוצאות תקועות', desc: 'מרגיש שעושה הכל נכון ואין שינוי' },
-    ]
-  },
-  {
-    id: 'q5',
-    title: 'איזו מסגרת ליווי תתאים לך עכשיו?',
-    hint: 'מה יעזור לך להצליח?',
-    options: [
-      { id: 'premium', label: 'ליווי אישי וצמוד', desc: 'מעקב שבועי, התאמות וזמינות מלאה' },
-      { id: 'independent', label: 'תוכנית מסודרת לעבודה עצמאית', desc: 'לקבל את הכלים ולרוץ לבד' },
-      { id: 'consult', label: 'פגישת ייעוץ ודיוק', desc: 'לעשות סדר חד פעמי בבלאגן' },
-      { id: 'unsure', label: 'לא בטוח', desc: 'אשמח להמלצה מקצועית' },
-    ]
-  }
-];
-
-function calculateResult(answers: Record<string, string>) {
-  let score = 0;
-  if (answers.q5 === 'premium') score += 3;
-  if (answers.q5 === 'independent') score -= 2;
-  if (answers.q3 === 'none') score += 1;
-  if (answers.q4 === 'yoyo') score += 1;
-
-  if (score >= 2) return {
-    badge: 'ההמלצה שלי: מסלול פרונטלי',
-    title: 'אתה צריך מסגרת חזקה וליווי אישי קרוב.',
-    body: 'לפי התשובות שלך, ניסית בעבר להתמודד לבד וזה לא החזיק מעמד.',
-    points: ['מעקב צמוד בקליניקה', 'התאמה אישית מדויקת', 'מסגרת מחייבת', 'גישה לאפליקציית המעקב'],
-    cta: 'בוא נבדוק בשיחת ייעוץ קצרה אם אנחנו מתאימים לעבוד יחד.'
-  };
-  if (score >= -1) return {
-    badge: 'ההמלצה שלי: מסלול אונליין',
-    title: 'יש לך את הדרייב, אתה רק צריך את המערכת הנכונה.',
-    body: 'אתה יודע לעבוד עצמאית, אבל חסר לך הסדר והכוונה המקצועית.',
-    points: ['תוכנית מותאמת אישית', 'מעקב שבועי מרחוק', 'עצמאות בביצוע', 'גישה לאפליקציית המעקב'],
-    cta: 'כדי להתאים לך את מסלול האונליין המדויק, נדרשת שיחת אפיון קצרה.'
-  };
-  return {
-    badge: 'ההמלצה שלי: ייעוץ ממוקד',
-    title: 'המצב שלך טוב, אתה רק צריך דיוק.',
-    body: 'נראה שיש לך בסיס טוב ואתה יודע מה לעשות.',
-    points: ['מענה מדויק לשאלות ספציפיות', 'דיוק התפריט הקיים', 'כלים פרקטיים ליישום מיידי', 'בלי התחייבות לתהליך ארוך'],
-    cta: 'בוא נשב לשיחת ייעוץ ממוקדת ונדייק את מה שחסר לך.'
-  };
-}
-
-export default function Pathfinder() {
-  const [currentStep, setCurrentStep] = useState(-1);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [leadData, setLeadData] = useState({ name: '', phone: '', email: '' });
-
-  const handleStart = () => setCurrentStep(0);
-
-  const handleAnswer = (questionId: string, optionId: string) => {
-    setAnswers(prev => ({ ...prev, [questionId]: optionId }));
-    if (currentStep < QUESTIONS.length - 1) {
-      setTimeout(() => setCurrentStep(prev => prev + 1), 350);
-    } else {
-      setTimeout(() => setCurrentStep(QUESTIONS.length), 350);
-    }
-  };
-
-  const handleLeadSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCurrentStep(QUESTIONS.length + 1);
-    setTimeout(() => setCurrentStep(QUESTIONS.length + 2), 2000);
-  };
-
-  const result = currentStep === QUESTIONS.length + 2 ? calculateResult(answers) : null;
-
-  return (
-    <section id="pathfinder" className="py-24 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden">
-      <div className="max-w-3xl mx-auto relative z-10">
-        {currentStep < QUESTIONS.length + 2 && (
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-heading font-black text-foreground mb-4">
-              בוא נבין מה באמת <span className="text-energy">מעכב אותך</span>
-            </h2>
-            <p className="text-text-muted text-lg max-w-2xl mx-auto">
-              אבחון תזונתי קצר שיגיד לך בדיוק מה המצב, מה עוצר אותך, ומה הצעד הבא שמתאים לך.
-            </p>
-          </div>
-        )}
-
-        <div className="glass-panel-dark rounded-3xl border border-foreground/5 p-8 md:p-12 min-h-[450px] flex flex-col justify-center relative overflow-hidden shadow-2xl">
-          {currentStep >= 0 && currentStep < QUESTIONS.length && (
-            <div className="absolute top-0 left-0 w-full h-1 bg-foreground/5">
-              <motion.div className="h-full bg-energy" initial={{ width: 0 }} animate={{ width: `${((currentStep + 1) / QUESTIONS.length) * 100}%` }} transition={{ duration: 0.3 }} />
-            </div>
-          )}
-
-          <AnimatePresence mode="wait">
-            {currentStep === -1 && (
-              <motion.div key="intro" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -50 }} className="text-center">
-                <div className="w-20 h-20 bg-energy/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-energy/20">
-                  <Target size={32} className="text-energy" />
-                </div>
-                <div className="space-y-4 mb-10 text-right max-w-sm mx-auto">
-                  {['5 שאלות קצרות, פחות מדקה', 'תוצאה מותאמת אישית בסוף', 'בלי מכירה, בלי ספאם'].map((text, i) => (
-                    <div key={i} className="flex items-center gap-3 text-text-muted">
-                      <div className="w-2 h-2 rounded-full bg-energy"></div>
-                      <span>{text}</span>
-                    </div>
-                  ))}
-                </div>
-                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] inline-flex items-center gap-2 text-lg">
-                  <span>בוא נתחיל</span>
-                  <ChevronLeft size={20} />
-                </button>
-              </motion.div>
-            )}
-
-            {currentStep >= 0 && currentStep < QUESTIONS.length && (
-              <motion.div key={`question-${currentStep}`} initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-2xl mx-auto">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-energy font-bold tracking-widest text-sm">שאלה {currentStep + 1} מתוך {QUESTIONS.length}</span>
-                  {currentStep > 0 && (
-                    <button onClick={() => setCurrentStep(prev => prev - 1)} className="text-text-muted hover:text-foreground flex items-center text-sm transition-colors">
-                      <ChevronRight size={16} className="ml-1" /> חזור
-                    </button>
-                  )}
-                </div>
-
-                <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-2">{QUESTIONS[currentStep].title}</h3>
-                {QUESTIONS[currentStep].hint && <p className="text-text-muted mb-8 text-sm">{QUESTIONS[currentStep].hint}</p>}
-
-                <div className="space-y-3">
-                  {QUESTIONS[currentStep].options.map((option) => {
-                    const isSelected = answers[QUESTIONS[currentStep].id] === option.id;
-                    return (
-                      <button
-                        key={option.id}
-                        onClick={() => handleAnswer(QUESTIONS[currentStep].id, option.id)}
-                        className={`w-full flex items-center gap-4 p-5 rounded-2xl border transition-all duration-200 text-right
-                          ${isSelected
-                            ? 'bg-energy/10 border-energy text-foreground shadow-[0_0_20px_rgba(255,77,0,0.15)]'
-                            : 'bg-foreground/5 border-foreground/10 text-text-muted hover:bg-foreground/10 hover:border-foreground/20 hover:text-foreground'
-                          }`}
-                      >
-                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'border-energy bg-energy' : 'border-foreground/20'}`}>
-                          {isSelected && <div className="w-1.5 h-1.5 bg-bg rounded-full"></div>}
-                        </div>
-                        <div>
-                          <span className="text-lg font-medium block">{option.label}</span>
-                          {option.desc && <span className="text-sm text-text-muted/80 block mt-0.5">{option.desc}</span>}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-
-            {currentStep === QUESTIONS.length && (
-              <motion.div key="lead" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="w-full max-w-xl mx-auto">
-                <div className="text-center mb-8">
-                  <h3 className="text-3xl font-heading font-bold text-foreground mb-2">התוצאות שלך מוכנות</h3>
-                  <p className="text-text-muted">השאר פרטים ותקבל את האבחון האישי שלך</p>
-                </div>
-                <form onSubmit={handleLeadSubmit} className="space-y-5">
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-text-muted">שם מלא</label>
-                    <input required type="text" value={leadData.name} onChange={e => setLeadData({...leadData, name: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors" placeholder="השם שלך" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-text-muted">טלפון</label>
-                    <input required type="tel" value={leadData.phone} onChange={e => setLeadData({...leadData, phone: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="050-0000000" dir="ltr" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-text-muted">אימייל</label>
-                    <input required type="email" value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
-                  </div>
-                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] mt-4">
-                    קבל את התוצאות שלי
-                  </button>
-                </form>
-              </motion.div>
-            )}
-
-            {currentStep === QUESTIONS.length + 1 && (
-              <motion.div key="calculating" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-12">
-                <div className="relative w-20 h-20 mx-auto mb-6">
-                  <div className="absolute inset-0 border-4 border-foreground/10 rounded-full"></div>
-                  <div className="absolute inset-0 border-4 border-energy rounded-full border-t-transparent animate-spin"></div>
-                </div>
-                <h3 className="text-2xl font-heading font-bold text-foreground mb-2">מנתח את התשובות שלך...</h3>
-                <p className="text-text-muted">מתאים את האבחון המדויק עבורך</p>
-              </motion.div>
-            )}
-
-            {currentStep === QUESTIONS.length + 2 && result && (
-              <motion.div key="result" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full">
-                <div className="text-center mb-10">
-                  <h3 className="text-3xl md:text-4xl font-heading font-black text-foreground mb-2">
-                    {leadData.name ? leadData.name.split(' ')[0] : 'היי'}, הנה מה שהאבחון מראה
-                  </h3>
-                </div>
-
-                <div className="border rounded-3xl p-8 mb-8 bg-bg relative overflow-hidden border-green-500/30">
-                  <div className="absolute top-0 right-0 w-full h-1 bg-green-500"></div>
-                  <div className="inline-block px-4 py-1.5 rounded-full text-sm font-bold tracking-widest mb-6 bg-green-500/10 text-green-500">
-                    {result.badge}
-                  </div>
-                  <h4 className="text-2xl font-bold text-foreground mb-4 leading-snug">{result.title}</h4>
-                  <p className="text-text-muted leading-relaxed mb-8">{result.body}</p>
-                  <ul className="space-y-4">
-                    {result.points.map((pt, i) => (
-                      <li key={i} className="flex items-start gap-3 text-foreground/90 pb-4 border-b border-foreground/5 last:border-0 last:pb-0">
-                        <CheckCircle2 size={20} className="shrink-0 mt-0.5 text-green-500" />
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="text-center bg-bg border border-foreground/5 rounded-3xl p-8">
-                  <div className="text-xl font-bold text-foreground mb-3">הצעד הבא שלך</div>
-                  <p className="text-text-muted mb-8 max-w-lg mx-auto">{result.cta}</p>
-                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
-                    לקבוע שיחת ייעוץ איתי
-                  </a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-```

@@ -47,7 +47,7 @@ export default function Hero() {
           background: useMotionTemplate`
             radial-gradient(
               600px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 77, 0, 0.15),
+              rgba(28, 141, 255, 0.16),
               transparent 80%
             )
           `,
@@ -57,7 +57,7 @@ export default function Hero() {
       {/* Dramatic Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/image1.jpg"
+          src="/tomer-office-highres.png"
           alt="Gym and Training Environment"
           className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-20 scale-105"
           referrerPolicy="no-referrer"
@@ -79,12 +79,12 @@ export default function Hero() {
         className="absolute bottom-0 left-0 lg:left-10 w-[350px] lg:w-[500px] h-[600px] lg:h-[800px] hidden md:block z-10 pointer-events-none"
       >
         <div className="w-full h-full relative overflow-hidden flex items-end justify-center">
-             {/* Orange background behind the image */}
+             {/* Brand-color background behind the image */}
              <div className="absolute inset-0 bg-energy/20"></div>
              {/* The image itself without opacity reduction for better resolution */}
              <div className="absolute inset-0 bg-[url('/tomer-blue-shirt.png')] bg-cover bg-top" style={{ maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)' }}></div>
              
-             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(255,77,0,0.3)]">
+             <div className="absolute bottom-10 px-6 py-3 glass-panel-dark rounded-2xl border border-white/10 backdrop-blur-md flex items-center gap-4 shadow-[0_0_30px_rgba(28,141,255,0.25)]">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center border border-energy/50 overflow-hidden bg-energy text-white font-heading font-black text-sm">
                     TF
                 </div>
@@ -131,7 +131,7 @@ export default function Hero() {
             variants={itemVariants}
             className="text-6xl md:text-[7rem] font-heading font-black text-white leading-[1.1] tracking-tighter"
           >
-            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-orange-400">האחרון</span><br/>
+            השינוי <span className="text-glow-animate text-transparent bg-clip-text bg-gradient-to-r from-energy to-blue-300">האחרון</span><br/>
             שתצטרך לעשות.
           </motion.h1>
         </div>
@@ -152,7 +152,7 @@ export default function Hero() {
           >
             <a
               href="#pathfinder"
-              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(255,77,0,0.6)] flex items-center justify-center"
+              className="btn-magnetic w-full sm:w-auto group bg-energy text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_-10px_rgba(28,141,255,0.45)] flex items-center justify-center"
             >
               <span>התאם לי תוכנית</span>
               <ArrowLeft size={20} className="mr-3 transition-transform group-hover:-translate-x-1" />

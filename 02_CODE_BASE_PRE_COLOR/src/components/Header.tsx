@@ -2,21 +2,21 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+const links = [
+  { name: 'ראשי', href: '#hero' },
+  { name: 'אודות', href: '#commitment' },
+  { name: 'מסלולים', href: '#tracks' },
+  { name: 'אפליקציה', href: '#app' },
+  { name: 'תהליך', href: '#process' },
+  { name: 'המלצות', href: '#testimonials' },
+  { name: 'הרצאות', href: '#seminars' },
+  { name: 'שאלות', href: '#faq' },
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-
-  const links = [
-    { name: 'ראשי', href: '#hero' },
-    { name: 'אודות', href: '#about' },
-    { name: 'מסלולים', href: '#tracks' },
-    { name: 'אפליקציה', href: '#app' },
-    { name: 'תהליך', href: '#process' },
-    { name: 'המלצות', href: '#testimonials' },
-    { name: 'הרצאות', href: '#courses' },
-    { name: 'שאלות', href: '#faq' },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +79,7 @@ export default function Header() {
                   href={link.href}
                   className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
                     isActive
-                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(255,77,0,0.2)]'
+                      ? 'text-white bg-white/10 shadow-[inset_0_0_20px_rgba(28,141,255,0.2)]'
                       : 'text-text-muted hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -87,7 +87,7 @@ export default function Header() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(255,77,0,0.8)]"
+                      className="absolute -bottom-1 inset-x-0 mx-auto w-3/4 h-0.5 bg-energy rounded-full shadow-[0_0_10px_rgba(28,141,255,0.8)]"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -98,7 +98,7 @@ export default function Header() {
 
           {/* CTA Button (Desktop) */}
           <div className="hidden md:block">
-            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(255,77,0,0.4)]">
+            <a href="#tracks" className="bg-energy text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-energy-light transition-colors shadow-[0_0_15px_rgba(28,141,255,0.4)]">
               צור קשר
             </a>
           </div>
@@ -138,7 +138,7 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: links.length * 0.1 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]"
+              className="mt-4 bg-energy text-white py-4 rounded-xl font-bold text-center text-xl shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
             >
               צור קשר
             </motion.a>
@@ -148,3 +148,4 @@ export default function Header() {
     </>
   );
 }
+

@@ -1,40 +1,275 @@
-===== FILE: src/components/NavLink.tsx =====
+===== FILE: src/components/DownloadPopup.tsx =====
 ```tsx
-import { NavLink as RouterNavLink, NavLinkProps } from "react-router-dom";
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Download, FileText, CheckCircle2 } from 'lucide-react';
 
-interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
-  className?: string;
-  activeClassName?: string;
-  pendingClassName?: string;
+export default function DownloadPopup() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [resourceName, setResourceName] = useState('');
+
+  useEffect(() => {
+    const handleOpenDownload = (e: CustomEvent) => {
+      setResourceName(e.detail.resourceName);
+      setIsOpen(true);
+      setHasSubmitted(false);
+    };
+
+    window.addEventListener('open-download', handleOpenDownload as EventListener);
+    return () => window.removeEventListener('open-download', handleOpenDownload as EventListener);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent('שלום תומר! קוראים לי ' + formData.name + ' ורציתי לקבל את החומר על ' + resourceName + ' (' + formData.email + ')');
+    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    setHasSubmitted(true);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="relative w-full max-w-lg bg-bg border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+          >
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="h-32 bg-gradient-to-br from-energy to-blue-700 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-[url('/tomer-pricing-board.jpeg')] mix-blend-overlay opacity-30 bg-cover bg-center"></div>
+              <FileText size={48} className="text-white relative z-10" />
+            </div>
+
+            <div className="p-8">
+              {!hasSubmitted ? (
+                <>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-heading font-bold text-white mb-2">
+                      קבלת גישה ל: {resourceName}
+                    </h3>
+                    <p className="text-text-muted text-sm">
+                      השאר פרטים והקובץ יישלח אליך למייל באופן מיידי.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <input 
+                        required 
+                        type="text" 
+                        value={formData.name} 
+                        onChange={e => setFormData({...formData, name: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors" 
+                        placeholder="שם פרטי" 
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        required 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={e => setFormData({...formData, email: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
+                        placeholder="your@email.com" 
+                        dir="ltr" 
+                      />
+                    </div>
+                    
+                    <button 
+                      type="submit" 
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-2"
+                    >
+                      <Download size={20} />
+                      <span>שלח לי את הקובץ</span>
+                    </button>
+                    <p className="text-xs text-text-muted/50 text-center mt-3">
+                      אני שונא ספאם בדיוק כמוך. הפרטים שלך בטוחים אצלי.
+                    </p>
+                  </form>
+                </>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 size={32} className="text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">נשלח בהצלחה!</h3>
+                  <p className="text-text-muted">
+                    הקובץ בדרך למייל שלך. בדוק גם בתיקיית קידומי מכירות או ספאם.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
 }
-
-const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
-  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
-    return (
-      <RouterNavLink
-        ref={ref}
-        to={to}
-        className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
-        }
-        {...props}
-      />
-    );
-  },
-);
-
-NavLink.displayName = "NavLink";
-
-export { NavLink };
-
 ```
 
+===== FILE: src/components/CoursePopup.tsx =====
+```tsx
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Mail, CheckCircle2, GraduationCap } from 'lucide-react';
+
+export default function CoursePopup() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [courseName, setCourseName] = useState('');
+
+  useEffect(() => {
+    const handleOpenCourse = (e: CustomEvent) => {
+      setCourseName(e.detail.courseName);
+      setIsOpen(true);
+      setHasSubmitted(false);
+      setFormData({ name: '', email: '' });
+    };
+
+    window.addEventListener('open-course', handleOpenCourse as EventListener);
+    return () => window.removeEventListener('open-course', handleOpenCourse as EventListener);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent('שלום תומר! קוראים לי ' + formData.name + ' ומעוניין/ת לשמוע על ' + courseName + ' (' + formData.email + ')');
+    window.open('https://wa.me/972546699574?text=' + text, '_blank');
+    setHasSubmitted(true);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 3000);
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="relative w-full max-w-lg bg-bg border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+          >
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white/70 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="h-32 bg-gradient-to-br from-energy to-blue-700 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/20"></div>
+              <GraduationCap size={48} className="text-white relative z-10" />
+            </div>
+
+            <div className="p-8">
+              {!hasSubmitted ? (
+                <>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-heading font-bold text-white mb-2">
+                      {courseName}
+                    </h3>
+                    <p className="text-text-muted text-sm">
+                      השאר שם ומייל ואני אשלח לך את כל הפרטים ישירות למייל.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <input 
+                        required 
+                        type="text" 
+                        value={formData.name} 
+                        onChange={e => setFormData({...formData, name: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
+                        placeholder="שם מלא" 
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        required 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={e => setFormData({...formData, email: e.target.value})} 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-energy transition-colors text-right" 
+                        placeholder="your@email.com" 
+                        dir="ltr" 
+                      />
+                    </div>
+                    
+                    <button 
+                      type="submit" 
+                      className="w-full btn-magnetic bg-energy text-white px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-2"
+                    >
+                      <Mail size={20} />
+                      <span>שלח לי למייל</span>
+                    </button>
+                    <p className="text-xs text-text-muted/50 text-center mt-3">
+                      אני שונא ספאם בדיוק כמוך. הפרטים שלך בטוחים אצלי.
+                    </p>
+                  </form>
+                </>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 size={32} className="text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">נשלח בהצלחה!</h3>
+                  <p className="text-text-muted">
+                    הפרטים בדרך למייל שלך. בדוק גם בתיקיית קידומי מכירות או ספאם.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+```
 
 ===== FILE: src/components/CursorFollower.tsx =====
 ```tsx
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function CursorFollower() {
@@ -92,233 +327,503 @@ export default function CursorFollower() {
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
           scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'rgba(255, 77, 0, 0.4)' : 'rgba(255, 77, 0, 0.1)',
+          backgroundColor: isHovering ? 'rgba(28, 141, 255, 0.4)' : 'rgba(28, 141, 255, 0.1)',
         }}
         transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.5 }}
       />
     </>
   );
 }
-
 ```
 
-
-===== FILE: src/hooks/use-mobile.tsx =====
+===== FILE: src/components/Ingredients.tsx =====
 ```tsx
-import * as React from "react";
+import { motion } from 'framer-motion';
+import { Dna, Dumbbell, CheckCircle2 } from 'lucide-react';
 
-const MOBILE_BREAKPOINT = 768;
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined);
-
-  React.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
-    const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    };
-    mql.addEventListener("change", onChange);
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    return () => mql.removeEventListener("change", onChange);
-  }, []);
-
-  return !!isMobile;
-}
-
-```
-
-
-===== FILE: src/hooks/use-toast.ts =====
-```ts
-import * as React from "react";
-
-import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
-
-const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000000;
-
-type ToasterToast = ToastProps & {
-  id: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  action?: ToastActionElement;
-};
-
-const actionTypes = {
-  ADD_TOAST: "ADD_TOAST",
-  UPDATE_TOAST: "UPDATE_TOAST",
-  DISMISS_TOAST: "DISMISS_TOAST",
-  REMOVE_TOAST: "REMOVE_TOAST",
-} as const;
-
-let count = 0;
-
-function genId() {
-  count = (count + 1) % Number.MAX_SAFE_INTEGER;
-  return count.toString();
-}
-
-type ActionType = typeof actionTypes;
-
-type Action =
-  | {
-      type: ActionType["ADD_TOAST"];
-      toast: ToasterToast;
-    }
-  | {
-      type: ActionType["UPDATE_TOAST"];
-      toast: Partial<ToasterToast>;
-    }
-  | {
-      type: ActionType["DISMISS_TOAST"];
-      toastId?: ToasterToast["id"];
-    }
-  | {
-      type: ActionType["REMOVE_TOAST"];
-      toastId?: ToasterToast["id"];
-    };
-
-interface State {
-  toasts: ToasterToast[];
-}
-
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
-
-const addToRemoveQueue = (toastId: string) => {
-  if (toastTimeouts.has(toastId)) {
-    return;
-  }
-
-  const timeout = setTimeout(() => {
-    toastTimeouts.delete(toastId);
-    dispatch({
-      type: "REMOVE_TOAST",
-      toastId: toastId,
-    });
-  }, TOAST_REMOVE_DELAY);
-
-  toastTimeouts.set(toastId, timeout);
-};
-
-export const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case "ADD_TOAST":
-      return {
-        ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
-      };
-
-    case "UPDATE_TOAST":
-      return {
-        ...state,
-        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
-      };
-
-    case "DISMISS_TOAST": {
-      const { toastId } = action;
-
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
-      if (toastId) {
-        addToRemoveQueue(toastId);
-      } else {
-        state.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id);
-        });
+export default function Ingredients() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
       }
-
-      return {
-        ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === toastId || toastId === undefined
-            ? {
-                ...t,
-                open: false,
-              }
-            : t,
-        ),
-      };
     }
-    case "REMOVE_TOAST":
-      if (action.toastId === undefined) {
-        return {
-          ...state,
-          toasts: [],
-        };
-      }
-      return {
-        ...state,
-        toasts: state.toasts.filter((t) => t.id !== action.toastId),
-      };
-  }
-};
+  };
 
-const listeners: Array<(state: State) => void> = [];
+  const itemVariants = {
+    hidden: { y: '100%' },
+    show: {
+      y: 0,
+      transition: { duration: 1.2, ease }
+    }
+  };
 
-let memoryState: State = { toasts: [] };
-
-function dispatch(action: Action) {
-  memoryState = reducer(memoryState, action);
-  listeners.forEach((listener) => {
-    listener(memoryState);
-  });
-}
-
-type Toast = Omit<ToasterToast, "id">;
-
-function toast({ ...props }: Toast) {
-  const id = genId();
-
-  const update = (props: ToasterToast) =>
-    dispatch({
-      type: "UPDATE_TOAST",
-      toast: { ...props, id },
-    });
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
-
-  dispatch({
-    type: "ADD_TOAST",
-    toast: {
-      ...props,
-      id,
-      open: true,
-      onOpenChange: (open) => {
-        if (!open) dismiss();
-      },
+  const data = [
+    {
+      id: "nutrition",
+      title: "תזונה שמתאימה לחיים שלך",
+      icon: "dna",
+      description: "לא עוד תפריט שגורם לך להרגיש רעב, מוגבל, או מנותק מהחיים. תפריט שבנוי סביב מה שאתה אוהב לאכול, מתי שנוח לך, ואיפה שאתה נמצא — גם במסעדה, גם בחופשה, גם באירוע.",
+      bullets: [
+        "מבוסס מחקר וידע עדכני, לא טרנדים מאינסטגרם",
+        "מותאם לגנטיקה, בריאות, העדפות, ולוח זמנים"
+      ]
     },
-  });
+    {
+      id: "training",
+      title: "אימונים שלא גוזלים לך את היום",
+      icon: "barbell",
+      description: "שכח אימונים של שעה וחצי שמרגישים כמו עונש. 20 דקות, 3 פעמים בשבוע. זה מספיק. זו לא דעה — זו פיזיולוגיה. התוכנית מותאמת למה שהגוף שלך צריך, לא למה שהאינסטגרם אומר.",
+      bullets: [
+        "מותאם לפיזיולוגיה ולמגבלות שלך",
+        "תקופתיות מתקדמת (Periodization) — ככל שאתה מתקדם, התכנית מתקדמת"
+      ]
+    }
+  ];
 
-  return {
-    id: id,
-    dismiss,
-    update,
-  };
+  return (
+    <section id="ingredients" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-20"
+        >
+          <div className="overflow-hidden pb-4">
+            <motion.h2
+              variants={itemVariants}
+              className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tighter"
+            >
+              למה זה עובד <span className="text-energy italic font-light">(כשכל השאר נכשל)</span>
+            </motion.h2>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          {data.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 60 + (idx * 40) }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: idx * 0.2, ease }}
+              className={`glass-panel rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group ${idx === 1 ? 'md:mt-24' : ''}`}
+            >
+              <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 transition-colors duration-700 ${idx === 0 ? 'bg-energy/5 group-hover:bg-energy/10' : 'bg-white/5 group-hover:bg-white/10'}`} />
+
+              <div className="relative z-10 flex flex-col h-full">
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${idx === 0 ? 'bg-energy/10 text-energy' : 'bg-white/10 text-white'}`}>
+                  {item.icon === 'dna' ? <Dna size={32} strokeWidth={1.5} /> : <Dumbbell size={32} strokeWidth={1.5} />}
+                </div>
+
+                <h3 className="text-3xl font-heading font-bold mb-6 text-white">{item.title}</h3>
+
+                <p className="text-lg text-text-muted leading-relaxed font-medium mb-8">
+                  {item.description}
+                </p>
+
+                <ul className="space-y-4 mt-auto">
+                  {item.bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex items-start gap-3 text-white/80 bg-white/5 p-4 rounded-xl border border-white/5">
+                      <CheckCircle2 size={20} className={`${idx === 0 ? 'text-energy' : 'text-white'} shrink-0 mt-0.5`} />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-
-function useToast() {
-  const [state, setState] = React.useState<State>(memoryState);
-
-  React.useEffect(() => {
-    listeners.push(setState);
-    return () => {
-      const index = listeners.indexOf(setState);
-      if (index > -1) {
-        listeners.splice(index, 1);
-      }
-    };
-  }, [state]);
-
-  return {
-    ...state,
-    toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
-  };
-}
-
-export { useToast, toast };
-
 ```
 
+===== FILE: src/components/FreeValue.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+import { CheckCircle2, Smartphone } from 'lucide-react';
+
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+export default function FreeValue() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+  };
+
+  const itemVariants = {
+    hidden: { y: '100%' },
+    show: { y: 0, transition: { duration: 1.2, ease } }
+  };
+
+  return (
+    <section className="py-24 px-6 md:px-16 lg:px-24 bg-surface relative overflow-hidden border-y border-foreground/5">
+      <div className="glow-blob top-0 left-0 bg-energy opacity-10"></div>
+      <div className="glow-blob bottom-0 right-0 bg-energy-light opacity-10"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <div className="overflow-hidden pb-2">
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-energy/30 bg-energy/10 mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-energy opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-energy"></span>
+                </span>
+                <span className="text-xs font-bold tracking-widest text-energy uppercase">חינם לחלוטין</span>
+              </motion.div>
+            </div>
+
+            <div className="overflow-hidden pb-4">
+              <motion.h2 variants={itemVariants} className="text-4xl md:text-6xl font-heading font-black text-foreground mb-6 leading-tight">
+                קבל גישה חינמית <span className="text-energy">לאפליקציית המעקב שלי</span>
+              </motion.h2>
+            </div>
+
+            <div className="overflow-hidden pb-2">
+              <motion.p variants={itemVariants} className="text-lg text-text-muted mb-8 leading-relaxed">
+                לפני שאתה מתחייב לתהליך, קבל ממני את כל הכלים שאתה צריך כדי להתחיל.
+              </motion.p>
+            </div>
+
+            <ul className="space-y-4 mb-10">
+              {['מעקב אחר משקל ומדדים אישיים', 'מחשבון קלוריות ומאקרו מובנה', 'גישה למאגר מתכונים בריאים', 'מדריך וידאו קצר להתחלה נכונה'].map((item, i) => (
+                <div key={i} className="overflow-hidden pb-1">
+                  <motion.li variants={itemVariants} className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 size={20} className="text-energy shrink-0" />
+                    <span>{item}</span>
+                  </motion.li>
+                </div>
+              ))}
+            </ul>
+
+            <div className="overflow-hidden pb-2">
+              <motion.button 
+                variants={itemVariants} 
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - אפליקציית החינמית' } }));
+                }}
+                className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
+              >
+                <Smartphone size={20} />
+                <span>קבל גישה חינם עכשיו</span>
+              </motion.button>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative flex justify-center lg:justify-end"
+          >
+            <div className="relative w-full max-w-md aspect-[3/4] glass-panel rounded-3xl border border-foreground/10 overflow-hidden shadow-2xl flex items-center justify-center group">
+              <div className="absolute inset-0 bg-gradient-to-br from-energy/20 to-bg opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-center p-8">
+                <div className="w-16 h-16 bg-energy text-foreground rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <Smartphone size={32} />
+                </div>
+                <h3 className="text-3xl font-heading font-black text-foreground mb-2">TF. TRACKER</h3>
+                <p className="text-energy font-bold tracking-widest uppercase text-sm mb-6">אפליקציית מעקב אישית</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+===== FILE: src/components/Courses.tsx =====
+```tsx
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Download } from 'lucide-react';
+import { SITE_DATA } from '../data';
+
+export default function Courses() {
+  const [hoveredCourse, setHoveredCourse] = useState<number | null>(null);
+
+  const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+  };
+
+  const itemVariants = {
+    hidden: { y: '100%' },
+    show: { y: 0, transition: { duration: 1.2, ease } }
+  };
+
+  const handleCourseClick = (e: React.MouseEvent, courseTitle: string) => {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('open-course', { detail: { courseName: courseTitle } }));
+  };
+
+  return (
+    <section id="courses" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }} className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <div className="overflow-hidden pb-4">
+              <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-heading font-bold text-foreground tracking-tighter mb-4">
+                קורסים <span className="text-energy italic font-light">והרצאות</span>
+              </motion.h2>
+            </div>
+            <div className="overflow-hidden pb-2">
+              <motion.p variants={itemVariants} className="text-xl text-text-muted max-w-lg">
+                ידע מבוסס מחקר, מונגש בצורה פרקטית וברורה.
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="flex flex-col relative">
+          {SITE_DATA.courses.map((course, idx) => (
+            <motion.a
+              href="#"
+              onClick={(e) => handleCourseClick(e, course.title)}
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              onMouseEnter={() => setHoveredCourse(idx)}
+              onMouseLeave={() => setHoveredCourse(null)}
+              className="group flex flex-col sm:flex-row sm:items-center justify-between py-10 border-b border-foreground/10 hover:border-energy/30 transition-colors cursor-pointer relative z-10"
+            >
+              <div className="flex flex-col gap-2 mb-4 sm:mb-0 transition-transform duration-500 ease-out group-hover:-translate-x-4">
+                <span className="text-sm font-medium text-energy tracking-wider uppercase">
+                  {course.type}
+                </span>
+                <h3 className="text-3xl md:text-5xl font-heading font-bold text-foreground group-hover:text-energy transition-colors duration-300">
+                  {course.title}
+                </h3>
+                {course.freeValue && (
+                  <span className="flex items-center gap-2 mt-2 text-sm text-text-muted">
+                    <Download size={14} className="text-energy" />
+                    <span>{course.freeValue}</span>
+                  </span>
+                )}
+              </div>
+
+              <div className="w-12 h-12 rounded-full border border-foreground/10 flex items-center justify-center group-hover:bg-energy group-hover:border-energy group-hover:text-foreground transition-all duration-300 transform group-hover:-translate-x-2">
+                <ArrowLeft size={20} className="transition-transform group-hover:-translate-x-1" />
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+===== FILE: src/components/PainPointGap.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+import { Check, X } from 'lucide-react';
+
+export default function PainPointGap() {
+  return (
+    <section className="pt-32 pb-12 px-6 md:px-16 lg:px-24 relative overflow-hidden">
+      {/* Gradient background for differentiation */}
+      <div className="absolute inset-0 bg-gradient-to-b from-bg via-surface/30 to-bg pointer-events-none"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-energy/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-6xl font-heading font-black text-white">
+            למה דיאטות לא עובדות <span className="text-energy italic font-light">(ומה כן)</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+          {/* Decorative VS divider */}
+          <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+            <div className="w-16 h-16 rounded-full bg-surface border-2 border-energy/30 flex items-center justify-center shadow-[0_0_30px_rgba(28,141,255,0.2)]">
+              <span className="text-energy font-black text-lg">VS</span>
+            </div>
+          </div>
+
+          {/* The Old Way */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-red-500/5 border border-red-500/10 rounded-3xl p-8 md:p-12 relative overflow-hidden backdrop-blur-sm"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+            <h3 className="text-2xl font-bold text-red-400 mb-8 border-b border-red-500/10 pb-4">
+              הדרך הישנה
+            </h3>
+            <ul className="space-y-6">
+              {[
+                "תפריטים גנריים שלא לוקחים בחשבון את החיים האמיתיים שלך",
+                "אימונים של שעה+ שנגמרים אחרי שבועיים כי אין זמן או כוח",
+                "דיאטות קיצוניות שמסתיימות באותו משקל — פלוס עוד קילו",
+                "מאמנים שנותנים תפריט פוטוקופי זהה לכל לקוח"
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <X size={14} className="text-red-400/80" />
+                  </div>
+                  <span className="text-white/70 font-medium leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Tomer's Way */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-energy/5 border border-energy/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_40px_rgba(28,141,255,0.05)] backdrop-blur-sm"
+          >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-energy/20 blur-3xl translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"></div>
+            <h3 className="text-2xl font-bold text-energy mb-8 border-b border-energy/10 pb-4 relative z-10">
+              הגישה של תומר
+            </h3>
+            <ul className="space-y-6 relative z-10">
+              {[
+                "תפריט שמתאים לאורח החיים שלך — מסעדות, אירועים, חופשות",
+                "אימונים של 20 דקות, 3 פעמים בשבוע. זה הכל.",
+                "תוצאות שנשארות כי הגישה מדעית, לא רגשית",
+                "תזונאי קליני אחד. 22 שנות ניסיון. בלי מתמחים, בלי צוות."
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-energy/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_10px_rgba(28,141,255,0.3)]">
+                    <Check size={14} className="text-energy" strokeWidth={3} />
+                  </div>
+                  <span className="text-white font-medium leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center text-text-muted mt-10 text-lg tracking-wide"
+        >
+          בחר את המסלול שמתאים לך.
+        </motion.p>
+      </div>
+    </section>
+  );
+}
+```
+
+===== FILE: src/components/About.tsx =====
+```tsx
+import { motion } from 'framer-motion';
+import { ShieldCheck } from 'lucide-react';
+
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+export default function About() {
+  return (
+    <section id="about" className="py-32 px-6 md:px-16 lg:px-24 bg-bg relative border-y border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          {/* Image Side */}
+          <div className="w-full lg:w-1/2 relative">
+            <div className="absolute inset-0 bg-energy/20 blur-3xl rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease }}
+              className="relative rounded-[2rem] overflow-hidden border border-white/10 aspect-[4/5]"
+            >
+              <img
+                src="/tomer-chair.png"
+                alt="תומר פרידמן - תזונאי קליני וספורט יושב"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
+
+              {/* Floating Insurance Badge */}
+              <div className="absolute bottom-8 right-8 bg-surface/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl flex items-center gap-4 animate-pulse">
+                <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-500 shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="font-bold text-sm text-white">החזרים מחברות הביטוח</p>
+                  <p className="text-xs text-text-muted">כפוף לפוליסה האישית</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Text Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease }}
+            className="w-full lg:w-1/2"
+          >
+            <span className="inline-block font-heading text-sm font-bold tracking-widest text-energy uppercase mb-4">הסיפור מאחורי השיטה</span>
+            <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl mb-8 text-white">
+              נעים מאוד, <span className="text-energy">תומר פרידמן</span>
+            </h2>
+
+            <div className="space-y-6 text-lg text-text-muted mb-10 leading-relaxed">
+              <p>
+                אני תזונאי קליני וספורט, ואני מלווה מאות מתאמנים, ספורטאים ואנשים שפשוט רוצים להיראות ולהרגיש הכי טוב שאפשר.
+                לא תמצאו אצלי פתרונות קסם. אין לי תפריט הדפסה שתלוי על המקרר.
+              </p>
+              <p>
+                <strong className="text-white font-medium">הגישה שלי שונה.</strong> אני מאמין בדיוק מדעי, בהתאמה אישית מלאה ובבניית הרגלים לטווח ארוך.
+                דיאטות מהירות נכשלות כי הן דורשות ממך להילחם בעצמך כל יום מחדש. המערכת שאנחנו בונים ביחד מנצחת את משחק המשמעת העצמית.
+              </p>
+              <p>
+                בתור עצמאי שעובד לבד, <span className="text-white border-b border-energy pb-0.5">אתם לא עוברים דרך מערך מתמחים.</span> אני זה שמנתח את הנתונים, אני זה שעונה בטלפון, ואני זה שבודק כל מדד וכל שקילה.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-8">
+              <div className="flex flex-col">
+                <span className="font-heading font-black text-4xl text-white">500+</span>
+                <span className="text-sm text-text-muted uppercase tracking-wider">לקוחות מרוצים</span>
+              </div>
+              <div className="w-px h-12 bg-white/10"></div>
+              <div className="flex flex-col">
+                <span className="font-heading font-black text-4xl text-white">B.Sc</span>
+                <span className="text-sm text-text-muted uppercase tracking-wider">מדעי התזונה</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
 
 ===== FILE: src/lib/utils.ts =====
 ```ts
@@ -328,46 +833,342 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
 ```
 
+===== FILE: src/components/ui/button.tsx =====
+```tsx
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
-===== FILE: src/vite-env.d.ts =====
-```ts
-/// <reference types="vite/client" />
+import { cn } from "@/lib/utils";
 
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  },
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
 ```
 
+===== FILE: src/components/ui/dialog.tsx =====
+```tsx
+import * as React from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
-===== FILE: src/test/example.test.ts =====
-```ts
-import { describe, it, expect } from "vitest";
+import { cn } from "@/lib/utils";
 
-describe("example", () => {
-  it("should pass", () => {
-    expect(true).toBe(true);
-  });
+const Dialog = DialogPrimitive.Root;
+
+const DialogTrigger = DialogPrimitive.Trigger;
+
+const DialogPortal = DialogPrimitive.Portal;
+
+const DialogClose = DialogPrimitive.Close;
+
+const DialogOverlay = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={cn(
+      "fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className,
+    )}
+    {...props}
+  />
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
+
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn(
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity data-[state=open]:bg-accent data-[state=open]:text-muted-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)} {...props} />
+);
+DialogHeader.displayName = "DialogHeader";
+
+const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)} {...props} />
+);
+DialogFooter.displayName = "DialogFooter";
+
+const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+};
+```
+
+===== FILE: src/components/ui/input.tsx =====
+```tsx
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className,
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);
+Input.displayName = "Input";
+
+export { Input };
+```
+
+===== FILE: src/components/ui/textarea.tsx =====
+```tsx
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+
+export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ className, ...props }, ref) => {
+  return (
+    <textarea
+      className={cn(
+        "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        className,
+      )}
+      ref={ref}
+      {...props}
+    />
+  );
 });
+Textarea.displayName = "Textarea";
 
+export { Textarea };
 ```
 
+===== FILE: src/components/ui/command.tsx =====
+```tsx
+import * as React from "react";
+import { type DialogProps } from "@radix-ui/react-dialog";
+import { Command as CommandPrimitive } from "cmdk";
+import { Search } from "lucide-react";
 
-===== FILE: src/test/setup.ts =====
-```ts
-import "@testing-library/jest-dom";
+import { cn } from "@/lib/utils";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: (query: string) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: () => {},
-    removeListener: () => {},
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => {},
-  }),
-});
+const Command = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive>
+>(({ className, ...props }, ref) => (
+  <CommandPrimitive
+    ref={ref}
+    className={cn(
+      "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
+      className,
+    )}
+    {...props}
+  />
+));
+Command.displayName = CommandPrimitive.displayName;
 
+type CommandDialogProps = DialogProps;
+
+const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
+  return (
+    <Dialog {...props}>
+      <DialogContent className="overflow-hidden p-0 shadow-lg">
+        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+          {children}
+        </Command>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const CommandInput = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.Input>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
+>(({ className, ...props }, ref) => (
+  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
+    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    <CommandPrimitive.Input
+      ref={ref}
+      className={cn(
+        "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        className,
+      )}
+      {...props}
+    />
+  </div>
+));
+
+CommandInput.displayName = CommandPrimitive.Input.displayName;
+
+const CommandList = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <CommandPrimitive.List
+    ref={ref}
+    className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
+    {...props}
+  />
+));
+
+CommandList.displayName = CommandPrimitive.List.displayName;
+
+const CommandEmpty = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.Empty>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
+>((props, ref) => <CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} />);
+
+CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
+
+const CommandGroup = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.Group>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
+>(({ className, ...props }, ref) => (
+  <CommandPrimitive.Group
+    ref={ref}
+    className={cn(
+      "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
+      className,
+    )}
+    {...props}
+  />
+));
+
+CommandGroup.displayName = CommandPrimitive.Group.displayName;
+
+const CommandSeparator = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <CommandPrimitive.Separator ref={ref} className={cn("-mx-1 h-px bg-border", className)} {...props} />
+));
+CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
+
+const CommandItem = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <CommandPrimitive.Item
+    ref={ref}
+    className={cn(
+      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50",
+      className,
+    )}
+    {...props}
+  />
+));
+
+CommandItem.displayName = CommandPrimitive.Item.displayName;
+
+const CommandShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
+  return <span className={cn("ml-auto text-xs tracking-widest text-muted-foreground", className)} {...props} />;
+};
+CommandShortcut.displayName = "CommandShortcut";
+
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+};
 ```
+

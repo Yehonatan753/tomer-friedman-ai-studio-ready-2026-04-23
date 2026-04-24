@@ -149,7 +149,7 @@ export default function Pathfinder() {
                     </div>
                   ))}
                 </div>
-                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] inline-flex items-center gap-2 text-lg">
+                <button onClick={handleStart} className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-flex items-center gap-2 text-lg">
                   <span>בוא נתחיל</span>
                   <ChevronLeft size={20} />
                 </button>
@@ -179,7 +179,7 @@ export default function Pathfinder() {
                         onClick={() => handleAnswer(QUESTIONS[currentStep].id, option.id)}
                         className={`w-full flex items-center gap-4 p-5 rounded-2xl border transition-all duration-200 text-right
                           ${isSelected
-                            ? 'bg-energy/10 border-energy text-foreground shadow-[0_0_20px_rgba(255,77,0,0.15)]'
+                            ? 'bg-energy/10 border-energy text-foreground shadow-[0_0_20px_rgba(28,141,255,0.15)]'
                             : 'bg-foreground/5 border-foreground/10 text-text-muted hover:bg-foreground/10 hover:border-foreground/20 hover:text-foreground'
                           }`}
                       >
@@ -216,7 +216,7 @@ export default function Pathfinder() {
                     <label className="text-sm font-medium text-text-muted">אימייל</label>
                     <input required type="email" value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
                   </div>
-                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] mt-4">
+                  <button type="submit" className="w-full btn-magnetic bg-energy text-foreground px-8 py-4 rounded-xl font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] mt-4">
                     קבל את התוצאות שלי
                   </button>
                 </form>
@@ -262,7 +262,7 @@ export default function Pathfinder() {
                 <div className="text-center bg-bg border border-foreground/5 rounded-3xl p-8">
                   <div className="text-xl font-bold text-foreground mb-3">הצעד הבא שלך</div>
                   <p className="text-text-muted mb-8 max-w-lg mx-auto">{result.cta}</p>
-                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
+                  <a href="#tracks" className="btn-magnetic bg-energy text-foreground px-10 py-4 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] inline-block w-full sm:w-auto text-lg mb-4">
                     לקבוע שיחת ייעוץ איתי
                   </a>
                 </div>
@@ -274,3 +274,4 @@ export default function Pathfinder() {
     </section>
   );
 }
+

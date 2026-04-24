@@ -37,7 +37,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#0a0f1c] border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-[0_0_50px_rgba(255,77,0,0.15)] relative overflow-hidden"
+              className="bg-[#0a0f1c] border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-[0_0_50px_rgba(28,141,255,0.15)] relative overflow-hidden"
             >
               {/* Subtle Glow Background */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-energy/10 blur-[80px] pointer-events-none"></div>
@@ -120,7 +120,7 @@ export default function Footer() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-8 bg-energy text-white py-4 px-8 rounded-full font-bold text-lg w-full md:w-auto self-start hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)]"
+                className="mt-8 bg-energy text-white py-4 px-8 rounded-full font-bold text-lg w-full md:w-auto self-start hover:bg-energy-light transition-colors shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]"
                 type="submit"
               >
                 שלח הודעה
@@ -209,3 +209,4 @@ export default function Footer() {
     </footer>
   );
 }
+

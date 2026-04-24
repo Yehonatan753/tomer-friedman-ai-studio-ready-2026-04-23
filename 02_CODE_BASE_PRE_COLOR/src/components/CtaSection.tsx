@@ -18,7 +18,7 @@ export default function CtaSection() {
 
   return (
     <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-bg relative overflow-hidden border-t border-white/5">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,77,0,0.1)_0,rgba(0,0,0,0)_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(28,141,255,0.1)_0,rgba(0,0,0,0)_50%)]"></div>
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
         
@@ -50,9 +50,9 @@ export default function CtaSection() {
             transition={{ delay: 0.2 }}
             className="w-full relative"
         >
-            <div className="absolute -inset-1 bg-gradient-to-r from-energy/50 to-orange-400/50 rounded-full blur-md opacity-70"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-energy/50 to-blue-300/50 rounded-full blur-md opacity-70"></div>
             
-            <div className="relative bg-[#110c18] border border-white/10 rounded-full py-6 px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_40px_rgba(255,77,0,0.15)]">
+            <div className="relative bg-[#110c18] border border-white/10 rounded-full py-6 px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_40px_rgba(28,141,255,0.15)]">
                 
                 <AnimatePresence mode="wait">
                   {!submitted ? (
@@ -80,7 +80,7 @@ export default function CtaSection() {
                         />
                         <button 
                           type="submit" 
-                          className="btn-magnetic bg-energy hover:bg-[#CC3E00] text-white px-8 py-3 rounded-full font-bold transition-colors shadow-[0_0_20px_rgba(255,77,0,0.4)] whitespace-nowrap text-sm"
+                          className="btn-magnetic bg-energy hover:bg-[#0f5fb3] text-white px-8 py-3 rounded-full font-bold transition-colors shadow-[0_0_20px_rgba(28,141,255,0.4)] whitespace-nowrap text-sm"
                         >
                           שליחה
                         </button>
@@ -107,3 +107,4 @@ export default function CtaSection() {
     </section>
   );
 }
+

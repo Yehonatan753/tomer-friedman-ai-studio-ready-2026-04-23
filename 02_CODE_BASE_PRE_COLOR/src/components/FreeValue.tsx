@@ -61,7 +61,7 @@ export default function FreeValue() {
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - אפליקציית החינמית' } }));
                 }}
-                className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(255,77,0,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
+                className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
               >
                 <Smartphone size={20} />
                 <span>קבל גישה חינם עכשיו</span>
@@ -92,3 +92,4 @@ export default function FreeValue() {
     </section>
   );
 }
+

@@ -1,0 +1,119 @@
+Your previous response did not satisfy the task.
+
+This is a correction prompt. Follow it exactly before doing anything else.
+
+Repository:
+https://github.com/Yehonatan753/tomer-friedman-ai-studio-ready-2026-04-23
+
+Read first:
+- `00_ORDERED_FILES_FOR_GEMINI/01_STRICT_EXECUTION_PROMPT.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/01A_AI_STUDIO_FEATURE_REQUIREMENTS.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/02_FULL_CONTINUOUS_BRIEF.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/03_SOURCE_CONTEXT_OPUS_AND_FEEDBACK.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/10_APP_STRUCTURE_AND_CONFIG.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/11_MAIN_PAGE_AND_DATA.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/12_TOP_OF_PAGE_COMPONENTS.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/13_CORE_SALES_COMPONENTS.txt`
+- `00_ORDERED_FILES_FOR_GEMINI/14_LOWER_PAGE_COMPONENTS.txt`
+
+Critical correction:
+The goal is not to keep the black/orange site unchanged.
+The black/orange site is the strongest base and conversion reference.
+The target is a premium hybrid:
+- preserve the old strong structure, motion, hierarchy, value stack, urgency, insurance, workshops, newsletter, CTA, footer
+- translate the visual language toward Tomer's blue/white business-color direction
+- reduce duplicated sections and duplicated image logic
+- tighten copy and density without deleting strong conversion sections
+
+Your previous response had false claims.
+Do not repeat them:
+- There is no `src/components/ScrollAnimation.tsx` in the base code.
+- There is no `src/components/GeminiChatbot.tsx` in the base code unless you actually create it and show the full file.
+- There is no `src/lib/firebase.ts` in the base code unless you actually create it and show the full file.
+- Do not claim Firestore, auth, build, compilation, terminal commands, or moved assets unless you provide exact code changes and exact commands.
+- Do not say "all changes were made in your environment" unless you return actual diffs or full file contents.
+
+What you must do now:
+
+1. Re-audit the real current base code.
+The base app is:
+`02_CODE_BASE_PRE_COLOR/`
+
+2. Explicitly map the correct section flow.
+The current `Index.tsx` has duplicates and wrong ordering:
+- old app sections appear more than once
+- workshops/courses appear more than once
+- commitment/trust is not placed cleanly between offers and insurance
+- offer section does not sit in the correct sales flow
+
+3. Correct the color interpretation.
+Use the black/orange version as the structural and emotional reference.
+But apply Tomer's requested blue/white business-color direction carefully:
+- keep dark/premium dramatic zones where they are doing sales work
+- translate the main accent from orange to a strong premium blue where appropriate
+- do not turn the whole site into bland white SaaS
+- do not leave everything orange if the client explicitly asked for blue/white
+
+4. Preserve the high-conversion sections.
+Do not delete:
+- Header/Hero
+- Process section directly under Hero
+- VSL
+- AppShowcase
+- Pathfinder
+- Tracks with value stack / market value / urgency / scarcity
+- Commitment / trust block
+- Insurance
+- Testimonials
+- Workshops / lectures
+- Newsletter
+- Final CTA
+- Footer/contact
+
+5. Fix the App section from the customer side.
+No backend/control/dashboard language.
+If you add a Gemini chatbot, it must be customer-facing:
+- help choose a product
+- answer FAQs
+- route to CTA
+- no diagnosis
+- no invented pricing
+- no internal admin logic
+
+6. Handle the AI Studio feature buttons honestly.
+The user requested:
+- Add database and auth
+- Add a Gemini chatbot
+- Enable high thinking
+- Analyze images
+- Add Gemini intelligence
+
+If you implement these, return exact files.
+If the environment cannot implement them directly, return exact schema, env vars, and integration plan.
+Do not claim they are implemented without code.
+
+Required output format:
+
+1. Failure Correction
+List the claims from your previous answer that were wrong or unproven.
+
+2. Real File Inventory
+List the actual files you inspected under `02_CODE_BASE_PRE_COLOR/`.
+
+3. Exact Implementation Plan
+Only include files you will change.
+No vague "improve UI" language.
+
+4. Patch / Full File Output
+Return actual unified diffs or full replacement files.
+
+5. Blue/White Translation Map
+Explain exactly which orange/dark treatments remain and which translate to blue/white.
+
+6. Duplicate Reduction Map
+Explain which duplicate sections/images are removed, merged, or preserved.
+
+7. Verification Commands
+Commands must run from `02_CODE_BASE_PRE_COLOR/`.
+
+Do not answer with a summary. Produce implementation-quality output.

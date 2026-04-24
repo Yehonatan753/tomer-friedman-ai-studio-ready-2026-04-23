@@ -3,16 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import VSL from '../components/VSL';
-import Ingredients from '../components/Ingredients';
 import Process from '../components/Process';
-import FreeValue from '../components/FreeValue';
 import Pathfinder from '../components/Pathfinder';
-import Courses from '../components/Courses';
 import Tracks from '../components/Tracks';
 import AppShowcase from '../components/AppShowcase';
 import Testimonials from '../components/Testimonials';
-import PainPointGap from '../components/PainPointGap';
-import About from '../components/About';
+import Commitment from '../components/Commitment';
 import Seminars from '../components/Seminars';
 import Newsletter from '../components/Newsletter';
 import FAQ from '../components/FAQ';
@@ -89,18 +85,14 @@ export default function Index() {
         <Header />
         <main>
           <Hero />
-          <VSL />
-          <Ingredients />
           <Process />
-          <FreeValue />
-          <Pathfinder />
-          <Courses />
-          <Testimonials />
-          <PainPointGap />
-          <Tracks />
-          <InsuranceBanner />
+          <VSL />
           <AppShowcase />
-          <About />
+          <Pathfinder />
+          <Tracks />
+          <Commitment />
+          <InsuranceBanner />
+          <Testimonials />
           <Seminars />
           <Newsletter />
           <FAQ />

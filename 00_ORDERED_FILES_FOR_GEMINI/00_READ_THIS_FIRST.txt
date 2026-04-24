@@ -7,6 +7,7 @@ The real base app is still:
 02_CODE_BASE_PRE_COLOR/
 
 But if navigation fails, use these ordered files as the source of truth:
+00B_FOLLOWUP_CORRECTION_PROMPT.txt
 01_STRICT_EXECUTION_PROMPT.txt
 01A_AI_STUDIO_FEATURE_REQUIREMENTS.txt
 02_FULL_CONTINUOUS_BRIEF.txt
@@ -20,4 +21,8 @@ But if navigation fails, use these ordered files as the source of truth:
 15_SUPPORT_COMPONENTS_AND_UTILS.txt
 16_FULL_CODEBASE_TEXT_DUMP.txt
 
-Your response must start with the Compliance Audit required in 01_STRICT_EXECUTION_PROMPT.txt.
+Important correction:
+The black/orange version is the structural/conversion reference, not the final palette requirement.
+The target is a premium blue/white translation that preserves the strong old flow, value stack, urgency, insurance, workshops, newsletter, CTA, footer, and motion while reducing duplication.
+
+Your response must start with the correction/audit required in 00B_FOLLOWUP_CORRECTION_PROMPT.txt and then satisfy 01_STRICT_EXECUTION_PROMPT.txt.

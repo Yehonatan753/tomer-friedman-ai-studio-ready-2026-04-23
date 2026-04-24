@@ -46,7 +46,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: (idx % 3) * 0.1, duration: 0.6, ease }}
-              className="break-inside-avoid bg-[#0a0a0a] border border-white/5 hover:border-energy/30 rounded-3xl p-8 flex flex-col relative transition-colors shadow-2xl hover:shadow-[0_15px_40px_rgba(255,77,0,0.1)] group"
+              className="break-inside-avoid bg-[#0a0a0a] border border-white/5 hover:border-energy/30 rounded-3xl p-8 flex flex-col relative transition-colors shadow-2xl hover:shadow-[0_15px_40px_rgba(28,141,255,0.1)] group"
             >
               <Quote size={32} className="text-energy/20 mb-6 rotate-180 group-hover:text-energy/50 transition-colors" />
               <div className="flex gap-1 mb-6">
@@ -82,7 +82,7 @@ export default function Testimonials() {
          >
             <div className="absolute top-0 right-0 w-96 h-96 bg-energy/10 rounded-full blur-[100px]"></div>
             
-            <div className="w-56 h-56 xl:w-72 xl:h-72 shrink-0 rounded-full border-[6px] border-[#111] overflow-hidden relative shadow-[0_0_50px_rgba(255,77,0,0.15)] glow-blob-container z-10">
+            <div className="w-56 h-56 xl:w-72 xl:h-72 shrink-0 rounded-full border-[6px] border-[#111] overflow-hidden relative shadow-[0_0_50px_rgba(28,141,255,0.15)] glow-blob-container z-10">
                 <div className="absolute inset-0 bg-[url('/tomer-measure.png')] bg-cover bg-top mix-blend-normal"></div>
             </div>
  
@@ -101,3 +101,4 @@ export default function Testimonials() {
     </section>
   );
 }
+

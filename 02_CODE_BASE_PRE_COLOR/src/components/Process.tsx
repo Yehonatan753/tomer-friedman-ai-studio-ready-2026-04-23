@@ -1,5 +1,94 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+
+type Step = {
+  num: string;
+  title: string;
+  desc: string;
+  note: string;
+};
+
+type ProcessStepProps = {
+  step: Step;
+  idx: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+};
+
+function ProcessStep({ step, idx, total, scrollYProgress }: ProcessStepProps) {
+  const isEven = idx % 2 !== 0;
+  const stepProgressStart = idx / Math.max(total, 1);
+  const stepProgressEnd = stepProgressStart + 0.16;
+
+  const glowOpacity = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    [0.2, 1]
+  );
+
+  const borderColor = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    ["rgba(255,255,255,0.1)", "rgba(28,141,255,1)"]
+  );
+
+  const scale = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    [1, 1.1]
+  );
+
+  const nodeColor = useTransform(
+    scrollYProgress,
+    [stepProgressStart, stepProgressEnd],
+    ["#ffffff", "#1c8dff"]
+  );
+
+  return (
+    <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
+      >
+        <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(28,141,255,0.15)] group">
+          <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
+          <p className="text-text-muted mb-4">{step.desc}</p>
+          <p className="text-sm text-energy/80 italic">"{step.note}"</p>
+        </div>
+      </motion.div>
+
+      <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
+        <motion.div
+          className="absolute inset-0 rounded-full bg-energy/20 blur-md"
+          style={{ opacity: glowOpacity }}
+        />
+        <motion.div
+          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
+          style={{
+            borderColor,
+            borderWidth: '2px',
+            borderStyle: 'solid',
+            scale
+          }}
+          whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(28,141,255,0.6)", borderColor: "rgba(28,141,255,1)" }}
+        >
+          <motion.span style={{ color: nodeColor }}>
+            {step.num}
+          </motion.span>
+        </motion.div>
+      </div>
+
+      <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(28,141,255,0.3)]">
+        {step.num}
+      </div>
+
+      <div className="hidden md:block flex-1 w-1/2"></div>
+    </div>
+  );
+}
 
 export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,21 +102,27 @@ export default function Process() {
   const steps = [
     {
       num: "1",
-      title: "אפיון והגדרת מטרות",
-      desc: "פגישת היכרות מעמיקה להבנת אורח החיים שלך, היסטוריה רפואית, העדפות תזונתיות והגדרת יעדים ריאליים ומדויקים.",
-      note: "בשלב זה אני אוסף את כל המידע הדרוש כדי לתפור את החליפה המושלמת עבורך."
+      title: "אבחון",
+      desc: "מתחילים במדידות אמיתיות, לא בהערכה. הרכב גוף, היקפים, בדיקות אם יש. בלי זה, כל תפריט הוא ניחוש.",
+      note: "בשלב הזה אני רוצה להבין מה באמת קורה, לא מה נדמה שקורה."
     },
     {
       num: "2",
-      title: "התאמה מדעית",
-      desc: "בניית תפריט תזונה ותכנית אימונים מבוססי מחקר, המותאמים אישית לפיזיולוגיה שלך ולסדר היום שלך.",
-      note: "התאמה אישית היא המפתח להתמדה. התכנית צריכה להתאים לחיים שלך, לא להפך."
+      title: "בנייה",
+      desc: "אני בונה לך מסגרת — תזונה, אימונים ומדידות — שמתחברת לחיים שלך, לא לחיים של מישהו אחר שראיתי באפליקציה.",
+      note: "התכנית צריכה להתאים אליך. לא אתה אליה."
     },
     {
       num: "3",
-      title: "מעקב ואופטימיזציה",
-      desc: "ליווי צמוד, שקילות, מדידות ועדכוני תכנית שוטפים כדי להבטיח התקדמות מתמדת ושבירת תקיעויות.",
-      note: "הגוף משתנה ומסתגל, ולכן התכנית חייבת להיות דינמית ולהשתנות יחד איתו."
+      title: "ליווי",
+      desc: "מענה יומיומי. לא פעם בשבועיים כשאתה נזכר. גם כשנשבר, גם כשאתה בחופש, גם כשהשתנה משהו.",
+      note: "אני לא משאיר אותך לבד עם קובץ ותפריט."
+    },
+    {
+      num: "4",
+      title: "התמדה",
+      desc: "בסוף התהליך לא נשארים תלויים בי. בונים את הרצף שאפשר להחזיק גם אחרי שסיימנו לעבוד יחד.",
+      note: "המטרה היא לא רק תוצאה. המטרה היא תוצאה שאתה יודע לשמור."
     }
   ];
 
@@ -52,88 +147,14 @@ export default function Process() {
 
           {/* Animated Fill Line */}
           <motion.div
-            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-orange-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(255,77,0,0.8)]"
+            className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-energy to-blue-500 -translate-x-1/2 hidden md:block origin-top shadow-[0_0_15px_rgba(28,141,255,0.8)]"
             style={{ height: lineHeight }}
           ></motion.div>
 
           <div className="flex flex-col gap-24 relative z-10">
-            {steps.map((step, idx) => {
-              const isEven = idx % 2 !== 0;
-              const stepProgressStart = idx * 0.33;
-              const stepProgressEnd = stepProgressStart + 0.1;
-
-              const glowOpacity = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                [0.2, 1]
-              );
-
-              const borderColor = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                ["rgba(255,255,255,0.1)", "rgba(255,77,0,1)"]
-              );
-
-              const scale = useTransform(
-                scrollYProgress,
-                [stepProgressStart, stepProgressEnd],
-                [1, 1.1]
-              );
-
-              return (
-                <div key={idx} className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? 'md:flex-row-reverse' : ''}`}>
-
-                  {/* Content Box */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6 }}
-                    className={`flex-1 w-full md:w-1/2 ${isEven ? 'md:text-right' : 'md:text-left'}`}
-                  >
-                    <div className="glass-panel p-8 rounded-3xl hover-trigger hover:border-energy/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,77,0,0.15)] group">
-                      <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-energy transition-colors">{step.title}</h3>
-                      <p className="text-text-muted mb-4">{step.desc}</p>
-                      <p className="text-sm text-energy/80 italic">"{step.note}"</p>
-                    </div>
-                  </motion.div>
-
-                  {/* Center Node */}
-                  <div className="hidden md:flex relative z-10 items-center justify-center w-16 h-16 shrink-0">
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-energy/20 blur-md"
-                      style={{ opacity: glowOpacity }}
-                    />
-                    <motion.div
-                      className="relative flex items-center justify-center w-14 h-14 rounded-full bg-bg text-white font-bold text-xl z-10 transition-colors hover-trigger"
-                      style={{
-                        borderColor: borderColor,
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                        scale: scale
-                      }}
-                      whileHover={{ scale: 1.2, boxShadow: "0 0 20px rgba(255,77,0,0.6)", borderColor: "rgba(255,77,0,1)" }}
-                    >
-                      <motion.span
-                        style={{
-                          color: useTransform(scrollYProgress, [stepProgressStart, stepProgressEnd], ["#ffffff", "#FF4D00"])
-                        }}
-                      >
-                        {step.num}
-                      </motion.span>
-                    </motion.div>
-                  </div>
-
-                  {/* Mobile Node (Static) */}
-                  <div className="md:hidden relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-bg border-2 border-energy text-energy font-bold text-xl shrink-0 shadow-[0_0_20px_rgba(255,77,0,0.3)]">
-                    {step.num}
-                  </div>
-
-                  {/* Empty Space for alignment */}
-                  <div className="hidden md:block flex-1 w-1/2"></div>
-                </div>
-              );
-            })}
+            {steps.map((step, idx) => (
+              <ProcessStep key={step.num} step={step} idx={idx} total={steps.length} scrollYProgress={scrollYProgress} />
+            ))}
           </div>
         </div>
       </div>
