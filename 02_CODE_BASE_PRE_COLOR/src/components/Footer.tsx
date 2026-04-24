@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Facebook, Instagram, Mail, Phone, Youtube } from 'lucide-react';
 import { SITE_DATA } from '../data';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -14,8 +14,10 @@ export default function Footer() {
     const fd = new FormData(e.currentTarget);
     const name = String(fd.get('name') || '');
     const phone = String(fd.get('phone') || '');
-    await submitLead({ source: 'footer', name, phone, product: 'footer-whatsapp', message: 'טופס מהיר בפוטר' });
-    openWhatsApp(`שלום תומר, שמי ${name}. אשמח שתחזור אליי. טלפון: ${phone}`);
+    submitLeadAndOpenWhatsApp(
+      { source: 'footer', name, phone, product: 'footer-whatsapp', message: 'טופס מהיר בפוטר' },
+      `שלום תומר, שמי ${name}. אשמח שתחזור אליי. טלפון: ${phone}`,
+    );
     setSubmitted(true);
   };
 
@@ -27,8 +29,10 @@ export default function Footer() {
     const email = String(fd.get('email') || '');
     const subject = String(fd.get('subject') || '');
     const message = String(fd.get('message') || '');
-    await submitLead({ source: 'footer', name, phone, email, product: subject || 'footer-contact', message });
-    openWhatsApp(`שלום תומר, שמי ${name}. אני רוצה לדבר איתך. ${subject ? `נושא: ${subject}. ` : ''}${message ? `הודעה: ${message}. ` : ''}טלפון: ${phone}. אימייל: ${email}`);
+    submitLeadAndOpenWhatsApp(
+      { source: 'footer', name, phone, email, product: subject || 'footer-contact', message },
+      `שלום תומר, שמי ${name}. אני רוצה לדבר איתך. ${subject ? `נושא: ${subject}. ` : ''}${message ? `הודעה: ${message}. ` : ''}טלפון: ${phone}. אימייל: ${email}`,
+    );
     setSubmitted(true);
   };
 

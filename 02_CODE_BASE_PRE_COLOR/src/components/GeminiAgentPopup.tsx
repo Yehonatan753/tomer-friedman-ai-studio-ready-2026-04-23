@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, Send, X, MessageCircle, Loader2 } from 'lucide-react';
 import { AgentMessage, sendAgentMessage } from '../lib/agentClient';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 const quickQuestions = [
   'איזה מסלול מתאים לי?',
@@ -51,14 +51,16 @@ export default function GeminiAgentPopup() {
 
   const handleLeadSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    await submitLead({
-      source: 'gemini-agent',
-      name: leadName,
-      phone: leadPhone,
-      product: 'agent-fit-check',
-      message: messages.map((message) => `${message.role}: ${message.content}`).join('\n').slice(-1800),
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${leadName}. דיברתי עם הסוכן באתר ורוצה להבין איזה מסלול מתאים לי. טלפון: ${leadPhone}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'gemini-agent',
+        name: leadName,
+        phone: leadPhone,
+        product: 'agent-fit-check',
+        message: messages.map((message) => `${message.role}: ${message.content}`).join('\n').slice(-1800),
+      },
+      `שלום תומר, קוראים לי ${leadName}. דיברתי עם הסוכן באתר ורוצה להבין איזה מסלול מתאים לי. טלפון: ${leadPhone}`,
+    );
     setLeadName('');
     setLeadPhone('');
   };

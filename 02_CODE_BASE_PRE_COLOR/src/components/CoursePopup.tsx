@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, GraduationCap, Send, X } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function CoursePopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,15 +23,17 @@ export default function CoursePopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'course-popup',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      product: courseName,
-      message: 'בקשת פרטים על הרצאה/סדנה',
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${courseName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'course-popup',
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        product: courseName,
+        message: 'בקשת פרטים על הרצאה/סדנה',
+      },
+      `שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${courseName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
+    );
     setHasSubmitted(true);
     setTimeout(() => setIsOpen(false), 2600);
   };

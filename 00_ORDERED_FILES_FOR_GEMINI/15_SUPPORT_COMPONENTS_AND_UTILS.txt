@@ -8,7 +8,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, Download, X } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function DownloadPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,15 +30,17 @@ export default function DownloadPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'download-popup',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      product: resourceName,
-      message: 'בקשת התאמה/חומר מה-popup',
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${resourceName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'download-popup',
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        product: resourceName,
+        message: 'בקשת התאמה/חומר מה-popup',
+      },
+      `שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${resourceName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
+    );
     setHasSubmitted(true);
     setTimeout(() => setIsOpen(false), 2600);
   };
@@ -144,7 +146,7 @@ export default function DownloadPopup() {
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, GraduationCap, Send, X } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function CoursePopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -166,15 +168,17 @@ export default function CoursePopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'course-popup',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      product: courseName,
-      message: 'בקשת פרטים על הרצאה/סדנה',
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${courseName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'course-popup',
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        product: courseName,
+        message: 'בקשת פרטים על הרצאה/סדנה',
+      },
+      `שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${courseName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
+    );
     setHasSubmitted(true);
     setTimeout(() => setIsOpen(false), 2600);
   };
@@ -276,7 +280,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, Send, X, MessageCircle, Loader2 } from 'lucide-react';
 import { AgentMessage, sendAgentMessage } from '../lib/agentClient';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 const quickQuestions = [
   'איזה מסלול מתאים לי?',
@@ -325,14 +329,16 @@ export default function GeminiAgentPopup() {
 
   const handleLeadSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    await submitLead({
-      source: 'gemini-agent',
-      name: leadName,
-      phone: leadPhone,
-      product: 'agent-fit-check',
-      message: messages.map((message) => `${message.role}: ${message.content}`).join('\n').slice(-1800),
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${leadName}. דיברתי עם הסוכן באתר ורוצה להבין איזה מסלול מתאים לי. טלפון: ${leadPhone}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'gemini-agent',
+        name: leadName,
+        phone: leadPhone,
+        product: 'agent-fit-check',
+        message: messages.map((message) => `${message.role}: ${message.content}`).join('\n').slice(-1800),
+      },
+      `שלום תומר, קוראים לי ${leadName}. דיברתי עם הסוכן באתר ורוצה להבין איזה מסלול מתאים לי. טלפון: ${leadPhone}`,
+    );
     setLeadName('');
     setLeadPhone('');
   };
@@ -567,7 +573,35 @@ export const TOMER_WHATSAPP = 'https://wa.me/972546699574';
 
 export function openWhatsApp(message: string) {
   const url = `${TOMER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
+  const opened = window.open(url, '_blank');
+  if (opened) {
+    opened.opener = null;
+    return;
+  }
+
+  window.location.assign(url);
+}
+
+export function submitLeadInBackground(payload: LeadPayload) {
+  const body = JSON.stringify(payload);
+
+  try {
+    if ('sendBeacon' in navigator) {
+      const blob = new Blob([body], { type: 'application/json' });
+      if (navigator.sendBeacon('/api/leads', blob)) {
+        return;
+      }
+    }
+  } catch {
+    // Fall back to fetch below.
+  }
+
+  void submitLead(payload);
+}
+
+export function submitLeadAndOpenWhatsApp(payload: LeadPayload, message: string) {
+  openWhatsApp(message);
+  submitLeadInBackground(payload);
 }
 
 export async function submitLead(payload: LeadPayload): Promise<LeadResponse> {
@@ -605,6 +639,43 @@ export type AgentResponse = {
   error?: string;
 };
 
+function localAgentFallback(messages: AgentMessage[]): AgentResponse {
+  const lastUserMessage = [...messages].reverse().find((message) => message.role === 'user')?.content.toLowerCase() || '';
+
+  if (lastUserMessage.includes('מחיר') || lastUserMessage.includes('כמה') || lastUserMessage.includes('עלות')) {
+    return {
+      ok: true,
+      configured: false,
+      answer:
+        'המחירים המרכזיים: TF Tracker ב-₪49.90 חודשי או ₪39.90 במסלול שנתי, BodyMetRiX Lite ב-₪297 לדוח, תהליך אונליין מ-₪4,500 ל-3 חודשים, וליווי אישי מלא מ-₪9,000 ל-3 חודשים.',
+    };
+  }
+
+  if (lastUserMessage.includes('ביטוח') || lastUserMessage.includes('החזר')) {
+    return {
+      ok: true,
+      configured: false,
+      answer: 'יכול להיות שיש זכאות להחזר דרך ביטוח פרטי או קופה, אבל זה תלוי בפוליסה. השאר פרטים באזור הביטוח ותומר יחזור אליך לבדיקה נקודתית.',
+    };
+  }
+
+  if (lastUserMessage.includes('tracker') || lastUserMessage.includes('אפליק')) {
+    return {
+      ok: true,
+      configured: false,
+      answer:
+        'TF Tracker מתאים למי שרוצה להתחיל עצמאית וזול: אוכל, אימונים, מדידות ומעקב במקום אחד. אם בהמשך עוברים לתהליך אישי, הנתונים ממשיכים איתך ולא מתחילים מאפס.',
+    };
+  }
+
+  return {
+    ok: true,
+    configured: false,
+    answer:
+      'כדי לכוון אותך נכון צריך להבין מטרה, רמת ליווי רצויה, והאם אתה רוצה להתחיל לבד או בתהליך מלא. אם אתה רוצה ליווי מרחוק, תהליך אונליין הוא נקודת פתיחה חזקה. אם אתה רוצה זמינות גבוהה ועבודה צמודה, הליווי האישי מתאים יותר.',
+  };
+}
+
 export async function sendAgentMessage(messages: AgentMessage[]): Promise<AgentResponse> {
   try {
     const response = await fetch('/api/agent/chat', {
@@ -614,20 +685,12 @@ export async function sendAgentMessage(messages: AgentMessage[]): Promise<AgentR
     });
 
     if (!response.ok) {
-      return {
-        ok: false,
-        answer: 'לא הצלחתי לקבל תשובה כרגע. אפשר להשאיר פרטים ותומר יחזור אליך בוואטסאפ.',
-        error: 'agent-request-failed',
-      };
+      return localAgentFallback(messages);
     }
 
     return (await response.json()) as AgentResponse;
   } catch {
-    return {
-      ok: false,
-      answer: 'אין כרגע חיבור לסוכן. אפשר להשאיר פרטים ותומר יחזור אליך בוואטסאפ.',
-      error: 'agent-network-error',
-    };
+    return localAgentFallback(messages);
   }
 }
 

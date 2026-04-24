@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, ChevronLeft, CheckCircle2, ChevronRight } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 const QUESTIONS = [
   {
@@ -109,15 +109,17 @@ export default function Pathfinder() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'pathfinder',
-      name: leadData.name,
-      phone: leadData.phone,
-      email: leadData.email,
-      product: 'pathfinder-result',
-      metadata: { answers },
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${leadData.name}. מילאתי את האבחון באתר ואשמח להבין מה המסלול הנכון בשבילי. טלפון: ${leadData.phone}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'pathfinder',
+        name: leadData.name,
+        phone: leadData.phone,
+        email: leadData.email,
+        product: 'pathfinder-result',
+        metadata: { answers },
+      },
+      `שלום תומר, קוראים לי ${leadData.name}. מילאתי את האבחון באתר ואשמח להבין מה המסלול הנכון בשבילי. טלפון: ${leadData.phone}`,
+    );
     setCurrentStep(QUESTIONS.length + 1);
     setTimeout(() => setCurrentStep(QUESTIONS.length + 2), 2000);
   };

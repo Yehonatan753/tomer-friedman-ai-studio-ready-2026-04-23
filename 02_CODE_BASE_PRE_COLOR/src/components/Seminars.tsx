@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function Seminars() {
   const [email, setEmail] = useState('');
@@ -8,13 +8,15 @@ export default function Seminars() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    await submitLead({
-      source: 'newsletter',
-      email,
-      product: 'seminars-2026',
-      message: 'רשימת המתנה לסדנאות והרצאות',
-    });
-    openWhatsApp(`שלום תומר, אשמח להצטרף לרשימת ההמתנה לסדנאות 2026. אימייל: ${email}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'newsletter',
+        email,
+        product: 'seminars-2026',
+        message: 'רשימת המתנה לסדנאות והרצאות',
+      },
+      `שלום תומר, אשמח להצטרף לרשימת ההמתנה לסדנאות 2026. אימייל: ${email}`,
+    );
     setSubmitted(true);
   };
 

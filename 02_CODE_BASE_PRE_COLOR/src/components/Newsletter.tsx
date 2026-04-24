@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, Mail, Send } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
@@ -10,14 +10,16 @@ export default function Newsletter() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'newsletter',
-      name,
-      email,
-      product: 'newsletter',
-      message: 'הרשמה לניוזלטר',
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${name}. אשמח להירשם לעדכונים שלך. אימייל: ${email}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'newsletter',
+        name,
+        email,
+        product: 'newsletter',
+        message: 'הרשמה לניוזלטר',
+      },
+      `שלום תומר, קוראים לי ${name}. אשמח להירשם לעדכונים שלך. אימייל: ${email}`,
+    );
     setSubmitted(true);
   };
 

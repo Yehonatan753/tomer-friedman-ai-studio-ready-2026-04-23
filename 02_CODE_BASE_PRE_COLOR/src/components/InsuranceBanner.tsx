@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function InsuranceBanner() {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', insuranceType: '' });
@@ -9,15 +9,17 @@ export default function InsuranceBanner() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'insurance',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      product: 'insurance-refund-check',
-      message: formData.insuranceType,
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${formData.name}. אשמח לבדוק זכאות להחזר ביטוח. טלפון: ${formData.phone}. סוג פוליסה: ${formData.insuranceType || 'לא בטוח/ה'}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'insurance',
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        product: 'insurance-refund-check',
+        message: formData.insuranceType,
+      },
+      `שלום תומר, קוראים לי ${formData.name}. אשמח לבדוק זכאות להחזר ביטוח. טלפון: ${formData.phone}. סוג פוליסה: ${formData.insuranceType || 'לא בטוח/ה'}`,
+    );
     setSubmitted(true);
   };
 

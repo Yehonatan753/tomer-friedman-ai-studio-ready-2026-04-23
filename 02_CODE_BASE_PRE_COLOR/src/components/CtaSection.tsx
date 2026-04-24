@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function CtaSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -12,14 +12,16 @@ export default function CtaSection() {
     const fd = new FormData(form);
     const name = String(fd.get('name') || '').trim();
     const phone = String(fd.get('phone') || '').trim();
-    await submitLead({
-      source: 'final-cta',
-      name,
-      phone,
-      product: 'final-fit-call',
-      message: 'CTA סוף דף',
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${name}. הגעתי מהאתר ורוצה להתחיל להבין מה מתאים לי. טלפון: ${phone}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'final-cta',
+        name,
+        phone,
+        product: 'final-fit-call',
+        message: 'CTA סוף דף',
+      },
+      `שלום תומר, קוראים לי ${name}. הגעתי מהאתר ורוצה להתחיל להבין מה מתאים לי. טלפון: ${phone}`,
+    );
     setSubmitted(true);
   };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, Download, X } from 'lucide-react';
-import { openWhatsApp, submitLead } from '../lib/leads';
+import { submitLeadAndOpenWhatsApp } from '../lib/leads';
 
 export default function DownloadPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,15 +23,17 @@ export default function DownloadPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitLead({
-      source: 'download-popup',
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      product: resourceName,
-      message: 'בקשת התאמה/חומר מה-popup',
-    });
-    openWhatsApp(`שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${resourceName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`);
+    submitLeadAndOpenWhatsApp(
+      {
+        source: 'download-popup',
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        product: resourceName,
+        message: 'בקשת התאמה/חומר מה-popup',
+      },
+      `שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${resourceName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
+    );
     setHasSubmitted(true);
     setTimeout(() => setIsOpen(false), 2600);
   };
