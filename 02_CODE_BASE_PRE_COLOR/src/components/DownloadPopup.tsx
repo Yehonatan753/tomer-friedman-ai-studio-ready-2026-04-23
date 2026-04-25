@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CheckCircle2, Download, X } from 'lucide-react';
+import { CheckCircle2, Smartphone, X } from 'lucide-react';
 import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 export default function DownloadPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
-  const [resourceName, setResourceName] = useState('');
+  const [resourceName, setResourceName] = useState('TF Tracker');
 
   useEffect(() => {
     const handleOpenDownload = (e: CustomEvent) => {
-      setResourceName(e.detail.resourceName);
+      setResourceName(e.detail?.resourceName || 'TF Tracker');
       setIsOpen(true);
       setHasSubmitted(false);
       setFormData({ name: '', phone: '', email: '' });
@@ -31,10 +31,10 @@ export default function DownloadPopup() {
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
-        product: resourceName,
-        message: 'בקשת התאמה/חומר מה-popup',
+        product: 'TF Tracker app onboarding',
+        message: `בקשת כניסה לאפליקציית TF Tracker דרך popup. מקור: ${resourceName}`,
       },
-      `שלום תומר, קוראים לי ${formData.name}. אשמח לקבל פרטים על ${resourceName}. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
+      `שלום תומר, קוראים לי ${formData.name}. אני רוצה להתחיל עם TF Tracker ולקבל קישור כניסה לאפליקציה + שאלון פתיחה. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
     );
     setHasSubmitted(true);
     setTimeout(() => setIsOpen(false), 2600);
@@ -66,10 +66,14 @@ export default function DownloadPopup() {
               <X size={20} />
             </button>
 
-            <div className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-[#f2f8ff] to-[#dff0ff]">
+            <div className="relative flex h-44 items-center justify-center overflow-hidden bg-gradient-to-br from-[#f2f8ff] to-[#dff0ff]">
               <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: 'radial-gradient(#1c8dff 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-energy/20 bg-white shadow-[0_16px_40px_rgba(28,141,255,0.16)]">
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] border border-energy/20 bg-white shadow-[0_16px_40px_rgba(28,141,255,0.16)]">
                 <img src="/tomer-logo.png" alt="תומר פרידמן" className="h-16 w-16 object-contain" />
+                <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full bg-energy px-3 py-1 text-[10px] font-black text-white shadow-[0_10px_24px_rgba(28,141,255,0.28)]">
+                  <Smartphone size={12} />
+                  TF Tracker
+                </div>
               </div>
             </div>
 
@@ -78,11 +82,17 @@ export default function DownloadPopup() {
                 <>
                   <div className="mb-6 text-center">
                     <h3 className="mb-2 font-heading text-2xl font-black text-foreground">
-                      השאר פרטים ונכוון אותך נכון
+                      כניסה ל־TF Tracker
                     </h3>
                     <p className="text-sm leading-relaxed text-text-muted">
-                      השאר פרטים ותומר יחזור אליך בוואטסאפ עם הכיוון המתאים לגבי {resourceName || 'המסלול'}.
+                      השאר פרטים ונשלח לך בוואטסאפ את קישור הכניסה לאפליקציה ואת שאלון הפתיחה הראשוני. בפנים יש מעקב אוכל, אימונים, מדידות והתקדמות במקום אחד.
                     </p>
+                  </div>
+
+                  <div className="mb-5 grid grid-cols-1 gap-2 rounded-2xl border border-energy/15 bg-[#f7fbff] p-4 text-sm font-bold text-foreground sm:grid-cols-3">
+                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">₪49.90 חודשי</div>
+                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">₪39.90 שנתי</div>
+                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">ללא התחייבות</div>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -119,8 +129,8 @@ export default function DownloadPopup() {
                     />
 
                     <button type="submit" className="btn-magnetic flex w-full items-center justify-center gap-2 rounded-xl bg-energy px-8 py-4 font-black text-white shadow-[0_12px_34px_rgba(28,141,255,0.28)]">
-                      <Download size={20} />
-                      <span>שלח פרטים לתומר</span>
+                      <Smartphone size={20} />
+                      <span>שלחו לי קישור ל־TF Tracker</span>
                     </button>
                   </form>
                 </>
@@ -129,8 +139,8 @@ export default function DownloadPopup() {
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50">
                     <CheckCircle2 size={32} className="text-green-600" />
                   </div>
-                  <h3 className="mb-2 text-2xl font-black text-foreground">הפרטים נקלטו</h3>
-                  <p className="text-text-muted">נפתח לך וואטסאפ עם הודעה מוכנה לתומר.</p>
+                  <h3 className="mb-2 text-2xl font-black text-foreground">הבקשה נקלטה</h3>
+                  <p className="text-text-muted">נפתח לך וואטסאפ עם הודעה מוכנה לקבלת קישור הכניסה ל־TF Tracker.</p>
                 </motion.div>
               )}
             </div>
