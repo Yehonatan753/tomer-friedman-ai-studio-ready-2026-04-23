@@ -76,7 +76,7 @@ export default function CoursePopup() {
                   <div className="mb-6 text-center">
                     <h3 className="mb-2 font-heading text-2xl font-black text-foreground">{courseName}</h3>
                     <p className="text-sm leading-relaxed text-text-muted">
-                      השאר פרטים ותומר יחזור אליך בוואטסאפ עם כל המידע הרלוונטי להרצאה או לסדנה.
+                      השאר פרטים ואחזור אליך בוואטסאפ עם כל המידע הרלוונטי להרצאה או לסדנה.
                     </p>
                   </div>
 
@@ -125,7 +125,7 @@ export default function CoursePopup() {
                     <CheckCircle2 size={32} className="text-green-600" />
                   </div>
                   <h3 className="mb-2 text-2xl font-black text-foreground">הפרטים נקלטו</h3>
-                  <p className="text-text-muted">נפתח לך וואטסאפ עם הודעה מוכנה לתומר.</p>
+                  <p className="text-text-muted">נפתח לך וואטסאפ עם הודעה מוכנה להמשך.</p>
                 </motion.div>
               )}
             </div>

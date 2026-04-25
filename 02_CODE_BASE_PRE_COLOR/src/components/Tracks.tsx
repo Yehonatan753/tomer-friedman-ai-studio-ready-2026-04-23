@@ -62,7 +62,7 @@ const products: Product[] = [
       'שאלון אישי קצר ובניית מסגרת התחלתית',
       'בוט AI לשאלות יומיומיות בסיסיות',
       'מדידות עצמאיות ומעקב התקדמות',
-      'שיטת המנות של תומר + ברקוד/צילום/מאגר ארוחות',
+      'שיטת המנות שלי + ברקוד/צילום/מאגר ארוחות',
       'תוכנית אימונים לבית, לחדר כושר או לפארק',
     ],
     renewal: 'מנוי חודשי או שנתי. אפשר לבטל בלי להיכנס לתהליך אישי.',
@@ -466,7 +466,7 @@ export default function Tracks() {
                 </button>
                 <a href={cartWhatsappLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full bg-energy px-6 py-3 text-sm font-black text-white">
                   <MessageCircle size={16} />
-                  שלח לתומר
+                  שלח אליי
                 </a>
               </div>
             </div>

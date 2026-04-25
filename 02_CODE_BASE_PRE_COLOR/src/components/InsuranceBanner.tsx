@@ -73,7 +73,7 @@ export default function InsuranceBanner() {
 
             <div className="border-t border-[#dceaf5] pt-8">
               <h3 className="mb-6 text-xl font-black text-foreground">
-                לבדיקה אם אתם זכאים לכיסוי, מלאו פרטים ותומר יחזור אליכם בוואטסאפ:
+                לבדיקה אם אתם זכאים לכיסוי, מלאו פרטים ואחזור אליכם בוואטסאפ:
               </h3>
 
               {!submitted ? (
@@ -124,7 +124,7 @@ export default function InsuranceBanner() {
                 </form>
               ) : (
                 <div className="rounded-2xl border border-green-200 bg-green-50 p-5 font-black text-green-800">
-                  קיבלתי את הפרטים. תומר יחזור אליך בוואטסאפ.
+                  קיבלתי את הפרטים. אחזור אליך בוואטסאפ.
                 </div>
               )}
             </div>

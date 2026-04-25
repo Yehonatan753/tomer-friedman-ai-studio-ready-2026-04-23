@@ -61,7 +61,7 @@ export default function CtaSection() {
               ) : (
                 <motion.div key="success" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 200, damping: 20 }} className="flex w-full items-center justify-center gap-4 py-2">
                   <CheckCircle className="h-8 w-8 text-green-600" />
-                  <p className="text-xl font-black text-foreground">תודה. תומר יחזור אליך בהקדם.</p>
+                  <p className="text-xl font-black text-foreground">תודה. אחזור אליך בהקדם.</p>
                 </motion.div>
               )}
             </AnimatePresence>

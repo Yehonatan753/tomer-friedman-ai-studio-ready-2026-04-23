@@ -83,7 +83,7 @@ export default function Newsletter() {
                 <CheckCircle className="h-8 w-8 text-green-600" />
               </div>
               <p className="text-xl font-black text-foreground">נרשמת בהצלחה</p>
-              <p className="text-text-muted">הפרטים נקלטו, ותומר יוכל להמשיך איתך בוואטסאפ.</p>
+              <p className="text-text-muted">הפרטים נקלטו, ואוכל להמשיך איתך בוואטסאפ.</p>
             </motion.div>
           )}
         </AnimatePresence>

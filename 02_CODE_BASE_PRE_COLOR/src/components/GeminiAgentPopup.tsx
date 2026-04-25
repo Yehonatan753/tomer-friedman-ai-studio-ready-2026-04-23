@@ -189,7 +189,7 @@ export default function GeminiAgentPopup() {
 
               <div className="mt-3 flex items-center gap-2 text-xs text-text-muted">
                 <MessageCircle size={14} className="text-energy" />
-                הסוכן לא מחליף ייעוץ אישי. בשאלות רפואיות עוברים לתומר.
+                הסוכן לא מחליף ייעוץ אישי. בשאלות רפואיות משאירים פרטים ואני עובר על זה אישית.
               </div>
             </div>
           </motion.div>

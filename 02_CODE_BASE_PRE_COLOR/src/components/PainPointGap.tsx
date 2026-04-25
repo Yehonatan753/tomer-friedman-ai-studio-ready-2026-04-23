@@ -68,7 +68,7 @@ export default function PainPointGap() {
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-energy/20 blur-3xl translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"></div>
             <h3 className="text-2xl font-bold text-energy mb-8 border-b border-energy/10 pb-4 relative z-10">
-              הגישה של תומר
+              הגישה שלי
             </h3>
             <ul className="space-y-6 relative z-10">
               {[
@@ -101,4 +101,3 @@ export default function PainPointGap() {
     </section>
   );
 }
-
