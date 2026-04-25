@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 export default function Seminars() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!validateLeadForm(event.currentTarget)) return;
+
     submitLeadAndOpenWhatsApp(
       {
         source: 'newsletter',
@@ -45,7 +47,8 @@ export default function Seminars() {
             {!submitted ? (
               <form className="mx-auto flex max-w-md flex-col gap-4 sm:flex-row" onSubmit={handleSubmit}>
                 <input
-                  type="email"
+                  name="email"
+                  {...leadInputProps.email}
                   placeholder="האימייל שלך"
                   required
                   value={email}

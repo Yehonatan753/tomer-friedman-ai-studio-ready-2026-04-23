@@ -47,6 +47,15 @@ export default function Index() {
 
     window.addEventListener('scroll', handleScroll);
 
+    const params = new URLSearchParams(window.location.search);
+    const shouldOpenPopup = params.get('open_popup') === 'true' || params.get('popup') === 'true';
+    if (shouldOpenPopup) {
+      window.setTimeout(() => {
+        hasScrolledPopupRef.current = true;
+        window.dispatchEvent(new CustomEvent('open-download', { detail: { resourceName: 'TF Tracker - התאמת מסלול ראשונית' } }));
+      }, 1200);
+    }
+
     return () => {
       clearInterval(timer);
       window.removeEventListener('scroll', handleScroll);

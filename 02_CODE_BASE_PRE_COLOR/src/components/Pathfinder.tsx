@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, ChevronLeft, CheckCircle2, ChevronRight } from 'lucide-react';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 const QUESTIONS = [
   {
@@ -158,8 +158,10 @@ export default function Pathfinder() {
     }
   };
 
-  const handleLeadSubmit = async (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateLeadForm(e.currentTarget)) return;
+
     submitLeadAndOpenWhatsApp(
       {
         source: 'pathfinder',
@@ -269,15 +271,15 @@ export default function Pathfinder() {
                 <form onSubmit={handleLeadSubmit} className="space-y-5">
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-text-muted">שם מלא</label>
-                    <input required type="text" value={leadData.name} onChange={e => setLeadData({...leadData, name: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors" placeholder="השם שלך" />
+                    <input name="name" required type="text" {...leadInputProps.fullName} value={leadData.name} onChange={e => setLeadData({...leadData, name: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors" placeholder="השם שלך" />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-text-muted">טלפון</label>
-                    <input required type="tel" value={leadData.phone} onChange={e => setLeadData({...leadData, phone: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="050-0000000" dir="ltr" />
+                    <input name="phone" required {...leadInputProps.phone} value={leadData.phone} onChange={e => setLeadData({...leadData, phone: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="050-0000000" dir="ltr" />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-text-muted">אימייל</label>
-                    <input required type="email" value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
+                    <input name="email" required {...leadInputProps.email} value={leadData.email} onChange={e => setLeadData({...leadData, email: e.target.value})} className="w-full bg-bg border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-energy transition-colors text-right" placeholder="your@email.com" dir="ltr" />
                   </div>
                   <button type="submit" className="btn-magnetic mt-4 w-full rounded-xl bg-energy px-8 py-4 font-bold text-white shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)]">
                     קבל את התוצאות שלי

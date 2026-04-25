@@ -49,10 +49,25 @@ export function trimText(value: string | undefined, max = 2000) {
   return (value || '').trim().slice(0, max);
 }
 
+export function normalizeIsraeliPhone(input = '') {
+  const digits = input.replace(/\D/g, '');
+
+  if (digits.startsWith('972') && digits.length >= 11) {
+    return `0${digits.slice(3)}`;
+  }
+
+  return digits;
+}
+
+export function isValidIsraeliPhone(input = '') {
+  const value = input.trim();
+  return /^(?:\+?972[\s-]?|0)(?:5\d|7\d|[23489])[\s-]?\d{3}[\s-]?\d{4}$/.test(value) || /^0(?:5\d{8}|7\d{8}|[23489]\d{7})$/.test(normalizeIsraeliPhone(value));
+}
+
 export const LeadSchema = z.object({
   source: z.string().min(1).max(80),
   name: z.string().max(120).optional(),
-  phone: z.string().max(40).optional(),
+  phone: z.string().max(40).optional().refine((value) => !value || isValidIsraeliPhone(value), 'invalid-phone'),
   email: z.string().email().max(160).optional().or(z.literal('')),
   product: z.string().max(160).optional(),
   message: z.string().max(2000).optional(),

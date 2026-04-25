@@ -15,15 +15,17 @@ const testimonials = [
     name: 'ד. ס.',
     context: 'ליווי אישי',
     text: 'המדידות שינו לי את כל ההבנה. לא הסתכלנו רק על משקל, אלא על הרכב גוף, היקפים והתגובה של הגוף לאורך זמן.',
-    image: '/tomer-measure-waist-highres.png',
-    imageLabel: 'מדידה כחלק מתהליך',
+    image: '/tomer-measure-arm-highres.png',
+    imageLabel: 'מדידת היקף יד',
+    imageClass: 'object-[52%_34%]',
   },
   {
     name: 'ר. ג.',
     context: 'ספורטאי חובב',
     text: 'הדיוק סביב אימונים, זמני ארוחות וכמויות הוריד המון רעש. לא הייתי צריך לנחש אם אני אוכל מספיק או יותר מדי.',
-    image: '/tomer-measure.png',
-    imageLabel: 'מעקב גוף והיקפים',
+    image: '/tomer-measure-waist-highres.png',
+    imageLabel: 'מדידת היקפים',
+    imageClass: 'object-[55%_42%]',
   },
   {
     name: 'א. מ.',
@@ -39,6 +41,8 @@ const testimonials = [
     name: 'ל. א.',
     context: 'תחזוקה',
     text: 'אחרי התהליך היה לי חשוב לא להיעלם. כרטיסיית המדידות נתנה לי נקודת בדיקה מסודרת בלי להיכנס שוב לתהליך מלא.',
+    image: '/tomer-measure.png',
+    imageLabel: 'מעקב התקדמות',
   },
 ];
 
@@ -76,7 +80,7 @@ export default function Testimonials() {
             >
               {'image' in testimonial && testimonial.image && (
                 <div className="relative h-48 overflow-hidden">
-                  <img src={testimonial.image} alt={testimonial.imageLabel} className="h-full w-full object-cover" />
+                  <img src={testimonial.image} alt={testimonial.imageLabel} className={`h-full w-full object-cover ${'imageClass' in testimonial ? testimonial.imageClass || '' : ''}`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f2a44]/45 to-transparent" />
                   <div className="absolute bottom-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-foreground">
                     {testimonial.imageLabel}

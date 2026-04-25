@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, Mail, Send } from 'lucide-react';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 export default function Newsletter() {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateLeadForm(e.currentTarget)) return;
+
     submitLeadAndOpenWhatsApp(
       {
         source: 'newsletter',
@@ -51,7 +53,9 @@ export default function Newsletter() {
               onSubmit={handleSubmit}
             >
               <input
+                name="name"
                 type="text"
+                {...leadInputProps.fullName}
                 placeholder="שם מלא"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -59,7 +63,8 @@ export default function Newsletter() {
                 required
               />
               <input
-                type="email"
+                name="email"
+                {...leadInputProps.email}
                 placeholder="your@email.com"
                 dir="ltr"
                 value={email}

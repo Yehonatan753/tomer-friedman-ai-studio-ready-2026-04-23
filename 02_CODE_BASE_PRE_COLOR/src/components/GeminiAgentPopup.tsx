@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, Send, X, MessageCircle, Loader2 } from 'lucide-react';
 import { AgentMessage, sendAgentMessage } from '../lib/agentClient';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 const quickQuestions = [
   'איזה מסלול מתאים לי?',
@@ -49,8 +49,10 @@ export default function GeminiAgentPopup() {
     })();
   };
 
-  const handleLeadSubmit = async (event: React.FormEvent) => {
+  const handleLeadSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!validateLeadForm(event.currentTarget)) return;
+
     submitLeadAndOpenWhatsApp(
       {
         source: 'gemini-agent',
@@ -162,15 +164,19 @@ export default function GeminiAgentPopup() {
 
               <form onSubmit={handleLeadSubmit} className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr_auto]">
                 <input
+                  name="name"
                   value={leadName}
                   onChange={(event) => setLeadName(event.target.value)}
+                  {...leadInputProps.fullName}
                   placeholder="שם"
                   className="rounded-full border border-[#d6e5f1] px-4 py-2 text-right text-xs outline-none focus:border-energy"
                   required
                 />
                 <input
+                  name="phone"
                   value={leadPhone}
                   onChange={(event) => setLeadPhone(event.target.value)}
+                  {...leadInputProps.phone}
                   placeholder="טלפון"
                   dir="ltr"
                   className="rounded-full border border-[#d6e5f1] px-4 py-2 text-right text-xs outline-none focus:border-energy"

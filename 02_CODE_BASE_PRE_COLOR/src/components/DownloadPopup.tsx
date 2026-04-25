@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, Download, X } from 'lucide-react';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 export default function DownloadPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +21,10 @@ export default function DownloadPopup() {
     return () => window.removeEventListener('open-download', handleOpenDownload as EventListener);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateLeadForm(e.currentTarget)) return;
+
     submitLeadAndOpenWhatsApp(
       {
         source: 'download-popup',
@@ -85,16 +87,20 @@ export default function DownloadPopup() {
 
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <input
+                      name="name"
                       required
                       type="text"
+                      {...leadInputProps.fullName}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"
                       placeholder="שם מלא"
                     />
                     <input
+                      name="phone"
                       required
                       type="tel"
+                      {...leadInputProps.phone}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"
@@ -102,7 +108,9 @@ export default function DownloadPopup() {
                       dir="ltr"
                     />
                     <input
+                      name="email"
                       type="email"
+                      {...leadInputProps.email}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"

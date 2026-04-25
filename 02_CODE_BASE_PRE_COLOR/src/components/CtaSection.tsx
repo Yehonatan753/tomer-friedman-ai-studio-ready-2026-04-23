@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 export default function CtaSection() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
+    const form = e.currentTarget as HTMLFormElement;
+    if (!validateLeadForm(form)) return;
+
     const fd = new FormData(form);
     const name = String(fd.get('name') || '').trim();
     const phone = String(fd.get('phone') || '').trim();
@@ -49,8 +51,8 @@ export default function CtaSection() {
                     זה הזמן לעשות את הצעד הראשון. השאר פרטים ואחזור אליך בהקדם.
                   </p>
                   <form className="flex w-full flex-col items-center justify-end gap-4 md:flex-row lg:w-3/5" onSubmit={handleSubmit}>
-                    <input name="name" type="text" placeholder="שם מלא" className="w-full rounded-full border border-[#d2e2ef] bg-white px-6 py-3 text-right text-sm text-foreground outline-none transition-colors focus:border-energy md:w-1/3" required />
-                    <input name="phone" type="tel" placeholder="טלפון" dir="ltr" className="w-full rounded-full border border-[#d2e2ef] bg-white px-6 py-3 text-right text-sm text-foreground outline-none transition-colors focus:border-energy md:w-1/3" required />
+                    <input name="name" type="text" {...leadInputProps.fullName} placeholder="שם מלא" className="w-full rounded-full border border-[#d2e2ef] bg-white px-6 py-3 text-right text-sm text-foreground outline-none transition-colors focus:border-energy md:w-1/3" required />
+                    <input name="phone" {...leadInputProps.phone} placeholder="טלפון" dir="ltr" className="w-full rounded-full border border-[#d2e2ef] bg-white px-6 py-3 text-right text-sm text-foreground outline-none transition-colors focus:border-energy md:w-1/3" required />
                     <button type="submit" className="btn-magnetic whitespace-nowrap rounded-full bg-energy px-8 py-3 text-sm font-black text-white shadow-[0_0_20px_rgba(28,141,255,0.28)] transition-colors hover:bg-[#0f6fc9]">
                       שליחה
                     </button>

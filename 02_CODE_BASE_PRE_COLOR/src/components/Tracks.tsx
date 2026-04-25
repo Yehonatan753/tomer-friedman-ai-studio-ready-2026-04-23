@@ -306,8 +306,8 @@ function ProductCard({ product, inCart, onToggleCart }: { product: Product; inCa
       )}
 
       {product.capacity && (
-        <div className="mb-5 flex items-start gap-2 rounded-full border border-amber-300/60 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">
-          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+        <div className="mb-5 flex items-start gap-2 rounded-full border border-energy/30 bg-[#eef7ff] px-4 py-3 text-sm font-bold text-[#0f2a44]">
+          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-energy" />
           {product.capacity}
         </div>
       )}

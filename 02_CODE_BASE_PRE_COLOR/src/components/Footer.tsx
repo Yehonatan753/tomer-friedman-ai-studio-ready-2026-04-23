@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Facebook, Instagram, Linkedin, Mail, MessageCircle, Phone, Youtube } from 'lucide-react';
 import { SITE_DATA } from '../data';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -11,6 +11,8 @@ export default function Footer() {
 
   const handleQuickSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateLeadForm(e.currentTarget)) return;
+
     const fd = new FormData(e.currentTarget);
     const name = String(fd.get('name') || '');
     const phone = String(fd.get('phone') || '');
@@ -23,6 +25,8 @@ export default function Footer() {
 
   const handleFullSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateLeadForm(e.currentTarget)) return;
+
     const fd = new FormData(e.currentTarget);
     const name = String(fd.get('name') || '');
     const phone = String(fd.get('phone') || '');
@@ -54,8 +58,8 @@ export default function Footer() {
                 </h3>
                 {!submitted ? (
                   <form className="flex w-full flex-col items-stretch justify-center gap-4 md:w-auto md:flex-row md:items-center" onSubmit={handleQuickSubmit}>
-                    <input name="name" type="text" placeholder="שם מלא" className="w-full max-w-xs flex-grow rounded-full border border-[#d2e2ef] bg-white px-6 py-4 text-right text-foreground outline-none transition-colors focus:border-energy md:w-auto" required />
-                    <input name="phone" type="tel" placeholder="טלפון" dir="ltr" className="w-full max-w-xs flex-grow rounded-full border border-[#d2e2ef] bg-white px-6 py-4 text-right text-foreground outline-none transition-colors focus:border-energy md:w-auto" required />
+                    <input name="name" type="text" {...leadInputProps.fullName} placeholder="שם מלא" className="w-full max-w-xs flex-grow rounded-full border border-[#d2e2ef] bg-white px-6 py-4 text-right text-foreground outline-none transition-colors focus:border-energy md:w-auto" required />
+                    <input name="phone" {...leadInputProps.phone} placeholder="טלפון" dir="ltr" className="w-full max-w-xs flex-grow rounded-full border border-[#d2e2ef] bg-white px-6 py-4 text-right text-foreground outline-none transition-colors focus:border-energy md:w-auto" required />
                     <button type="submit" className="btn-magnetic flex w-full items-center justify-center gap-2 rounded-full bg-energy px-10 py-4 font-black text-white shadow-[0_14px_38px_rgba(28,141,255,0.28)] transition-colors hover:bg-[#0f6fc9] md:w-auto">
                       בואו נתחיל
                     </button>
@@ -77,17 +81,17 @@ export default function Footer() {
             <form className="flex flex-col gap-8" onSubmit={handleFullSubmit}>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div className="relative">
-                  <input name="name" type="text" required className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-foreground outline-none transition-colors focus:border-energy" placeholder=" " />
+                  <input name="name" type="text" {...leadInputProps.fullName} required className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-foreground outline-none transition-colors focus:border-energy" placeholder=" " />
                   <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">שם מלא</label>
                 </div>
                 <div className="relative">
-                  <input name="phone" type="tel" required className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-right text-foreground outline-none transition-colors focus:border-energy" placeholder=" " dir="ltr" />
+                  <input name="phone" {...leadInputProps.phone} required className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-right text-foreground outline-none transition-colors focus:border-energy" placeholder=" " dir="ltr" />
                   <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">טלפון</label>
                 </div>
               </div>
 
               <div className="relative">
-                <input name="email" type="email" className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-right text-foreground outline-none transition-colors focus:border-energy" placeholder=" " dir="ltr" />
+                <input name="email" {...leadInputProps.email} className="peer w-full border-b border-[#cfe0ee] bg-transparent py-3 text-right text-foreground outline-none transition-colors focus:border-energy" placeholder=" " dir="ltr" />
                 <label className="absolute right-0 top-3 text-text-muted transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-energy peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">אימייל</label>
               </div>
 

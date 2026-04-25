@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
-import { submitLeadAndOpenWhatsApp } from '../lib/leads';
+import { leadInputProps, submitLeadAndOpenWhatsApp, validateLeadForm } from '../lib/leads';
 
 export default function InsuranceBanner() {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', insuranceType: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateLeadForm(e.currentTarget)) return;
+
     submitLeadAndOpenWhatsApp(
       {
         source: 'insurance',
@@ -78,7 +80,9 @@ export default function InsuranceBanner() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <input
+                      name="name"
                       type="text"
+                      {...leadInputProps.fullName}
                       placeholder="שם מלא *"
                       required
                       value={formData.name}
@@ -86,7 +90,8 @@ export default function InsuranceBanner() {
                       className="w-full rounded-xl border border-[#d2e2ef] bg-white px-4 py-3 text-right text-foreground outline-none transition-colors focus:border-energy"
                     />
                     <input
-                      type="tel"
+                      name="phone"
+                      {...leadInputProps.phone}
                       placeholder="טלפון *"
                       required
                       dir="ltr"
@@ -97,7 +102,8 @@ export default function InsuranceBanner() {
                   </div>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <input
-                      type="email"
+                      name="email"
+                      {...leadInputProps.email}
                       placeholder="אימייל"
                       dir="ltr"
                       value={formData.email}
