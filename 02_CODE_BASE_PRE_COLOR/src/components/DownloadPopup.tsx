@@ -34,7 +34,7 @@ export default function DownloadPopup() {
         product: 'TF Tracker app onboarding',
         message: `בקשת כניסה לאפליקציית TF Tracker דרך popup. מקור: ${resourceName}`,
       },
-      `שלום תומר, קוראים לי ${formData.name}. אני רוצה להתחיל עם TF Tracker ולקבל קישור כניסה לאפליקציה + שאלון פתיחה. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
+      `שלום תומר, קוראים לי ${formData.name}. אני רוצה להתחיל עם TF Tracker ולקבל קישור כניסה לאפליקציה + שאלון פתיחה. הבנתי שהחודש הראשון חינם בלבד, אחרי ייעוץ טלפוני יש 3 חודשים חינם, ובתהליך אונליין/פרונטלי יש Lifetime. טלפון: ${formData.phone}. אימייל: ${formData.email}`,
     );
     setHasSubmitted(true);
     setTimeout(() => setIsOpen(false), 2600);
@@ -85,14 +85,14 @@ export default function DownloadPopup() {
                       כניסה ל־TF Tracker
                     </h3>
                     <p className="text-sm leading-relaxed text-text-muted">
-                      השאר פרטים ונשלח לך בוואטסאפ את קישור הכניסה לאפליקציה ואת שאלון הפתיחה הראשוני. בפנים יש מעקב אוכל, אימונים, מדידות והתקדמות במקום אחד.
+                      השאר פרטים ונשלח לך בוואטסאפ את קישור הכניסה לאפליקציה ואת שאלון הפתיחה הראשוני. משתמש חדש מקבל חודש ראשון חינם בלבד; אחרי ייעוץ טלפוני מקבלים 3 חודשים חינם; ובתהליך אונליין/פרונטלי מקבלים Lifetime.
                     </p>
                   </div>
 
                   <div className="mb-5 grid grid-cols-1 gap-2 rounded-2xl border border-energy/15 bg-[#f7fbff] p-4 text-sm font-bold text-foreground sm:grid-cols-3">
-                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">₪49.90 חודשי</div>
-                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">₪39.90 שנתי</div>
-                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">ללא התחייבות</div>
+                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">חודש ראשון חינם</div>
+                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">3 חודשים אחרי ייעוץ</div>
+                    <div className="rounded-xl bg-white px-3 py-2 text-center shadow-sm">Lifetime ללקוחות ליווי</div>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">

@@ -110,15 +110,15 @@ export default function AppShowcase() {
               <ul className="space-y-3 text-sm text-text-muted">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-energy" />
-                  <span><strong className="text-foreground">₪49.90 / חודשי:</strong> גמיש, ללא התחייבות.</span>
+                  <span><strong className="text-foreground">חודש ראשון חינם בלבד:</strong> אחר כך ₪49.90 במסלול חודשי.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-energy" />
-                  <span><strong className="text-foreground">₪39.90 / לחודש במסלול שנתי:</strong> חיסכון של ₪120 לשנה.</span>
+                  <span><strong className="text-foreground">₪39.90 / לחודש במסלול שנתי:</strong> חיסכון של ₪120 לשנה אחרי חודש ההטבה.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-energy" />
-                  <span><strong className="text-foreground">המשך טבעי למסלול אישי:</strong> כשמוכנים, עוברים בלי לאבד נתונים.</span>
+                  <span><strong className="text-foreground">בונוסים חכמים:</strong> אחרי ייעוץ טלפוני מקבלים 3 חודשים חינם. בתהליך אונליין/פרונטלי מקבלים גישת Lifetime.</span>
                 </li>
               </ul>
               <p className="mt-5 text-xs text-text-muted/80">

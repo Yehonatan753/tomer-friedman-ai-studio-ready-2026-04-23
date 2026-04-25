@@ -106,7 +106,7 @@ export const SITE_DATA = {
 
     phone: {
       title: "ייעוץ טלפוני ממוקד",
-      description: "יש לך שאלות נקודתיות? אפשר לתאם שיחה מראש לייעוץ קצר וקולע ולחסוך זמן יקר.",
+      description: "יש לך שאלות נקודתיות? אפשר לתאם שיחה מראש לייעוץ קצר וקולע, לקבל דיוק מהיר, ולקבל 3 חודשים חינם ב־TF Tracker אחרי השיחה.",
       basePrice: { minutes: 10, price: 200 },
       additionalMinutePrice: 20
     }

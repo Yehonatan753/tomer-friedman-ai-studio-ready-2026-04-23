@@ -28,13 +28,13 @@ export default function FreeValue() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-energy opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-energy"></span>
                 </span>
-                <span className="text-xs font-bold tracking-widest text-energy uppercase">חינם לחלוטין</span>
+                <span className="text-xs font-bold tracking-widest text-energy uppercase">חודש ראשון חינם</span>
               </motion.div>
             </div>
 
             <div className="overflow-hidden pb-4">
               <motion.h2 variants={itemVariants} className="text-4xl md:text-6xl font-heading font-black text-foreground mb-6 leading-tight">
-                קבל גישה חינמית <span className="text-energy">לאפליקציית המעקב שלי</span>
+                התחל חודש ראשון חינם <span className="text-energy">באפליקציית המעקב שלי</span>
               </motion.h2>
             </div>
 
@@ -64,7 +64,7 @@ export default function FreeValue() {
                 className="btn-magnetic bg-energy text-white px-10 py-5 rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(28,141,255,0.4)] flex items-center justify-center gap-3 w-full sm:w-auto"
               >
                 <Smartphone size={20} />
-                <span>קבל גישה חינם עכשיו</span>
+                <span>התחל חודש ראשון חינם</span>
               </motion.button>
             </div>
           </motion.div>
